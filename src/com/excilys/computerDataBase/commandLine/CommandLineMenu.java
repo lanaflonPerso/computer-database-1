@@ -53,6 +53,7 @@ public class CommandLineMenu {
 
 		}
 		operationSwitch(resultAsAnInt);
+		scanner.close();
 	}
 
 	/**
@@ -63,67 +64,25 @@ public class CommandLineMenu {
 	private void operationSwitch(int resultAsAnInt) {
 		switch (resultAsAnInt) {
 		case 1:
-			listComputers();
+			service.listComputers();
 			break;
 		case 2:
-			listCompanies();
+			service.listCompanies();
 			break;
 		case 3:
-			showComputerDetails();
+			service.showComputerDetails();
 			break;
 		case 4:
-			createComputer();
+			service.createComputer();
 			break;
 		case 5:
-			updateComputer();
+			service.updateComputer();
 			break;
 		case 6:
-			deleteComputer();
+			service.deleteComputer();
 			break;
 		default:
 			break;
 		}
-	}
-
-	/**
-	 * Delete computer.
-	 */
-	private void deleteComputer() {
-		service.deleteComputer();
-	}
-
-	/**
-	 * Update computer.
-	 */
-	private void updateComputer() {
-		service.updateComputer();
-	}
-
-	/**
-	 * Creates the computer.
-	 */
-	private void createComputer() {
-		service.createComputer();
-	}
-
-	/**
-	 * Show computer details.
-	 */
-	private void showComputerDetails() {
-		service.showComputerDetails();
-	}
-
-	/**
-	 * List companies.
-	 */
-	private void listCompanies() {
-		service.listCompanies();
-	}
-
-	/**
-	 * List computers.
-	 */
-	private void listComputers() {
-		service.listComputers();
 	}
 }

@@ -10,7 +10,9 @@ import java.util.List;
 
 import com.excilys.computerDataBase.dao.ComputerDaoInterface;
 import com.excilys.computerDataBase.entity.Computer;
+import com.excilys.computerDataBase.exception.UnableToInsertElementException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
+
 import java.sql.Connection;
 
 /**
@@ -18,10 +20,10 @@ import java.sql.Connection;
  *
  */
 public enum ComputerDao implements ComputerDaoInterface {
-	
+
 	/** The instance. */
 	INSTANCE;
-	
+
 	private static final String PARAM_ID = "id";
 	private static final String PARAM_NAME = "name";
 	private static final String PARAM_INTRODUCED = "introduced";
@@ -30,6 +32,10 @@ public enum ComputerDao implements ComputerDaoInterface {
 
 	@Override
 	public Computer create(Computer t) {
+		if (t == null) {
+			throw new UnableToInsertElementException(
+					UnableToInsertElementException.NULL_COMPUTER);
+		}
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Connection connection = null;
@@ -42,6 +48,10 @@ public enum ComputerDao implements ComputerDaoInterface {
 			preparedStatement.setString(1, t.getName());
 			preparedStatement.setTimestamp(2, t.getIntroduced());
 			preparedStatement.setTimestamp(3, t.getDiscontinued());
+			if (t.getCompany_id() == null) {
+				throw new UnableToInsertElementException(
+						UnableToInsertElementException.NULL_COMPANY_ID);
+			}
 			preparedStatement.setLong(4, t.getCompany_id());
 			preparedStatement.executeUpdate();
 			resultSet = preparedStatement.getGeneratedKeys();
@@ -50,7 +60,8 @@ public enum ComputerDao implements ComputerDaoInterface {
 			t.setId(key);
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new UnableToInsertElementException(
+					UnableToInsertElementException.CAN_NOT_INSERT, e);
 		} finally {
 			closeConnection(preparedStatement, connection);
 		}
@@ -167,7 +178,8 @@ public enum ComputerDao implements ComputerDaoInterface {
 		return computers;
 	}
 
-	private void closeConnection(Statement preparedStatement, Connection connection) {
+	private void closeConnection(Statement preparedStatement,
+			Connection connection) {
 		try {
 			if (preparedStatement != null)
 				preparedStatement.close();

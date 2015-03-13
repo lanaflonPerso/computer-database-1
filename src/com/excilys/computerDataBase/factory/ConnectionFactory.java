@@ -8,6 +8,15 @@ public class ConnectionFactory {
 	private final static String DEFAULT_DATABASE = "computer-database-db" ;
 	private final static String DEFAULT_USER = "root" ;
 	private final static String DEFAULT_PASSWORD = "root";
+	
+	/**
+	 * Creates a new Connection object.
+	 *
+	 * @param dataBase the data base
+	 * @param user the user
+	 * @param password the password
+	 * @return the connection
+	 */
 	public static Connection createConnection(String dataBase, String user, String password) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
