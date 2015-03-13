@@ -1,7 +1,5 @@
 package com.excilys.computerDataBase.dao.impl;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,55 +10,31 @@ import java.util.List;
 
 import com.excilys.computerDataBase.dao.ComputerDaoInterface;
 import com.excilys.computerDataBase.entity.Computer;
+import com.excilys.computerDataBase.factory.ConnectionFactory;
+import java.sql.Connection;
 
 /**
  * @author vgalloy
  *
  */
-public class ComputerDao implements ComputerDaoInterface {
+public enum ComputerDao implements ComputerDaoInterface {
+	
+	/** The instance. */
+	INSTANCE;
+	
 	private static final String PARAM_ID = "id";
 	private static final String PARAM_NAME = "name";
 	private static final String PARAM_INTRODUCED = "introduced";
 	private static final String PARAM_DISCONTINUED = "discontinued";
 	private static final String PARAM_COMPANY_ID = "company_id";
-	private static ComputerDao computerDaoInstance = null;
-	private Connection connection = null;
-
-	public ComputerDao() {
-		super();
-	}
-
-	@Override
-	public void openConnection(String dataBase, String user, String password)
-			throws SQLException {
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-		} catch (Exception e) {
-			System.out.println("Driver problem");
-			e.printStackTrace();
-		}
-
-		connection = DriverManager.getConnection("jdbc:mysql://localhost/"
-				+ dataBase + "?user=" + user + "&password=" + password
-				+ "&zeroDateTimeBehavior=convertToNull");
-	}
-
-	@Override
-	public void closeConnection() {
-		try {
-			if (connection != null)
-				connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
 
 	@Override
 	public Computer create(Computer t) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
+		Connection connection = null;
 		try {
+			connection = ConnectionFactory.createConnection();
 			preparedStatement = connection
 					.prepareStatement(
 							"INSERT INTO computer (name, introduced, discontinued, company_id) VALUES (?,?,?,?)",
@@ -78,7 +52,7 @@ public class ComputerDao implements ComputerDaoInterface {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closePreparedStatement(preparedStatement);
+			closeConnection(preparedStatement, connection);
 		}
 		return t;
 	}
@@ -86,7 +60,9 @@ public class ComputerDao implements ComputerDaoInterface {
 	@Override
 	public void delete(Computer t) {
 		PreparedStatement preparedStatement = null;
+		Connection connection = null;
 		try {
+			connection = ConnectionFactory.createConnection();
 			preparedStatement = connection
 					.prepareStatement("DELETE FROM computer WHERE id=?");
 			preparedStatement.setLong(1, t.getId());
@@ -94,7 +70,7 @@ public class ComputerDao implements ComputerDaoInterface {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closePreparedStatement(preparedStatement);
+			closeConnection(preparedStatement, connection);
 		}
 
 	}
@@ -103,7 +79,9 @@ public class ComputerDao implements ComputerDaoInterface {
 	public Computer update(Computer t) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
+		Connection connection = null;
 		try {
+			connection = ConnectionFactory.createConnection();
 			preparedStatement = connection
 					.prepareStatement("UPDATE computer SET name=?, introduced=?, discontinued=?, company_id=? WHERE id=?");
 			preparedStatement.setString(1, t.getName());
@@ -119,7 +97,7 @@ public class ComputerDao implements ComputerDaoInterface {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closePreparedStatement(preparedStatement);
+			closeConnection(preparedStatement, connection);
 		}
 
 		return null;
@@ -129,7 +107,9 @@ public class ComputerDao implements ComputerDaoInterface {
 	public Computer get(long index) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
+		Connection connection = null;
 		try {
+			connection = ConnectionFactory.createConnection();
 			preparedStatement = connection
 					.prepareStatement("SELECT * FROM computer WHERE id=?");
 			preparedStatement.setLong(1, index);
@@ -145,7 +125,7 @@ public class ComputerDao implements ComputerDaoInterface {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			closePreparedStatement(preparedStatement);
+			closeConnection(preparedStatement, connection);
 		}
 		return null;
 	}
@@ -154,7 +134,9 @@ public class ComputerDao implements ComputerDaoInterface {
 	public List<Computer> selectAll() {
 		Statement statement = null;
 		ResultSet resultSet = null;
+		Connection connection = null;
 		try {
+			connection = ConnectionFactory.createConnection();
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("SELECT * FROM computer");
 
@@ -165,12 +147,7 @@ public class ComputerDao implements ComputerDaoInterface {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (statement != null)
-					statement.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			closeConnection(statement, connection);
 		}
 		return new ArrayList<Computer>();
 	}
@@ -190,19 +167,18 @@ public class ComputerDao implements ComputerDaoInterface {
 		return computers;
 	}
 
-	private void closePreparedStatement(PreparedStatement preparedStatement) {
+	private void closeConnection(Statement preparedStatement, Connection connection) {
 		try {
 			if (preparedStatement != null)
 				preparedStatement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public final static ComputerDao getInstance() {
-		if (ComputerDao.computerDaoInstance == null) {
-			ComputerDao.computerDaoInstance = new ComputerDao();
+		try {
+			if (connection != null)
+				connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		return ComputerDao.computerDaoInstance;
 	}
 }
