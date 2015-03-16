@@ -1,7 +1,10 @@
 package com.excilys.computerDataBase.ui;
 
+import java.sql.Timestamp;
 import java.util.Scanner;
 
+import com.excilys.computerDataBase.entity.Company;
+import com.excilys.computerDataBase.entity.Computer;
 import com.excilys.computerDataBase.service.ServiceImpl;
 
 // TODO: Auto-generated Javadoc
@@ -29,7 +32,8 @@ public class CommandLineMenu {
 	/**
 	 * The main method.
 	 *
-	 * @param args the arguments
+	 * @param args
+	 *            the arguments
 	 */
 	public static void main(String[] args) {
 		new CommandLineMenu().displayMainMenu();
@@ -61,30 +65,147 @@ public class CommandLineMenu {
 	/**
 	 * Operation switch.
 	 *
-	 * @param resultAsAnInt the result as an int
+	 * @param resultAsAnInt
+	 *            the result as an int
 	 */
 	private void operationSwitch(int resultAsAnInt) {
 		switch (resultAsAnInt) {
 		case 1:
-			service.listComputers();
+			listComputer();
 			break;
 		case 2:
-			service.listCompanies();
+			listCompanies();
 			break;
 		case 3:
-			service.showComputerDetails();
+			showComputerDetails();
 			break;
 		case 4:
-			service.createComputer();
+			createComputer();
 			break;
 		case 5:
-			service.updateComputer();
+			updateComputer();
 			break;
 		case 6:
-			service.deleteComputer();
+			deleteComputer();
 			break;
 		default:
 			break;
 		}
 	}
+
+	/**
+	 * List computer.
+	 */
+	private void listComputer() {
+		for (Computer computer : service.listComputers()) {
+			System.out.println(computer.toString());
+		}
+	}
+
+	/**
+	 * List companies.
+	 */
+	private void listCompanies() {
+		for (Company company : service.listCompanies()) {
+			System.out.println(company.toString());
+		}
+	}
+
+	/**
+	 * Show computer details.
+	 */
+	private void showComputerDetails() {
+		Long id = getLongFromCommandLine("Computer Id : ");
+		Computer computer = service.computerDetails(id);
+		System.out.println(computer.toString());
+	}
+
+	/**
+	 * Creates the computer.
+	 */
+	private void createComputer() {
+		String name = getStringFromCommandLine("Computer name : ");
+		Timestamp introduced = getTimestampFromCommandLine("Computer introduced : ");
+		Timestamp discontinued = getTimestampFromCommandLine("Computer discontinued : ");
+		Long company_id = getLongFromCommandLine("Computer company_id : ");
+		Computer computer = new Computer(new Long(0), name, introduced,
+				discontinued, company_id);
+		service.createComputer(computer);
+		System.out.println("computer created : " + computer.toString());
+	}
+
+	/**
+	 * Update computer.
+	 */
+	private void updateComputer() {
+		Long id = getLongFromCommandLine("Computer id : ");
+		String name = getStringFromCommandLine("Computer (new) name : ");
+		Timestamp introduced = getTimestampFromCommandLine("Computer (new) introduced : ");
+		Timestamp discontinued = getTimestampFromCommandLine("Computer (new) discontinued : ");
+		Long company_id = getLongFromCommandLine("Computer (new) company_id : ");
+		Computer computer = new Computer(id, name, introduced, discontinued,
+				company_id);
+		service.updateComputer(computer);
+		System.out.println("computer updated : " + computer.toString());
+
+	}
+
+	/**
+	 * Delete computer.
+	 */
+	private void deleteComputer() {
+		Long id = getLongFromCommandLine("Computer id : ");
+		service.deleteComputer(id);
+	}
+
+	/**
+	 * Gets the long from command line.
+	 *
+	 * @param request the request
+	 * @return the long from command line
+	 */
+	private Long getLongFromCommandLine(String request) {
+		System.out.println(request);
+		String result = scanner.nextLine();
+		Long resultAsALong = null;
+		try {
+			resultAsALong = new Long(result);
+		} catch (NumberFormatException e) {
+
+		}
+		return resultAsALong;
+	}
+
+	/**
+	 * Gets the string from command line.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the string from command line
+	 */
+	private String getStringFromCommandLine(String request) {
+		System.out.println(request);
+		String result = scanner.nextLine();
+		return result;
+	}
+
+	/**
+	 * Gets the timestamp from command line.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the timestamp from command line
+	 */
+	private Timestamp getTimestampFromCommandLine(String request) {
+		System.out.println(request);
+		String result = scanner.nextLine();
+		Timestamp resultAsATimestamp = null;
+		try {
+			resultAsATimestamp = new Timestamp(new Long(result));
+		} catch (NumberFormatException e) {
+
+		}
+		return resultAsATimestamp;
+	}
+
 }
