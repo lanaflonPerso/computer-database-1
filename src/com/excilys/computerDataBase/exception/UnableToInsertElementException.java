@@ -4,7 +4,7 @@ package com.excilys.computerDataBase.exception;
 /**
  * The Class UnableToInsertElementException.
  */
-public class UnableToInsertElementException extends RuntimeException {
+public class UnableToInsertElementException extends DataBaseException {
 	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

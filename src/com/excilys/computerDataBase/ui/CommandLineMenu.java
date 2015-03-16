@@ -3,8 +3,9 @@ package com.excilys.computerDataBase.ui;
 import java.sql.Timestamp;
 import java.util.Scanner;
 
-import com.excilys.computerDataBase.entity.Company;
 import com.excilys.computerDataBase.entity.Computer;
+import com.excilys.computerDataBase.exception.ParsingException;
+import com.excilys.computerDataBase.service.Paginator;
 import com.excilys.computerDataBase.service.ServiceImpl;
 
 // TODO: Auto-generated Javadoc
@@ -97,18 +98,14 @@ public class CommandLineMenu {
 	 * List computer.
 	 */
 	private void listComputer() {
-		for (Computer computer : service.listComputers()) {
-			System.out.println(computer.toString());
-		}
+		Paginator.INSTANCE.print(service.listComputers());
 	}
 
 	/**
 	 * List companies.
 	 */
 	private void listCompanies() {
-		for (Company company : service.listCompanies()) {
-			System.out.println(company.toString());
-		}
+		Paginator.INSTANCE.print(service.listCompanies());
 	}
 
 	/**
@@ -171,7 +168,7 @@ public class CommandLineMenu {
 		try {
 			resultAsALong = new Long(result);
 		} catch (NumberFormatException e) {
-
+			System.out.println(ParsingException.CAN_NOT_PARSE_INTO_LONG);
 		}
 		return resultAsALong;
 	}
@@ -203,7 +200,7 @@ public class CommandLineMenu {
 		try {
 			resultAsATimestamp = new Timestamp(new Long(result));
 		} catch (NumberFormatException e) {
-
+			System.out.println(ParsingException.CAN_NOT_PARSE_INTO_TIMESTAMP);
 		}
 		return resultAsATimestamp;
 	}

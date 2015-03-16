@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.excilys.computerDataBase.dao.ComputerDaoInterface;
 import com.excilys.computerDataBase.entity.Computer;
+import com.excilys.computerDataBase.exception.GetException;
 import com.excilys.computerDataBase.exception.UnableToInsertElementException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 
@@ -134,11 +135,11 @@ public enum ComputerDao implements ComputerDaoInterface {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new GetException(GetException.CAN_NOT_GET_COMPUTER);
 		} finally {
 			closeConnection(preparedStatement, connection);
 		}
-		return null;
+		throw new GetException(GetException.NO_ITEM_FOUND);
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import java.util.Scanner;
  * The Enum Paginator.
  */
 public enum Paginator {
-	
+
 	/** The instance. */
 	INSTANCE;
 
@@ -21,15 +21,18 @@ public enum Paginator {
 	/**
 	 * Prints the.
 	 *
-	 * @param list the list
+	 * @param list
+	 *            the list
 	 */
 	public void print(List<? extends Object> list) {
-		for (int i = 0; i < list.size(); i++) {
-			Object o = list.get(i);
-			System.out.println(o.toString());
-			if ((i + 1) % SIZE == 0) {
-				if(! waitEnter())
-					return;
+		if (list != null) {
+			for (int i = 0; i < list.size(); i++) {
+				Object o = list.get(i);
+				System.out.println(o.toString());
+				if ((i + 1) % SIZE == 0) {
+					if (!waitEnter())
+						return;
+				}
 			}
 		}
 	}
