@@ -4,9 +4,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * A factory for creating Connection objects.
+ */
 public class ConnectionFactory {
+	
+	/** The Constant DEFAULT_DATABASE. */
 	private final static String DEFAULT_DATABASE = "computer-database-db" ;
+	
+	/** The Constant DEFAULT_USER. */
 	private final static String DEFAULT_USER = "root" ;
+	
+	/** The Constant DEFAULT_PASSWORD. */
 	private final static String DEFAULT_PASSWORD = "root";
 	
 	/**
@@ -40,6 +50,11 @@ public class ConnectionFactory {
 		return connection;
 	}
 	
+	/**
+	 * Creates a new Connection object.
+	 *
+	 * @return the connection
+	 */
 	public static Connection createConnection() {
 		return createConnection(DEFAULT_DATABASE, DEFAULT_USER, DEFAULT_PASSWORD);
 	}

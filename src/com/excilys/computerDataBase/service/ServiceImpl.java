@@ -9,42 +9,58 @@ import com.excilys.computerDataBase.dao.impl.ComputerDao;
 import com.excilys.computerDataBase.entity.Company;
 import com.excilys.computerDataBase.entity.Computer;
 
-public enum Service implements ServiceInterface{
-	INSTANCE;
-
-	/** The computer dao. */
-	private ComputerDao computerDao = ComputerDao.INSTANCE;
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum ServiceImpl.
+ */
+public enum ServiceImpl implements ServiceInterface{
 	
-	/** The company dao. */
-	private CompanyDao companyDao = CompanyDao.INSTANCE;
+	/** The instance. */
+	INSTANCE;
 
 	/** The scanner. */
 	Scanner scanner = new Scanner(System.in);
 	
 	
+	
+	/* (non-Javadoc)
+	 * @see com.excilys.computerDataBase.service.ServiceInterface#listComputers()
+	 */
 	@Override
 	public void listComputers() {
-		List<Computer> computers = this.computerDao.selectAll();
+		List<Computer> computers = ComputerDao.INSTANCE.selectAll();
 		for (Computer computer : computers) {
 			System.out.println(computer.toString());
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerDataBase.service.ServiceInterface#listCompanies()
+	 */
 	@Override
 	public void listCompanies() {
-		List<Company> companies = this.companyDao.selectAll();
+		List<Company> companies = CompanyDao.INSTANCE.selectAll();
+		Paginator.INSTANCE.print(companies);
+		/*
 		for (Company company : companies) {
 			System.out.println(company.toString());
 		}
+		*/
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerDataBase.service.ServiceInterface#showComputerDetails()
+	 */
 	@Override
 	public void showComputerDetails() {
 		Long id = getLongFromCommandLine("Computer Id : ");
-		Computer computer = this.computerDao.get(id);
+		Computer computer = ComputerDao.INSTANCE.get(id);
 		System.out.println(computer.toString());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerDataBase.service.ServiceInterface#createComputer()
+	 */
 	@Override
 	public void createComputer() {
 		String name = getStringFromCommandLine("Computer name : ");
@@ -53,10 +69,13 @@ public enum Service implements ServiceInterface{
 		Long company_id = getLongFromCommandLine("Computer company_id : ");
 		Computer computer = new Computer(new Long(0), name, introduced,
 				discontinued, company_id);
-		this.computerDao.create(computer);
+		ComputerDao.INSTANCE.create(computer);
 		System.out.println("new computer added : " + computer.toString());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerDataBase.service.ServiceInterface#updateComputer()
+	 */
 	@Override
 	public void updateComputer() {
 		Long id = getLongFromCommandLine("Computer id : ");
@@ -66,14 +85,17 @@ public enum Service implements ServiceInterface{
 		Long company_id = getLongFromCommandLine("Computer (new) company_id : ");
 		Computer computer = new Computer(id, name, introduced, discontinued,
 				company_id);
-		this.computerDao.update(computer);
+		ComputerDao.INSTANCE.update(computer);
 		System.out.println("computer updated : " + computer.toString());
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerDataBase.service.ServiceInterface#deleteComputer()
+	 */
 	@Override
 	public void deleteComputer() {
 		Long id = getLongFromCommandLine("Computer id : ");
-		this.computerDao.delete(new Computer(id, null, null, null, null));
+		ComputerDao.INSTANCE.delete(new Computer(id, null, null, null, null));
 		System.out.println("computer with id " + id + " deleted");
 	}
 	

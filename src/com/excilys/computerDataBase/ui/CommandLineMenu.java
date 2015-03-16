@@ -1,9 +1,10 @@
-package com.excilys.computerDataBase.commandLine;
+package com.excilys.computerDataBase.ui;
 
 import java.util.Scanner;
 
-import com.excilys.computerDataBase.service.Service;
+import com.excilys.computerDataBase.service.ServiceImpl;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CommandLineMenu.
  *
@@ -14,14 +15,15 @@ public class CommandLineMenu {
 	/** The scanner. */
 	Scanner scanner = new Scanner(System.in);
 
-	private Service service;
+	/** The service. */
+	private ServiceImpl service;
 
 	/**
 	 * Instantiates a new command line menu.
 	 */
 	public CommandLineMenu() {
 		super();
-		this.service = Service.INSTANCE;
+		this.service = ServiceImpl.INSTANCE;
 	}
 
 	/**
