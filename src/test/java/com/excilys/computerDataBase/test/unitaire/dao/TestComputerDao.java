@@ -5,6 +5,8 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.List;
 
 import org.junit.Test;
@@ -21,39 +23,46 @@ public class TestComputerDao {
 	@Test
 	public void testInsert() {
 		Computer computer = new Computer(new Long(1), "test_name",
-				LocalDateTime.now(), LocalDateTime.now(), new Company(new Long(
-						15), "Canon"));
+				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
+				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
+				new Company(new Long(15), "Canon"));
 		computerDao.create(computer);
 		assertThat(computer.getId() == 1, is(false));
 
 		Computer computer2 = computerDao.getById(computer.getId());
-		
-		assertThat(computer.getId(), is(computer2.getId()));
-		assertThat(computer.getCompany(), is(computer2.getCompany()));
-		assertThat(computer.getName(), is(computer2.getName()));
+		assertThat(computer2, is(computer));
 	}
 
 	@Test
 	public void testInsertNullDateTime() {
 		Computer computer = new Computer(new Long(1), "test_name", null, null,
-				new Company(new Long(15), null));
+				new Company(new Long(15), "Canon"));
 		computerDao.create(computer);
+		assertThat(computer.getId() == 1, is(false));
 
+		Computer computer2 = computerDao.getById(computer.getId());
+		assertThat(computer2, is(computer));
 	}
 
 	@Test
 	public void testInsertNullCompanyId() {
-		Computer computer = new Computer(new Long(1), "test_name", null, null,
-				new Company(null, null));
+		Computer computer = new Computer(new Long(1), "test_name",
+				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
+				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
+				new Company(null, "Canon"));
 		computerDao.create(computer);
+		computer.getCompany().setName(null);
+		computer.getCompany().setId(new Long(0));
 
+		Computer computer2 = computerDao.getById(computer.getId());
+		assertThat(computer2, is(computer));
 	}
 
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void testInsertNullName() {
-		Computer computer = new Computer(new Long(1), null,
-				LocalDateTime.now(), LocalDateTime.now(), new Company(new Long(
-						15), "Canon"));
+		Computer computer = new Computer(new Long(1), null, LocalDateTime.now()
+				.truncatedTo(ChronoUnit.SECONDS), LocalDateTime.now()
+				.truncatedTo(ChronoUnit.SECONDS), new Company(null, "Canon"));
 		computerDao.create(computer);
 	}
 
@@ -64,32 +73,22 @@ public class TestComputerDao {
 		computerDao.create(computer);
 	}
 
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void testInsertComputerWithNullAttributs() {
-		try {
-			Computer computer = new Computer();
-			computerDao.create(computer);
-		} catch (DaoException e) {
-			assertThat(e.getMessage(), is(DaoException.CAN_NOT_INSERT_ELEMENT));
-		}
-		
+		Computer computer = new Computer();
+		computerDao.create(computer);
+	}
+
+	@Test(expected = NullPointerException.class)
+	public void testInsertNullComputer() {
+			Computer computer = null;
+		computerDao.create(computer);
 	}
 
 	@Test
-	public void testInsertNullComputer() {
-		try {
-			Computer computer = null;
-			computerDao.create(computer);
-			fail("testInsertNullComputer : no exception");
-		} catch (DaoException e) {
-			assertThat(e.getMessage(), is(DaoException.CAN_NOT_INSERT_ELEMENT));
-		}
-	}
-	
-	@Test
 	public void testListComputer() {
 		List<Computer> computers = computerDao.getAll();
-		assertThat(computers.get(0), is(new Computer(1l,
+		assertThat(computers.get(0), is(new Computer(4l,
 				"MacBook Pro 15.4 inch", null, null, new Company(new Long(1),
 						"Apple Inc."))));
 		assertThat(computers.size() > 1, is(true));
@@ -145,6 +144,13 @@ public class TestComputerDao {
 		assertThat(computers == null, is(false));
 		assertThat(total == null, is(false));
 		assertThat(total, is(new Long(computers.size())));
+	}
+
+	@Test
+	public void testNameContains() {
+		List<Computer> computers = computerDao.getNameContains("App");
+		assertThat(computers == null, is(false));
+		assertThat(computers.get(0).getName(), is("MacBook Pro 15.4 inch"));
 	}
 
 }

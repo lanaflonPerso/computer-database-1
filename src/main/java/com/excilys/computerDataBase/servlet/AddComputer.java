@@ -1,8 +1,6 @@
 package com.excilys.computerDataBase.servlet;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,13 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
+import com.excilys.computerDataBase.dto.CompanyDto;
+import com.excilys.computerDataBase.dto.ComputerDto;
 import com.excilys.computerDataBase.exception.ParsingException;
+import com.excilys.computerDataBase.mapper.CompanyMapper;
+import com.excilys.computerDataBase.mapper.ComputerMapper;
 import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
 import com.excilys.computerDataBase.service.impl.CompanyService;
 import com.excilys.computerDataBase.service.impl.ComputerService;
-import com.excilys.computerDataBase.validation.Validator;
-
+import com.excilys.computerDataBase.util.ServletUtil;
 /**
  * Servlet implementation class addComputer
  */
@@ -26,23 +29,22 @@ import com.excilys.computerDataBase.validation.Validator;
 public class AddComputer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
+	private final Logger log = Logger.getLogger(AddComputer.class.getName());
+
 	public AddComputer() {
 		super();
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		log.info("Servlet : [GET] addComputer");
+		
 		HttpSession session = request.getSession();
 		List<Company> companies = CompanyService.INSTANCE.list();
-		session.setAttribute("companies", companies);
+		companies.add(0, new Company(null, "--"));
+		List<CompanyDto> companyDtos = CompanyMapper.mapListModelToDto(companies);
+		session.setAttribute("companies", companyDtos);
 
 		request.getRequestDispatcher("WEB-INF/views/addComputer.jsp").forward(
 				request, response);
@@ -55,88 +57,20 @@ public class AddComputer extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		Computer computer = null;
+		log.info("Servlet : [POST] addComputer");
+		
 		try {
-			String name = getName(request);
-			LocalDateTime introduced = getIntroduced(request);
-			LocalDateTime discontinued = getDiscontinued(request);
-			Long companyId = getCompanyId(request);
-
-			computer = new Computer(new Long(0), name, introduced,
-					discontinued, new Company(companyId, null));
-			
+			ComputerDto computerDto = ServletUtil.getComputerDto(request);
+			Computer computer = ComputerMapper.mapDtoToModel(computerDto);
 			ComputerService.INSTANCE.create(computer);
 			
 		} catch (ParsingException e) {
-			System.out
-					.println("One of the field is not correct : computer can not be added.");
+			log.warn("One of the field is not correct : computer can not be added.");
 		} catch (Exception e) {
-			System.out.println("Exception :  " + e.getMessage());
+			e.printStackTrace();
+			log.error("Exception :  " + e.getMessage());
 		}
 		
 		response.sendRedirect("dashboard");
-	}
-
-	private Long getCompanyId(HttpServletRequest request) {
-		String string = (String) request.getParameter("companyId");
-		if (string == "" || string == null) {
-			return null;
-		}
-		string = string.trim();
-		try {
-			Long companyId = new Long(string);
-			if (companyId.equals(new Long(0))) {
-				System.out.println("companyId must be not equal to 0.");
-				throw new ParsingException();
-			}
-			return companyId;
-		} catch (Exception e) {
-			System.out.println(ParsingException.CAN_NOT_PARSE_INTO_LONG
-					+ " : companyId");
-			throw new ParsingException();
-		}
-	}
-
-	private LocalDateTime getDiscontinued(HttpServletRequest request) {
-		String string = (String) request.getParameter("discontinued");
-		if (string == "" || string == null) {
-			return null;
-		}  
-		string = string.trim();
-		if (Validator.INSTANCE.validateDate(string)) {
-			DateTimeFormatter dateTimeFormatter = DateTimeFormatter
-					.ofPattern("yyyy-MM-dd HH:mm:ss");
-			return LocalDateTime.parse(string, dateTimeFormatter);
-		} else {
-			System.out.println(Validator.WRONG_DATE_FORMAT + " : discontinued");
-			throw new ParsingException();
-		}
-	}
-
-	private LocalDateTime getIntroduced(HttpServletRequest request) {
-		String string = (String) request.getParameter("introduced");
-		if (string == "" || string == null) {
-			return null;
-		}  
-		string = string.trim();
-		if (Validator.INSTANCE.validateDate(string)) {
-			DateTimeFormatter dateTimeFormatter = DateTimeFormatter
-					.ofPattern("yyyy-MM-dd HH:mm:ss");
-			return LocalDateTime.parse(string, dateTimeFormatter);
-		} else {
-			System.out.println(Validator.WRONG_DATE_FORMAT + " : introduced");
-			throw new ParsingException();
-		}
-	}
-
-	private String getName(HttpServletRequest request) {
-		String string = (String) request.getParameter("computerName");
-		string = string.trim();
-		if (string == "" || string == null) {
-			System.out.println("name is mandatory, can not be null");
-			throw new ParsingException();
-		} else {
-			return string;
-		}
 	}
 }

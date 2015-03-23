@@ -5,13 +5,13 @@ import java.util.List;
 import com.excilys.computerDataBase.dao.impl.CompanyDao;
 import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.model.Company;
-import com.excilys.computerDataBase.service.ServiceInterface;
+import com.excilys.computerDataBase.service.ServiceCompanyInterface;
 import com.excilys.computerDataBase.validation.Validator;
 
 /**
  * The Enum CompanyServiceImpl.
  */
-public enum CompanyService implements ServiceInterface<Company> {
+public enum CompanyService implements ServiceCompanyInterface {
 	
 	/** The instance. */
 	INSTANCE;
@@ -39,7 +39,7 @@ public enum CompanyService implements ServiceInterface<Company> {
 
 	@Override
 	public List<Company> list(Long from, Long to) {
-		if (Validator.INSTANCE.checkFromTo(from, to) == true) {
+		if (Validator.isDateFromToCorrect(from, to)) {
 			return companyDao.getAll(from, to);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_PARAMETER);

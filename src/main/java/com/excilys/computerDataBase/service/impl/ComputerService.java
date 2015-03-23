@@ -6,13 +6,13 @@ import com.excilys.computerDataBase.dao.ComputerDaoInterface;
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
 import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.model.Computer;
-import com.excilys.computerDataBase.service.ServiceInterface;
+import com.excilys.computerDataBase.service.ServiceComputerInterface;
 import com.excilys.computerDataBase.validation.Validator;
 
 /**
  * The Enum ServiceImpl.
  */
-public enum ComputerService implements ServiceInterface<Computer> {
+public enum ComputerService implements ServiceComputerInterface {
 	INSTANCE;
 
 	private ComputerDaoInterface computerDao = ComputerDao.INSTANCE;
@@ -24,7 +24,7 @@ public enum ComputerService implements ServiceInterface<Computer> {
 
 	@Override
 	public Computer details(Long computerId) {
-		if (Validator.INSTANCE.checkComputerId(computerId) == true) {
+		if (Validator.isComputerIdCorrect(computerId)) {
 			return computerDao.getById(computerId);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_COMPUTER_ID);
@@ -33,7 +33,7 @@ public enum ComputerService implements ServiceInterface<Computer> {
 
 	@Override
 	public void create(Computer c) {
-		if (Validator.INSTANCE.checkComputer(c) == true) {
+		if (Validator.isComputerCorrect(c)) {
 			computerDao.create(c);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_COMPUTER);
@@ -42,7 +42,7 @@ public enum ComputerService implements ServiceInterface<Computer> {
 
 	@Override
 	public void update(Computer c) {
-		if (Validator.INSTANCE.checkComputer(c) == true && Validator.INSTANCE.checkComputerId(c.getId()) == true) {
+		if (Validator.isComputerCorrect(c)&& Validator.isComputerIdCorrect(c.getId())) {
 			computerDao.update(c);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_COMPUTER);
@@ -51,7 +51,7 @@ public enum ComputerService implements ServiceInterface<Computer> {
 
 	@Override
 	public void delete(Long computerId) {
-		if (Validator.INSTANCE.checkComputerId(computerId) == true) {
+		if (Validator.isComputerIdCorrect(computerId)) {
 			computerDao.delete(computerId);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_COMPUTER);
@@ -65,11 +65,21 @@ public enum ComputerService implements ServiceInterface<Computer> {
 
 	@Override
 	public List<Computer> list(Long from, Long to) {
-		if (Validator.INSTANCE.checkFromTo(from, to) == true) {
+		if (Validator.isDateFromToCorrect(from, to)) {
 			return computerDao.getAll(from, to);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_PARAMETER);
 		}
+	}
+
+	@Override
+	public List<Computer> getNameContains(String string) {
+		if (Validator.isNameForSearchCorrect(string)) {
+			return computerDao.getNameContains(string);
+		} else {
+			throw new ServiceException(ServiceException.INVALID_PARAMETER);
+		}
+		
 	}
 
 	public ComputerDaoInterface getComputerDao() {
@@ -79,5 +89,4 @@ public enum ComputerService implements ServiceInterface<Computer> {
 	public void setComputerDao(ComputerDaoInterface computerDao) {
 		this.computerDao = computerDao;
 	}
-
 }

@@ -12,7 +12,11 @@ function checkPostForm(document) {
 
 function checkName(document) {
 	element = document.getElementById("computerName")
-	if (element.value == "" || element.value == null) {
+	re = /^[ ]+$/
+	if (re.test(element.value)) {
+		element.style.borderColor = "red";
+		return false;
+	} else if (element.value == "" || element.value == null) {
 		element.style.borderColor = "red";
 		return false;
 	} else {

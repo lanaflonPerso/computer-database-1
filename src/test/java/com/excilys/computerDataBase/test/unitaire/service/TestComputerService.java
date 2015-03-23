@@ -65,6 +65,7 @@ public class TestComputerService extends TestCase {
 	public void testGetByIdWrong() {
 		try {
 			computerService.details(new Long(0));
+			fail("no exception occured");
 		} catch (ServiceException e) {
 			assertThat(e.getMessage(), is(ServiceException.INVALID_COMPUTER_ID));
 		}
@@ -86,11 +87,25 @@ public class TestComputerService extends TestCase {
 	public void testCreateWrongComputer() {
 		try {
 			computerService.create(new Computer());
+			fail("no exception occured");
 		} catch (ServiceException e) {
 			assertThat(e.getMessage(), is(ServiceException.INVALID_COMPUTER));
 		}
 	}
 
+	@Test
+	public void testCreateNameWithSpace1() {
+		try {
+		Computer computer = new Computer(new Long(1), "   ", LocalDateTime.now(),
+				LocalDateTime.now(), new Company(new Long(15), "Canon"));
+		computerService.create(computer);
+		fail("no exception occured");
+		} catch (ServiceException e) {
+			assertThat(e.getMessage(), is(ServiceException.INVALID_COMPUTER));
+		}
+	}
+	
+	
 	@Test
 	public void testUpdateOk() {
 		computerService.update(computer1);
@@ -102,6 +117,7 @@ public class TestComputerService extends TestCase {
 				LocalDateTime.now(), LocalDateTime.now(), null);
 		try {
 			computerService.create(computer);
+			fail("no exception occured");
 		} catch (ServiceException e) {
 			assertThat(e.getMessage(), is(ServiceException.INVALID_COMPUTER));
 		}
@@ -116,6 +132,7 @@ public class TestComputerService extends TestCase {
 	public void testDeleteWrongComputer() {
 		try {
 			computerService.delete(new Long(-1));
+			fail("no exception occured");
 		} catch (ServiceException e) {
 			assertThat(e.getMessage(), is(ServiceException.INVALID_COMPUTER));
 		}
@@ -136,6 +153,7 @@ public class TestComputerService extends TestCase {
 	public void testListFromToWrong() {
 		try {
 			computerService.list(new Long(0), null);
+			fail("no exception occured");
 		} catch (ServiceException e) {
 			assertThat(e.getMessage(), is(ServiceException.INVALID_PARAMETER));
 		}

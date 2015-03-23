@@ -6,14 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.excilys.computerDataBase.dao.ComputerDaoInterface;
 import com.excilys.computerDataBase.exception.DaoException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
-import com.excilys.computerDataBase.mapper.impl.DaoMapper;
 import com.excilys.computerDataBase.model.Computer;
+import com.excilys.computerDataBase.util.DaoUtil;
 
 /**
  * The Enum ComputerDao.
@@ -22,7 +21,6 @@ import com.excilys.computerDataBase.model.Computer;
  */
 public enum ComputerDao implements ComputerDaoInterface {
 
-	/** The instance. */
 	INSTANCE;
 
 	@Override
@@ -36,12 +34,9 @@ public enum ComputerDao implements ComputerDaoInterface {
 					.prepareStatement(
 							"INSERT INTO computer (name, introduced, discontinued, company_id) VALUES (?,?,?,?)",
 							Statement.RETURN_GENERATED_KEYS);
-			if (t.getName() != null) {
-				preparedStatement.setString(1,t.getName());
-			} else {
-				preparedStatement.setNull(1, java.sql.Types.VARCHAR);
-			}	
-			
+
+			preparedStatement.setString(1, t.getName().trim());
+
 			if (t.getIntroduced() != null) {
 				preparedStatement.setTimestamp(2,
 						Timestamp.valueOf(t.getIntroduced()));
@@ -66,10 +61,10 @@ public enum ComputerDao implements ComputerDaoInterface {
 			resultSet.next();
 			Long key = resultSet.getLong(1);
 			t.setId(key);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_INSERT_ELEMENT, e);
 		} finally {
-			closeConnection(preparedStatement, connection);
+			DaoUtil.closeConnection(preparedStatement, connection);
 		}
 	}
 
@@ -83,10 +78,10 @@ public enum ComputerDao implements ComputerDaoInterface {
 					.prepareStatement("DELETE FROM computer WHERE id=?");
 			preparedStatement.setLong(1, computerId);
 			preparedStatement.execute();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_DELETE_ELEMENT, e);
 		} finally {
-			closeConnection(preparedStatement, connection);
+			DaoUtil.closeConnection(preparedStatement, connection);
 		}
 	}
 
@@ -98,13 +93,9 @@ public enum ComputerDao implements ComputerDaoInterface {
 			connection = ConnectionFactory.INSTANCE.createConnection();
 			preparedStatement = connection
 					.prepareStatement("UPDATE computer SET name=?, introduced=?, discontinued=?, company_id=? WHERE id=?");
-			
-			if (t.getName() != null) {
-				preparedStatement.setString(1,t.getName());
-			} else {
-				preparedStatement.setNull(1, java.sql.Types.VARCHAR);
-			}	
-			
+
+			preparedStatement.setString(1, t.getName().trim());
+
 			if (t.getIntroduced() != null) {
 				preparedStatement.setTimestamp(2,
 						Timestamp.valueOf(t.getIntroduced()));
@@ -127,10 +118,10 @@ public enum ComputerDao implements ComputerDaoInterface {
 
 			preparedStatement.setLong(5, t.getId());
 			preparedStatement.executeUpdate();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_UPDATE_ELEMENT, e);
 		} finally {
-			closeConnection(preparedStatement, connection);
+			DaoUtil.closeConnection(preparedStatement, connection);
 		}
 	}
 
@@ -146,12 +137,12 @@ public enum ComputerDao implements ComputerDaoInterface {
 					.prepareStatement("select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compu.id=?");
 			preparedStatement.setLong(1, index);
 			resultSet = preparedStatement.executeQuery();
-			List<Computer> computers = getComputerList(resultSet);
+			List<Computer> computers = DaoUtil.getComputerList(resultSet);
 			computer = computers.get(0);
 		} catch (Exception e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
-			closeConnection(preparedStatement, connection);
+			DaoUtil.closeConnection(preparedStatement, connection);
 		}
 		return computer;
 	}
@@ -167,11 +158,11 @@ public enum ComputerDao implements ComputerDaoInterface {
 			statement = connection.createStatement();
 			resultSet = statement
 					.executeQuery("select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id");
-			computers = getComputerList(resultSet);
-		} catch (Exception e) {
+			computers = DaoUtil.getComputerList(resultSet);
+		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
-			closeConnection(statement, connection);
+			DaoUtil.closeConnection(statement, connection);
 		}
 		return computers;
 	}
@@ -189,11 +180,11 @@ public enum ComputerDao implements ComputerDaoInterface {
 			preparedStatement.setLong(1, to - from);
 			preparedStatement.setLong(2, from);
 			resultSet = preparedStatement.executeQuery();
-			computers = getComputerList(resultSet);
-		} catch (Exception e) {
+			computers = DaoUtil.getComputerList(resultSet);
+		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
-			closeConnection(preparedStatement, connection);
+			DaoUtil.closeConnection(preparedStatement, connection);
 		}
 		return computers;
 	}
@@ -210,37 +201,34 @@ public enum ComputerDao implements ComputerDaoInterface {
 			resultSet = statement.executeQuery("select count(*) from computer");
 			resultSet.next();
 			result = Long.valueOf(resultSet.getString("count(*)"));
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
-			closeConnection(statement, connection);
+			DaoUtil.closeConnection(statement, connection);
 		}
 		return result;
 	}
 
-	private List<Computer> getComputerList(ResultSet resultSet)
-			throws SQLException {
-		List<Computer> computers = new ArrayList<Computer>();
-		while (resultSet.next()) {
-			Computer computer = DaoMapper.INSTANCE.map(resultSet);
-			computers.add(computer);
+	@Override
+	public List<Computer> getNameContains(String string) {
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Connection connection = null;
+		List<Computer> computers = null;
+		try {
+			connection = ConnectionFactory.INSTANCE.createConnection();
+			preparedStatement = connection
+					.prepareStatement("select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compu.name LIKE ? or compa.name LIKE ?");
+			preparedStatement.setString(1, "%" + string + "%");
+			preparedStatement.setString(2, "%" + string + "%");
+			resultSet = preparedStatement.executeQuery();
+			computers = DaoUtil.getComputerList(resultSet);
+		} catch (SQLException e) {
+			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
+		} finally {
+			DaoUtil.closeConnection(preparedStatement, connection);
 		}
 		return computers;
-	}
-
-	private void closeConnection(Statement statement, Connection connection) {
-		try {
-			if (statement != null)
-				statement.close();
-		} catch (SQLException e) {
-			throw new DaoException(DaoException.CAN_NOT_CLOSE_STATEMENT, e);
-		}
-		try {
-			if (connection != null)
-				connection.close();
-		} catch (SQLException e) {
-			throw new DaoException(DaoException.CAN_NOT_CLOSE_CONNECTION, e);
-		}
 	}
 
 }

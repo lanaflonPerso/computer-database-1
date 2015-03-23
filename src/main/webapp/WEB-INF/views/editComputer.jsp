@@ -53,10 +53,10 @@
 									class="form-control" id="companyId" name="companyId">
 									<c:forEach var="i" begin="0" end="${companies.size() - 1}">
 										<option
-											<c:if test="${companies.get(i).getId() == computer.getCompany().getId()}">
+											<c:if test="${companies.get(i).getId() == computer.getCompanyName()}">
 										selected
 										</c:if>
-											value="${i + 1}">${companies.get(i).getName()}</option>
+											value="${i}">${companies.get(i).getName()}</option>
 									</c:forEach>
 								</select>
 							</div>
@@ -65,7 +65,7 @@
 
 						</fieldset>
 						<div class="actions pull-right">
-							<input type="submit" value="Edit" class="btn btn-primary">
+							<input id="editButton" type="submit" value="Edit" class="btn btn-primary">
 							or <a href="dashboard" class="btn btn-default">Cancel</a>
 						</div>
 					</form>

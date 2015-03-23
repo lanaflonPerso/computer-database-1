@@ -35,4 +35,16 @@ public class TestDashboard {
 		assertThat(query != null, is(true));
 		assertThat(query.getText(), is("MacBook Pro 15.4 inch"));
 	}
+	
+	@Test
+	public void testGoToAddElementUrl() {
+		driver.findElement(By.id("addComputer")).click();
+		assertThat(driver.getCurrentUrl(), is("http://localhost:8080/computer-database/addComputer"));
+	}
+	
+	@Test
+	public void testGoToEditElementUrl() {
+		driver.findElement(By.id("name_0")).click();
+		assertThat(driver.getCurrentUrl(), is("http://localhost:8080/computer-database/editComputer?computerId=4"));
+	}
 }

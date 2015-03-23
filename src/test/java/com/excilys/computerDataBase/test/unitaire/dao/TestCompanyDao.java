@@ -19,7 +19,6 @@ public class TestCompanyDao {
 	public void testListComputer() {
 		List<Company> companies = companyDao.getAll();
 		assertThat(companies.get(0), is(new Company(1l, "Apple Inc.")));
-
 	}
 
 	@Test(expected = UnsupportedOperationException.class)

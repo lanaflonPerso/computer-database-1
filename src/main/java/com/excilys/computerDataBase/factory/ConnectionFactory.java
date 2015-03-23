@@ -39,14 +39,10 @@ public enum ConnectionFactory {
 	}
 
 	public Connection createConnection() {
-		Connection connection;
 		try {
-			connection = DriverManager.getConnection(url, properties);
-			return connection;
+			return DriverManager.getConnection(url, properties);
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_CREATE_CONNECTION);
 		}
-		
-
 	}
 }

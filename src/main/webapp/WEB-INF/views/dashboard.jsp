@@ -28,8 +28,9 @@
 			<h1 id="homeTitle">${numberOfComputer} Computers found</h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
-					<form id="searchForm" action="#" method="GET" class="form-inline">
-
+					<form id="searchForm" action="dashboard" method="GET" class="form-inline">
+						<input type="hidden" name="size" value="${size}"/>
+						<input type="hidden" name="page" value="${page}"/>
 						<input type="search" id="searchbox" name="search"
 							class="form-control" placeholder="Search name" /> <input
 							type="submit" id="searchsubmit" value="Filter by name"
@@ -76,13 +77,13 @@
 						<tr>
 							<c:if test="${computers.size() > i}">
 								<td class="editMode"><input type="checkbox" name="cb" id="selected_${i}"
-									class="cb" value="0"></td>
+									class="cb" value="${i}"></td>
 								<td>
 									<a id="name_${i}" href="editComputer?computerId=${computers.get(i).getId()}" onclick="">${computers.get(i).getName()}</a>
 								</td>
 								<td id="introduced_${i}">${computers.get(i).getIntroduced()}</td>
 								<td>${computers.get(i).getDiscontinued()}</td>
-								<td id="companyName_${i}">${computers.get(i).getCompany().getName()}</td>
+								<td id="companyName_${i}">${computers.get(i).getCompanyName()}</td>
 							</c:if>
 						</tr>
 					</c:forEach>

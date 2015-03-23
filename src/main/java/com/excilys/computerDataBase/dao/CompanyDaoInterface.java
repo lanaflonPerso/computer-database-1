@@ -9,5 +9,4 @@ import com.excilys.computerDataBase.model.Company;
  *            the generic type
  */
 public interface CompanyDaoInterface extends DaoInterface<Company> {
-
 }
