@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.List;
 
 import org.junit.Test;
@@ -66,7 +65,7 @@ public class TestComputerDao {
 		computerDao.create(computer);
 	}
 
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void testInsertEmptyName() {
 		Computer computer = new Computer(new Long(1), "", LocalDateTime.now(),
 				LocalDateTime.now(), new Company(new Long(15), "Canon"));

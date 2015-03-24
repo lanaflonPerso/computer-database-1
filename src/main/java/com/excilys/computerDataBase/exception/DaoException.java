@@ -7,11 +7,11 @@ package com.excilys.computerDataBase.exception;
  * @author excilys
  *
  */
-public class DaoException extends RuntimeException{
+public class DaoException extends RuntimeException {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;	
-	
+	private static final long serialVersionUID = 1L;
+
 	/** The Constant CAN_NOT_CREATE_CONNECTION. */
 	public static final String CAN_NOT_CREATE_CONNECTION = "can not create connection";
 
@@ -27,6 +27,9 @@ public class DaoException extends RuntimeException{
 
 	public static final String CAN_NOT_CLOSE_STATEMENT = "can not close statement";
 	
+	public static final String CAN_NOT_ROLLBACK_TRANSACTION = "can not rollback transaction";
+
+
 	/**
 	 * Instantiates a new data base exception.
 	 */
@@ -37,10 +40,14 @@ public class DaoException extends RuntimeException{
 	/**
 	 * Instantiates a new data base exception.
 	 *
-	 * @param message the message
-	 * @param cause the cause
-	 * @param enableSuppression the enable suppression
-	 * @param writableStackTrace the writable stack trace
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 * @param enableSuppression
+	 *            the enable suppression
+	 * @param writableStackTrace
+	 *            the writable stack trace
 	 */
 	public DaoException(String message, Throwable cause,
 			boolean enableSuppression, boolean writableStackTrace) {
@@ -50,8 +57,10 @@ public class DaoException extends RuntimeException{
 	/**
 	 * Instantiates a new data base exception.
 	 *
-	 * @param message the message
-	 * @param cause the cause
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
 	 */
 	public DaoException(String message, Throwable cause) {
 		super(message, cause);
@@ -60,7 +69,8 @@ public class DaoException extends RuntimeException{
 	/**
 	 * Instantiates a new data base exception.
 	 *
-	 * @param message the message
+	 * @param message
+	 *            the message
 	 */
 	public DaoException(String message) {
 		super(message);
@@ -69,7 +79,8 @@ public class DaoException extends RuntimeException{
 	/**
 	 * Instantiates a new data base exception.
 	 *
-	 * @param cause the cause
+	 * @param cause
+	 *            the cause
 	 */
 	public DaoException(Throwable cause) {
 		super(cause);

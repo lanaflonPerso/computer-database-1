@@ -3,6 +3,7 @@ package com.excilys.computerDataBase.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public enum CompanyDao implements CompanyDaoInterface {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("SELECT * FROM company");
 			companies = DaoUtil.getCompanyList(resultSet);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
 			DaoUtil.closeConnection(statement, connection);
@@ -51,7 +52,7 @@ public enum CompanyDao implements CompanyDaoInterface {
 			preparedStatement.setLong(2, from);
 			resultSet = preparedStatement.executeQuery();
 			companies = DaoUtil.getCompanyList(resultSet);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
 			DaoUtil.closeConnection(preparedStatement, connection);
@@ -71,12 +72,12 @@ public enum CompanyDao implements CompanyDaoInterface {
 			resultSet = statement.executeQuery("select count(*) from company");
 			resultSet.next();
 			result = Long.valueOf(resultSet.getString("count(*)"));
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
 			DaoUtil.closeConnection(statement, connection);
 		}
 		return result;
 	}
-
+	
 }

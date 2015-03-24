@@ -34,7 +34,9 @@ public enum ComputerDao implements ComputerDaoInterface {
 					.prepareStatement(
 							"INSERT INTO computer (name, introduced, discontinued, company_id) VALUES (?,?,?,?)",
 							Statement.RETURN_GENERATED_KEYS);
-
+			if(t.getName().trim().isEmpty()) {
+				throw new NullPointerException();
+			}
 			preparedStatement.setString(1, t.getName().trim());
 
 			if (t.getIntroduced() != null) {
@@ -93,7 +95,10 @@ public enum ComputerDao implements ComputerDaoInterface {
 			connection = ConnectionFactory.INSTANCE.createConnection();
 			preparedStatement = connection
 					.prepareStatement("UPDATE computer SET name=?, introduced=?, discontinued=?, company_id=? WHERE id=?");
-
+			
+			if(t.getName().trim().isEmpty()) {
+				throw new NullPointerException();
+			}
 			preparedStatement.setString(1, t.getName().trim());
 
 			if (t.getIntroduced() != null) {
