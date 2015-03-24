@@ -14,9 +14,7 @@ public interface DaoInterface<T> {
 		throw new UnsupportedOperationException();
 	}
 
-	public default void delete(Long id) {
-		throw new UnsupportedOperationException();
-	}
+	public void delete(Long id);
 
 	public default void update(T t) {
 		throw new UnsupportedOperationException();

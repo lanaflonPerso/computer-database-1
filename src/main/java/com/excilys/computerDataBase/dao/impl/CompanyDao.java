@@ -11,6 +11,7 @@ import com.excilys.computerDataBase.dao.CompanyDaoInterface;
 import com.excilys.computerDataBase.exception.DaoException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.model.Company;
+import com.excilys.computerDataBase.model.Computer;
 import com.excilys.computerDataBase.util.DaoUtil;
 
 /**
@@ -78,6 +79,62 @@ public enum CompanyDao implements CompanyDaoInterface {
 			DaoUtil.closeConnection(statement, connection);
 		}
 		return result;
+	}
+
+	@Override
+	public void delete(Long id) {
+		Connection connection = null;
+		try {
+			connection = ConnectionFactory.INSTANCE.createConnection();
+			connection.setAutoCommit(false);
+			List<Computer> computers = getComputerWithCompanyId(connection, id);
+			for(Computer computer : computers) {
+				ComputerDao.INSTANCE.delete(computer.getId());
+			}
+			deleteCompany(connection, id);
+			connection.commit();
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				throw new DaoException(DaoException.CAN_NOT_ROLLBACK_TRANSACTION, e);
+			}
+			throw new DaoException(DaoException.CAN_NOT_DELETE_ELEMENT, e);
+		} finally {
+			DaoUtil.closeConnection(connection);
+		}
+	}
+
+	private void deleteCompany(Connection connection, Long id) {
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement = connection
+					.prepareStatement("DELETE FROM company WHERE id=?");
+			preparedStatement.setLong(1, id);
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			throw new DaoException(DaoException.CAN_NOT_DELETE_ELEMENT, e);
+		} finally {
+			DaoUtil.closeStatement(preparedStatement);
+		}
+		
+	}
+
+	private List<Computer> getComputerWithCompanyId(Connection connection, Long id) {
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<Computer> computers = null;
+		try {
+			preparedStatement = connection.prepareStatement("select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compa.id = ?");
+			preparedStatement.setLong(1, id);
+			resultSet = preparedStatement.executeQuery();
+			computers = DaoUtil.getComputerList(resultSet);
+		} catch (SQLException e) {
+			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
+		} finally {
+			DaoUtil.closeStatement(preparedStatement);
+		}
+		return computers;
 	}
 	
 }

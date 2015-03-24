@@ -27,7 +27,7 @@ public class Validator {
 		}
 	}
 
-	public static boolean isComputerIdCorrect(Long computerId) {
+	public static boolean isIdCorrect(Long computerId) {
 		if (computerId == null) {
 			return false;
 		} else if (computerId <= new Long(0)) {
