@@ -2,14 +2,15 @@ package com.excilys.computerDataBase.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.excilys.computerDataBase.dto.ComputerDto;
 
 public final class ServletUtil {
 
-	private static final Logger log = Logger.getLogger(ServletUtil.class
-			.getName());
+	final static Logger log = LoggerFactory.getLogger(ServletUtil.class);
+
 
 	private static String getStringFromRequest(HttpServletRequest request,
 			String name) {

@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.excilys.computerDataBase.dto.ComputerDto;
 import com.excilys.computerDataBase.mapper.ComputerMapper;
@@ -24,7 +25,7 @@ import com.excilys.computerDataBase.service.impl.ComputerService;
 @WebServlet("/dashboard")
 public class Dashboard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private final Logger log = Logger.getLogger(Dashboard.class.getName());
+	final static Logger log = LoggerFactory.getLogger(Dashboard.class);
 	private final ComputerService computerService = ComputerService.INSTANCE;
 	public Dashboard() {
 		super();

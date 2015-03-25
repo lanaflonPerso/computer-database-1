@@ -50,6 +50,11 @@
 			<version>${mysql-connector-version}</version>
 			<scope>runtime</scope>
 		</dependency>
+<dependency>
+	<groupId>com.jolbox</groupId>
+	<artifactId>bonecp</artifactId>
+	<version>0.8.0.RELEASE</version>
+</dependency>
 
 		<!-- Test -->
 		<dependency>
@@ -144,11 +149,19 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j-api-version}</version>
 		</dependency>
+		<!-- 
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j-version}</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.10</version>
 		</dependency>
+		 -->
+	<dependency>
+	<groupId>ch.qos.logback</groupId>
+	<artifactId>logback-classic</artifactId>
+	<version>1.1.2</version>
+</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
@@ -163,34 +176,6 @@
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>${maven-war-plugin-version}</version>
-			</plugin>
-
-
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>selenium-maven-plugin</artifactId>
-				<version>${selenium-maven-plugin-version}</version>
-				<configuration>
-					<forcedBrowserMode>*firefox</forcedBrowserMode>
-					<background>true</background>
-				</configuration>
-				<executions>
-					<execution>
-						<id>start-selenium-server</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>start-server</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>stop-selenium-server</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop-server</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 		</plugins>
