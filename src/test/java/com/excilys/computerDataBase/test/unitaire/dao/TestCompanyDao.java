@@ -1,34 +1,76 @@
 package com.excilys.computerDataBase.test.unitaire.dao;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.excilys.computerDataBase.dao.impl.CompanyDao;
+import com.excilys.computerDataBase.dao.impl.ComputerDao;
 import com.excilys.computerDataBase.exception.DaoException;
+import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.model.Company;
+import com.excilys.computerDataBase.model.Computer;
 
 public class TestCompanyDao {
 
-	CompanyDao companyDao = CompanyDao.INSTANCE;
+	private CompanyDao companyDao = CompanyDao.INSTANCE;
+	private ComputerDao computerDao = ComputerDao.INSTANCE;
+	private Connection connection = null;
+
+	@Before
+	public void init() throws SQLException {
+		connection = ConnectionFactory.INSTANCE.createConnection();
+		connection.setAutoCommit(false);
+	}
+
+	@After
+	public void after() throws SQLException {
+		connection.rollback();
+	}
 
 	@Test
-	public void testListComputer() {
+	public void testCreateCompany() {
+		Company company = new Company(new Long(0), "company_test");
+		companyDao.create(connection, company);
+		Company company2 = companyDao.getById(connection, company.getId());
+		assertEquals(company2, company);
+	}
+
+	@Test
+	public void testListCompany() {
 		List<Company> companies = companyDao.getAll();
-		assertThat(companies.get(0), is(new Company(1l, "Apple Inc.")));
+		assertEquals(companies.get(0), new Company(1l, "Apple Inc."));
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
 	public void testDelete() {
-		companyDao.delete(null);
-	}
+		Company company = new Company(new Long(0), "company_test");
+		companyDao.create(connection, company);
 
-	@Test(expected = UnsupportedOperationException.class)
-	public void testCreate() {
-		companyDao.create(null);
+		Computer computer = new Computer(null, "name", null, null, company);
+		computerDao.create(computer);
+		companyDao.delete(company.getId());
+
+		try {
+			companyDao.getById(company.getId());
+			fail("no exception : company not deleted");
+		} catch (NullPointerException e) {
+
+		}
+
+		try {
+			computerDao.getById(computer.getId());
+			fail("no exception : computer not deleted");
+		} catch (NullPointerException e) {
+
+		}
+
 	}
 
 	@Test(expected = UnsupportedOperationException.class)
@@ -36,27 +78,32 @@ public class TestCompanyDao {
 		companyDao.update(null);
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
-	public void testGetById() {
+	@Test(expected = DaoException.class)
+	public void testGetByIdWithNullCompanyId() {
 		companyDao.getById(null);
+	}
+
+	public void testGetByIdOk() {
+		Company company = companyDao.getById(new Long(4));
+		assertEquals(company.getId(), new Long(4));
 	}
 
 	@Test
 	public void testGetAllFromToWithZero() {
 		List<Company> companies = companyDao.getAll(new Long(0), new Long(0));
-		assertThat(companies == null, is(false));
-		assertThat(companies.size(), is(0));
+		assertEquals(companies == null, false);
+		assertEquals(companies.size(), 0);
 	}
 
 	@Test
 	public void testGetAllFromTo() {
 		List<Company> companies = companyDao.getAll(new Long(0), new Long(1));
-		assertThat(companies == null, is(false));
-		assertThat(companies.size(), is(1));
-		assertThat(companies.get(0).getName(), is("Apple Inc."));
+		assertEquals(companies == null, false);
+		assertEquals(companies.size(), 1);
+		assertEquals(companies.get(0).getName(), "Apple Inc.");
 	}
 
-	@Test(expected = DaoException.class)
+	@Test(expected = NullPointerException.class)
 	public void testGetAllFromToWrong() {
 		companyDao.getAll(null, new Long(1));
 	}
@@ -70,9 +117,7 @@ public class TestCompanyDao {
 	public void testGetNumberOfElement() {
 		List<Company> companies = companyDao.getAll();
 		Long total = companyDao.getNumberOfElement();
-		assertThat(companies == null, is(false));
-		assertThat(total == null, is(false));
-		assertThat(total, is(new Long(companies.size())));
+		assertEquals(total, new Long(companies.size()));
 	}
 
 }

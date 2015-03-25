@@ -34,16 +34,26 @@ public class DaoUtil {
 		return companies;
 	}
 	
-	public static void closeConnection(Statement statement, Connection connection) {
+	public static void close(Statement statement, Connection connection) {
+		closeStatement(statement);
+		closeConnection(connection);
+	}
+	
+	public static void closeStatement(Statement statement) {
 		try {
-			if (statement != null)
+			if (statement != null) {
 				statement.close();
+			}
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_CLOSE_STATEMENT, e);
 		}
+	}
+
+	public static void closeConnection(Connection connection) {
 		try {
-			if (connection != null)
+			if (connection != null) {
 				connection.close();
+			}
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_CLOSE_CONNECTION, e);
 		}

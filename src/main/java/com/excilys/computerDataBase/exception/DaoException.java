@@ -26,8 +26,6 @@ public class DaoException extends RuntimeException {
 	public static final String CAN_NOT_CLOSE_CONNECTION = "can not close connection";
 
 	public static final String CAN_NOT_CLOSE_STATEMENT = "can not close statement";
-	
-	public static final String CAN_NOT_ROLLBACK_TRANSACTION = "can not rollback transaction";
 
 
 	/**

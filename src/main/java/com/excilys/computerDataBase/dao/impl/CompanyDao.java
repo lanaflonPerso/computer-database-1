@@ -11,7 +11,6 @@ import com.excilys.computerDataBase.dao.CompanyDaoInterface;
 import com.excilys.computerDataBase.exception.DaoException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.model.Company;
-import com.excilys.computerDataBase.model.Computer;
 import com.excilys.computerDataBase.util.DaoUtil;
 
 /**
@@ -21,11 +20,37 @@ public enum CompanyDao implements CompanyDaoInterface {
 	INSTANCE;
 
 	@Override
+	public void create(Connection connection, Company t) {
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		try {
+			preparedStatement = connection
+					.prepareStatement(
+							"INSERT INTO company (name) VALUES (?)",
+							Statement.RETURN_GENERATED_KEYS);
+			if(t.getName().trim().isEmpty()) {
+				throw new NullPointerException();
+			}
+			preparedStatement.setString(1, t.getName().trim());
+			preparedStatement.executeUpdate();
+			resultSet = preparedStatement.getGeneratedKeys();
+			resultSet.next();
+			Long key = resultSet.getLong(1);
+			t.setId(key);
+		} catch (SQLException e) {
+			throw new DaoException(DaoException.CAN_NOT_INSERT_ELEMENT, e);
+		} finally {
+			DaoUtil.closeStatement(preparedStatement);
+		}
+		
+	}
+	
+	@Override
 	public List<Company> getAll() {
 		Statement statement = null;
 		ResultSet resultSet = null;
 		Connection connection = null;
-		List<Company> companies = null;		
+		List<Company> companies = null;
 		try {
 			connection = ConnectionFactory.INSTANCE.createConnection();
 			statement = connection.createStatement();
@@ -34,11 +59,11 @@ public enum CompanyDao implements CompanyDaoInterface {
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
-			DaoUtil.closeConnection(statement, connection);
+			DaoUtil.close(statement, connection);
 		}
 		return companies;
 	}
-
+	
 	@Override
 	public List<Company> getAll(Long from, Long to) {
 		PreparedStatement preparedStatement = null;
@@ -56,19 +81,17 @@ public enum CompanyDao implements CompanyDaoInterface {
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
-			DaoUtil.closeConnection(preparedStatement, connection);
+			DaoUtil.close(preparedStatement, connection);
 		}
 		return companies;
 	}
 
 	@Override
-	public Long getNumberOfElement() {
+	public Long getNumberOfElement(Connection connection) {
 		Statement statement = null;
 		ResultSet resultSet = null;
-		Connection connection = null;
 		Long result = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("select count(*) from company");
 			resultSet.next();
@@ -76,36 +99,13 @@ public enum CompanyDao implements CompanyDaoInterface {
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
-			DaoUtil.closeConnection(statement, connection);
+			DaoUtil.closeStatement(statement);
 		}
 		return result;
 	}
-
+	
 	@Override
-	public void delete(Long id) {
-		Connection connection = null;
-		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
-			connection.setAutoCommit(false);
-			List<Computer> computers = getComputerWithCompanyId(connection, id);
-			for(Computer computer : computers) {
-				ComputerDao.INSTANCE.delete(computer.getId());
-			}
-			deleteCompany(connection, id);
-			connection.commit();
-		} catch (Exception e) {
-			try {
-				connection.rollback();
-			} catch (SQLException e1) {
-				throw new DaoException(DaoException.CAN_NOT_ROLLBACK_TRANSACTION, e);
-			}
-			throw new DaoException(DaoException.CAN_NOT_DELETE_ELEMENT, e);
-		} finally {
-			DaoUtil.closeConnection(connection);
-		}
-	}
-
-	private void deleteCompany(Connection connection, Long id) {
+	public void delete(Connection connection, Long id) {
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = connection
@@ -117,24 +117,26 @@ public enum CompanyDao implements CompanyDaoInterface {
 		} finally {
 			DaoUtil.closeStatement(preparedStatement);
 		}
-		
 	}
 
-	private List<Computer> getComputerWithCompanyId(Connection connection, Long id) {
+	@Override
+	public Company getById(Connection connection, Long id) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		List<Computer> computers = null;
+		Company company = null;
 		try {
-			preparedStatement = connection.prepareStatement("select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compa.id = ?");
+			preparedStatement = connection
+					.prepareStatement("select * from company WHERE id=?");
 			preparedStatement.setLong(1, id);
 			resultSet = preparedStatement.executeQuery();
-			computers = DaoUtil.getComputerList(resultSet);
-		} catch (SQLException e) {
+			List<Company> companies = DaoUtil.getCompanyList(resultSet);
+			company = companies.get(0);
+		} catch (Exception e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
 			DaoUtil.closeStatement(preparedStatement);
 		}
-		return computers;
+		return company;
 	}
 	
 }

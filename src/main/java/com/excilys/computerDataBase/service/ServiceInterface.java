@@ -25,8 +25,6 @@ public interface ServiceInterface<T> {
 		throw new UnsupportedOperationException();
 	}
 
-	public default void delete(Long id) {
-		throw new UnsupportedOperationException();
-	}
+	public void delete(Long id);
 	
 }

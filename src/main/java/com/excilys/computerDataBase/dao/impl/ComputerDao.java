@@ -24,12 +24,10 @@ public enum ComputerDao implements ComputerDaoInterface {
 	INSTANCE;
 
 	@Override
-	public void create(Computer t) {
+	public void create(Connection connection, Computer t) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		Connection connection = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
 			preparedStatement = connection
 					.prepareStatement(
 							"INSERT INTO computer (name, introduced, discontinued, company_id) VALUES (?,?,?,?)",
@@ -66,16 +64,14 @@ public enum ComputerDao implements ComputerDaoInterface {
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_INSERT_ELEMENT, e);
 		} finally {
-			DaoUtil.closeConnection(preparedStatement, connection);
+			DaoUtil.closeStatement(preparedStatement);
 		}
-	}
-
+	}	
+	
 	@Override
-	public void delete(Long computerId) {
+	public void delete(Connection connection, Long computerId) {
 		PreparedStatement preparedStatement = null;
-		Connection connection = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
 			preparedStatement = connection
 					.prepareStatement("DELETE FROM computer WHERE id=?");
 			preparedStatement.setLong(1, computerId);
@@ -83,16 +79,15 @@ public enum ComputerDao implements ComputerDaoInterface {
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_DELETE_ELEMENT, e);
 		} finally {
-			DaoUtil.closeConnection(preparedStatement, connection);
+			DaoUtil.closeStatement(preparedStatement);
 		}
 	}
-
+	
+	
 	@Override
-	public void update(Computer t) {
+	public void update(Connection connection, Computer t) {
 		PreparedStatement preparedStatement = null;
-		Connection connection = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
 			preparedStatement = connection
 					.prepareStatement("UPDATE computer SET name=?, introduced=?, discontinued=?, company_id=? WHERE id=?");
 			
@@ -126,18 +121,16 @@ public enum ComputerDao implements ComputerDaoInterface {
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_UPDATE_ELEMENT, e);
 		} finally {
-			DaoUtil.closeConnection(preparedStatement, connection);
+			DaoUtil.closeStatement(preparedStatement);
 		}
 	}
 
 	@Override
-	public Computer getById(Long index) {
+	public Computer getById(Connection connection, Long index) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		Connection connection = null;
 		Computer computer = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
 			preparedStatement = connection
 					.prepareStatement("select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compu.id=?");
 			preparedStatement.setLong(1, index);
@@ -147,7 +140,7 @@ public enum ComputerDao implements ComputerDaoInterface {
 		} catch (Exception e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
-			DaoUtil.closeConnection(preparedStatement, connection);
+			DaoUtil.closeStatement(preparedStatement);
 		}
 		return computer;
 	}
@@ -167,7 +160,7 @@ public enum ComputerDao implements ComputerDaoInterface {
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
-			DaoUtil.closeConnection(statement, connection);
+			DaoUtil.close(statement, connection);
 		}
 		return computers;
 	}
@@ -189,19 +182,17 @@ public enum ComputerDao implements ComputerDaoInterface {
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
-			DaoUtil.closeConnection(preparedStatement, connection);
+			DaoUtil.close(preparedStatement, connection);
 		}
 		return computers;
 	}
 
 	@Override
-	public Long getNumberOfElement() {
+	public Long getNumberOfElement(Connection connection) {
 		Statement statement = null;
 		ResultSet resultSet = null;
-		Connection connection = null;
 		Long result = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("select count(*) from computer");
 			resultSet.next();
@@ -209,7 +200,7 @@ public enum ComputerDao implements ComputerDaoInterface {
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
-			DaoUtil.closeConnection(statement, connection);
+			DaoUtil.closeStatement(statement);
 		}
 		return result;
 	}
@@ -231,9 +222,28 @@ public enum ComputerDao implements ComputerDaoInterface {
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
 		} finally {
-			DaoUtil.closeConnection(preparedStatement, connection);
+			DaoUtil.close(preparedStatement, connection);
 		}
 		return computers;
 	}
+
+	@Override
+	public List<Computer> getByCompanyId(Connection connection, Long id) {
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		List<Computer> computers = null;
+		try {
+			preparedStatement = connection
+					.prepareStatement("select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compa.id = ?");
+			preparedStatement.setLong(1, id);
+			resultSet = preparedStatement.executeQuery();
+			computers = DaoUtil.getComputerList(resultSet);
+		} catch (SQLException e) {
+			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
+		} finally {
+			DaoUtil.closeStatement(preparedStatement);
+		}
+		return computers;
+	}	
 
 }

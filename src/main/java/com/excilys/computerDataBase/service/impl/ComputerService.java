@@ -24,7 +24,7 @@ public enum ComputerService implements ServiceComputerInterface {
 
 	@Override
 	public Computer details(Long computerId) {
-		if (Validator.isComputerIdCorrect(computerId)) {
+		if (Validator.isIdCorrect(computerId)) {
 			return computerDao.getById(computerId);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_COMPUTER_ID);
@@ -42,7 +42,7 @@ public enum ComputerService implements ServiceComputerInterface {
 
 	@Override
 	public void update(Computer c) {
-		if (Validator.isComputerCorrect(c)&& Validator.isComputerIdCorrect(c.getId())) {
+		if (Validator.isComputerCorrect(c)&& Validator.isIdCorrect(c.getId())) {
 			computerDao.update(c);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_COMPUTER);
@@ -51,7 +51,7 @@ public enum ComputerService implements ServiceComputerInterface {
 
 	@Override
 	public void delete(Long computerId) {
-		if (Validator.isComputerIdCorrect(computerId)) {
+		if (Validator.isIdCorrect(computerId)) {
 			computerDao.delete(computerId);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_COMPUTER);

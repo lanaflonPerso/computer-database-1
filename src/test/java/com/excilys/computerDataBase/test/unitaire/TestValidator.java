@@ -106,25 +106,25 @@ public class TestValidator {
 
 	@Test
 	public void testComputerIdOk() {
-		assertThat(Validator.isComputerIdCorrect(new Long(4)),
+		assertThat(Validator.isIdCorrect(new Long(4)),
 				is(true));
 	}
 	
 	@Test
 	public void testComputerIdNull() {
-		assertThat(Validator.isComputerIdCorrect(null),
+		assertThat(Validator.isIdCorrect(null),
 				is(false));
 	}
 	
 	@Test
 	public void testComputerIdNegtif() {
-		assertThat(Validator.isComputerIdCorrect(new Long(-4)),
+		assertThat(Validator.isIdCorrect(new Long(-4)),
 				is(false));
 	}
 	
 	@Test
 	public void testComputerIdZero() {
-		assertThat(Validator.isComputerIdCorrect(new Long(0)),
+		assertThat(Validator.isIdCorrect(new Long(0)),
 				is(false));
 	}
 	

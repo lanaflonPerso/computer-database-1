@@ -12,6 +12,7 @@
 		<java-target-version>1.8</java-target-version>
 		<!-- maven -->
 		<maven-compiler-plugin-version>3.1</maven-compiler-plugin-version>
+		<maven-war-plugin-version>2.4</maven-war-plugin-version>
 		<!-- SQL -->
 		<mysql-connector-version>5.1.6</mysql-connector-version>
 		<!-- Test -->
@@ -49,7 +50,7 @@
 			<version>${mysql-connector-version}</version>
 			<scope>runtime</scope>
 		</dependency>
-		
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -161,8 +162,37 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.4</version>
+				<version>${maven-war-plugin-version}</version>
 			</plugin>
+
+
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>selenium-maven-plugin</artifactId>
+				<version>${selenium-maven-plugin-version}</version>
+				<configuration>
+					<forcedBrowserMode>*firefox</forcedBrowserMode>
+					<background>true</background>
+				</configuration>
+				<executions>
+					<execution>
+						<id>start-selenium-server</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>start-server</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop-selenium-server</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop-server</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>
