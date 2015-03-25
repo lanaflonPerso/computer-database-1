@@ -1,15 +1,15 @@
 package com.excilys.computerDataBase.test.unitaire.service;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -25,7 +25,7 @@ import com.excilys.computerDataBase.service.impl.ComputerService;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ ComputerDao.class })
-public class TestComputerService extends TestCase {
+public class TestComputerService {
 
 	private static final Long COMPUTER_ID = new Long(45);
 	private static final Long NUMBER_OF_ELEMENT = new Long(101);
@@ -43,7 +43,7 @@ public class TestComputerService extends TestCase {
 				LocalDateTime.now(), new Company(new Long(3), "myCompany"));
 	}
 
-	@Override
+	@BeforeClass
 	public void setUp() {
 		Mockito.when(computerDao.getById(COMPUTER_ID)).thenReturn(computer1);
 		List<Computer> computers = new ArrayList<Computer>();
@@ -55,10 +55,14 @@ public class TestComputerService extends TestCase {
 		computerService.setComputerDao(computerDao);
 	}
 
+	@AfterClass
+	public void setDown() {
+		computerService.setComputerDao(ComputerDao.INSTANCE);
+	}
+
 	@Test
 	public void testGetByIdOk() {
-		assertThat(computerService.getById(COMPUTER_ID).getId(),
-				is(new Long(1)));
+		assertEquals(computerService.getById(COMPUTER_ID).getId(), new Long(1));
 	}
 
 	@Test
@@ -67,15 +71,15 @@ public class TestComputerService extends TestCase {
 			computerService.getById(new Long(0));
 			fail("no exception occured");
 		} catch (ServiceException e) {
-			assertThat(e.getMessage(), is(ServiceException.INVALID_COMPUTER_ID));
+			assertEquals(e.getMessage(), ServiceException.INVALID_COMPUTER_ID);
 		}
 	}
 
 	@Test
 	public void testAll() {
 		List<Computer> computers = computerService.list();
-		assertThat(computers.size(), is(1));
-		assertThat(computers.get(0), is(computer1));
+		assertEquals(computers.size(), 1);
+		assertEquals(computers.get(0), computer1);
 	}
 
 	@Test
@@ -89,23 +93,23 @@ public class TestComputerService extends TestCase {
 			computerService.create(new Computer());
 			fail("no exception occured");
 		} catch (ServiceException e) {
-			assertThat(e.getMessage(), is(ServiceException.INVALID_COMPUTER));
+			assertEquals(e.getMessage(), ServiceException.INVALID_COMPUTER);
 		}
 	}
 
 	@Test
 	public void testCreateNameWithSpace1() {
 		try {
-		Computer computer = new Computer(new Long(1), "   ", LocalDateTime.now(),
-				LocalDateTime.now(), new Company(new Long(15), "Canon"));
-		computerService.create(computer);
-		fail("no exception occured");
+			Computer computer = new Computer(new Long(1), "   ",
+					LocalDateTime.now(), LocalDateTime.now(), new Company(
+							new Long(15), "Canon"));
+			computerService.create(computer);
+			fail("no exception occured");
 		} catch (ServiceException e) {
-			assertThat(e.getMessage(), is(ServiceException.INVALID_COMPUTER));
+			assertEquals(e.getMessage(), ServiceException.INVALID_COMPUTER);
 		}
 	}
-	
-	
+
 	@Test
 	public void testUpdateOk() {
 		computerService.update(computer1);
@@ -119,7 +123,7 @@ public class TestComputerService extends TestCase {
 			computerService.create(computer);
 			fail("no exception occured");
 		} catch (ServiceException e) {
-			assertThat(e.getMessage(), is(ServiceException.INVALID_COMPUTER));
+			assertEquals(e.getMessage(), ServiceException.INVALID_COMPUTER);
 		}
 	}
 
@@ -134,28 +138,28 @@ public class TestComputerService extends TestCase {
 			computerService.delete(new Long(-1));
 			fail("no exception occured");
 		} catch (ServiceException e) {
-			assertThat(e.getMessage(), is(ServiceException.INVALID_COMPUTER));
+			assertEquals(e.getMessage(), ServiceException.INVALID_COMPUTER);
 		}
 	}
 
 	@Test
 	public void testNumberOfElementOk() {
 		Long numberforElement = computerService.getNumberOfElement();
-		assertThat(numberforElement, is(NUMBER_OF_ELEMENT));
+		assertEquals(numberforElement, NUMBER_OF_ELEMENT);
 	}
-	
+
 	@Test
 	public void testListFromToOk() {
-			computerService.list(new Long(0), new Long(1));
+		computerService.list(new Long(0), new Long(1));
 	}
-	
+
 	@Test
 	public void testListFromToWrong() {
 		try {
 			computerService.list(new Long(0), null);
 			fail("no exception occured");
 		} catch (ServiceException e) {
-			assertThat(e.getMessage(), is(ServiceException.INVALID_PARAMETER));
+			assertEquals(e.getMessage(), ServiceException.INVALID_PARAMETER);
 		}
 	}
 
