@@ -6,11 +6,11 @@ public enum SortDirection {
 	public String toString() {
 		switch (this) {
 		case ASC:
-			return "ASC, compu.id ASC";
+			return "ASC";
 		case DESC:
-			return "DESC, compu.id ASC";
+			return "DESC";
 		default:
-			return "ASC, compu.id ASC";
+			return "ASC";
 		}
 	}
 

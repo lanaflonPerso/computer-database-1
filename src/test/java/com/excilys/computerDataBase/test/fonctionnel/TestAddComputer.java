@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class TestAddComputer {
-	private HtmlUnitDriver driver;
+	private WebDriver driver;
 
 	@Before
 	public void init() {

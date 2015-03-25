@@ -39,13 +39,6 @@ public class TestEditComputer {
 		String name = "editComputerTest3";
 		enterComputer(driver, name, "", date, "Nokia");
 		
-		/*
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		*/
 		driver.findElement(By.id("editButton")).click();
 		
 		assertEquals(name, driver.findElement(By.id("name_1")).getText());

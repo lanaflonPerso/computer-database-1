@@ -14,6 +14,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.DaoException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.model.Company;
@@ -104,7 +105,7 @@ public class TestComputerDao {
 
 	@Test
 	public void testListComputer() {
-		List<Computer> computers = computerDao.getAll();
+		List<Computer> computers = computerDao.getAll(new SortCriteria());
 		assertEquals(computers.get(0), new Computer(4l,
 				"MacBook Pro 15.4 inch", null, null, new Company(new Long(1),
 						"Apple Inc.")));
@@ -141,27 +142,27 @@ public class TestComputerDao {
 
 	@Test
 	public void testGetAllFromToWithZero() {
-		List<Computer> computers = computerDao.getAll(new Long(0), new Long(0));
+		List<Computer> computers = computerDao.getAll(new Long(0), new Long(0), new SortCriteria());
 		assertEquals(computers.size(), 0);
 	}
 
 	@Test
 	public void testGetAllFromTo() {
-		List<Computer> computers = computerDao.getAll(new Long(0), new Long(1));
+		List<Computer> computers = computerDao.getAll(new Long(0), new Long(1), new SortCriteria());
 		assertEquals(computers.size(), 1);
 		assertEquals(computers.get(0).getName(), "MacBook Pro 15.4 inch");
 	}
 
 	@Test
 	public void testGetNumberOfElement() {
-		List<Computer> computers = computerDao.getAll();
+		List<Computer> computers = computerDao.getAll(new SortCriteria());
 		Long total = computerDao.getNumberOfElement();
 		assertEquals(total, new Long(computers.size()));
 	}
 
 	@Test
 	public void testNameContains() {
-		List<Computer> computers = computerDao.getNameContains("App", new Long(0), new Long(10));
+		List<Computer> computers = computerDao.getNameContains("App", new Long(0), new Long(10), new SortCriteria());
 		assertEquals(computers.get(0).getName(), "MacBook Pro 15.4 inch");
 	}
 

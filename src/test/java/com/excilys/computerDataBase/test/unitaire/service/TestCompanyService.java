@@ -7,6 +7,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.excilys.computerDataBase.dao.impl.CompanyDao;
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.service.impl.CompanyService;
 
@@ -26,7 +27,7 @@ public class TestCompanyService {
 	
 	@Test
 	public void testGetAll() {
-		assertEquals(companyService.list().size(), 42);
+		assertEquals(companyService.list(new SortCriteria()).size(), 42);
 	}
 
 	@Test(expected = UnsupportedOperationException.class)

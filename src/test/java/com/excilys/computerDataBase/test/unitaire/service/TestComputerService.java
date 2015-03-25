@@ -14,6 +14,7 @@ import org.mockito.Mockito;
 
 import com.excilys.computerDataBase.dao.ComputerDaoInterface;
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
@@ -38,7 +39,7 @@ public class TestComputerService {
 		Mockito.when(computerDao.getById(COMPUTER_ID)).thenReturn(computer1);
 		List<Computer> computers = new ArrayList<Computer>();
 		computers.add(computer1);
-		Mockito.when(computerDao.getAll()).thenReturn(computers);
+		Mockito.when(computerDao.getAll(Mockito.any())).thenReturn(computers);
 		Mockito.when(computerDao.getNumberOfElement()).thenReturn(
 				NUMBER_OF_ELEMENT);
 		Mockito.doThrow(new RuntimeException()).when(computerDao)
@@ -68,7 +69,7 @@ public class TestComputerService {
 
 	@Test
 	public void testAll() {
-		List<Computer> computers = computerService.list();
+		List<Computer> computers = computerService.list(new SortCriteria());
 		assertEquals(computers.size(), 1);
 		assertEquals(computers.get(0), computer1);
 	}
@@ -141,13 +142,13 @@ public class TestComputerService {
 
 	@Test
 	public void testListFromToOk() {
-		computerService.list(new Long(0), new Long(1));
+		computerService.list(new Long(0), new Long(1), new SortCriteria());
 	}
 
 	@Test
 	public void testListFromToWrong() {
 		try {
-			computerService.list(new Long(0), null);
+			computerService.list(new Long(0), null, new SortCriteria());
 			fail("no exception occured");
 		} catch (ServiceException e) {
 			assertEquals(e.getMessage(), ServiceException.INVALID_PARAMETER);

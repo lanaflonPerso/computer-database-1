@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.excilys.computerDataBase.dao.impl.CompanyDao;
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.DaoException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.model.Company;
@@ -45,7 +46,7 @@ public class TestCompanyDao {
 
 	@Test
 	public void testListCompany() {
-		List<Company> companies = companyDao.getAll();
+		List<Company> companies = companyDao.getAll(new SortCriteria());
 		assertEquals(companies.get(0), new Company(1l, "Apple Inc."));
 	}
 
@@ -90,14 +91,14 @@ public class TestCompanyDao {
 
 	@Test
 	public void testGetAllFromToWithZero() {
-		List<Company> companies = companyDao.getAll(new Long(0), new Long(0));
+		List<Company> companies = companyDao.getAll(new Long(0), new Long(0), new SortCriteria());
 		assertEquals(companies == null, false);
 		assertEquals(companies.size(), 0);
 	}
 
 	@Test
 	public void testGetAllFromTo() {
-		List<Company> companies = companyDao.getAll(new Long(0), new Long(1));
+		List<Company> companies = companyDao.getAll(new Long(0), new Long(1), new SortCriteria());
 		assertEquals(companies == null, false);
 		assertEquals(companies.size(), 1);
 		assertEquals(companies.get(0).getName(), "Apple Inc.");
@@ -105,17 +106,17 @@ public class TestCompanyDao {
 
 	@Test(expected = NullPointerException.class)
 	public void testGetAllFromToWrong() {
-		companyDao.getAll(null, new Long(1));
+		companyDao.getAll(null, new Long(1), new SortCriteria());
 	}
 
 	@Test(expected = DaoException.class)
 	public void testGetAllFromToWrong2() {
-		companyDao.getAll(new Long(4), new Long(1));
+		companyDao.getAll(new Long(4), new Long(1), new SortCriteria());
 	}
 
 	@Test
 	public void testGetNumberOfElement() {
-		List<Company> companies = companyDao.getAll();
+		List<Company> companies = companyDao.getAll(new SortCriteria());
 		Long total = companyDao.getNumberOfElement();
 		assertEquals(total, new Long(companies.size()));
 	}
