@@ -91,7 +91,7 @@
 									<a id="name_${i}" href="editComputer?computerId=${computers.get(i).getId()}" onclick="">${computers.get(i).getName()}</a>
 								</td>
 								<td id="introduced_${i}">${computers.get(i).getIntroduced()}</td>
-								<td>${computers.get(i).getDiscontinued()}</td>
+								<td id="discontinued_${i}">${computers.get(i).getDiscontinued()}</td>
 								<td id="companyName_${i}">${computers.get(i).getCompanyName()}</td>
 							</c:if>
 						</tr>

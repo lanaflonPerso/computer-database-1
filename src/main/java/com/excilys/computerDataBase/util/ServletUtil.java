@@ -26,6 +26,10 @@ public final class ServletUtil {
 	}
 
 	public static ComputerDto getComputerDto(HttpServletRequest request) {
+		String id = getStringFromRequest(request, "computerId");
+		if("".equals(id)) {
+			id = null;
+		}
 		String name = getStringFromRequest(request, "computerName");
 		String introduced = getStringFromRequest(request, "introduced");
 		String discontinued = getStringFromRequest(request, "discontinued");
@@ -34,6 +38,6 @@ public final class ServletUtil {
 			companyId = null;
 		}
 		String companyName = getStringFromRequest(request, "companyName");
-		return new ComputerDto(null, name, introduced, discontinued, companyId, companyName);
+		return new ComputerDto(id, name, introduced, discontinued, companyId, companyName);
 	}
 }

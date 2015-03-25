@@ -24,7 +24,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-8 col-xs-offset-2 box">
-					<div class="label label-default pull-right">id:
+					<div id="computer_Id" class="label label-default pull-right">id:
 						${computer.getId()}</div>
 					<h1>Edit Computer</h1>
 
@@ -56,7 +56,7 @@
 											<c:if test="${companies.get(i).getId() == computer.getCompanyName()}">
 										selected
 										</c:if>
-											value="${i}">${companies.get(i).getName()}</option>
+											value="${companies.get(i).getId()}">${companies.get(i).getName()}</option>
 									</c:forEach>
 								</select>
 							</div>

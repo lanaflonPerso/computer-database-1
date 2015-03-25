@@ -42,7 +42,7 @@ public enum ComputerService implements ServiceComputerInterface {
 
 	@Override
 	public void update(Computer c) {
-		if (Validator.isComputerCorrect(c)&& Validator.isIdCorrect(c.getId())) {
+		if (Validator.isComputerCorrect(c) && Validator.isIdCorrect(c.getId())) {
 			computerDao.update(c);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_COMPUTER);
@@ -78,8 +78,7 @@ public enum ComputerService implements ServiceComputerInterface {
 			return computerDao.getNameContains(string, from, to);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_PARAMETER);
-		}
-		
+		}	
 	}
 
 	public ComputerDaoInterface getComputerDao() {
