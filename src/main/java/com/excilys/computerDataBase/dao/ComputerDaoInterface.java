@@ -12,7 +12,7 @@ import com.excilys.computerDataBase.model.Computer;
  *            the generic type
  */
 public interface ComputerDaoInterface extends DaoInterface<Computer> {
-	public List<Computer> getNameContains(String string);
+	public List<Computer> getNameContains(String string, Long from, Long to);
 
 	public List<Computer> getByCompanyId(Connection connection, Long id);
 }

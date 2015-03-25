@@ -29,10 +29,19 @@
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
 					<form id="searchForm" action="dashboard" method="GET" class="form-inline">
+						<input type="hidden" name="page" value="${1}"/>
 						<input type="hidden" name="size" value="${size}"/>
-						<input type="hidden" name="page" value="${page}"/>
 						<input type="search" id="searchbox" name="search"
-							class="form-control" placeholder="Search name" /> <input
+							class="form-control" 
+							<c:if test="${search == null || search == \"\"}">
+								placeholder="Search name" 
+							</c:if>
+							<c:if test="${search != null}">
+								value="${search}" 
+							</c:if>
+							
+							/>
+							 <input
 							type="submit" id="searchsubmit" value="Filter by name"
 							class="btn btn-primary" />
 					</form>
@@ -94,7 +103,7 @@
 
 	
 	<footer class="navbar-fixed-bottom">
-		<mylib:pagination page="${page}" size="${size}"/>
+		<mylib:pagination page="${page}" size="${size}" search="${search}"/>
 	</footer>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>

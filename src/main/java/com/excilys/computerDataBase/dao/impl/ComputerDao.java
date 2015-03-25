@@ -206,7 +206,7 @@ public enum ComputerDao implements ComputerDaoInterface {
 	}
 
 	@Override
-	public List<Computer> getNameContains(String string) {
+	public List<Computer> getNameContains(String string, Long from, Long to) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Connection connection = null;
@@ -214,9 +214,11 @@ public enum ComputerDao implements ComputerDaoInterface {
 		try {
 			connection = ConnectionFactory.INSTANCE.createConnection();
 			preparedStatement = connection
-					.prepareStatement("select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compu.name LIKE ? or compa.name LIKE ?");
+					.prepareStatement("SELECT * FROM computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compu.name LIKE ? or compa.name LIKE ? LIMIT ? OFFSET ?");
 			preparedStatement.setString(1, "%" + string + "%");
 			preparedStatement.setString(2, "%" + string + "%");
+			preparedStatement.setLong(3, to - from);
+			preparedStatement.setLong(4, from);;
 			resultSet = preparedStatement.executeQuery();
 			computers = DaoUtil.getComputerList(resultSet);
 		} catch (SQLException e) {

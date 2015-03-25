@@ -45,8 +45,9 @@ public class Dashboard extends HttpServlet {
 		Long numberOfComputer = null;
 
 		String search = getSearch(request);
-		if (search != null) {
-			computers = ComputerService.INSTANCE.getNameContains(search);
+		if (search != null && !"".equals(search.trim())) {
+			computers = ComputerService.INSTANCE.getNameContains(search, new Long((page - 1)
+					* size), new Long(page * size));
 			numberOfComputer = Long.valueOf(computers.size());
 		} else {
 			computers = ComputerService.INSTANCE.list(new Long((page - 1)
@@ -56,6 +57,7 @@ public class Dashboard extends HttpServlet {
 		computerDtos = ComputerMapper.mapListModelToDto(computers);
 		session.setAttribute("numberOfComputer", numberOfComputer);
 
+		session.setAttribute("search", search);
 		session.setAttribute("page", page);
 		session.setAttribute("size", size);
 		session.setAttribute("computers", computerDtos);
@@ -108,11 +110,11 @@ public class Dashboard extends HttpServlet {
 				search = search.trim();
 			}
 			if ("".equals(search)) {
-				return null;
+				return "";
 			}
 			return search;
 		} catch (Exception e) {
-			return null;
+			return "";
 		}
 	}
 

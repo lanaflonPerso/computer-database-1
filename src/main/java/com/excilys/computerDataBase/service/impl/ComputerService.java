@@ -73,9 +73,9 @@ public enum ComputerService implements ServiceComputerInterface {
 	}
 
 	@Override
-	public List<Computer> getNameContains(String string) {
+	public List<Computer> getNameContains(String string, Long from, Long to) {
 		if (Validator.isNameForSearchCorrect(string)) {
-			return computerDao.getNameContains(string);
+			return computerDao.getNameContains(string, from, to);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_PARAMETER);
 		}

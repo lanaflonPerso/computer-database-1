@@ -160,7 +160,7 @@ public class TestComputerDao {
 
 	@Test
 	public void testNameContains() {
-		List<Computer> computers = computerDao.getNameContains("App");
+		List<Computer> computers = computerDao.getNameContains("App", new Long(0), new Long(10));
 		assertEquals(computers.get(0).getName(), "MacBook Pro 15.4 inch");
 	}
 
