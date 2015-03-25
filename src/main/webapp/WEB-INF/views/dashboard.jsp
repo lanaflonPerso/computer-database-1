@@ -4,17 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="mylib"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Computer Database</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="utf-8">
-<!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="css/font-awesome.css" rel="stylesheet" media="screen">
-<link href="css/main.css" rel="stylesheet" media="screen">
-</head>
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -22,7 +12,6 @@
 				Database </a>
 		</div>
 	</header>
-
 	<section id="main">
 		<div class="container">
 			<h1 id="homeTitle">${numberOfComputer} Computers found</h1>
@@ -105,9 +94,9 @@
 	<footer class="navbar-fixed-bottom">
 		<mylib:pagination page="${page}" size="${size}" search="${search}"/>
 	</footer>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/dashboard.js"></script>
+	
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+
 
 </body>
 </html>

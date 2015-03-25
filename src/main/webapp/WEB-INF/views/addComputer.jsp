@@ -3,16 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Computer Database</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="css/font-awesome.css" rel="stylesheet" media="screen">
-<link href="css/main.css" rel="stylesheet" media="screen">
-</head>
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
 <body>
 	<header class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
@@ -61,6 +52,6 @@
 			</div>
 		</div>
 	</section>
-<script src="js/myFunction.js"></script>
+		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>
