@@ -57,14 +57,14 @@ public class TestComputerService extends TestCase {
 
 	@Test
 	public void testGetByIdOk() {
-		assertThat(computerService.details(COMPUTER_ID).getId(),
+		assertThat(computerService.getById(COMPUTER_ID).getId(),
 				is(new Long(1)));
 	}
 
 	@Test
 	public void testGetByIdWrong() {
 		try {
-			computerService.details(new Long(0));
+			computerService.getById(new Long(0));
 			fail("no exception occured");
 		} catch (ServiceException e) {
 			assertThat(e.getMessage(), is(ServiceException.INVALID_COMPUTER_ID));

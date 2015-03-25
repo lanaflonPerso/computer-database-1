@@ -32,7 +32,7 @@ public enum ComputerDao implements ComputerDaoInterface {
 					.prepareStatement(
 							"INSERT INTO computer (name, introduced, discontinued, company_id) VALUES (?,?,?,?)",
 							Statement.RETURN_GENERATED_KEYS);
-			if(t.getName().trim().isEmpty()) {
+			if (t.getName().trim().isEmpty()) {
 				throw new NullPointerException();
 			}
 			preparedStatement.setString(1, t.getName().trim());
@@ -66,8 +66,8 @@ public enum ComputerDao implements ComputerDaoInterface {
 		} finally {
 			DaoUtil.closeStatement(preparedStatement);
 		}
-	}	
-	
+	}
+
 	@Override
 	public void delete(Connection connection, Long computerId) {
 		PreparedStatement preparedStatement = null;
@@ -82,16 +82,15 @@ public enum ComputerDao implements ComputerDaoInterface {
 			DaoUtil.closeStatement(preparedStatement);
 		}
 	}
-	
-	
+
 	@Override
 	public void update(Connection connection, Computer t) {
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = connection
 					.prepareStatement("UPDATE computer SET name=?, introduced=?, discontinued=?, company_id=? WHERE id=?");
-			
-			if(t.getName().trim().isEmpty()) {
+
+			if (t.getName().trim().isEmpty()) {
 				throw new NullPointerException();
 			}
 			preparedStatement.setString(1, t.getName().trim());
@@ -218,7 +217,7 @@ public enum ComputerDao implements ComputerDaoInterface {
 			preparedStatement.setString(1, "%" + string + "%");
 			preparedStatement.setString(2, "%" + string + "%");
 			preparedStatement.setLong(3, to - from);
-			preparedStatement.setLong(4, from);;
+			preparedStatement.setLong(4, from);
 			resultSet = preparedStatement.executeQuery();
 			computers = DaoUtil.getComputerList(resultSet);
 		} catch (SQLException e) {
@@ -246,6 +245,29 @@ public enum ComputerDao implements ComputerDaoInterface {
 			DaoUtil.closeStatement(preparedStatement);
 		}
 		return computers;
-	}	
+	}
+
+	@Override
+	public Long getNameContainsElement(String string) {
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Connection connection = null;
+		Long result = null;
+		try {
+			connection = ConnectionFactory.INSTANCE.createConnection();
+			preparedStatement = connection
+					.prepareStatement("SELECT count(*) FROM computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compu.name LIKE ? or compa.name LIKE ?");
+			preparedStatement.setString(1, "%" + string + "%");
+			preparedStatement.setString(2, "%" + string + "%");
+			resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			result = Long.valueOf(resultSet.getString("count(*)"));
+		} catch (SQLException e) {
+			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
+		} finally {
+			DaoUtil.close(preparedStatement, connection);
+		}
+		return result;
+	}
 
 }

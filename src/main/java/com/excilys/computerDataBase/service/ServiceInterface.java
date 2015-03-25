@@ -13,7 +13,7 @@ public interface ServiceInterface<T> {
 
 	public List<T> list(Long from, Long to);
 	
-	public default T details(Long id) {
+	public default T getById(Long id) {
 		throw new UnsupportedOperationException();
 	}
 

@@ -23,7 +23,7 @@ public enum ComputerService implements ServiceComputerInterface {
 	}
 
 	@Override
-	public Computer details(Long computerId) {
+	public Computer getById(Long computerId) {
 		if (Validator.isIdCorrect(computerId)) {
 			return computerDao.getById(computerId);
 		} else {
@@ -88,5 +88,10 @@ public enum ComputerService implements ServiceComputerInterface {
 
 	public void setComputerDao(ComputerDaoInterface computerDao) {
 		this.computerDao = computerDao;
+	}
+
+	@Override
+	public Long getNameContainsElement(String string) {
+		return computerDao.getNameContainsElement(string);
 	}
 }

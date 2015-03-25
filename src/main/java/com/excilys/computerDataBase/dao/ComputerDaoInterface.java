@@ -14,5 +14,7 @@ import com.excilys.computerDataBase.model.Computer;
 public interface ComputerDaoInterface extends DaoInterface<Computer> {
 	public List<Computer> getNameContains(String string, Long from, Long to);
 
+	public Long getNameContainsElement(String string);
+
 	public List<Computer> getByCompanyId(Connection connection, Long id);
 }

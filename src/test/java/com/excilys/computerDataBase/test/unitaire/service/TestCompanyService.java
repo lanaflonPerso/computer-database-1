@@ -23,7 +23,7 @@ public class TestCompanyService {
 
 	@Test(expected = UnsupportedOperationException.class)
 	public void testDetails() {
-		companyServiceImpl.details(null);
+		companyServiceImpl.getById(null);
 	}
 
 	@Test(expected = UnsupportedOperationException.class)

@@ -113,7 +113,7 @@ public class CommandLineMenu {
 	 */
 	private void showComputerDetails() {
 		Long id = getLongFromCommandLine("Computer Id : ");
-		Computer computer = ComputerService.INSTANCE.details(id);
+		Computer computer = ComputerService.INSTANCE.getById(id);
 		System.out.println(computer.toString());
 	}
 

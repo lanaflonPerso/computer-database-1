@@ -24,9 +24,8 @@ import com.excilys.computerDataBase.service.impl.ComputerService;
 @WebServlet("/dashboard")
 public class Dashboard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	private final Logger log = Logger.getLogger(Dashboard.class.getName());
-
+	private final ComputerService computerService = ComputerService.INSTANCE;
 	public Dashboard() {
 		super();
 	}
@@ -46,13 +45,13 @@ public class Dashboard extends HttpServlet {
 
 		String search = getSearch(request);
 		if (search != null && !"".equals(search.trim())) {
-			computers = ComputerService.INSTANCE.getNameContains(search, new Long((page - 1)
+			computers = computerService.getNameContains(search, new Long((page - 1)
 					* size), new Long(page * size));
-			numberOfComputer = Long.valueOf(computers.size());
+			numberOfComputer = computerService.getNameContainsElement(search);
 		} else {
-			computers = ComputerService.INSTANCE.list(new Long((page - 1)
+			computers = computerService.list(new Long((page - 1)
 					* size), new Long(page * size));
-			numberOfComputer = ComputerService.INSTANCE.getNumberOfElement();
+			numberOfComputer = computerService.getNumberOfElement();
 		}
 		computerDtos = ComputerMapper.mapListModelToDto(computers);
 		session.setAttribute("numberOfComputer", numberOfComputer);
@@ -77,7 +76,7 @@ public class Dashboard extends HttpServlet {
 
 		for (Long l : list) {
 			try {
-				ComputerService.INSTANCE.delete(l);
+				computerService.delete(l);
 				log.info("computer with id : " + l + " deleted");
 			} catch (Exception e) {
 				log.error("computer with id : " + l + " can not be deleted");

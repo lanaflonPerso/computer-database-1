@@ -57,7 +57,7 @@ public class EditComputer extends HttpServlet {
 		companies.add(0, new Company(null, "--"));
 		List<CompanyDto> companyDtos = CompanyMapper.mapListModelToDto(companies);
 		
-		Computer computer = ComputerService.INSTANCE.details(computerId);
+		Computer computer = ComputerService.INSTANCE.getById(computerId);
 		ComputerDto computerDto = ComputerMapper.mapModelToDto(computer);
 
 		session.setAttribute("companies", companyDtos);
