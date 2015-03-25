@@ -3,6 +3,7 @@ package com.excilys.computerDataBase.dao;
 import java.sql.Connection;
 import java.util.List;
 
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.util.DaoUtil;
 
@@ -26,9 +27,9 @@ public interface DaoInterface<T> {
 
 	public void delete(Connection connection, Long id);
 
-	public List<T> getAll();
+	public List<T> getAll(SortCriteria sortCriteria);
 
-	public List<T> getAll(Long from, Long to);
+	public List<T> getAll(Long from, Long to, SortCriteria sortCriteria);
 
 	public default void create(T t) {
 		Connection connection = null;

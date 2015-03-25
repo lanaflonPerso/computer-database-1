@@ -7,6 +7,7 @@ package com.excilys.computerDataBase.ui;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.ParsingException;
 import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
@@ -98,14 +99,14 @@ public class CommandLineMenu {
 	 * List computer.
 	 */
 	private void listComputer() {
-		Paginator.INSTANCE.print(ComputerService.INSTANCE.list());
+		Paginator.INSTANCE.print(ComputerService.INSTANCE.list(new SortCriteria()));
 	}
 
 	/**
 	 * List companies.
 	 */
 	private void listCompanies() {
-		Paginator.INSTANCE.print(CompanyService.INSTANCE.list());
+		Paginator.INSTANCE.print(CompanyService.INSTANCE.list(new SortCriteria()));
 	}
 
 	/**

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.dto.CompanyDto;
 import com.excilys.computerDataBase.dto.ComputerDto;
 import com.excilys.computerDataBase.exception.ParsingException;
@@ -42,7 +43,7 @@ public class AddComputer extends HttpServlet {
 		log.info("Servlet : [GET] addComputer");
 		
 		HttpSession session = request.getSession();
-		List<Company> companies = CompanyService.INSTANCE.list();
+		List<Company> companies = CompanyService.INSTANCE.list(new SortCriteria());
 		companies.add(0, new Company(null, "--"));
 		List<CompanyDto> companyDtos = CompanyMapper.mapListModelToDto(companies);
 		session.setAttribute("companies", companyDtos);

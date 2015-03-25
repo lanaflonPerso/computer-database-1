@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.excilys.computerDataBase.dao.ComputerDaoInterface;
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.DaoException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.model.Computer;
@@ -145,35 +146,37 @@ public enum ComputerDao implements ComputerDaoInterface {
 	}
 
 	@Override
-	public List<Computer> getAll() {
-		Statement statement = null;
-		ResultSet resultSet = null;
-		Connection connection = null;
-		List<Computer> computers = null;
-		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
-			statement = connection.createStatement();
-			resultSet = statement
-					.executeQuery("select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id");
-			computers = DaoUtil.getComputerList(resultSet);
-		} catch (SQLException e) {
-			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
-		} finally {
-			DaoUtil.close(statement, connection);
-		}
-		return computers;
-	}
-
-	@Override
-	public List<Computer> getAll(Long from, Long to) {
+	public List<Computer> getAll(SortCriteria sortCriteria) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Connection connection = null;
 		List<Computer> computers = null;
 		try {
 			connection = ConnectionFactory.INSTANCE.createConnection();
+			String request = "select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id ORDER BY " + sortCriteria.toString();
 			preparedStatement = connection
-					.prepareStatement("select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id LIMIT ? OFFSET ?");
+					.prepareStatement(request);
+			resultSet = preparedStatement.executeQuery();
+			computers = DaoUtil.getComputerList(resultSet);
+		} catch (SQLException e) {
+			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
+		} finally {
+			DaoUtil.close(preparedStatement, connection);
+		}
+		return computers;
+	}
+
+	@Override
+	public List<Computer> getAll(Long from, Long to, SortCriteria sortCriteria) {
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Connection connection = null;
+		List<Computer> computers = null;
+		try {
+			connection = ConnectionFactory.INSTANCE.createConnection();
+			String request = "select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id ORDER BY " + sortCriteria.toString() + " LIMIT ? OFFSET ? ";
+			preparedStatement = connection
+					.prepareStatement(request);
 			preparedStatement.setLong(1, to - from);
 			preparedStatement.setLong(2, from);
 			resultSet = preparedStatement.executeQuery();
@@ -205,15 +208,17 @@ public enum ComputerDao implements ComputerDaoInterface {
 	}
 
 	@Override
-	public List<Computer> getNameContains(String string, Long from, Long to) {
+	public List<Computer> getNameContains(String string, Long from, Long to,
+			SortCriteria sortCriteria) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Connection connection = null;
 		List<Computer> computers = null;
 		try {
 			connection = ConnectionFactory.INSTANCE.createConnection();
+			String request = "SELECT * FROM computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compu.name LIKE ? or compa.name LIKE ? ORDER BY " + sortCriteria.toString() + " LIMIT ? OFFSET ?";
 			preparedStatement = connection
-					.prepareStatement("SELECT * FROM computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compu.name LIKE ? or compa.name LIKE ? LIMIT ? OFFSET ?");
+					.prepareStatement(request);
 			preparedStatement.setString(1, "%" + string + "%");
 			preparedStatement.setString(2, "%" + string + "%");
 			preparedStatement.setLong(3, to - from);

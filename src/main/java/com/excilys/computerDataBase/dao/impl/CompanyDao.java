@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.List;
 
 import com.excilys.computerDataBase.dao.CompanyDaoInterface;
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.DaoException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.model.Company;
@@ -46,34 +47,35 @@ public enum CompanyDao implements CompanyDaoInterface {
 	}
 	
 	@Override
-	public List<Company> getAll() {
-		Statement statement = null;
-		ResultSet resultSet = null;
-		Connection connection = null;
-		List<Company> companies = null;
-		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM company");
-			companies = DaoUtil.getCompanyList(resultSet);
-		} catch (SQLException e) {
-			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
-		} finally {
-			DaoUtil.close(statement, connection);
-		}
-		return companies;
-	}
-	
-	@Override
-	public List<Company> getAll(Long from, Long to) {
+	public List<Company> getAll(SortCriteria sortCriteria) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Connection connection = null;
 		List<Company> companies = null;
 		try {
 			connection = ConnectionFactory.INSTANCE.createConnection();
-			preparedStatement = connection
-					.prepareStatement("select * FROM company LIMIT ? OFFSET ?");
+			String request = "SELECT * FROM company ORDER BY " + sortCriteria.toString();
+			preparedStatement = connection.prepareStatement(request);
+			resultSet = preparedStatement.executeQuery();
+			companies = DaoUtil.getCompanyList(resultSet);
+		} catch (SQLException e) {
+			throw new DaoException(DaoException.CAN_NOT_GET_ELEMENT, e);
+		} finally {
+			DaoUtil.close(preparedStatement, connection);
+		}
+		return companies;
+	}
+	
+	@Override
+	public List<Company> getAll(Long from, Long to, SortCriteria sortCriteria) {
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		Connection connection = null;
+		List<Company> companies = null;
+		try {
+			connection = ConnectionFactory.INSTANCE.createConnection();
+			String request = "select * FROM company ORDER BY " + sortCriteria.toString() + " LIMIT ? OFFSET ?";
+			preparedStatement = connection.prepareStatement(request);
 			preparedStatement.setLong(1, to - from);
 			preparedStatement.setLong(2, from);
 			resultSet = preparedStatement.executeQuery();

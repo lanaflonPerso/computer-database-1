@@ -3,6 +3,7 @@ package com.excilys.computerDataBase.dao;
 import java.sql.Connection;
 import java.util.List;
 
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.model.Computer;
 
 /**
@@ -12,7 +13,7 @@ import com.excilys.computerDataBase.model.Computer;
  *            the generic type
  */
 public interface ComputerDaoInterface extends DaoInterface<Computer> {
-	public List<Computer> getNameContains(String string, Long from, Long to);
+	public List<Computer> getNameContains(String string, Long from, Long to, SortCriteria sortCriteria);
 
 	public Long getNameContainsElement(String string);
 

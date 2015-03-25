@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.excilys.computerDataBase.dao.ComputerDaoInterface;
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.model.Computer;
 import com.excilys.computerDataBase.service.ServiceComputerInterface;
@@ -18,8 +19,8 @@ public enum ComputerService implements ServiceComputerInterface {
 	private ComputerDaoInterface computerDao = ComputerDao.INSTANCE;
 
 	@Override
-	public List<Computer> list() {
-		return computerDao.getAll();
+	public List<Computer> list(SortCriteria sortCriteria) {
+		return computerDao.getAll(sortCriteria);
 	}
 
 	@Override
@@ -64,18 +65,18 @@ public enum ComputerService implements ServiceComputerInterface {
 	}
 
 	@Override
-	public List<Computer> list(Long from, Long to) {
+	public List<Computer> list(Long from, Long to, SortCriteria sortCriteria) {
 		if (Validator.isDateFromToCorrect(from, to)) {
-			return computerDao.getAll(from, to);
+			return computerDao.getAll(from, to, sortCriteria);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_PARAMETER);
 		}
 	}
 
 	@Override
-	public List<Computer> getNameContains(String string, Long from, Long to) {
+	public List<Computer> getNameContains(String string, Long from, Long to, SortCriteria sortCriteria) {
 		if (Validator.isNameForSearchCorrect(string)) {
-			return computerDao.getNameContains(string, from, to);
+			return computerDao.getNameContains(string, from, to, sortCriteria);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_PARAMETER);
 		}	

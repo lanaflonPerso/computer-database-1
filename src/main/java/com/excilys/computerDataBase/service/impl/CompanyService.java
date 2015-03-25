@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.excilys.computerDataBase.dao.impl.CompanyDao;
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.DaoException;
 import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
@@ -26,8 +27,8 @@ public enum CompanyService implements ServiceCompanyInterface {
 	private CompanyDao companyDao = CompanyDao.INSTANCE;
 
 	@Override
-	public List<Company> list() {
-		return companyDao.getAll();
+	public List<Company> list(SortCriteria sortCriteria) {
+		return companyDao.getAll(sortCriteria);
 	}
 
 	@Override
@@ -36,9 +37,9 @@ public enum CompanyService implements ServiceCompanyInterface {
 	}
 
 	@Override
-	public List<Company> list(Long from, Long to) {
+	public List<Company> list(Long from, Long to, SortCriteria sortCriteria) {
 		if (Validator.isDateFromToCorrect(from, to)) {
-			return companyDao.getAll(from, to);
+			return companyDao.getAll(from, to, sortCriteria);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_PARAMETER);
 		}

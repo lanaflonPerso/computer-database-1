@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.excilys.computerDataBase.dao.sort.SortColumn;
+import com.excilys.computerDataBase.dao.sort.SortCriteria;
+import com.excilys.computerDataBase.dao.sort.SortDirection;
 import com.excilys.computerDataBase.dto.ComputerDto;
 import com.excilys.computerDataBase.mapper.ComputerMapper;
 import com.excilys.computerDataBase.model.Computer;
@@ -40,6 +43,8 @@ public class Dashboard extends HttpServlet {
 
 		int page = getPage(request);
 		int size = getSize(request);
+		SortCriteria sortCriteria = getSortCriteria(request);
+		
 		List<Computer> computers = null;
 		List<ComputerDto> computerDtos = null;
 		Long numberOfComputer = null;
@@ -47,19 +52,24 @@ public class Dashboard extends HttpServlet {
 		String search = getSearch(request);
 		if (search != null && !"".equals(search.trim())) {
 			computers = computerService.getNameContains(search, new Long((page - 1)
-					* size), new Long(page * size));
+					* size), new Long(page * size), sortCriteria);
 			numberOfComputer = computerService.getNameContainsElement(search);
 		} else {
 			computers = computerService.list(new Long((page - 1)
-					* size), new Long(page * size));
+					* size), new Long(page * size), sortCriteria);
 			numberOfComputer = computerService.getNumberOfElement();
 		}
 		computerDtos = ComputerMapper.mapListModelToDto(computers);
 		session.setAttribute("numberOfComputer", numberOfComputer);
 
-		session.setAttribute("search", search);
+		
+		
+		
 		session.setAttribute("page", page);
 		session.setAttribute("size", size);
+		session.setAttribute("search", search);
+		session.setAttribute("sortColumn", sortCriteria.getSortColumn().toPrint());
+		session.setAttribute("sortDirection", sortCriteria.getSortDirection().toPrint());
 		session.setAttribute("computers", computerDtos);
 		session.setAttribute("pageMax", (numberOfComputer - 1) / size + 1);
 		session.setAttribute("numberOfComputer", numberOfComputer);
@@ -67,6 +77,8 @@ public class Dashboard extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/views/dashboard.jsp").forward(
 				request, response);
 	}
+
+	
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -127,5 +139,21 @@ public class Dashboard extends HttpServlet {
 		}
 
 		return list;
+	}
+	
+	private SortCriteria getSortCriteria(HttpServletRequest request) {
+			String string = request.getParameter("sortColumn");
+			if (string != null) {
+				string = string.trim();
+			}
+			SortColumn sortColumn = SortColumn.build(string);
+			
+			string = request.getParameter("sortDirection");
+			if (string != null) {
+				string = string.trim();
+			}
+			SortDirection sortDirection = SortDirection.build(string);
+			
+			return new SortCriteria(sortColumn, sortDirection);
 	}
 }
