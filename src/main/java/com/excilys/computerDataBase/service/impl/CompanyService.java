@@ -35,14 +35,6 @@ public enum CompanyService implements ServiceCompanyInterface {
 		return companyDao.getNumberOfElement();
 	}
 
-	public CompanyDao getCompanyDao() {
-		return companyDao;
-	}
-
-	public void setCompanyDao(CompanyDao companyDao) {
-		this.companyDao = companyDao;
-	}
-
 	@Override
 	public List<Company> list(Long from, Long to) {
 		if (Validator.isDateFromToCorrect(from, to)) {
@@ -57,7 +49,7 @@ public enum CompanyService implements ServiceCompanyInterface {
 		if (Validator.isIdCorrect(id)) {
 			deleteCompany(id);
 		} else {
-
+			throw new ServiceException(ServiceException.INVALID_PARAMETER);
 		}
 	}
 
@@ -83,6 +75,14 @@ public enum CompanyService implements ServiceCompanyInterface {
 		} finally {
 			DaoUtil.closeConnection(connection);
 		}
+	}
+
+	public CompanyDao getCompanyDao() {
+		return companyDao;
+	}
+
+	public void setCompanyDao(CompanyDao companyDao) {
+		this.companyDao = companyDao;
 	}
 
 }

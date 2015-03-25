@@ -1,9 +1,6 @@
 package com.excilys.computerDataBase.test.unitaire;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,7 +31,7 @@ public class TestMapper {
 				LocalDateTime.parse("2000-10-10 10:10:10", dateTimeFormatter),
 				null, new Company(new Long(0), "name"));
 		ComputerDto computerDto = ComputerMapper.mapModelToDto(computer);
-		assertThat(computerDto.getIntroduced(), is("2000-10-10 10:10:10"));
+		assertEquals(computerDto.getIntroduced(), "2000-10-10 10:10:10");
 	}
 
 	@Test
@@ -43,8 +40,8 @@ public class TestMapper {
 				LocalDateTime.parse("2000-10-10 10:10:10", dateTimeFormatter),
 				new Company(null, "name"));
 		ComputerDto computerDto = ComputerMapper.mapModelToDto(computer);
-		assertThat(computerDto.getIntroduced(), nullValue());
-		assertThat(computerDto.getDiscontinued(), is("2000-10-10 10:10:10"));
+		assertEquals(computerDto.getIntroduced(), null);
+		assertEquals(computerDto.getDiscontinued(), "2000-10-10 10:10:10");
 	}
 
 	@Test
@@ -59,32 +56,24 @@ public class TestMapper {
 		List<ComputerDto> computerDtos = ComputerMapper
 				.mapListModelToDto(computers);
 
-		assertThat(computerDtos.size(), is(2));
-		assertThat(computerDtos.get(0).getIntroduced(), nullValue());
-		assertThat(computerDtos.get(0).getDiscontinued(),
-				is("2000-10-10 10:10:10"));
-		assertThat(computerDtos.get(1).getIntroduced(), nullValue());
+		assertEquals(computerDtos.size(), 2);
+		assertEquals(computerDtos.get(1).getIntroduced(), null);
 
 		ComputerDto computerDto = ComputerMapper.mapModelToDto(computer);
-		assertThat(computerDtos.get(0), is(computerDto));
+		assertEquals(computerDtos.get(0), computerDto);
 	}
 
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void testMapperDaoListWrong() {
-		try {
 			ComputerMapper.mapModelToDto(null);
-			fail("no exception");
-		} catch (NullPointerException e) {
-			assertThat(true, is(true));
-		}
 	}
 	
 	@Test
 	public void testMapperDtoToModelOk(){
 		Computer computer2 = new Computer(new Long(5), "name", LocalDateTime.parse("2000-10-10 20:25:26", dateTimeFormatter), null, new Company(new Long(4), null));
 		Computer computer = ComputerMapper.mapDtoToModel(new ComputerDto("5", "name", "2000-10-10 20:25:26", "", "4", null));
-		assertThat(computer, is(computer2));
-		assertThat(computer.hashCode(), is(computer2.hashCode()));
+		assertEquals(computer.hashCode(), computer2.hashCode());
+		assertEquals(computer, computer2);
 	}
 
 }

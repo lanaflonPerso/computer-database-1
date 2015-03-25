@@ -8,13 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.excilys.computerDataBase.dao.ComputerDaoInterface;
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
@@ -23,40 +19,35 @@ import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
 import com.excilys.computerDataBase.service.impl.ComputerService;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({ ComputerDao.class })
 public class TestComputerService {
 
 	private static final Long COMPUTER_ID = new Long(45);
 	private static final Long NUMBER_OF_ELEMENT = new Long(101);
 
-	private ComputerService computerService = ComputerService.INSTANCE;
+	private static ComputerService computerService = ComputerService.INSTANCE;
 
-	private ComputerDaoInterface computerDao = Mockito
+	private static ComputerDaoInterface computerDao = Mockito
 			.mock(ComputerDaoInterface.class);
 
-	Computer computer1 = null;
-
-	@Before
-	public void init() {
-		computer1 = new Computer(new Long(1), "myName", LocalDateTime.now(),
-				LocalDateTime.now(), new Company(new Long(3), "myCompany"));
-	}
+	private static Computer computer1 = new Computer(new Long(1), "myName",
+			LocalDateTime.now(), LocalDateTime.now(), new Company(new Long(3),
+					"myCompany"));
 
 	@BeforeClass
-	public void setUp() {
+	public static void setUp() {
 		Mockito.when(computerDao.getById(COMPUTER_ID)).thenReturn(computer1);
 		List<Computer> computers = new ArrayList<Computer>();
 		computers.add(computer1);
 		Mockito.when(computerDao.getAll()).thenReturn(computers);
 		Mockito.when(computerDao.getNumberOfElement()).thenReturn(
 				NUMBER_OF_ELEMENT);
-
+		Mockito.doThrow(new RuntimeException()).when(computerDao)
+				.create(computer1);
 		computerService.setComputerDao(computerDao);
 	}
 
 	@AfterClass
-	public void setDown() {
+	public static void setDown() {
 		computerService.setComputerDao(ComputerDao.INSTANCE);
 	}
 
@@ -82,7 +73,7 @@ public class TestComputerService {
 		assertEquals(computers.get(0), computer1);
 	}
 
-	@Test
+	@Test(expected = RuntimeException.class)
 	public void testCreateOk() {
 		computerService.create(computer1);
 	}

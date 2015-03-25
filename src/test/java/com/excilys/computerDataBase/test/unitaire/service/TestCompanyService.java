@@ -1,39 +1,52 @@
 package com.excilys.computerDataBase.test.unitaire.service;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.excilys.computerDataBase.dao.impl.CompanyDao;
+import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.service.impl.CompanyService;
 
 public class TestCompanyService {
 
-	CompanyService companyServiceImpl = CompanyService.INSTANCE;
+	private static CompanyService companyService = CompanyService.INSTANCE;
 
+	@BeforeClass
+	public static void tearUp(){
+		//companyService.setCompanyDao(null);
+	}
+	
+	@AfterClass
+	public static void tearDown(){
+		companyService.setCompanyDao(CompanyDao.INSTANCE);
+	}
+	
 	@Test
 	public void testGetAll() {
-		assertThat(companyServiceImpl.list().size(), is(42));
+		assertEquals(companyService.list().size(), 42);
 	}
 
 	@Test(expected = UnsupportedOperationException.class)
 	public void testCreate() {
-		companyServiceImpl.create(null);
+		companyService.create(null);
 	}
 
 	@Test(expected = UnsupportedOperationException.class)
 	public void testDetails() {
-		companyServiceImpl.getById(null);
+		companyService.getById(null);
 	}
 
 	@Test(expected = UnsupportedOperationException.class)
 	public void testUpdate() {
-		companyServiceImpl.update(null);
+		companyService.update(null);
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test(expected = ServiceException.class)
 	public void testDelete() {
-		companyServiceImpl.delete(null);
+		companyService.delete(null);
 	}
 
 }
