@@ -27,7 +27,7 @@ function checkName(document) {
 
 function checkIntroduced(document) {
 	element = document.getElementById("introduced")
-	re = /^[1-2][0-9][0-9][0-9]-[1-2][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/
+	re = /^[1-2][0-9][0-9][0-9]-[0-2][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/
 
 	if (element.value == "") {
 		return true;
@@ -42,7 +42,7 @@ function checkIntroduced(document) {
 
 function checkDiscontinued(document) {
 	element = document.getElementById("discontinued")
-	re = /^[1-2][0-9][0-9][0-9]-[1-2][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/
+	re = /^[1-2][0-9][0-9][0-9]-[0-2][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/
 
 	if (element.value == "") {
 		return true;
