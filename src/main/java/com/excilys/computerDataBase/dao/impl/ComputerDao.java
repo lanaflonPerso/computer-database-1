@@ -24,9 +24,10 @@ import com.excilys.computerDataBase.util.DaoUtil;
  * @author vgalloy
  */
 public enum ComputerDao implements ComputerDaoInterface {
-
 	INSTANCE;
-
+	
+	ConnectionFactory connectionFactory = ConnectionFactory.INSTANCE;
+	
 	@Override
 	public void create(Connection connection, Computer t) {
 		PreparedStatement preparedStatement = null;
@@ -155,7 +156,7 @@ public enum ComputerDao implements ComputerDaoInterface {
 		Connection connection = null;
 		List<Computer> computers = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
+			connection = connectionFactory.createConnection();
 			String request = "select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id ORDER BY " + sortCriteria.toString();
 			preparedStatement = connection
 					.prepareStatement(request);
@@ -176,7 +177,7 @@ public enum ComputerDao implements ComputerDaoInterface {
 		Connection connection = null;
 		List<Computer> computers = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
+			connection = connectionFactory.createConnection();
 			String request = "select * from computer compu LEFT JOIN company compa ON compu.company_id = compa.id ORDER BY " + sortCriteria.toString() + " LIMIT ? OFFSET ? ";
 			preparedStatement = connection
 					.prepareStatement(request);
@@ -218,7 +219,7 @@ public enum ComputerDao implements ComputerDaoInterface {
 		Connection connection = null;
 		List<Computer> computers = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
+			connection = connectionFactory.createConnection();
 			String request = "SELECT * FROM computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compu.name LIKE ? or compa.name LIKE ? ORDER BY " + sortCriteria.toString() + " LIMIT ? OFFSET ?";
 			preparedStatement = connection
 					.prepareStatement(request);
@@ -262,7 +263,7 @@ public enum ComputerDao implements ComputerDaoInterface {
 		Connection connection = null;
 		Long result = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
+			connection = connectionFactory.createConnection();
 			preparedStatement = connection
 					.prepareStatement("SELECT count(*) FROM computer compu LEFT JOIN company compa ON compu.company_id = compa.id WHERE compu.name LIKE ? or compa.name LIKE ?");
 			preparedStatement.setString(1, "%" + string + "%");

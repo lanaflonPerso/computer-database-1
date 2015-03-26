@@ -13,6 +13,8 @@ import com.excilys.computerDataBase.util.DaoUtil;
 
 public interface DaoInterface<T> {
 
+	ConnectionFactory connectionFactory = ConnectionFactory.INSTANCE;
+	
 	public void create(Connection connection, T t);
 
 	public T getById(Connection connection, Long id);
@@ -31,14 +33,14 @@ public interface DaoInterface<T> {
 
 	public default void create(T t) {
 		Connection connection = null;
-		connection = ConnectionFactory.INSTANCE.createConnection();
+		connection = connectionFactory.createConnection();
 		create(connection, t);
 		DaoUtil.closeConnection(connection);
 	}
 
 	public default T getById(Long id) {
 		Connection connection = null;
-		connection = ConnectionFactory.INSTANCE.createConnection();
+		connection = connectionFactory.createConnection();
 		T result = getById(connection, id);
 		DaoUtil.closeConnection(connection);
 		return result;
@@ -46,20 +48,20 @@ public interface DaoInterface<T> {
 
 	public default Long getNumberOfElement() {
 		Connection connection = null;
-		connection = ConnectionFactory.INSTANCE.createConnection();
+		connection = connectionFactory.createConnection();
 		Long result = getNumberOfElement(connection);
 		DaoUtil.closeConnection(connection);
 		return result;
 	}
 	public default void update(T t) {
 		Connection connection = null;
-		connection = ConnectionFactory.INSTANCE.createConnection();
+		connection = connectionFactory.createConnection();
 		update(connection, t);
 		DaoUtil.closeConnection(connection);
 	}
 	public default void delete(Long id) {
 		Connection connection = null;
-		connection = ConnectionFactory.INSTANCE.createConnection();
+		connection = connectionFactory.createConnection();
 		delete(connection, id);
 		DaoUtil.closeConnection(connection);
 	}

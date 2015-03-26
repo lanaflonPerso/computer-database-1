@@ -5,6 +5,6 @@ package com.excilys.computerDataBase.service;
 
 import com.excilys.computerDataBase.model.Company;
 
-public interface ServiceCompanyInterface extends ServiceInterface<Company> {
+public interface CompanyServiceInterface extends ServiceInterface<Company> {
 
 }

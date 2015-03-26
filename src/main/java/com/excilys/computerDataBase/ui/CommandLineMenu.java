@@ -10,6 +10,8 @@ import java.util.Scanner;
 import com.excilys.computerDataBase.exception.ParsingException;
 import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
+import com.excilys.computerDataBase.service.CompanyServiceInterface;
+import com.excilys.computerDataBase.service.ComputerServiceInterface;
 import com.excilys.computerDataBase.service.impl.CompanyService;
 import com.excilys.computerDataBase.service.impl.ComputerService;
 import com.excilys.computerDataBase.sort.SortCriteria;
@@ -21,7 +23,11 @@ import com.excilys.computerDataBase.validation.Validator;
  */
 public class CommandLineMenu {
 
-	Scanner scanner = new Scanner(System.in);
+	private Scanner scanner = new Scanner(System.in);
+	
+	ComputerServiceInterface computerService = ComputerService.INSTANCE;
+	
+	CompanyServiceInterface companyService = CompanyService.INSTANCE;
 	
 	public CommandLineMenu() {
 		super();
@@ -81,16 +87,16 @@ public class CommandLineMenu {
 	}
 
 	private void listComputer() {
-		Paginator.INSTANCE.print(ComputerService.INSTANCE.list(new SortCriteria()));
+		Paginator.print(computerService.list(new SortCriteria()));
 	}
 
 	private void listCompanies() {
-		Paginator.INSTANCE.print(CompanyService.INSTANCE.list(new SortCriteria()));
+		Paginator.print(computerService.list(new SortCriteria()));
 	}
 
 	private void showComputerDetails() {
 		Long id = getLongFromCommandLine("Computer Id : ");
-		Computer computer = ComputerService.INSTANCE.getById(id);
+		Computer computer = computerService.getById(id);
 		System.out.println(computer.toString());
 	}
 
@@ -101,7 +107,7 @@ public class CommandLineMenu {
 		Long company_id = getLongFromCommandLine("Computer company_id : ");
 		Computer computer = new Computer(new Long(0), name, introduced,
 				discontinued, new Company(company_id, null));
-		ComputerService.INSTANCE.create(computer);
+		computerService.create(computer);
 		System.out.println("computer created : " + computer.toString());
 	}
 
@@ -113,19 +119,19 @@ public class CommandLineMenu {
 		Long company_id = getLongFromCommandLine("Computer (new) company_id : ");
 		Computer computer = new Computer(id, name, introduced, discontinued,
 				new Company(company_id, null));
-		ComputerService.INSTANCE.update(computer);
+		computerService.update(computer);
 		System.out.println("computer updated : " + computer.toString());
 
 	}
 
 	private void deleteComputer() {
 		Long id = getLongFromCommandLine("Computer id : ");
-		ComputerService.INSTANCE.delete(id);
+		computerService.delete(id);
 	}
 
 	private void deleteCompany() {
 		Long id = getLongFromCommandLine("Company id : ");
-		CompanyService.INSTANCE.delete(id);
+		companyService.delete(id);
 	}
 	
 	private Long getLongFromCommandLine(String request) {

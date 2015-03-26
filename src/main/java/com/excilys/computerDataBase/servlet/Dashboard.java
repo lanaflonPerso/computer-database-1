@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import com.excilys.computerDataBase.dto.ComputerDto;
 import com.excilys.computerDataBase.mapper.ComputerMapper;
 import com.excilys.computerDataBase.model.Computer;
+import com.excilys.computerDataBase.service.ComputerServiceInterface;
 import com.excilys.computerDataBase.service.impl.ComputerService;
 import com.excilys.computerDataBase.sort.SortColumn;
 import com.excilys.computerDataBase.sort.SortCriteria;
@@ -32,7 +33,8 @@ import com.excilys.computerDataBase.sort.SortDirection;
 public class Dashboard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	final static Logger log = LoggerFactory.getLogger(Dashboard.class);
-	private final ComputerService computerService = ComputerService.INSTANCE;
+	
+	ComputerServiceInterface computerService = ComputerService.INSTANCE;
 
 	public Dashboard() {
 		super();

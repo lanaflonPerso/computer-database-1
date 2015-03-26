@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.excilys.computerDataBase.dao.impl.ComputerDao;
 import com.excilys.computerDataBase.dto.CompanyDto;
 import com.excilys.computerDataBase.dto.ComputerDto;
 import com.excilys.computerDataBase.dto.page.ComputerPage;
@@ -18,6 +17,8 @@ import com.excilys.computerDataBase.mapper.CompanyMapper;
 import com.excilys.computerDataBase.mapper.ComputerMapper;
 import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
+import com.excilys.computerDataBase.service.CompanyServiceInterface;
+import com.excilys.computerDataBase.service.ComputerServiceInterface;
 import com.excilys.computerDataBase.service.impl.CompanyService;
 import com.excilys.computerDataBase.service.impl.ComputerService;
 import com.excilys.computerDataBase.sort.SortCriteria;
@@ -28,6 +29,10 @@ public final class ServletUtil {
 
 	final static Logger log = LoggerFactory.getLogger(ServletUtil.class);
 
+	private static CompanyServiceInterface companyService = CompanyService.INSTANCE;
+	
+	private static ComputerServiceInterface computerService = ComputerService.INSTANCE;
+	
 	private static String getStringFromRequest(HttpServletRequest request,
 			String name) {
 		String string = (String) request.getParameter(name);
@@ -79,7 +84,7 @@ public final class ServletUtil {
 
 	public static ComputerPage getAddComputerPage(HttpServletRequest request) {
 		ComputerPage page = new ComputerPage();
-		List<Company> companies = CompanyService.INSTANCE
+		List<Company> companies = companyService
 				.list(new SortCriteria());
 		companies.add(0, new Company(null, "--"));
 		List<CompanyDto> companyDtos = CompanyMapper
@@ -92,14 +97,14 @@ public final class ServletUtil {
 
 	public static ComputerPage getEditComputerPageGet(HttpServletRequest request) {
 		ComputerPage page = new ComputerPage();
-		List<Company> companies = CompanyService.INSTANCE
+		List<Company> companies = companyService
 				.list(new SortCriteria());
 		companies.add(0, new Company(null, "--"));
 		List<CompanyDto> companyDtos = CompanyMapper
 				.mapListModelToDto(companies);
 		page.setCompanies(companyDtos);
 		page.setComputerDto(ServletUtil.getComputerDto(request));
-		Computer computer = ComputerDao.INSTANCE.getById(Long.valueOf(page
+		Computer computer = computerService.getById(Long.valueOf(page
 				.getComputerDto().getId()));
 		page.setComputerDto(ComputerMapper.mapModelToDto(computer));
 		page.setCorrectField(ServletUtil.checkComputerDto(page.getComputerDto()));
@@ -109,7 +114,7 @@ public final class ServletUtil {
 	public static ComputerPage getEditComputerPagePost(
 			HttpServletRequest request) {
 		ComputerPage page = getAddComputerPage(request);
-		Computer c = ComputerService.INSTANCE.getById(Long.valueOf(page
+		Computer c = computerService.getById(Long.valueOf(page
 				.getComputerDto().getId()));
 		if (c.getCompany() != null) {
 			page.getComputerDto().setCompanyName(c.getCompany().getName());

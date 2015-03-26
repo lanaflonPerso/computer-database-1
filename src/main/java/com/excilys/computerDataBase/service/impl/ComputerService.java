@@ -9,17 +9,14 @@ import com.excilys.computerDataBase.dao.ComputerDaoInterface;
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
 import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.model.Computer;
-import com.excilys.computerDataBase.service.ServiceComputerInterface;
+import com.excilys.computerDataBase.service.ComputerServiceInterface;
 import com.excilys.computerDataBase.sort.SortCriteria;
 import com.excilys.computerDataBase.validation.Validator;
 
-/**
- * The Enum ServiceImpl.
- */
-public enum ComputerService implements ServiceComputerInterface {
+public enum ComputerService implements ComputerServiceInterface {
 	INSTANCE;
 
-	private ComputerDaoInterface computerDao = ComputerDao.INSTANCE;
+	ComputerDaoInterface computerDao = ComputerDao.INSTANCE;
 
 	@Override
 	public List<Computer> list(SortCriteria sortCriteria) {
@@ -77,12 +74,13 @@ public enum ComputerService implements ServiceComputerInterface {
 	}
 
 	@Override
-	public List<Computer> getNameContains(String string, Long from, Long to, SortCriteria sortCriteria) {
+	public List<Computer> getNameContains(String string, Long from, Long to,
+			SortCriteria sortCriteria) {
 		if (Validator.isNameForSearchCorrect(string)) {
 			return computerDao.getNameContains(string, from, to, sortCriteria);
 		} else {
 			throw new ServiceException(ServiceException.INVALID_PARAMETER);
-		}	
+		}
 	}
 
 	public ComputerDaoInterface getComputerDao() {

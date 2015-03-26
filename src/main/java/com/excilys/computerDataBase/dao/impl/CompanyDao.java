@@ -22,7 +22,8 @@ import com.excilys.computerDataBase.util.DaoUtil;
  */
 public enum CompanyDao implements CompanyDaoInterface {
 	INSTANCE;
-
+	
+	ConnectionFactory connectionFactory = ConnectionFactory.INSTANCE;
 	@Override
 	public void create(Connection connection, Company t) {
 		PreparedStatement preparedStatement = null;
@@ -56,7 +57,7 @@ public enum CompanyDao implements CompanyDaoInterface {
 		Connection connection = null;
 		List<Company> companies = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
+			connection = connectionFactory.createConnection();
 			String request = "SELECT * FROM company ORDER BY " + sortCriteria.toString();
 			preparedStatement = connection.prepareStatement(request);
 			resultSet = preparedStatement.executeQuery();
@@ -76,7 +77,7 @@ public enum CompanyDao implements CompanyDaoInterface {
 		Connection connection = null;
 		List<Company> companies = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
+			connection = connectionFactory.createConnection();
 			String request = "select * FROM company ORDER BY " + sortCriteria.toString() + " LIMIT ? OFFSET ?";
 			preparedStatement = connection.prepareStatement(request);
 			preparedStatement.setLong(1, to - from);

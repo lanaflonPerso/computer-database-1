@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.excilys.computerDataBase.dao.CompanyDaoInterface;
+import com.excilys.computerDataBase.dao.ComputerDaoInterface;
 import com.excilys.computerDataBase.dao.impl.CompanyDao;
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
 import com.excilys.computerDataBase.exception.DaoException;
@@ -14,21 +16,18 @@ import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
-import com.excilys.computerDataBase.service.ServiceCompanyInterface;
+import com.excilys.computerDataBase.service.CompanyServiceInterface;
 import com.excilys.computerDataBase.sort.SortCriteria;
 import com.excilys.computerDataBase.util.DaoUtil;
 import com.excilys.computerDataBase.validation.Validator;
 
-/**
- * The Enum CompanyServiceImpl.
- */
-public enum CompanyService implements ServiceCompanyInterface {
-
-	/** The instance. */
+public enum CompanyService implements CompanyServiceInterface {
 	INSTANCE;
-
-	private CompanyDao companyDao = CompanyDao.INSTANCE;
-
+	
+	ComputerDaoInterface computerDao = ComputerDao.INSTANCE;
+	CompanyDaoInterface companyDao = CompanyDao.INSTANCE;
+	ConnectionFactory connectionFactory = ConnectionFactory.INSTANCE;
+	
 	@Override
 	public List<Company> list(SortCriteria sortCriteria) {
 		return companyDao.getAll(sortCriteria);
@@ -60,11 +59,11 @@ public enum CompanyService implements ServiceCompanyInterface {
 	private void deleteCompany(Long id) {
 		Connection connection = null;
 		try {
-			connection = ConnectionFactory.INSTANCE.createConnection();
+			connection = connectionFactory.createConnection();
 			connection.setAutoCommit(false);
-			List<Computer> computers = ComputerDao.INSTANCE.getByCompanyId(connection, id);
+			List<Computer> computers = computerDao.getByCompanyId(connection, id);
 			for (Computer computer : computers) {
-				ComputerDao.INSTANCE.delete(connection, computer.getId());
+				computerDao.delete(connection, computer.getId());
 			}
 			companyDao.delete(connection, id);
 			connection.commit();
@@ -81,11 +80,11 @@ public enum CompanyService implements ServiceCompanyInterface {
 		}
 	}
 
-	public CompanyDao getCompanyDao() {
+	public CompanyDaoInterface getCompanyDao() {
 		return companyDao;
 	}
 
-	public void setCompanyDao(CompanyDao companyDao) {
+	public void setCompanyDao(CompanyDaoInterface companyDao) {
 		this.companyDao = companyDao;
 	}
 

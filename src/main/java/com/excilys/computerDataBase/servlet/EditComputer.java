@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import com.excilys.computerDataBase.dto.page.ComputerPage;
 import com.excilys.computerDataBase.mapper.ComputerMapper;
 import com.excilys.computerDataBase.model.Computer;
+import com.excilys.computerDataBase.service.ComputerServiceInterface;
 import com.excilys.computerDataBase.service.impl.ComputerService;
 import com.excilys.computerDataBase.util.ServletUtil;
 
@@ -26,6 +27,8 @@ public class EditComputer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	final static Logger log = LoggerFactory.getLogger(EditComputer.class);
 
+	ComputerServiceInterface computerService = ComputerService.INSTANCE;
+	
 	public EditComputer() {
 		super();
 	}
@@ -55,7 +58,7 @@ public class EditComputer extends HttpServlet {
 		if (page.getCorrectField().areAllFieldsOk()) {
 			Computer computer = ComputerMapper.mapDtoToModel(page
 					.getComputerDto());
-			ComputerService.INSTANCE.update(computer);
+			computerService.update(computer);
 			response.sendRedirect("dashboard");
 		} else {
 			log.info("Wrong input");

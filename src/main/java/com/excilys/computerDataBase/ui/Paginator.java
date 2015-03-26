@@ -9,10 +9,7 @@ import java.util.Scanner;
 /**
  * The Enum Paginator.
  */
-public enum Paginator {
-
-	/** The instance. */
-	INSTANCE;
+public class Paginator {
 
 	/** The Constant SIZE. */
 	private static final int SIZE = 10;
@@ -26,7 +23,7 @@ public enum Paginator {
 	 * @param list
 	 *            the list
 	 */
-	public void print(List<? extends Object> list) {
+	public static void print(List<? extends Object> list) {
 		if (list != null) {
 			for (int i = 0; i < list.size(); i++) {
 				Object o = list.get(i);
@@ -44,7 +41,7 @@ public enum Paginator {
 	 *
 	 * @return true, if successful
 	 */
-	private boolean waitEnter() {
+	private static boolean waitEnter() {
 		System.out.println("--More--");
 		String result = scanner.nextLine();
 		if ("".equals(result)) {
