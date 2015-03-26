@@ -4,7 +4,6 @@
 package com.excilys.computerDataBase.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,24 +15,16 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
-import com.excilys.computerDataBase.dto.CompanyDto;
-import com.excilys.computerDataBase.dto.page.AddComputerPage;
-import com.excilys.computerDataBase.mapper.CompanyMapper;
+import com.excilys.computerDataBase.dto.page.ComputerPage;
 import com.excilys.computerDataBase.mapper.ComputerMapper;
-import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
-import com.excilys.computerDataBase.service.impl.CompanyService;
 import com.excilys.computerDataBase.service.impl.ComputerService;
 import com.excilys.computerDataBase.util.ServletUtil;
+import com.excilys.computerDataBase.validation.CorrectField;
 
-/**
- * Servlet implementation class addComputer
- */
 @WebServlet("/addComputer")
 public class AddComputer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	final static Logger log = LoggerFactory.getLogger(EditComputer.class);
 
 	public AddComputer() {
@@ -46,9 +37,10 @@ public class AddComputer extends HttpServlet {
 		log.info("Servlet : [GET] addComputer");
 
 		HttpSession session = request.getSession();
-		AddComputerPage addComputerPage = getAddComputerPage(request);
-		session.setAttribute("page", addComputerPage);
-
+		ComputerPage page = ServletUtil.getAddComputerPage(request);
+		page.setCorrectField(new CorrectField());
+		session.setAttribute("page", page);
+		System.out.println(page);
 		request.getRequestDispatcher("WEB-INF/views/addComputer.jsp").forward(
 				request, response);
 	}
@@ -57,14 +49,14 @@ public class AddComputer extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		log.info("Servlet : [POST] addComputer");
-
 		
 		HttpSession session = request.getSession();
-		AddComputerPage addComputerPage = getAddComputerPage(request);
-		session.setAttribute("page", addComputerPage);
-		
-		if (addComputerPage.getCorrectField().areAllFieldsOk()) {
-			Computer computer = ComputerMapper.mapDtoToModel(addComputerPage.getComputerDto());
+		ComputerPage page = ServletUtil.getAddComputerPage(request);
+		session.setAttribute("page", page);
+
+		if (page.getCorrectField().areAllFieldsOk()) {
+			Computer computer = ComputerMapper.mapDtoToModel(page
+					.getComputerDto());
 			ComputerService.INSTANCE.create(computer);
 			response.sendRedirect("dashboard");
 		} else {
@@ -74,18 +66,4 @@ public class AddComputer extends HttpServlet {
 		}
 	}
 
-	
-	private AddComputerPage getAddComputerPage(HttpServletRequest request) {
-		AddComputerPage addComputerPage = new AddComputerPage();
-		List<Company> companies = CompanyService.INSTANCE
-				.list(new SortCriteria());
-		companies.add(0, new Company(null, "--"));
-		List<CompanyDto> companyDtos = CompanyMapper
-				.mapListModelToDto(companies);
-		addComputerPage.setCompanies(companyDtos);
-		addComputerPage.setComputerDto(ServletUtil.getComputerDto(request));
-		addComputerPage.setCorrectField( ServletUtil.checkComputerDto(addComputerPage.getComputerDto()));
-		return addComputerPage;
-	}
-	
 }

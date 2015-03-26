@@ -6,7 +6,6 @@ function checkPostForm(document) {
 		value = false
 	if (checkDiscontinued(document) == false)
 		value = false
-	alert("result " + value);
 	return value;
 }
 

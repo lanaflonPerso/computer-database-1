@@ -1,6 +1,7 @@
 package com.excilys.computerDataBase.test.fonctionnel;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -51,12 +53,10 @@ public class TestEditComputer {
 	@Test
 	public void testEditElementWithWrongName() {
 		driver.get("http://localhost:8080/computer-database/editComputer?computerId=104");
-	
 		
 		deleteComputer(driver);
 		String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		enterComputer(driver, "", "", date, "Nokia");
-		
 		driver.findElement(By.id("editButton")).click();
 		
 		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/computer-database/editComputer?computerId=104");
@@ -69,11 +69,18 @@ public class TestEditComputer {
 		
 		deleteComputer(driver);
 		enterComputer(driver, "nameWrongDate", "", "2000-19-10 10:10:10", "Nokia");
-		
 		driver.findElement(By.id("editButton")).click();
 		
-		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/computer-database/editComputer?computerId=104");
-		assertEquals(driver.getPageSource().contains("Invalid introduced date : respect yyyy-MM-dd HH:mm:ss"), true);
+		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/computer-database/editComputer");
+		assertEquals(driver.findElement(By.id("serviceDiscontinuedException")).getText(), "Invalid discontinued date : respect yyyy-MM-dd HH:mm:ss");
+		try {
+			driver.findElement(By.id("serviceNameException"));
+			fail("element serviceNameException must not appear in this case");
+		} catch (NoSuchElementException ignored) {}
+		try {
+			driver.findElement(By.id("serviceIntroducedException"));
+			fail("element serviceNameException must not appear in this case");
+		} catch (NoSuchElementException ignored) {}	
 	}
 	
 	
