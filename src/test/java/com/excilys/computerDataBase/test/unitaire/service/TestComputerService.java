@@ -1,3 +1,6 @@
+/**
+ * @Author Vincent Galloy
+ */
 package com.excilys.computerDataBase.test.unitaire.service;
 
 import static org.junit.Assert.assertEquals;

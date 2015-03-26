@@ -1,3 +1,6 @@
+/**
+ * @Author Vincent Galloy
+ */
 package com.excilys.computerDataBase.test.fonctionnel;
 
 import static org.hamcrest.CoreMatchers.is;
