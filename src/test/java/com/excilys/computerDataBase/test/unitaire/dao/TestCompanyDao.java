@@ -34,6 +34,7 @@ public class TestCompanyDao {
 	@After
 	public void after() throws SQLException {
 		connection.rollback();
+		connection.close();
 	}
 
 	@Test
