@@ -1,3 +1,6 @@
+/**
+ * @Author Vincent Galloy
+ */
 package com.excilys.computerDataBase.dao;
 
 import java.sql.Connection;
@@ -7,12 +10,7 @@ import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.util.DaoUtil;
 
-/**
- * The Interface CommonDaoInterface.
- *
- * @param <T>
- *            the generic type
- */
+
 public interface DaoInterface<T> {
 
 	public void create(Connection connection, T t);

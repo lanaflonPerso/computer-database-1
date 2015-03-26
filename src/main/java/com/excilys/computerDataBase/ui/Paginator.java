@@ -1,3 +1,6 @@
+/**
+ * @Author Vincent Galloy
+ */
 package com.excilys.computerDataBase.ui;
 
 import java.util.List;

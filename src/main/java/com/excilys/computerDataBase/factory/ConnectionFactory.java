@@ -1,3 +1,6 @@
+/**
+ * @Author Vincent Galloy
+ */
 package com.excilys.computerDataBase.factory;
 
 import java.io.InputStream;

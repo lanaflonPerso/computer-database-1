@@ -1,3 +1,6 @@
+/**
+ * @Author Vincent Galloy
+ */
 package com.excilys.computerDataBase.dao.impl;
 
 import java.sql.Connection;

@@ -1,3 +1,6 @@
+/**
+ * @Author Vincent Galloy
+ */
 package com.excilys.computerDataBase.validation;
 
 import org.apache.commons.validator.routines.DateValidator;

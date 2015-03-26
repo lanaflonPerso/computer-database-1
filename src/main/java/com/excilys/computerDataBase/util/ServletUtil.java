@@ -1,3 +1,6 @@
+/**
+ * @Author Vincent Galloy
+ */
 package com.excilys.computerDataBase.util;
 
 import javax.servlet.http.HttpServletRequest;
