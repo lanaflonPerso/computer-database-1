@@ -4,8 +4,8 @@
 package com.excilys.computerDataBase.mapper;
 
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.excilys.computerDataBase.dto.CompanyDto;
 import com.excilys.computerDataBase.exception.ParsingException;
@@ -37,19 +37,13 @@ public class CompanyMapper {
 	}
 
 	public static List<CompanyDto> mapListModelToDto(List<Company> companies) {
-		List<CompanyDto> companyDtos = new ArrayList<CompanyDto>();
-		for (Company company : companies) {
-			companyDtos.add(mapModelToDto(company));
-		}
-		return companyDtos;
+		return companies.stream().map(e -> mapModelToDto(e))
+				.collect(Collectors.toList());
 	}
 
-	public static List<Company> mapListDtoToModel(List<CompanyDto> computerDtos) {
-		List<Company> companies = new ArrayList<Company>();
-		for (CompanyDto computerDto : computerDtos) {
-			companies.add(mapDtoToModel(computerDto));
-		}
-		return companies;
+	public static List<Company> mapListDtoToModel(List<CompanyDto> companyDtos) {
+		return companyDtos.stream().map(e -> mapDtoToModel(e))
+				.collect(Collectors.toList());
 	}
 
 	public static Company mapResultSetToModel(ResultSet resultSet) {

@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.excilys.computerDataBase.dto.CompanyDto;
 import com.excilys.computerDataBase.dto.ComputerDto;
@@ -73,20 +73,14 @@ public class ComputerMapper {
 	}
 
 	public static List<ComputerDto> mapListModelToDto(List<Computer> computers) {
-		List<ComputerDto> computerDtos = new ArrayList<ComputerDto>();
-		for (Computer computer : computers) {
-			computerDtos.add(mapModelToDto(computer));
-		}
-		return computerDtos;
+		return computers.stream().map(e -> mapModelToDto(e))
+				.collect(Collectors.toList());
 	}
 
 	public static List<Computer> mapListDtoToModel(
 			List<ComputerDto> computerDtos) {
-		List<Computer> computers = new ArrayList<Computer>();
-		for (ComputerDto computerDto : computerDtos) {
-			computers.add(mapDtoToModel(computerDto));
-		}
-		return computers;
+		return computerDtos.stream().map(e -> mapDtoToModel(e))
+				.collect(Collectors.toList());
 	}
 
 	public static Computer mapResultSetToModel(ResultSet resultSet) {
