@@ -19,7 +19,6 @@ public enum ConnectionFactory {
 	INSTANCE;
 
 	private Properties properties;
-	private String url;
 	private BoneCP connectionPool;
 
 	private ConnectionFactory() {
@@ -34,21 +33,19 @@ public enum ConnectionFactory {
 		try {
 
 			final InputStream is = ConnectionFactory.class.getClassLoader()
-					.getResourceAsStream("config.properties");
+					.getResourceAsStream("boneCPConfig.properties");
 			properties.load(is);
-			url = properties.getProperty("url");
 		} catch (Exception e) {
 			throw new RuntimeException("can not load config.properties", e);
 		}
 
-		BoneCPConfig config = new BoneCPConfig();
-		config.setJdbcUrl(url);
-		config.setUsername(properties.getProperty("user"));
-		config.setPassword(properties.getProperty("password"));
-		config.setMinConnectionsPerPartition(5);
-		config.setMaxConnectionsPerPartition(10);
-		config.setPartitionCount(2);
-
+		BoneCPConfig config;
+		try {
+			config = new BoneCPConfig(properties);
+		} catch (Exception e1) {
+			throw new DaoException(DaoException.CAN_NOT_CREATE_CONNECTION, e1);
+		}
+		
 		try {
 			connectionPool = new BoneCP(config);
 		} catch (SQLException e) {
@@ -60,8 +57,8 @@ public enum ConnectionFactory {
 	public Connection createConnection() {
 		try {
 			return connectionPool.getConnection();
-		} catch (SQLException e) {
-			throw new DaoException(DaoException.CAN_NOT_CREATE_CONNECTION);
+		} catch (SQLException e2) {
+			throw new DaoException(DaoException.CAN_NOT_CREATE_CONNECTION, e2);
 		}
 	}
 }
