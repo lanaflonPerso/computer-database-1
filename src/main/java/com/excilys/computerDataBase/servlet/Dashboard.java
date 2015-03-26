@@ -33,6 +33,7 @@ public class Dashboard extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	final static Logger log = LoggerFactory.getLogger(Dashboard.class);
 	private final ComputerService computerService = ComputerService.INSTANCE;
+
 	public Dashboard() {
 		super();
 	}
@@ -47,32 +48,31 @@ public class Dashboard extends HttpServlet {
 		int page = getPage(request);
 		int size = getSize(request);
 		SortCriteria sortCriteria = getSortCriteria(request);
-		
+
 		List<Computer> computers = null;
 		List<ComputerDto> computerDtos = null;
 		Long numberOfComputer = null;
 
 		String search = getSearch(request);
 		if (search != null && !"".equals(search.trim())) {
-			computers = computerService.getNameContains(search, new Long((page - 1)
-					* size), new Long(page * size), sortCriteria);
+			computers = computerService.getNameContains(search, new Long(
+					(page - 1) * size), new Long(page * size), sortCriteria);
 			numberOfComputer = computerService.getNameContainsElement(search);
 		} else {
-			computers = computerService.list(new Long((page - 1)
-					* size), new Long(page * size), sortCriteria);
+			computers = computerService.list(new Long((page - 1) * size),
+					new Long(page * size), sortCriteria);
 			numberOfComputer = computerService.getNumberOfElement();
 		}
 		computerDtos = ComputerMapper.mapListModelToDto(computers);
 		session.setAttribute("numberOfComputer", numberOfComputer);
 
-		
-		
-		
 		session.setAttribute("page", page);
 		session.setAttribute("size", size);
 		session.setAttribute("search", search);
-		session.setAttribute("sortColumn", sortCriteria.getSortColumn().toPrint());
-		session.setAttribute("sortDirection", sortCriteria.getSortDirection().toPrint());
+		session.setAttribute("sortColumn", sortCriteria.getSortColumn()
+				.toPrint());
+		session.setAttribute("sortDirection", sortCriteria.getSortDirection()
+				.toPrint());
 		session.setAttribute("computers", computerDtos);
 		session.setAttribute("pageMax", (numberOfComputer - 1) / size + 1);
 		session.setAttribute("numberOfComputer", numberOfComputer);
@@ -80,8 +80,6 @@ public class Dashboard extends HttpServlet {
 		request.getRequestDispatcher("WEB-INF/views/dashboard.jsp").forward(
 				request, response);
 	}
-
-	
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -91,12 +89,7 @@ public class Dashboard extends HttpServlet {
 		List<Long> list = getListLong(request);
 
 		for (Long l : list) {
-			try {
-				computerService.delete(l);
-				log.info("computer with id : " + l + " deleted");
-			} catch (Exception e) {
-				log.error("computer with id : " + l + " can not be deleted");
-			}
+			computerService.delete(l);
 		}
 
 		response.sendRedirect("dashboard");
@@ -143,20 +136,20 @@ public class Dashboard extends HttpServlet {
 
 		return list;
 	}
-	
+
 	private SortCriteria getSortCriteria(HttpServletRequest request) {
-			String string = request.getParameter("sortColumn");
-			if (string != null) {
-				string = string.trim();
-			}
-			SortColumn sortColumn = SortColumn.build(string);
-			
-			string = request.getParameter("sortDirection");
-			if (string != null) {
-				string = string.trim();
-			}
-			SortDirection sortDirection = SortDirection.build(string);
-			
-			return new SortCriteria(sortColumn, sortDirection);
+		String string = request.getParameter("sortColumn");
+		if (string != null) {
+			string = string.trim();
+		}
+		SortColumn sortColumn = SortColumn.build(string);
+
+		string = request.getParameter("sortDirection");
+		if (string != null) {
+			string = string.trim();
+		}
+		SortDirection sortDirection = SortDirection.build(string);
+
+		return new SortCriteria(sortColumn, sortDirection);
 	}
 }

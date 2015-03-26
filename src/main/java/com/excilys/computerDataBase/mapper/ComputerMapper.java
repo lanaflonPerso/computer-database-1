@@ -114,7 +114,7 @@ public class ComputerMapper {
 			return null;
 		} else if ("".equals(date.trim())) {
 			return null;
-		} else if (Validator.validateDate(date)) {
+		} else if (Validator.isDateValid(date)) {
 			return LocalDateTime.parse(date, dateTimeFormatter);
 		} else {
 			throw new ParsingException(Validator.WRONG_DATE_FORMAT);

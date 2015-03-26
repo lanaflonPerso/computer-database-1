@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.dto.CompanyDto;
 import com.excilys.computerDataBase.dto.ComputerDto;
-import com.excilys.computerDataBase.exception.ParsingException;
 import com.excilys.computerDataBase.mapper.CompanyMapper;
 import com.excilys.computerDataBase.mapper.ComputerMapper;
 import com.excilys.computerDataBase.model.Company;
@@ -27,6 +26,7 @@ import com.excilys.computerDataBase.model.Computer;
 import com.excilys.computerDataBase.service.impl.CompanyService;
 import com.excilys.computerDataBase.service.impl.ComputerService;
 import com.excilys.computerDataBase.util.ServletUtil;
+import com.excilys.computerDataBase.validation.CorrectField;
 
 @WebServlet("/editComputer")
 public class EditComputer extends HttpServlet {
@@ -65,6 +65,7 @@ public class EditComputer extends HttpServlet {
 		Computer computer = ComputerService.INSTANCE.getById(computerId);
 		ComputerDto computerDto = ComputerMapper.mapModelToDto(computer);
 
+		session.setAttribute("correctField", new CorrectField(true, true, true, true));
 		session.setAttribute("companies", companyDtos);
 		session.setAttribute("computer", computerDto);
 		
@@ -81,16 +82,19 @@ public class EditComputer extends HttpServlet {
 		
 		log.info("Servlet : [POST] editComputer");
 		
-		try {			
-			ComputerDto computerDto = ServletUtil.getComputerDto(request);
+		HttpSession session = request.getSession();
+		ComputerDto computerDto = ServletUtil.getComputerDto(request);
+		CorrectField correctField = ServletUtil
+				.checkComputerDto(computerDto);
+		session.setAttribute("correctField", correctField);
+		if (correctField.areAllFieldsOk()) {
 			Computer computer = ComputerMapper.mapDtoToModel(computerDto);
 			ComputerService.INSTANCE.update(computer);
-
-		} catch (ParsingException e) {
-			log.error("One of the field is not correct : computer can not be updated.");
-		} catch (Exception e) {
-			log.error("Exception : " + e.getMessage());
+			response.sendRedirect("dashboard");
+		} else {
+			log.info("Wrong input");
+			request.getRequestDispatcher("WEB-INF/views/editComputer.jsp")
+					.forward(request, response);
 		}
-		response.sendRedirect("dashboard");
 	}
 }

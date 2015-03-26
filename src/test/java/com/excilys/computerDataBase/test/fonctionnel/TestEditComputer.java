@@ -30,7 +30,7 @@ public class TestEditComputer {
 	}
 
 	@Test
-	public void testEditElement() {
+	public void testEditCorrectElement() {
 		driver.get("http://localhost:8080/computer-database/editComputer?computerId=104");
 	
 		
@@ -47,6 +47,35 @@ public class TestEditComputer {
 
 	}
 
+	
+	@Test
+	public void testEditElementWithWrongName() {
+		driver.get("http://localhost:8080/computer-database/editComputer?computerId=104");
+	
+		
+		deleteComputer(driver);
+		String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		enterComputer(driver, "", "", date, "Nokia");
+		
+		driver.findElement(By.id("editButton")).click();
+		
+		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/computer-database/editComputer?computerId=104");
+	}
+	
+	@Test
+	public void testEditElementWithWrongDate() {
+		driver.get("http://localhost:8080/computer-database/editComputer?computerId=104");
+	
+		
+		deleteComputer(driver);
+		enterComputer(driver, "nameWrongDate", "", "2000-19-10 10:10:10", "Nokia");
+		
+		driver.findElement(By.id("editButton")).click();
+		
+		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/computer-database/editComputer?computerId=104");
+		assertEquals(driver.getPageSource().contains("Invalid introduced date : respect yyyy-MM-dd HH:mm:ss"), true);
+	}
+	
 	
 	private void deleteComputer(WebDriver driver2) {
 		WebElement webElement = null;

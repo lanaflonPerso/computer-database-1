@@ -16,54 +16,72 @@
 			<div class="row">
 				<div class="col-xs-8 col-xs-offset-2 box">
 					<div id="computer_Id" class="label label-default pull-right">id:
-						${computer.getId()}</div>
+						${page.getComputerDto().getId()}</div>
 					<h1>Edit Computer</h1>
 
 					<form action="editComputer" method="POST"
 						onsubmit="return checkPostForm(document)">
 						<input type="hidden" name="computerId" id="computerId"
-							value="${computer.getId()}" />
+							value="${page.getComputerDto().getId()}" />
 						<fieldset>
 							<div class="form-group">
 								<label for="computerName">Computer name</label> <input
 									name="computerName" type="text" class="form-control"
-									id="computerName" value="${computer.getName()}">
+									id="computerName" value="${page.getComputerDto().getName()}">
 							</div>
+							<c:if
+								test="${!page.getCorrectField().isComputerNameTrue()}">
+								<font id="serviceNameException" color="red"> Wrong computer name : computer name
+									can not be empty</font>
+							</c:if>
 							<div class="form-group">
 								<label for="introduced">Introduced date</label> <input
 									name="introduced" type="text" class="form-control"
-									id="introduced" value="${computer.getIntroduced()}">
+									id="introduced" value="${page.getComputerDto().getIntroduced()}">
 							</div>
+							<c:if
+								test="${!page.getCorrectField().isIntroducedDateTrue()}">
+								<font id="serviceIntroducedException" color="red"> Invalid introduced date : respect
+									yyyy-MM-dd HH:mm:ss</font>
+							</c:if>
 							<div class="form-group">
 								<label for="discontinued">Discontinued date</label> <input
 									name="discontinued" type="text" class="form-control"
-									id="discontinued" value="${computer.getDiscontinued()}">
+									id="discontinued" value="${page.getComputerDto().getDiscontinued()}">
 							</div>
+							<c:if
+								test="${!page.getCorrectField().isDiscontinuedDateTrue()}">
+								<font id="serviceDiscontinuedException" color="red"> Invalid discontinued date : respect
+									yyyy-MM-dd HH:mm:ss</font>
+							</c:if>
 							<div class="form-group">
 								<label for="companyId">Company</label> <select
 									class="form-control" id="companyId" name="companyId">
-									<c:forEach var="i" begin="0" end="${companies.size() - 1}">
+									<c:forEach var="i" begin="0" end="${page.getCompanies().size() - 1}">
 										<option
-											<c:if test="${companies.get(i).getId() == computer.getCompanyName()}">
+											<c:if test="${page.getCompanies().get(i).getName() == page.getComputerDto().getCompanyName()}">
 										selected
 										</c:if>
-											value="${companies.get(i).getId()}">${companies.get(i).getName()}</option>
+											value="${page.getCompanies().get(i).getId()}">${page.getCompanies().get(i).getName()}</option>
 									</c:forEach>
 								</select>
 							</div>
-
-
+							<c:if
+								test="${!page.getCorrectField().isCompanyIdTrue()}">
+								<font color="red"> Invalid company id</font>
+							</c:if>
 
 						</fieldset>
 						<div class="actions pull-right">
-							<input id="editButton" type="submit" value="Edit" class="btn btn-primary">
-							or <a href="dashboard" class="btn btn-default">Cancel</a>
+							<input id="editButton" type="submit" value="Edit"
+								class="btn btn-primary"> or <a href="dashboard"
+								class="btn btn-default">Cancel</a>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</section>
-		<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </body>
 </html>

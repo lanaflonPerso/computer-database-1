@@ -198,7 +198,7 @@ public class CommandLineMenu {
 	private LocalDateTime getLocalDateTimeFromCommandLine(String request) {
 		System.out.println(request);
 		String result = scanner.nextLine();
-		if (Validator.validateDate(result)) {
+		if (Validator.isDateValid(result)) {
 			return LocalDateTime.parse(result);
 		} else {
 			System.out.println(Validator.WRONG_DATE_FORMAT);

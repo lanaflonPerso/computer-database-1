@@ -11,7 +11,7 @@ public class Validator {
 
 	public static final String WRONG_DATE_FORMAT = "unable to convert to date";
 
-	public static boolean validateDate(String inputString) {
+	public static boolean isDateValid(String inputString) {
 		return DateValidator.getInstance().isValid(inputString,
 				"yyyy-MM-dd HH:mm:ss");
 	}
@@ -63,4 +63,5 @@ public class Validator {
 			return true;
 		}
 	}
+
 }

@@ -6,8 +6,8 @@ function checkPostForm(document) {
 		value = false
 	if (checkDiscontinued(document) == false)
 		value = false
+	alert("result " + value);
 	return value;
-
 }
 
 function checkName(document) {
@@ -20,6 +20,9 @@ function checkName(document) {
 		element.style.borderColor = "red";
 		return false;
 	} else {
+		if (document.getElementById("serviceNameException") != null) {
+			document.getElementById("serviceNameException").style.visibility = "hidden";
+		}
 		element.style.borderColor = "#CCC";
 		return true;
 	}
@@ -30,8 +33,14 @@ function checkIntroduced(document) {
 	re = /^[1-2][0-9][0-9][0-9]-[0-2][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/
 
 	if (element.value == "") {
+		if (document.getElementById("serviceIntroducedException") != null) {
+			document.getElementById("serviceIntroducedException").style.visibility = "hidden";
+		}
 		return true;
 	} else if (element.value.match(re)) {
+		if (document.getElementById("serviceIntroducedException") != null) {
+			document.getElementById("serviceIntroducedException").style.visibility = "hidden";
+		}
 		element.style.borderColor = "#CCC";
 		return true;
 	} else {
@@ -45,8 +54,14 @@ function checkDiscontinued(document) {
 	re = /^[1-2][0-9][0-9][0-9]-[0-2][0-9]-[0-3][0-9] [0-2][0-9]:[0-5][0-9]:[0-5][0-9]$/
 
 	if (element.value == "") {
+		if (document.getElementById("serviceDiscontinuedException") != null) {
+			document.getElementById("serviceDiscontinuedException").style.visibility = "hidden";
+		}
 		return true;
 	} else if (element.value.match(re)) {
+		if (document.getElementById("serviceDiscontinuedException") != null) {
+			document.getElementById("serviceDiscontinuedException").style.visibility = "hidden";
+		}
 		element.style.borderColor = "#CCC";
 		return true;
 	} else {

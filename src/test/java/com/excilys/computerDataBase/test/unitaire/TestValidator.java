@@ -14,25 +14,25 @@ public class TestValidator {
 	@Test
 	public void testDateValidatorCorrectDate() {
 		String stringDate = "2100-10-12 10:10:12";
-		assertEquals(Validator.validateDate(stringDate), true);
+		assertEquals(Validator.isDateValid(stringDate), true);
 	}
 
 	@Test
 	public void testDateValidator() {
 		String stringDate = "null";
-		assertEquals(Validator.validateDate(stringDate), false);
+		assertEquals(Validator.isDateValid(stringDate), false);
 	}
 
 	@Test
 	public void testDateValidator2() {
 		String stringDate = null;
-		assertEquals(Validator.validateDate(stringDate), false);
+		assertEquals(Validator.isDateValid(stringDate), false);
 	}
 
 	@Test
 	public void testDateValidator3() {
 		String stringDate = "2100-34-12 35:45:12";
-		assertEquals(Validator.validateDate(stringDate), false);
+		assertEquals(Validator.isDateValid(stringDate), false);
 	}
 
 	/*

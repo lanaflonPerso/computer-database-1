@@ -1,7 +1,6 @@
 package com.excilys.computerDataBase.test.fonctionnel;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -30,31 +29,26 @@ public class TestAddComputer {
 	@Test
 	public void testAddWrongElement() {
 		Long computerFoundNumber1 = getComputerNumber(driver);
-		assertThat(computerFoundNumber1 != null, is(true));
+		assertEquals(computerFoundNumber1 != null, true);
 
 		driver.findElement(By.id("addComputer")).click();
 		enterComputer(driver, "name", "wrongDate", "WrongDate", "Apple Inc.");
 		driver.findElement(By.id("addButton")).click();
-
-		Long computerFoundNumber2 = getComputerNumber(driver);
-		//assertThat(computerFoundNumber2, nullValue());
-
-		assertThat(computerFoundNumber1, is(computerFoundNumber2));
+		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/computer-database/addComputer");
 	}
 
 	@Test
 	public void testAddRightElement() throws Exception {
 		Long computerFoundNumber1 = getComputerNumber(driver);
-		assertThat(computerFoundNumber1 != null, is(true));
+		assertEquals(computerFoundNumber1 != null, true);
 
 		driver.findElement(By.id("addComputer")).click();
 		enterComputer(driver, "name", "1999-10-09 01:02:03", "1999-10-09 01:02:03", "Apple Inc.");
 		driver.findElement(By.id("addButton")).click();
 
 		Long computerFoundNumber2 = getComputerNumber(driver);
-		assertThat(computerFoundNumber2 != null, is(true));
-
-		assertThat(computerFoundNumber1, is(computerFoundNumber2 - 1));
+		assertEquals(computerFoundNumber2 != null, true);
+		assertEquals(computerFoundNumber1, new Long(computerFoundNumber2 - 1));
 	}
 	
 	private void enterComputer(WebDriver driver2, String name,
