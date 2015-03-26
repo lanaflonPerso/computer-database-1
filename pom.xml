@@ -28,7 +28,6 @@
 		<!-- Selenium -->
 		<selenium-java-version>2.45.0</selenium-java-version>
 		<selenium-firefox-driver-version>2.45.0</selenium-firefox-driver-version>
-		<selenium-server-version>2.25.0</selenium-server-version>
 		<!-- Date -->
 		<commons-validator-version>1.4.0</commons-validator-version>
 		<!-- JSP + JSTL -->
@@ -37,9 +36,7 @@
 		<!-- log -->
 		<slf4j-api-version>1.7.10</slf4j-api-version>
 		<log4j-version>1.2.17</log4j-version>
-
-		<selenium-maven-plugin-version>1.0.1</selenium-maven-plugin-version> <!-- A checker -->
-		<maven-surefire-plugin-version>2.5</maven-surefire-plugin-version> <!-- A checker -->
+		<logback-classic-version>1.1.2</logback-classic-version>
 	</properties>
 
 	<dependencies>
@@ -50,11 +47,11 @@
 			<version>${mysql-connector-version}</version>
 			<scope>runtime</scope>
 		</dependency>
-<dependency>
-	<groupId>com.jolbox</groupId>
-	<artifactId>bonecp</artifactId>
-	<version>0.8.0.RELEASE</version>
-</dependency>
+		<dependency>
+			<groupId>com.jolbox</groupId>
+			<artifactId>bonecp</artifactId>
+			<version>0.8.0.RELEASE</version>
+		</dependency>
 
 		<!-- Test -->
 		<dependency>
@@ -115,12 +112,6 @@
 			<version>${selenium-firefox-driver-version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-server</artifactId>
-			<version>${selenium-server-version}</version>
-			<scope>test</scope>
-		</dependency>
 
 		<!-- Date -->
 		<dependency>
@@ -149,19 +140,11 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j-api-version}</version>
 		</dependency>
-		<!-- 
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.10</version>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback-classic-version}</version>
 		</dependency>
-		 -->
-	<dependency>
-	<groupId>ch.qos.logback</groupId>
-	<artifactId>logback-classic</artifactId>
-	<version>1.1.2</version>
-</dependency>
-
 	</dependencies>
 	<build>
 		<plugins>

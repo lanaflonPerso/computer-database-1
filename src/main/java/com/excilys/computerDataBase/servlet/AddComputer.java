@@ -40,7 +40,6 @@ public class AddComputer extends HttpServlet {
 		ComputerPage page = ServletUtil.getAddComputerPage(request);
 		page.setCorrectField(new CorrectField());
 		session.setAttribute("page", page);
-		System.out.println(page);
 		request.getRequestDispatcher("WEB-INF/views/addComputer.jsp").forward(
 				request, response);
 	}
