@@ -5,7 +5,7 @@ package com.excilys.computerDataBase.service;
 
 import java.util.List;
 
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
+import com.excilys.computerDataBase.sort.SortCriteria;
 
 /**
  * The Interface ServiceInterface.
@@ -16,7 +16,15 @@ public interface ServiceInterface<T> {
 	
 	public List<T> list(SortCriteria sortCriteria);
 
+	public default List<T> list() {
+		return list(new SortCriteria());
+	}
+	
 	public List<T> list(Long from, Long to, SortCriteria sortCriteria);
+	
+	public default List<T> list(Long from, Long to) {
+		return list(from, to, new SortCriteria());
+	}
 	
 	public default T getById(Long id) {
 		throw new UnsupportedOperationException();

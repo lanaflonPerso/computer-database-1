@@ -10,9 +10,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.excilys.computerDataBase.dao.impl.CompanyDao;
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.service.impl.CompanyService;
+import com.excilys.computerDataBase.sort.SortCriteria;
 
 public class TestCompanyService {
 

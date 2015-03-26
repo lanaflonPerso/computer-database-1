@@ -9,13 +9,13 @@ import java.util.List;
 
 import com.excilys.computerDataBase.dao.impl.CompanyDao;
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.DaoException;
 import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
 import com.excilys.computerDataBase.service.ServiceCompanyInterface;
+import com.excilys.computerDataBase.sort.SortCriteria;
 import com.excilys.computerDataBase.util.DaoUtil;
 import com.excilys.computerDataBase.validation.Validator;
 

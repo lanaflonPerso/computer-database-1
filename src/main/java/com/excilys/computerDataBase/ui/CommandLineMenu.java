@@ -7,12 +7,12 @@ package com.excilys.computerDataBase.ui;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.ParsingException;
 import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
 import com.excilys.computerDataBase.service.impl.CompanyService;
 import com.excilys.computerDataBase.service.impl.ComputerService;
+import com.excilys.computerDataBase.sort.SortCriteria;
 import com.excilys.computerDataBase.validation.Validator;
 
 

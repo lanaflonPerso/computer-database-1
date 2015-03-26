@@ -6,8 +6,8 @@ package com.excilys.computerDataBase.dao;
 import java.sql.Connection;
 import java.util.List;
 
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.model.Computer;
+import com.excilys.computerDataBase.sort.SortCriteria;
 
 /**
  * The Interface CommonDaoInterface.

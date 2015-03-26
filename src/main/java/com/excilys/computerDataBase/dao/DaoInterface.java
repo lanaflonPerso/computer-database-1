@@ -6,8 +6,8 @@ package com.excilys.computerDataBase.dao;
 import java.sql.Connection;
 import java.util.List;
 
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
+import com.excilys.computerDataBase.sort.SortCriteria;
 import com.excilys.computerDataBase.util.DaoUtil;
 
 

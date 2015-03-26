@@ -17,13 +17,13 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.excilys.computerDataBase.dao.sort.SortColumn;
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
-import com.excilys.computerDataBase.dao.sort.SortDirection;
 import com.excilys.computerDataBase.dto.ComputerDto;
 import com.excilys.computerDataBase.mapper.ComputerMapper;
 import com.excilys.computerDataBase.model.Computer;
 import com.excilys.computerDataBase.service.impl.ComputerService;
+import com.excilys.computerDataBase.sort.SortColumn;
+import com.excilys.computerDataBase.sort.SortCriteria;
+import com.excilys.computerDataBase.sort.SortDirection;
 
 /**
  * Servlet implementation class Dashboard

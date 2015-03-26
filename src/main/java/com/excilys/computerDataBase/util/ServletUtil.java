@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.dto.CompanyDto;
 import com.excilys.computerDataBase.dto.ComputerDto;
 import com.excilys.computerDataBase.dto.page.ComputerPage;
@@ -21,6 +20,7 @@ import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
 import com.excilys.computerDataBase.service.impl.CompanyService;
 import com.excilys.computerDataBase.service.impl.ComputerService;
+import com.excilys.computerDataBase.sort.SortCriteria;
 import com.excilys.computerDataBase.validation.CorrectField;
 import com.excilys.computerDataBase.validation.Validator;
 

@@ -16,11 +16,11 @@ import org.junit.Test;
 
 import com.excilys.computerDataBase.dao.impl.CompanyDao;
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.DaoException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
+import com.excilys.computerDataBase.sort.SortCriteria;
 
 public class TestCompanyDao {
 

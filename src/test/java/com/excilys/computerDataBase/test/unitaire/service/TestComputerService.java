@@ -17,11 +17,11 @@ import org.mockito.Mockito;
 
 import com.excilys.computerDataBase.dao.ComputerDaoInterface;
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.model.Company;
 import com.excilys.computerDataBase.model.Computer;
 import com.excilys.computerDataBase.service.impl.ComputerService;
+import com.excilys.computerDataBase.sort.SortCriteria;
 
 public class TestComputerService {
 

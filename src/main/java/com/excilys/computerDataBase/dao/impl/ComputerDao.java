@@ -12,10 +12,10 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.excilys.computerDataBase.dao.ComputerDaoInterface;
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.DaoException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.model.Computer;
+import com.excilys.computerDataBase.sort.SortCriteria;
 import com.excilys.computerDataBase.util.DaoUtil;
 
 /**

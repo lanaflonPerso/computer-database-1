@@ -7,10 +7,10 @@ import java.util.List;
 
 import com.excilys.computerDataBase.dao.ComputerDaoInterface;
 import com.excilys.computerDataBase.dao.impl.ComputerDao;
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.ServiceException;
 import com.excilys.computerDataBase.model.Computer;
 import com.excilys.computerDataBase.service.ServiceComputerInterface;
+import com.excilys.computerDataBase.sort.SortCriteria;
 import com.excilys.computerDataBase.validation.Validator;
 
 /**

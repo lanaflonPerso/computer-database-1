@@ -11,10 +11,10 @@ import java.sql.Statement;
 import java.util.List;
 
 import com.excilys.computerDataBase.dao.CompanyDaoInterface;
-import com.excilys.computerDataBase.dao.sort.SortCriteria;
 import com.excilys.computerDataBase.exception.DaoException;
 import com.excilys.computerDataBase.factory.ConnectionFactory;
 import com.excilys.computerDataBase.model.Company;
+import com.excilys.computerDataBase.sort.SortCriteria;
 import com.excilys.computerDataBase.util.DaoUtil;
 
 /**

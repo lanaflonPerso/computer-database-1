@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerDataBase.dao.sort;
+package com.excilys.computerDataBase.sort;
 
 public enum SortColumn {
 	NULL, COMPUTER_NAME, INTRODUCED_DATE, DISCONTINUED_DATE, COMPANY_NAME;
