@@ -8,5 +8,4 @@
 <%@ attribute name="sortDirection" description="Direction for sorting"%>
 
 
-<c:url
-	value="dashboard?page=${page}&size=${size}&search=${search}&sortColumn=${sortColumn}&sortDirection=${sortDirection}" />
+<c:url value="${target}?page=${page}&size=${size}&search=${search}&sortColumn=${sortColumn}&sortDirection=${sortDirection}" />

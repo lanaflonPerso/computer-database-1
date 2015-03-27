@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 
 import org.junit.Test;
 
-import com.excilys.computerDataBase.model.Company;
-import com.excilys.computerDataBase.model.Computer;
-import com.excilys.computerDataBase.validation.Validator;
+import com.excilys.computerdatabase.model.Company;
+import com.excilys.computerdatabase.model.Computer;
+import com.excilys.computerdatabase.validation.Validator;
 
 public class TestValidator {
 	@Test

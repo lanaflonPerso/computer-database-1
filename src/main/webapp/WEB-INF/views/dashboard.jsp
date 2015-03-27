@@ -14,19 +14,19 @@
 	</header>
 	<section id="main">
 		<div class="container">
-			<h1 id="homeTitle">${numberOfComputer} Computersfound</h1>
+			<h1 id="homeTitle">${page.getNumberOfComputer()} Computers found</h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
 					<form id="searchForm" action="dashboard" method="GET"
 						class="form-inline">
-						<input type="hidden" name="page" value="${1}" /> <input
-							type="hidden" name="size" value="${size}" /> <input
+						<input type="hidden" name="page" value="1" /> <input
+							type="hidden" name="size" value="${page.getSize()}" /> <input
 							type="search" id="searchbox" name="search" class="form-control"
-							<c:if test="${search == null || search == \"\"}">
+							<c:if test="${page.getSearch() == null || page.getSearch() == \"\"}">
 								placeholder="Search name" 
 							</c:if>
-							<c:if test="${search != null}">
-								value="${search}" 
+							<c:if test="${page.getSearch() != null}">
+								value="${page.getSearch()}" 
 							</c:if> />
 						<input type="submit" id="searchsubmit" value="Filter by name"
 							class="btn btn-primary" />
@@ -58,43 +58,34 @@
 									class="fa fa-trash-o fa-lg"></i>
 							</a>
 						</span></th>
-
-						<th>Computer name<a class="fa fa-sort-asc"
-							href="<mylib:link target="dashboard" size="${size}" search="${search}" sortColumn="COMPUTER_NAME" sortDirection="ASC"/>"></a>
-							<a class="fa fa-sort-desc"
-							href="<mylib:link target="dashboard" size="${size}" search="${search}" sortColumn="COMPUTER_NAME" sortDirection="DESC"/>"></a>
-						</th>
-						<th>Introduced date<a class="fa fa-sort-asc"
-							href="<mylib:link target="dashboard" size="${size}" search="${search}" sortColumn="INTRODUCED_DATE" sortDirection="ASC"/>"></a>
-							<a class="fa fa-sort-desc"
-							href="<mylib:link target="dashboard" size="${size}" search="${search}" sortColumn="INTRODUCED_DATE" sortDirection="DESC"/>"></a>
-						</th>
-						<th>Discontinued date<a class="fa fa-sort-asc"
-							href="<mylib:link target="dashboard" size="${size}" search="${search}" sortColumn="DISCONTINUED_DATE" sortDirection="ASC"/>"></a>
-							<a class="fa fa-sort-desc"
-							href="<mylib:link target="dashboard" size="${size}" search="${search}" sortColumn="DISCONTINUED_DATE" sortDirection="DESC"/>"></a>
-						</th>
-						<th>Company Name <a class="fa fa-sort-asc"
-							href="<mylib:link target="dashboard" size="${size}" search="${search}" sortColumn="COMPANY_NAME" sortDirection="ASC"/>"></a>
-							<a class="fa fa-sort-desc"
-							href="<mylib:link target="dashboard" size="${size}" search="${search}" sortColumn="COMPANY_NAME" sortDirection="DESC"/>"></a>
-						</th>
+						<mylib:dashboardTitle pageAll="${page}" page="${page.getPage()}"
+							size="${page.getSize()}" search="${page.getSearch()}"
+							name="Computer name" sortColumn="COMPUTER_NAME" currentColumn="${page.getSortColumn()}" currentDirection="${page.getSortDirection()}"/>
+						<mylib:dashboardTitle page="${page.getPage()}"
+							size="${page.getSize()}" search="${page.getSearch()}"
+							name="Introduced date" sortColumn="INTRODUCED_DATE" currentColumn="${page.getSortColumn()}" currentDirection="${page.getSortDirection()}"/>
+						<mylib:dashboardTitle page="${page.getPage()}"
+							size="${page.getSize()}" search="${page.getSearch()}"
+							name="Discontinued date" sortColumn="DISCONTINUED_DATE" currentColumn="${page.getSortColumn()}" currentDirection="${page.getSortDirection()}"/>
+						<mylib:dashboardTitle page="${page.getPage()}"
+							size="${page.getSize()}" search="${page.getSearch()}"
+							name="Company Name" sortColumn="COMPANY_NAME" currentColumn="${page.getSortColumn()}" currentDirection="${page.getSortDirection()}"/>
 
 					</tr>
 				</thead>
 				<!-- Browse attribute computers -->
 				<tbody id="results">
-					<c:forEach var="i" begin="0" end="${computers.size()}">
+					<c:forEach var="i" begin="0" end="${page.getComputers().size()}">
 						<tr>
-							<c:if test="${computers.size() > i}">
+							<c:if test="${page.getComputers().size() > i}">
 								<td class="editMode"><input type="checkbox" name="cb"
 									id="selected_${i}" class="cb" value="${i}"></td>
 								<td><a id="name_${i}"
-									href="editComputer?computerId=${computers.get(i).getId()}"
-									onclick="">${computers.get(i).getName()}</a></td>
-								<td id="introduced_${i}">${computers.get(i).getIntroduced()}</td>
-								<td id="discontinued_${i}">${computers.get(i).getDiscontinued()}</td>
-								<td id="companyName_${i}">${computers.get(i).getCompanyName()}</td>
+									href="editComputer?computerId=${page.getComputers().get(i).getId()}"
+									onclick="">${page.getComputers().get(i).getName()}</a></td>
+								<td id="introduced_${i}">${page.getComputers().get(i).getIntroduced()}</td>
+								<td id="discontinued_${i}">${page.getComputers().get(i).getDiscontinued()}</td>
+								<td id="companyName_${i}">${page.getComputers().get(i).getCompanyName()}</td>
 							</c:if>
 						</tr>
 					</c:forEach>
@@ -105,7 +96,10 @@
 
 
 	<footer class="navbar-fixed-bottom">
-		<mylib:pagination page="${page}" size="${size}" search="${search}" sortColumn="${sortColumn}" sortDirection="${sortDirection}"/>
+		<mylib:pagination page="${page.getPage()}"
+			pageMax="${page.getPageMax()}" size="${page.getSize()}"
+			search="${page.getSearch()}" sortColumn="${page.getSortColumn()}"
+			sortDirection="${page.getSortDirection()}" />
 	</footer>
 
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>

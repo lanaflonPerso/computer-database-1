@@ -10,35 +10,46 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.excilys.computerDataBase.dao.ComputerDaoInterface;
-import com.excilys.computerDataBase.dao.impl.ComputerDao;
-import com.excilys.computerDataBase.exception.ServiceException;
-import com.excilys.computerDataBase.model.Company;
-import com.excilys.computerDataBase.model.Computer;
-import com.excilys.computerDataBase.service.impl.ComputerService;
-import com.excilys.computerDataBase.sort.SortCriteria;
+import com.excilys.computerdatabase.dao.ComputerDaoInterface;
+import com.excilys.computerdatabase.dao.impl.ComputerDao;
+import com.excilys.computerdatabase.exception.ServiceException;
+import com.excilys.computerdatabase.model.Company;
+import com.excilys.computerdatabase.model.Computer;
+import com.excilys.computerdatabase.service.impl.ComputerServiceImpl;
+import com.excilys.computerdatabase.sort.SortCriteria;
 
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "/test-application-context.xml" })
 public class TestComputerService {
 
 	private static final Long COMPUTER_ID = new Long(45);
 	private static final Long NUMBER_OF_ELEMENT = new Long(101);
 
-	private static ComputerService computerService = ComputerService.INSTANCE;
+	@Autowired
+	private ComputerServiceImpl computerService;
 
-	private static ComputerDaoInterface computerDao = Mockito
+	@Autowired
+	private ComputerDao computerDao2;
+
+	private ComputerDaoInterface computerDao = Mockito
 			.mock(ComputerDaoInterface.class);
 
-	private static Computer computer1 = new Computer(new Long(1), "myName",
+	private final Computer computer1 = new Computer(new Long(1), "myName",
 			LocalDateTime.now(), LocalDateTime.now(), new Company(new Long(3),
 					"myCompany"));
 
-	@BeforeClass
-	public static void setUp() {
+	@Before
+	public void setUp() {
 		Mockito.when(computerDao.getById(COMPUTER_ID)).thenReturn(computer1);
 		List<Computer> computers = new ArrayList<Computer>();
 		computers.add(computer1);
@@ -50,9 +61,9 @@ public class TestComputerService {
 		computerService.setComputerDao(computerDao);
 	}
 
-	@AfterClass
-	public static void setDown() {
-		computerService.setComputerDao(ComputerDao.INSTANCE);
+	@After
+	public void setDown() {
+		computerService.setComputerDao(computerDao2);
 	}
 
 	@Test

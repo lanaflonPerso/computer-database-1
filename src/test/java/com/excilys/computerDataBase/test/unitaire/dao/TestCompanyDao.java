@@ -6,45 +6,35 @@ package com.excilys.computerDataBase.test.unitaire.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.excilys.computerDataBase.dao.impl.CompanyDao;
-import com.excilys.computerDataBase.dao.impl.ComputerDao;
-import com.excilys.computerDataBase.exception.DaoException;
-import com.excilys.computerDataBase.factory.ConnectionFactory;
-import com.excilys.computerDataBase.model.Company;
-import com.excilys.computerDataBase.model.Computer;
-import com.excilys.computerDataBase.sort.SortCriteria;
+import com.excilys.computerdatabase.dao.impl.CompanyDao;
+import com.excilys.computerdatabase.dao.impl.ComputerDao;
+import com.excilys.computerdatabase.exception.DaoException;
+import com.excilys.computerdatabase.model.Company;
+import com.excilys.computerdatabase.model.Computer;
+import com.excilys.computerdatabase.sort.SortCriteria;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "/test-application-context.xml" })
 public class TestCompanyDao {
-
-	private CompanyDao companyDao = CompanyDao.INSTANCE;
-	private ComputerDao computerDao = ComputerDao.INSTANCE;
-	private Connection connection = null;
-
-	@Before
-	public void init() throws SQLException {
-		connection = ConnectionFactory.INSTANCE.createConnection();
-		connection.setAutoCommit(false);
-	}
-
-	@After
-	public void after() throws SQLException {
-		connection.rollback();
-		connection.close();
-	}
-
+	@Autowired
+	private CompanyDao companyDao;
+	@Autowired
+	private ComputerDao computerDao;
+	
+	
 	@Test
 	public void testCreateCompany() {
 		Company company = new Company(new Long(0), "company_test");
-		companyDao.create(connection, company);
-		Company company2 = companyDao.getById(connection, company.getId());
+		companyDao.create( company);
+		Company company2 = companyDao.getById(company.getId());
 		assertEquals(company2, company);
 	}
 
@@ -56,7 +46,7 @@ public class TestCompanyDao {
 
 	public void testDelete() {
 		Company company = new Company(new Long(0), "company_test");
-		companyDao.create(connection, company);
+		companyDao.create(company);
 
 		Computer computer = new Computer(null, "name", null, null, company);
 		computerDao.create(computer);

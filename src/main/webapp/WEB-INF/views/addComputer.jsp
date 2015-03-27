@@ -39,7 +39,7 @@
 									<c:if test="${page.getComputerDto().getIntroduced() != null}">
 										value="${page.getComputerDto().getIntroduced()}"
 									</c:if>
-									placeholder="Introduced date">
+									placeholder="yyyy-MM-dd hh:mm:ss">
 							</div>
 							<c:if test="${!page.getCorrectField().isIntroducedDateTrue()}">
 								<font id="serviceIntroducedException" color="red">
@@ -52,7 +52,7 @@
 									<c:if test="${page.getComputerDto().getDiscontinued() != null}">
 										value="${page.getComputerDto().getDiscontinued()}"
 									</c:if>
-									placeholder="Discontinued date">
+									placeholder="yyyy-MM-dd hh:mm:ss">
 							</div>
 							<c:if test="${!page.getCorrectField().isDiscontinuedDateTrue()}">
 								<font id="serviceDiscontinuedException" color="red">

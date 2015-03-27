@@ -6,40 +6,31 @@ package com.excilys.computerDataBase.test.unitaire.dao;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.excilys.computerDataBase.dao.impl.ComputerDao;
-import com.excilys.computerDataBase.exception.DaoException;
-import com.excilys.computerDataBase.factory.ConnectionFactory;
-import com.excilys.computerDataBase.model.Company;
-import com.excilys.computerDataBase.model.Computer;
-import com.excilys.computerDataBase.sort.SortCriteria;
+import com.excilys.computerdatabase.dao.impl.ComputerDao;
+import com.excilys.computerdatabase.exception.DaoException;
+import com.excilys.computerdatabase.factory.ConnectionFactory;
+import com.excilys.computerdatabase.model.Company;
+import com.excilys.computerdatabase.model.Computer;
+import com.excilys.computerdatabase.sort.SortCriteria;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = { "/test-application-context.xml" })
 public class TestComputerDao {
 
-	ComputerDao computerDao = ComputerDao.INSTANCE;
-	private Connection connection = null;
-	
-	
-	@Before
-	public void init() throws SQLException {
-		connection = ConnectionFactory.INSTANCE.createConnection();
-		connection.setAutoCommit(false);
-	}
-
-	@After
-	public void after() throws SQLException {
-		connection.rollback();
-		connection.close();
-	}
+	@Autowired
+	private ComputerDao computerDao;
+	@Autowired
+	private ConnectionFactory connectionFactory;	
 	
 	@Test
 	public void testInsert() {
@@ -47,10 +38,10 @@ public class TestComputerDao {
 				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
 				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
 				new Company(new Long(15), "Canon"));
-		computerDao.create(connection, computer);
+		computerDao.create(computer);
 		assertEquals(computer.getId() == 1, false);
 
-		Computer computer2 = computerDao.getById(connection, computer.getId());
+		Computer computer2 = computerDao.getById(computer.getId());
 		assertEquals(computer2, computer);
 	}
 
@@ -58,10 +49,10 @@ public class TestComputerDao {
 	public void testInsertNullDateTime() {
 		Computer computer = new Computer(new Long(1), "test_name", null, null,
 				new Company(new Long(15), "Canon"));
-		computerDao.create(connection, computer);
+		computerDao.create(computer);
 		assertEquals(computer.getId() == 1, false);
 
-		Computer computer2 = computerDao.getById(connection, computer.getId());
+		Computer computer2 = computerDao.getById(computer.getId());
 		assertEquals(computer2, computer);
 	}
 
@@ -71,11 +62,11 @@ public class TestComputerDao {
 				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
 				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
 				new Company(null, "Canon"));
-		computerDao.create(connection, computer);
+		computerDao.create(computer);
 		computer.getCompany().setName(null);
 		computer.getCompany().setId(new Long(0));
 
-		Computer computer2 = computerDao.getById(connection, computer.getId());
+		Computer computer2 = computerDao.getById(computer.getId());
 		assertEquals(computer2, computer);
 	}
 
@@ -84,26 +75,26 @@ public class TestComputerDao {
 		Computer computer = new Computer(new Long(1), null, LocalDateTime.now()
 				.truncatedTo(ChronoUnit.SECONDS), LocalDateTime.now()
 				.truncatedTo(ChronoUnit.SECONDS), new Company(null, "Canon"));
-		computerDao.create(connection, computer);
+		computerDao.create(computer);
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void testInsertEmptyName() {
 		Computer computer = new Computer(new Long(1), "", LocalDateTime.now(),
 				LocalDateTime.now(), new Company(new Long(15), "Canon"));
-		computerDao.create(connection, computer);
+		computerDao.create(computer);
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void testInsertComputerWithNullAttributs() {
 		Computer computer = new Computer();
-		computerDao.create(connection, computer);
+		computerDao.create(computer);
 	}
 
 	@Test(expected = NullPointerException.class)
 	public void testInsertNullComputer() {
 			Computer computer = null;
-		computerDao.create(connection, computer);
+		computerDao.create(computer);
 	}
 
 	@Test
@@ -120,10 +111,10 @@ public class TestComputerDao {
 		Computer computer = new Computer(new Long(1), "test_name",
 				LocalDateTime.now(), LocalDateTime.now(), new Company(new Long(
 						15), "Canon"));
-		computerDao.create(connection, computer);
-		computerDao.delete(connection, computer.getId());
+		computerDao.create(computer);
+		computerDao.delete(computer.getId());
 		try {
-			computerDao.getById(connection, computer.getId());
+			computerDao.getById(computer.getId());
 			fail("testDelete : no exception");
 		} catch (DaoException e) {
 			assertEquals(e.getMessage(), DaoException.CAN_NOT_GET_ELEMENT);
@@ -136,10 +127,10 @@ public class TestComputerDao {
 				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
 				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
 				new Company(new Long(1), "Apple Inc."));
-		computerDao.create(connection, computer);
+		computerDao.create(computer);
 		computer.setName("second_name");
-		computerDao.update(connection, computer);
-		Computer computer2 = computerDao.getById(connection, computer.getId());
+		computerDao.update(computer);
+		Computer computer2 = computerDao.getById(computer.getId());
 		assertEquals(computer, computer2);
 	}
 
@@ -165,7 +156,7 @@ public class TestComputerDao {
 
 	@Test
 	public void testNameContains() {
-		List<Computer> computers = computerDao.getNameContains("App", new Long(0), new Long(10), new SortCriteria());
+		List<Computer> computers = computerDao.getByName("App", new Long(0), new Long(10), new SortCriteria());
 		assertEquals(computers.get(0).getName(), "MacBook Pro 15.4 inch");
 	}
 

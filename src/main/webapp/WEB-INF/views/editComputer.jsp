@@ -37,7 +37,8 @@
 							<div class="form-group">
 								<label for="introduced">Introduced date</label> <input
 									name="introduced" type="text" class="form-control"
-									id="introduced" value="${page.getComputerDto().getIntroduced()}">
+									id="introduced" value="${page.getComputerDto().getIntroduced()}"
+									placeholder="yyyy-MM-dd hh:mm:ss">
 							</div>
 							<c:if
 								test="${!page.getCorrectField().isIntroducedDateTrue()}">
@@ -47,7 +48,8 @@
 							<div class="form-group">
 								<label for="discontinued">Discontinued date</label> <input
 									name="discontinued" type="text" class="form-control"
-									id="discontinued" value="${page.getComputerDto().getDiscontinued()}">
+									id="discontinued" value="${page.getComputerDto().getDiscontinued()}"
+									placeholder="yyyy-MM-dd hh:mm:ss">
 							</div>
 							<c:if
 								test="${!page.getCorrectField().isDiscontinuedDateTrue()}">
