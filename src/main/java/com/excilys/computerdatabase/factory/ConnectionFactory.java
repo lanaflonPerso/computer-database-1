@@ -60,13 +60,13 @@ public class ConnectionFactory {
 		try {
 			getConnection().commit();
 		} catch (SQLException e) {
-			throw new DaoException(DaoException.CAN_NOT_COMMIT_TRANSACTION);
+			throw new DaoException(DaoException.CAN_NOT_COMMIT_TRANSACTION, e);
 		}
 	}
 	
 	public static void closeConnection(Connection connection) {
 		try {
-			if (connection != null && !connection.getAutoCommit()) {
+			if (connection != null && connection.getAutoCommit()) {
 				connection.close();
 			}
 		} catch (SQLException e) {
@@ -90,6 +90,14 @@ public class ConnectionFactory {
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
+	}
+
+	public void rollback() {
+		try {
+			getConnection().rollback();
+		} catch (SQLException e) {
+			throw new DaoException(DaoException.CAN_NOT_ROLLBACK_TRANSACTION, e);
+		}
 	}
 
 }

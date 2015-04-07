@@ -10,7 +10,8 @@ public class ServiceException extends RuntimeException {
 	public static final String INVALID_COMPUTER_ID = "computer's id is invalid";
 	public static final String INVALID_PARAMETER = "invalid parameters";
 	public static final String CAN_NOT_ROLLBACK_TRANSACTION = "can not rollback transaction";
-	public static final String INVALID_COMPANY = "company is invalid";;
+	public static final String INVALID_COMPANY = "company is invalid";
+	public static final String INVALID_COMPANY_ID = "company's id is invalid";
 	
 	public ServiceException() {
 		super();

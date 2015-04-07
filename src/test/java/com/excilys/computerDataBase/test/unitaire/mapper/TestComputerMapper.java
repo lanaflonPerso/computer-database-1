@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerDataBase.test.unitaire;
+package com.excilys.computerDataBase.test.unitaire.mapper;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,19 +23,13 @@ import com.excilys.computerdatabase.model.Computer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "/test-application-context.xml" })
-public class TestMapper {
+public class TestComputerMapper {
 
 	@Autowired
 	ComputerMapper computerMapper;
 	
 	DateTimeFormatter dateTimeFormatter = DateTimeFormatter
 			.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-	@Test
-	public void testMapperModelToDtoOk() {
-		Computer computer = new Computer();
-		computerMapper.mapModelToDto(computer);
-	}
 
 	@Test
 	public void testMapperModelToDtoOk2() {

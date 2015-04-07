@@ -9,13 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
+
 import com.excilys.computerdatabase.exception.DaoException;
 
-public interface CommonMapper <Model, Dto>{
-	Model mapResultSetToModel (ResultSet resultSet);
-	Dto mapModelToDto (Model model);
-	Model mapDtoToModel (Dto dot);	
-	
+public interface CommonMapper<Model, Dto> extends ResultSetExtractor<Model>,
+		RowMapper<Model> {
+	Model mapResultSetToModel(ResultSet resultSet);
+
+	Dto mapModelToDto(Model model);
+
+	Model mapDtoToModel(Dto dot);
+
 	default List<Model> mapListResultSetToModel(ResultSet resultSet) {
 		List<Model> list = new ArrayList<Model>();
 		try {
@@ -27,13 +33,18 @@ public interface CommonMapper <Model, Dto>{
 		}
 		return list;
 	}
-	
+
 	default List<Dto> mapListModelToDto(List<Model> list) {
-		return list.stream().map(this::mapModelToDto).collect(Collectors.toList());
+		return list.stream().map(this::mapModelToDto)
+				.collect(Collectors.toList());
 	}
-	
-	default List<Model> mapListDtoToModel(List<Dto> list) {
-		return list.stream().map(this::mapDtoToModel).collect(Collectors.toList());
+
+	default Model extractData(ResultSet rs) throws SQLException {
+		return mapResultSetToModel(rs);
+	}
+
+	default Model mapRow(ResultSet rs, int line) throws SQLException {
+		return extractData(rs);
 	}
 	
 }

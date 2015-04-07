@@ -10,10 +10,11 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.excilys.computerDataBase.test.fonctionnel.TestAddComputer;
 import com.excilys.computerDataBase.test.fonctionnel.TestDashboard;
 import com.excilys.computerDataBase.test.fonctionnel.TestEditComputer;
-import com.excilys.computerDataBase.test.unitaire.TestMapper;
 import com.excilys.computerDataBase.test.unitaire.TestValidator;
 import com.excilys.computerDataBase.test.unitaire.dao.TestCompanyDao;
 import com.excilys.computerDataBase.test.unitaire.dao.TestComputerDao;
+import com.excilys.computerDataBase.test.unitaire.mapper.TestCompanyMapper;
+import com.excilys.computerDataBase.test.unitaire.mapper.TestComputerMapper;
 import com.excilys.computerDataBase.test.unitaire.service.TestCompanyService;
 import com.excilys.computerDataBase.test.unitaire.service.TestComputerService;
 
@@ -21,7 +22,7 @@ import com.excilys.computerDataBase.test.unitaire.service.TestComputerService;
 @SuiteClasses({ TestCompanyDao.class, TestComputerDao.class,
 		TestComputerService.class, TestValidator.class,
 		TestCompanyService.class, TestAddComputer.class, TestDashboard.class,
-		TestMapper.class, TestEditComputer.class })
+		TestComputerMapper.class, TestCompanyMapper.class, TestEditComputer.class })
 public class AllTests {
 
 }

@@ -50,16 +50,8 @@ public class CompanyServiceImpl implements CompanyService {
 		if (Validator.isIdCorrect(id)) {
 			deleteCompany(id);
 		} else {
-			throw new ServiceException(ServiceException.INVALID_PARAMETER);
+			throw new ServiceException(ServiceException.INVALID_COMPANY_ID);
 		}
-	}
-
-	private void deleteCompany(Long id) {
-		connectionFactory.startTransaction();
-		computerDao.getByCompanyId(id).stream().forEach(e -> computerDao.delete(e.getId()));
-		companyDao.delete(id);
-		connectionFactory.commit();
-		connectionFactory.forcedCloseConnection();
 	}
 
 	@Override
@@ -69,8 +61,32 @@ public class CompanyServiceImpl implements CompanyService {
 		} else {
 			throw new ServiceException(ServiceException.INVALID_COMPANY);
 		}
-		
 	}
+
+	@Override
+	public Company getById(Long id) {
+		if (Validator.isIdCorrect(id)) {
+			return companyDao.getById(id);
+		} else {
+			throw new ServiceException(ServiceException.INVALID_COMPANY_ID);
+		}
+	}
+	
+	private void deleteCompany(Long id) {
+		try {
+			connectionFactory.startTransaction();
+			computerDao.getByCompanyId(id).stream()
+					.forEach(e -> computerDao.delete(e.getId()));
+			companyDao.delete(id);
+			connectionFactory.commit();
+		} catch (Exception e) {
+			connectionFactory.rollback();
+			throw e;
+		} finally {
+			connectionFactory.forcedCloseConnection();
+		}
+
+	}	
 	
 	public CompanyDaoInterface getCompanyDao() {
 		return companyDao;
@@ -80,5 +96,12 @@ public class CompanyServiceImpl implements CompanyService {
 		this.companyDao = companyDao;
 	}
 
+	public ComputerDaoInterface getComputerDao() {
+		return computerDao;
+	}
+
+	public void setComputerDao(ComputerDaoInterface computerDao) {
+		this.computerDao = computerDao;
+	}
 
 }

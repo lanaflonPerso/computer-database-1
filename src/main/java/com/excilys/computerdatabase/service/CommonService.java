@@ -26,9 +26,7 @@ public interface CommonService<T> {
 		return list(from, to, new SortCriteria());
 	}
 	
-	public default T getById(Long id) {
-		throw new UnsupportedOperationException();
-	}
+	public T getById(Long id);
 
 	public void create(T t);
 

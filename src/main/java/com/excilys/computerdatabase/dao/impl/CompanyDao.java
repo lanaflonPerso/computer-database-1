@@ -49,7 +49,7 @@ public class CompanyDao implements CompanyDaoInterface {
 		} catch (SQLException e) {
 			throw new DaoException(DaoException.CAN_NOT_INSERT_ELEMENT, e);
 		} finally {
-			DaoUtil.closeStatement(preparedStatement);
+			DaoUtil.close(preparedStatement, connection);
 		}
 
 	}

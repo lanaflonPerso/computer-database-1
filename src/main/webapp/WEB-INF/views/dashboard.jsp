@@ -58,19 +58,14 @@
 									class="fa fa-trash-o fa-lg"></i>
 							</a>
 						</span></th>
-						<mylib:dashboardTitle pageAll="${page}" page="${page.getPage()}"
-							size="${page.getSize()}" search="${page.getSearch()}"
-							name="Computer name" sortColumn="COMPUTER_NAME" currentColumn="${page.getSortColumn()}" currentDirection="${page.getSortDirection()}"/>
-						<mylib:dashboardTitle page="${page.getPage()}"
-							size="${page.getSize()}" search="${page.getSearch()}"
-							name="Introduced date" sortColumn="INTRODUCED_DATE" currentColumn="${page.getSortColumn()}" currentDirection="${page.getSortDirection()}"/>
-						<mylib:dashboardTitle page="${page.getPage()}"
-							size="${page.getSize()}" search="${page.getSearch()}"
-							name="Discontinued date" sortColumn="DISCONTINUED_DATE" currentColumn="${page.getSortColumn()}" currentDirection="${page.getSortDirection()}"/>
-						<mylib:dashboardTitle page="${page.getPage()}"
-							size="${page.getSize()}" search="${page.getSearch()}"
-							name="Company Name" sortColumn="COMPANY_NAME" currentColumn="${page.getSortColumn()}" currentDirection="${page.getSortDirection()}"/>
-
+						<mylib:dashboardTitle page="${page}" name="Computer name"
+							sortColumn="COMPUTER_NAME" />
+						<mylib:dashboardTitle page="${page}" name="Introduced date"
+							sortColumn="INTRODUCED_DATE" />
+						<mylib:dashboardTitle page="${page}" name="Discontinued date"
+							sortColumn="DISCONTINUED_DATE" />
+						<mylib:dashboardTitle page="${page}" name="Company Name"
+							sortColumn="COMPANY_NAME" />
 					</tr>
 				</thead>
 				<!-- Browse attribute computers -->
@@ -96,10 +91,8 @@
 
 
 	<footer class="navbar-fixed-bottom">
-		<mylib:pagination page="${page.getPage()}"
-			pageMax="${page.getPageMax()}" size="${page.getSize()}"
-			search="${page.getSearch()}" sortColumn="${page.getSortColumn()}"
-			sortDirection="${page.getSortDirection()}" />
+		<mylib:pagination page="${page}" />	
+			
 	</footer>
 
 	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>

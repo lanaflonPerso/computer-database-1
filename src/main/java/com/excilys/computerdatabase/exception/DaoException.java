@@ -32,6 +32,8 @@ public class DaoException extends RuntimeException {
 
 	public static final String CAN_NOT_COMMIT_TRANSACTION = "can not commit transaction";
 
+	public static final String CAN_NOT_ROLLBACK_TRANSACTION = "can not rollback transaction";
+
 
 	/**
 	 * Instantiates a new data base exception.
