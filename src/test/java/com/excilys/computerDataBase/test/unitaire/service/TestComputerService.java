@@ -19,17 +19,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.excilys.computerdatabase.dao.ComputerDaoInterface;
-import com.excilys.computerdatabase.dao.impl.ComputerDao;
+import com.excilys.computerdatabase.dao.ComputerDao;
+import com.excilys.computerdatabase.dao.impl.ComputerDaoImpl;
 import com.excilys.computerdatabase.exception.ServiceException;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
 import com.excilys.computerdatabase.service.impl.ComputerServiceImpl;
 import com.excilys.computerdatabase.sort.SortCriteria;
+import com.excilys.computerdatabase.validation.Validator;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/test-application-context.xml" })
+@ContextConfiguration(locations = { "classpath:/application-context.xml" })
 public class TestComputerService {
 
 	private static final Long COMPUTER_ID = new Long(45);
@@ -39,10 +40,10 @@ public class TestComputerService {
 	private ComputerServiceImpl computerService;
 
 	@Autowired
-	private ComputerDao computerDao2;
+	private ComputerDaoImpl computerDao2;
 
-	private ComputerDaoInterface computerDao = Mockito
-			.mock(ComputerDaoInterface.class);
+	private ComputerDao computerDao = Mockito
+			.mock(ComputerDao.class);
 
 	private final Computer computer1 = new Computer(new Long(1), "myName",
 			LocalDateTime.now(), LocalDateTime.now(), new Company(new Long(3),
@@ -77,7 +78,7 @@ public class TestComputerService {
 			computerService.getById(new Long(0));
 			fail("no exception occured");
 		} catch (ServiceException e) {
-			assertEquals(e.getMessage(), ServiceException.INVALID_COMPUTER_ID);
+			assertEquals(e.getMessage(), Validator.INVALID_COMPUTER_ID);
 		}
 	}
 
@@ -99,7 +100,7 @@ public class TestComputerService {
 			computerService.create(new Computer());
 			fail("no exception occured");
 		} catch (ServiceException e) {
-			assertEquals(e.getMessage(), ServiceException.INVALID_COMPUTER);
+			assertEquals(e.getMessage(), Validator.INVALID_COMPUTER);
 		}
 	}
 
@@ -112,7 +113,7 @@ public class TestComputerService {
 			computerService.create(computer);
 			fail("no exception occured");
 		} catch (ServiceException e) {
-			assertEquals(e.getMessage(), ServiceException.INVALID_COMPUTER);
+			assertEquals(e.getMessage(), Validator.INVALID_COMPUTER);
 		}
 	}
 
@@ -129,7 +130,7 @@ public class TestComputerService {
 			computerService.create(computer);
 			fail("no exception occured");
 		} catch (ServiceException e) {
-			assertEquals(e.getMessage(), ServiceException.INVALID_COMPUTER);
+			assertEquals(e.getMessage(), Validator.INVALID_COMPUTER);
 		}
 	}
 
@@ -144,7 +145,7 @@ public class TestComputerService {
 			computerService.delete(new Long(-1));
 			fail("no exception occured");
 		} catch (ServiceException e) {
-			assertEquals(e.getMessage(), ServiceException.INVALID_COMPUTER);
+			assertEquals(e.getMessage(), Validator.INVALID_COMPUTER);
 		}
 	}
 
@@ -165,7 +166,7 @@ public class TestComputerService {
 			computerService.list(new Long(0), null, new SortCriteria());
 			fail("no exception occured");
 		} catch (ServiceException e) {
-			assertEquals(e.getMessage(), ServiceException.INVALID_PARAMETER);
+			assertEquals(e.getMessage(), Validator.INVALID_BOUND);
 		}
 	}
 

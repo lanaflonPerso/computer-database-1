@@ -8,7 +8,7 @@ import java.util.List;
 import com.excilys.computerdatabase.model.Computer;
 import com.excilys.computerdatabase.sort.SortCriteria;
 
-public interface ComputerDaoInterface extends DaoInterface<Computer> {
+public interface ComputerDao extends CommonDao<Computer> {
 	
 	public List<Computer> getByName(String string, Long from, Long to, SortCriteria sortCriteria);
 

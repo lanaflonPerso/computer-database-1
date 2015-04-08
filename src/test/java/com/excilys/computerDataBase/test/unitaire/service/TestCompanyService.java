@@ -17,9 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.excilys.computerdatabase.dao.CompanyDaoInterface;
-import com.excilys.computerdatabase.dao.impl.CompanyDao;
-import com.excilys.computerdatabase.dao.impl.ComputerDao;
+import com.excilys.computerdatabase.dao.CompanyDao;
+import com.excilys.computerdatabase.dao.impl.CompanyDaoImpl;
+import com.excilys.computerdatabase.dao.impl.ComputerDaoImpl;
 import com.excilys.computerdatabase.exception.DaoException;
 import com.excilys.computerdatabase.exception.ServiceException;
 import com.excilys.computerdatabase.model.Company;
@@ -29,16 +29,16 @@ import com.excilys.computerdatabase.service.impl.CompanyServiceImpl;
 import com.excilys.computerdatabase.sort.SortCriteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/test-application-context.xml" })
+@ContextConfiguration(locations = { "classpath:/application-context.xml" })
 public class TestCompanyService {
 	@Autowired
 	private ComputerService computerService;
 	@Autowired
 	private CompanyServiceImpl companyService;
 	@Autowired
-	private CompanyDao companyDao;
+	private CompanyDaoImpl companyDao;
 	@Autowired
-	private ComputerDao computerDao;
+	private ComputerDaoImpl computerDao;
 
 	@After
 	public void after() {
@@ -48,8 +48,8 @@ public class TestCompanyService {
 
 	@Test
 	public void testGetAll() {
-		CompanyDaoInterface companyDaoMock = Mockito
-				.mock(CompanyDaoInterface.class);
+		CompanyDao companyDaoMock = Mockito
+				.mock(CompanyDao.class);
 		List<Company> companies = new ArrayList<Company>();
 		companies.add(new Company());
 		Mockito.when(companyDaoMock.getAll(Mockito.any()))
@@ -93,9 +93,6 @@ public class TestCompanyService {
 		companyService.delete(null);
 	}
 
-	/**
-	 * 
-	 */
 	@Test
 	public void testDeleteOk() {
 		Company company = new Company(null, "company_test");

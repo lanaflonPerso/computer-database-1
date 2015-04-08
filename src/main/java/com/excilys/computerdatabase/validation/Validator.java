@@ -7,10 +7,19 @@ import org.apache.commons.validator.routines.DateValidator;
 
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
+import com.excilys.computerdatabase.sort.SortCriteria;
 
 public class Validator {
 
 	public static final String WRONG_DATE_FORMAT = "unable to convert to date";
+	public static final String INVALID_COMPUTER = "computer is invalid";
+	public static final String INVALID_COMPUTER_ID = "computer's id is invalid";
+	public static final String INVALID_PARAMETER = "invalid parameters";
+	public static final String INVALID_COMPANY = "company is invalid";
+	public static final String INVALID_COMPANY_ID = "company's id is invalid";
+	public static final String INVALID_BOUND = "invalid bound";
+	public static final String INVALID_STRING_FOR_SEARCH = "invalid string for search";
+	public static final String INVALID_SORT_CRITERIA = "invalid sort criteria";
 
 	public static boolean isDateValid(String inputString) {
 		return DateValidator.getInstance().isValid(inputString,
@@ -31,10 +40,10 @@ public class Validator {
 		}
 	}
 
-	public static boolean isIdCorrect(Long computerId) {
-		if (computerId == null) {
+	public static boolean isIdCorrect(Long id) {
+		if (id == null) {
 			return false;
-		} else if (computerId <= new Long(0)) {
+		} else if (id <= new Long(0)) {
 			return false;
 		} else {
 			return true;
@@ -55,7 +64,7 @@ public class Validator {
 		}
 	}
 
-	public static boolean isNameForSearchCorrect(String string) {
+	public static boolean isStringForSearchCorrect(String string) {
 		if (string == null) {
 			return false;
 		} else if ("".equals(string.trim())) {
@@ -71,6 +80,18 @@ public class Validator {
 		} else if (company.getName() == null) {
 			return false;
 		} else if ("".equals(company.getName().trim())) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public static boolean isSortCriteriaCorrect(SortCriteria sortCriteria) {
+		if (sortCriteria == null) {
+			return false;
+		} else if (sortCriteria.getSortColumn() == null) {
+			return false;
+		} else if (sortCriteria.getSortDirection() == null) {
 			return false;
 		} else {
 			return true;

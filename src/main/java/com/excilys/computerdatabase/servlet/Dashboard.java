@@ -3,20 +3,18 @@
  */
 package com.excilys.computerdatabase.servlet;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.excilys.computerdatabase.dto.page.DashboardPage;
 import com.excilys.computerdatabase.mapper.ComputerMapper;
@@ -26,10 +24,10 @@ import com.excilys.computerdatabase.util.ServletUtil;
 /**
  * Servlet implementation class Dashboard
  */
+
 @Controller
-@WebServlet("/dashboard")
-public class Dashboard extends AbstractServlet {
-	private static final long serialVersionUID = 1L;
+@RequestMapping("/dashboard")
+public class Dashboard {
 	final static Logger log = LoggerFactory.getLogger(Dashboard.class);
 
 	@Autowired
@@ -39,25 +37,19 @@ public class Dashboard extends AbstractServlet {
 	@Autowired
 	private ComputerMapper computerMapper;
 
-	public Dashboard() {
-		super();
-	}
-
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	@RequestMapping(method = RequestMethod.GET)
+	protected String doGet(HttpServletRequest request, ModelMap modelMap) {
 
 		log.info("Servlet : [GET] dashboard");
-
-		HttpSession session = request.getSession();
+		
 		DashboardPage page = servletUtil.getDashboardPageGet(request);
-		session.setAttribute("page", page);
+		modelMap.addAttribute("page", page);
 
-		request.getRequestDispatcher("WEB-INF/views/dashboard.jsp").forward(
-				request, response);
+		return "dashboard";
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	@RequestMapping(method = RequestMethod.POST)
+	protected String doPost(HttpServletRequest request, ModelMap modelMap) {
 
 		log.info("Servlet : [POST] dashboard");
 
@@ -66,7 +58,8 @@ public class Dashboard extends AbstractServlet {
 		for (Long l : list) {
 			computerService.delete(l);
 		}
-		response.sendRedirect("dashboard");
+		
+		return "dashboard";
 	}
 
 	private List<Long> getListLong(HttpServletRequest request) {

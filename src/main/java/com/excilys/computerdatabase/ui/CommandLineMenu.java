@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
 import com.excilys.computerdatabase.exception.ParsingException;
 import com.excilys.computerdatabase.model.Company;
@@ -17,10 +20,10 @@ import com.excilys.computerdatabase.service.ComputerService;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.validation.Validator;
 
-
 /**
  * The Class CommandLineMenu.
  */
+@Component
 public class CommandLineMenu {
 
 	private Scanner scanner = new Scanner(System.in);
@@ -28,13 +31,16 @@ public class CommandLineMenu {
 	private ComputerService computerService;
 	@Autowired
 	private CompanyService companyService;
-	
+
 	public CommandLineMenu() {
 		super();
 	}
-	
+
 	public static void main(String[] args) {
-		new CommandLineMenu().displayMainMenu();
+		@SuppressWarnings("resource")
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:/application-context.xml");
+		CommandLineMenu commandLineMenu = applicationContext.getBean(CommandLineMenu.class);
+		commandLineMenu.displayMainMenu();
 	}
 
 	private void displayMainMenu() {
@@ -133,7 +139,7 @@ public class CommandLineMenu {
 		Long id = getLongFromCommandLine("Company id : ");
 		companyService.delete(id);
 	}
-	
+
 	private Long getLongFromCommandLine(String request) {
 		System.out.println(request);
 		String result = scanner.nextLine();

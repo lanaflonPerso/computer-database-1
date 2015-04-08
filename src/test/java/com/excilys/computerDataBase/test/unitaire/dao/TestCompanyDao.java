@@ -4,6 +4,7 @@
 package com.excilys.computerDataBase.test.unitaire.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
 import java.util.List;
@@ -14,26 +15,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.excilys.computerdatabase.dao.impl.CompanyDao;
-import com.excilys.computerdatabase.dao.impl.ComputerDao;
+import com.excilys.computerdatabase.dao.CompanyDao;
+import com.excilys.computerdatabase.dao.ComputerDao;
 import com.excilys.computerdatabase.exception.DaoException;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
 import com.excilys.computerdatabase.sort.SortCriteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/test-application-context.xml" })
+@ContextConfiguration(locations = { "classpath:/application-context.xml" })
 public class TestCompanyDao {
 	@Autowired
 	private CompanyDao companyDao;
 	@Autowired
 	private ComputerDao computerDao;
 	
-	
 	@Test
 	public void testCreateCompany() {
 		Company company = new Company(new Long(0), "company_test");
-		companyDao.create( company);
+		companyDao.create(company);
+		assertNotEquals(company.getId(), new Long(0));
 		Company company2 = companyDao.getById(company.getId());
 		assertEquals(company2, company);
 	}
@@ -56,16 +57,14 @@ public class TestCompanyDao {
 			companyDao.getById(company.getId());
 			fail("no exception : company not deleted");
 		} catch (NullPointerException e) {
-
 		}
 
 		try {
 			computerDao.getById(computer.getId());
 			fail("no exception : computer not deleted");
 		} catch (NullPointerException e) {
-
 		}
-
+		
 	}
 
 	@Test(expected = UnsupportedOperationException.class)
@@ -73,9 +72,8 @@ public class TestCompanyDao {
 		companyDao.update(null);
 	}
 
-	@Test(expected = DaoException.class)
-	public void testGetByIdWithNullCompanyId() {
-		companyDao.getById(null);
+	public void testGetByIdWithNullCompany() {
+		assertEquals(companyDao.getById(null), null);
 	}
 
 	public void testGetByIdOk() {
@@ -98,7 +96,7 @@ public class TestCompanyDao {
 		assertEquals(companies.get(0).getName(), "Apple Inc.");
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = DaoException.class)
 	public void testGetAllFromToWrong() {
 		companyDao.getAll(null, new Long(1), new SortCriteria());
 	}
@@ -113,6 +111,24 @@ public class TestCompanyDao {
 		List<Company> companies = companyDao.getAll(new SortCriteria());
 		Long total = companyDao.getNumberOfElement();
 		assertEquals(total, new Long(companies.size()));
+	}
+	
+	@Test
+	public void testDeleteElementOk() {
+		Company company = new Company(new Long(0), "company_test");
+		companyDao.create(company);
+		Long total = companyDao.getNumberOfElement();
+		companyDao.delete(company.getId());
+		assertEquals(new Long(total - 1), companyDao.getNumberOfElement());
+	}
+	
+	@Test
+	public void testDeleteElementWrong() {
+		Company company = new Company(new Long(0), "company_test");
+		companyDao.create(company);
+		Long total = companyDao.getNumberOfElement();
+		companyDao.delete(company.getId() + 1);
+		assertEquals(total, companyDao.getNumberOfElement());
 	}
 
 }

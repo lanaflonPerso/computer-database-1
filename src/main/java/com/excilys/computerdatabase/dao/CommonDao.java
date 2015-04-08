@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.excilys.computerdatabase.sort.SortCriteria;
 
-public interface DaoInterface<T> {
+public interface CommonDao<T> {
 
 	public void create(T t);
 

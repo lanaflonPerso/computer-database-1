@@ -158,16 +158,16 @@ public class TestValidator {
 	
 	@Test
 	public void checkNameforSearchCorrect() {
-		assertEquals(Validator.isNameForSearchCorrect("test"), true);
+		assertEquals(Validator.isStringForSearchCorrect("test"), true);
 	}
 	
 	@Test
 	public void checkNameforSearchWrong() {
-		assertEquals(Validator.isNameForSearchCorrect("   "), false);
+		assertEquals(Validator.isStringForSearchCorrect("   "), false);
 	}
 	
 	@Test
 	public void checkNameforSearchNull() {
-		assertEquals(Validator.isNameForSearchCorrect(null), false);
+		assertEquals(Validator.isStringForSearchCorrect(null), false);
 	}
 }

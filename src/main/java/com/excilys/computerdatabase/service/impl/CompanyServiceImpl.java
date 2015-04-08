@@ -7,9 +7,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.excilys.computerdatabase.dao.CompanyDaoInterface;
-import com.excilys.computerdatabase.dao.ComputerDaoInterface;
+import com.excilys.computerdatabase.dao.CompanyDao;
+import com.excilys.computerdatabase.dao.ComputerDao;
 import com.excilys.computerdatabase.exception.ServiceException;
 import com.excilys.computerdatabase.factory.ConnectionFactory;
 import com.excilys.computerdatabase.model.Company;
@@ -20,14 +21,17 @@ import com.excilys.computerdatabase.validation.Validator;
 @Service
 public class CompanyServiceImpl implements CompanyService {
 	@Autowired
-	ComputerDaoInterface computerDao;
+	ComputerDao computerDao;
 	@Autowired
-	CompanyDaoInterface companyDao;
+	CompanyDao companyDao;
 	@Autowired
 	ConnectionFactory connectionFactory;
 
 	@Override
 	public List<Company> list(SortCriteria sortCriteria) {
+		if (!Validator.isSortCriteriaCorrect(sortCriteria)) {
+			throw new ServiceException(Validator.INVALID_SORT_CRITERIA);
+		}
 		return companyDao.getAll(sortCriteria);
 	}
 
@@ -38,69 +42,59 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public List<Company> list(Long from, Long to, SortCriteria sortCriteria) {
-		if (Validator.isDateFromToCorrect(from, to)) {
-			return companyDao.getAll(from, to, sortCriteria);
-		} else {
-			throw new ServiceException(ServiceException.INVALID_PARAMETER);
+		if (!Validator.isDateFromToCorrect(from, to)) {
+			throw new ServiceException(Validator.INVALID_BOUND);
 		}
+		if (!Validator.isSortCriteriaCorrect(sortCriteria)) {
+			throw new ServiceException(Validator.INVALID_SORT_CRITERIA);
+		}
+		return companyDao.getAll(from, to, sortCriteria);
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
-		if (Validator.isIdCorrect(id)) {
-			deleteCompany(id);
-		} else {
-			throw new ServiceException(ServiceException.INVALID_COMPANY_ID);
+		if (!Validator.isIdCorrect(id)) {
+			throw new ServiceException(Validator.INVALID_COMPANY_ID);
 		}
+		deleteCompany(id);
 	}
 
 	@Override
 	public void create(Company t) {
-		if (Validator.isCompanyCorrect(t)) {
-			companyDao.create(t);
-		} else {
-			throw new ServiceException(ServiceException.INVALID_COMPANY);
+		if (!Validator.isCompanyCorrect(t)) {
+			throw new ServiceException(Validator.INVALID_COMPANY);
 		}
+		companyDao.create(t);
 	}
 
 	@Override
 	public Company getById(Long id) {
-		if (Validator.isIdCorrect(id)) {
-			return companyDao.getById(id);
-		} else {
-			throw new ServiceException(ServiceException.INVALID_COMPANY_ID);
+		if (!Validator.isIdCorrect(id)) {
+			throw new ServiceException(Validator.INVALID_COMPANY_ID);
 		}
+		return companyDao.getById(id);
 	}
 	
 	private void deleteCompany(Long id) {
-		try {
-			connectionFactory.startTransaction();
-			computerDao.getByCompanyId(id).stream()
-					.forEach(e -> computerDao.delete(e.getId()));
-			companyDao.delete(id);
-			connectionFactory.commit();
-		} catch (Exception e) {
-			connectionFactory.rollback();
-			throw e;
-		} finally {
-			connectionFactory.forcedCloseConnection();
-		}
+		computerDao.getByCompanyId(id).stream()
+				.forEach(e -> computerDao.delete(e.getId()));
+		companyDao.delete(id);
+	}
 
-	}	
-	
-	public CompanyDaoInterface getCompanyDao() {
+	public CompanyDao getCompanyDao() {
 		return companyDao;
 	}
 
-	public void setCompanyDao(CompanyDaoInterface companyDao) {
+	public void setCompanyDao(CompanyDao companyDao) {
 		this.companyDao = companyDao;
 	}
 
-	public ComputerDaoInterface getComputerDao() {
+	public ComputerDao getComputerDao() {
 		return computerDao;
 	}
 
-	public void setComputerDao(ComputerDaoInterface computerDao) {
+	public void setComputerDao(ComputerDao computerDao) {
 		this.computerDao = computerDao;
 	}
 

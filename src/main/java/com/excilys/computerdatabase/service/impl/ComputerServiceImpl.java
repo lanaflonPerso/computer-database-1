@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.excilys.computerdatabase.dao.ComputerDaoInterface;
+import com.excilys.computerdatabase.dao.ComputerDao;
 import com.excilys.computerdatabase.exception.ServiceException;
 import com.excilys.computerdatabase.model.Computer;
 import com.excilys.computerdatabase.service.ComputerService;
@@ -19,7 +19,7 @@ import com.excilys.computerdatabase.validation.Validator;
 public class ComputerServiceImpl implements ComputerService {
 
 	@Autowired
-	ComputerDaoInterface computerDao;
+	ComputerDao computerDao;
 
 	public ComputerServiceImpl() {
 		super();
@@ -32,38 +32,37 @@ public class ComputerServiceImpl implements ComputerService {
 
 	@Override
 	public Computer getById(Long computerId) {
-		if (Validator.isIdCorrect(computerId)) {
-			return computerDao.getById(computerId);
-		} else {
-			throw new ServiceException(ServiceException.INVALID_COMPUTER_ID);
+		if (!Validator.isIdCorrect(computerId)) {
+			throw new ServiceException(Validator.INVALID_COMPUTER_ID);
 		}
+		return computerDao.getById(computerId);
+
 	}
 
 	@Override
 	public void create(Computer c) {
-		if (Validator.isComputerCorrect(c)) {
-			computerDao.create(c);
-		} else {
-			throw new ServiceException(ServiceException.INVALID_COMPUTER);
+		if (!Validator.isComputerCorrect(c)) {
+			throw new ServiceException(Validator.INVALID_COMPUTER);
 		}
+		computerDao.create(c);
 	}
 
 	@Override
 	public void update(Computer c) {
-		if (Validator.isComputerCorrect(c) && Validator.isIdCorrect(c.getId())) {
-			computerDao.update(c);
-		} else {
-			throw new ServiceException(ServiceException.INVALID_COMPUTER);
+		if (!Validator.isComputerCorrect(c) && Validator.isIdCorrect(c.getId())) {
+			throw new ServiceException(Validator.INVALID_COMPUTER);
 		}
+		computerDao.update(c);
+
 	}
 
 	@Override
 	public void delete(Long computerId) {
-		if (Validator.isIdCorrect(computerId)) {
-			computerDao.delete(computerId);
-		} else {
-			throw new ServiceException(ServiceException.INVALID_COMPUTER);
+		if (!Validator.isIdCorrect(computerId)) {
+			throw new ServiceException(Validator.INVALID_COMPUTER);
 		}
+		computerDao.delete(computerId);
+
 	}
 
 	@Override
@@ -73,33 +72,44 @@ public class ComputerServiceImpl implements ComputerService {
 
 	@Override
 	public List<Computer> list(Long from, Long to, SortCriteria sortCriteria) {
-		if (Validator.isDateFromToCorrect(from, to)) {
-			return computerDao.getAll(from, to, sortCriteria);
-		} else {
-			throw new ServiceException(ServiceException.INVALID_PARAMETER);
+		if (!Validator.isDateFromToCorrect(from, to)) {
+			throw new ServiceException(Validator.INVALID_BOUND);
 		}
+		if (!Validator.isSortCriteriaCorrect(sortCriteria)) {
+			throw new ServiceException(Validator.INVALID_SORT_CRITERIA);
+		}
+		return computerDao.getAll(from, to, sortCriteria);
 	}
 
 	@Override
 	public List<Computer> getNameContains(String string, Long from, Long to,
 			SortCriteria sortCriteria) {
-		if (Validator.isNameForSearchCorrect(string)) {
-			return computerDao.getByName(string, from, to, sortCriteria);
-		} else {
-			throw new ServiceException(ServiceException.INVALID_PARAMETER);
+		if (!Validator.isStringForSearchCorrect(string)) {
+			throw new ServiceException(Validator.INVALID_STRING_FOR_SEARCH);
 		}
+		if (!Validator.isStringForSearchCorrect(string)) {
+			throw new ServiceException(Validator.INVALID_BOUND);
+		}
+		if (!Validator.isSortCriteriaCorrect(sortCriteria)) {
+			throw new ServiceException(Validator.INVALID_SORT_CRITERIA);
+		}
+		return computerDao.getByName(string, from, to, sortCriteria);
+
 	}
 
-	public ComputerDaoInterface getComputerDao() {
+	public ComputerDao getComputerDao() {
 		return computerDao;
 	}
 
-	public void setComputerDao(ComputerDaoInterface computerDao) {
+	public void setComputerDao(ComputerDao computerDao) {
 		this.computerDao = computerDao;
 	}
 
 	@Override
 	public Long getNameContainsElement(String string) {
+		if (!Validator.isStringForSearchCorrect(string)) {
+			throw new ServiceException(Validator.INVALID_STRING_FOR_SEARCH);
+		}
 		return computerDao.getByNameNumberOfElement(string);
 	}
 }

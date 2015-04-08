@@ -22,7 +22,7 @@ import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/test-application-context.xml" })
+@ContextConfiguration(locations = { "classpath:/application-context.xml" })
 public class TestComputerMapper {
 
 	@Autowired

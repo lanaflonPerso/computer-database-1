@@ -61,6 +61,7 @@
 							<div class="form-group">
 								<label for="companyId">Company</label> <select
 									class="form-control" id="companyId" name="companyId">
+									<option value=>--</option>
 									<c:forEach var="i" begin="0"
 										end="${page.getCompanies().size() - 1}">
 										<option value="${page.getCompanies().get(i).getId()}">${page.getCompanies().get(i).getName()}</option>

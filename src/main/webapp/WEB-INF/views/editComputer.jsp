@@ -59,6 +59,7 @@
 							<div class="form-group">
 								<label for="companyId">Company</label> <select
 									class="form-control" id="companyId" name="companyId">
+								<option>--</option>
 									<c:forEach var="i" begin="0" end="${page.getCompanies().size() - 1}">
 										<option
 											<c:if test="${page.getCompanies().get(i).getName() == page.getComputerDto().getCompanyName()}">

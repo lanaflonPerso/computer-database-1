@@ -20,7 +20,7 @@ import com.excilys.computerdatabase.mapper.CompanyMapper;
 import com.excilys.computerdatabase.model.Company;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/test-application-context.xml" })
+@ContextConfiguration(locations = { "classpath:/application-context.xml" })
 public class TestCompanyMapper {
 
 	@Autowired

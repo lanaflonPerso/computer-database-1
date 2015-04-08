@@ -9,13 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.excilys.computerdatabase.exception.DaoException;
 
-public interface CommonMapper<Model, Dto> extends ResultSetExtractor<Model>,
-		RowMapper<Model> {
+public interface CommonMapper<Model, Dto> extends RowMapper<Model> {
 	Model mapResultSetToModel(ResultSet resultSet);
 
 	Dto mapModelToDto(Model model);
@@ -39,12 +37,8 @@ public interface CommonMapper<Model, Dto> extends ResultSetExtractor<Model>,
 				.collect(Collectors.toList());
 	}
 
-	default Model extractData(ResultSet rs) throws SQLException {
-		return mapResultSetToModel(rs);
-	}
-
 	default Model mapRow(ResultSet rs, int line) throws SQLException {
-		return extractData(rs);
+		return mapResultSetToModel(rs);
 	}
 	
 }

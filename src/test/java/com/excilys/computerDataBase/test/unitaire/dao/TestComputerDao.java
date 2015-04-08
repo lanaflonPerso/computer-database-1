@@ -16,21 +16,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.excilys.computerdatabase.dao.impl.ComputerDao;
+import com.excilys.computerdatabase.dao.impl.ComputerDaoImpl;
 import com.excilys.computerdatabase.exception.DaoException;
-import com.excilys.computerdatabase.factory.ConnectionFactory;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
 import com.excilys.computerdatabase.sort.SortCriteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "/test-application-context.xml" })
+@ContextConfiguration(locations = { "classpath:/application-context.xml" })
 public class TestComputerDao {
 
 	@Autowired
-	private ComputerDao computerDao;
-	@Autowired
-	private ConnectionFactory connectionFactory;	
+	private ComputerDaoImpl computerDao;
 	
 	@Test
 	public void testInsert() {
@@ -70,7 +67,7 @@ public class TestComputerDao {
 		assertEquals(computer2, computer);
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = DaoException.class)
 	public void testInsertNullName() {
 		Computer computer = new Computer(new Long(1), null, LocalDateTime.now()
 				.truncatedTo(ChronoUnit.SECONDS), LocalDateTime.now()
@@ -78,20 +75,20 @@ public class TestComputerDao {
 		computerDao.create(computer);
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = DaoException.class)
 	public void testInsertEmptyName() {
 		Computer computer = new Computer(new Long(1), "", LocalDateTime.now(),
 				LocalDateTime.now(), new Company(new Long(15), "Canon"));
 		computerDao.create(computer);
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = DaoException.class)
 	public void testInsertComputerWithNullAttributs() {
 		Computer computer = new Computer();
 		computerDao.create(computer);
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = DaoException.class)
 	public void testInsertNullComputer() {
 			Computer computer = null;
 		computerDao.create(computer);
@@ -160,4 +157,11 @@ public class TestComputerDao {
 		assertEquals(computers.get(0).getName(), "MacBook Pro 15.4 inch");
 	}
 
+	@Test
+	public void testGetByNameNumberOfElement(){
+		Long l1 = computerDao.getByNameNumberOfElement("test");
+		Long l2 = (long) computerDao.getByName("test", new Long(0), new Long(computerDao.getNumberOfElement()), new SortCriteria()).size();
+		assertEquals(l1, l2);
+	}
+	
 }

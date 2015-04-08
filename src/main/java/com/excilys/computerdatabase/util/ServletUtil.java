@@ -30,7 +30,6 @@ import com.excilys.computerdatabase.validation.Validator;
 
 @Service
 public class ServletUtil {
-
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
@@ -60,10 +59,9 @@ public class ServletUtil {
 		return incorrectField;
 	}
 
-	public ComputerPage getAddComputerPage(HttpServletRequest request) {
+	public ComputerPage getAddComputerPagePost(HttpServletRequest request) {
 		ComputerPage page = new ComputerPage();
 		List<Company> companies = companyService.list(new SortCriteria());
-		companies.add(0, new Company(null, "--"));
 		List<CompanyDto> companyDtos = companyMapper
 				.mapListModelToDto(companies);
 		page.setCompanies(companyDtos);
@@ -75,7 +73,6 @@ public class ServletUtil {
 	public ComputerPage getEditComputerPageGet(HttpServletRequest request) {
 		ComputerPage page = new ComputerPage();
 		List<Company> companies = companyService.list(new SortCriteria());
-		companies.add(0, new Company(null, "--"));
 		List<CompanyDto> companyDtos = companyMapper
 				.mapListModelToDto(companies);
 		page.setCompanies(companyDtos);
@@ -90,7 +87,6 @@ public class ServletUtil {
 	public ComputerPage getEditComputerPagePost(HttpServletRequest request) {
 		ComputerPage page = new ComputerPage();
 		List<Company> companies = companyService.list(new SortCriteria());
-		companies.add(0, new Company(null, "--"));
 		List<CompanyDto> companyDtos = companyMapper
 				.mapListModelToDto(companies);
 		page.setCompanies(companyDtos);
@@ -195,4 +191,15 @@ public class ServletUtil {
 		return new SortCriteria(sortColumn, sortDirection);
 	}
 
+	public ComputerPage getAddComputerPageGet() {
+		ComputerPage page = new ComputerPage();
+		List<Company> companies = companyService.list(new SortCriteria());
+		List<CompanyDto> companyDtos = companyMapper
+				.mapListModelToDto(companies);
+		page.setCompanies(companyDtos);
+		page.setComputerDto(new ComputerDto());
+		page.setCorrectField(new CorrectField());
+		return page;
+	}
+	
 }
