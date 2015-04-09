@@ -2,19 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="mylib"%>
 
-<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/import/header_css.jsp"></jsp:include>
 <body>
-	<header class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="dashboard"> Application - Computer
-				Database </a>
-		</div>
-	</header>
+	<jsp:include page="/WEB-INF/views/import/header_menu.jsp"></jsp:include>
 	<section id="main">
 		<div class="container">
-			<h1 id="homeTitle">${page.getNumberOfComputer()} Computers found</h1>
+			<h1 id="homeTitle">${page.getNumberOfComputer()} <spring:message code="computer.found"/></h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
 					<form id="searchForm" action="dashboard" method="GET"
@@ -23,19 +19,18 @@
 							type="hidden" name="size" value="${page.getSize()}" /> <input
 							type="search" id="searchbox" name="search" class="form-control"
 							<c:if test="${page.getSearch() == null || page.getSearch() == \"\"}">
-								placeholder="Search name" 
+								placeholder="<spring:message code="search.name"/>" 
 							</c:if>
 							<c:if test="${page.getSearch() != null}">
 								value="${page.getSearch()}" 
 							</c:if> />
-						<input type="submit" id="searchsubmit" value="Filter by name"
+						<input type="submit" id="searchsubmit" value="<spring:message code="filter.by.name"/>"
 							class="btn btn-primary" />
 					</form>
 				</div>
 				<div class="pull-right">
-					<a class="btn btn-success" id="addComputer" href="addComputer">Add
-						Computer</a> <a class="btn btn-default" id="editComputer" href="#"
-						onclick="$.fn.toggleEditMode();">Edit</a>
+					<a class="btn btn-success" id="addComputer" href="addComputer"><spring:message code="add.computer"/></a> <a class="btn btn-default" id="editComputer" href="#"
+						onclick="$.fn.toggleEditMode();"><spring:message code="edit"/></a>
 				</div>
 			</div>
 		</div>
@@ -58,13 +53,17 @@
 									class="fa fa-trash-o fa-lg"></i>
 							</a>
 						</span></th>
-						<mylib:dashboardTitle page="${page}" name="Computer name"
+						<spring:message code="computer.name" var="computer_name"/>
+						<mylib:dashboardTitle page="${page}" name="${computer_name}"
 							sortColumn="COMPUTER_NAME" />
-						<mylib:dashboardTitle page="${page}" name="Introduced date"
+						<spring:message code="introduced.date" var="introduced_date"/>
+						<mylib:dashboardTitle page="${page}" name="${introduced_date}"
 							sortColumn="INTRODUCED_DATE" />
-						<mylib:dashboardTitle page="${page}" name="Discontinued date"
+						<spring:message code="discontined.date" var="discontinued_date"/>
+						<mylib:dashboardTitle page="${page}" name="${discontinued_date}"
 							sortColumn="DISCONTINUED_DATE" />
-						<mylib:dashboardTitle page="${page}" name="Company Name"
+						<spring:message code="company.name" var="company_name"/>
+						<mylib:dashboardTitle page="${page}" name="${company_name}"
 							sortColumn="COMPANY_NAME" />
 					</tr>
 				</thead>
@@ -95,7 +94,7 @@
 			
 	</footer>
 
-	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/import/footer.jsp"></jsp:include>
 
 
 </body>

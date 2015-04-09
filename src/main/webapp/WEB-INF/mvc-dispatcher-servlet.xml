@@ -24,5 +24,18 @@
 		</property>
 	</bean>
 
+
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en_US" />
+	</bean>
+
+<mvc:interceptors>
+	<bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<property name="paramName" value="language" />
+	</bean>
+</mvc:interceptors>
  
 </beans>

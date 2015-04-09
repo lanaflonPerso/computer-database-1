@@ -30,4 +30,14 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="basenames">
+			<list>
+				<value>classpath:/message/springMessage</value>
+			</list>
+		</property>
+	</bean>
+
 </beans>

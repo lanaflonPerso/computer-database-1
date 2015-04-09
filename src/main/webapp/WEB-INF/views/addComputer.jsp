@@ -2,65 +2,67 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/import/header_css.jsp"></jsp:include>
 <body>
-	<header class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="dashboard"> Application - Computer
-				Database </a>
-		</div>
-	</header>
+	<jsp:include page="/WEB-INF/views/import/header_menu.jsp"></jsp:include>
 	<section id="main">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-8 col-xs-offset-2 box">
-					<h1>Add Computer</h1>
+					<h1>
+						<spring:message code="add.computer" />
+					</h1>
 					<form action="addComputer"
 						onsubmit="return checkPostForm(document)" method="POST">
 						<fieldset>
 							<div class="form-group">
-								<label for="computerName">Computer name</label> <input
-									type="text" class="form-control" id="computerName"
-									name="computerName"
+								<label for="computerName"><spring:message
+										code="computer.name" /></label> <input type="text"
+									class="form-control" id="computerName" name="computerName"
 									<c:if test="${page.getComputerDto().getName() != null}">
 										value="${page.getComputerDto().getName()}"
 									</c:if>
-									placeholder="Computer name">
+									placeholder="<spring:message code="computer.name"/>">
 							</div>
 							<c:if test="${!page.getCorrectField().isComputerNameTrue()}">
-								<font id="serviceNameException" color="red"> Wrong
-									computer name : computer name can not be empty</font>
+								<font id="serviceNameException" color="red"> <spring:message
+										code="error.invalid.computer.name" />
+								</font>
 							</c:if>
 							<div class="form-group">
-								<label for="introduced">Introduced date</label> <input
-									type="text" class="form-control" id="introduced"
-									name="introduced"
+								<label for="introduced"><spring:message
+										code="introduced.date" /></label> <input type="text"
+									class="form-control" id="introduced" name="introduced"
 									<c:if test="${page.getComputerDto().getIntroduced() != null}">
 										value="${page.getComputerDto().getIntroduced()}"
 									</c:if>
-									placeholder="yyyy-MM-dd hh:mm:ss">
+									placeholder="<spring:message code="date.format"/>">
 							</div>
 							<c:if test="${!page.getCorrectField().isIntroducedDateTrue()}">
-								<font id="serviceIntroducedException" color="red">
-									Invalid introduced date : respect yyyy-MM-dd HH:mm:ss</font>
+								<font id="serviceIntroducedException" color="red"> <spring:message
+										code="error.invalid.introduced.date" /> <spring:message
+										code="date.format" /></font>
 							</c:if>
 							<div class="form-group">
-								<label for="discontinued">Discontinued date</label> <input
-									type="text" class="form-control" id="discontinued"
-									name="discontinued"
+								<label for="discontinued"><spring:message
+										code="discontined.date" /></label> <input type="text"
+									class="form-control" id="discontinued" name="discontinued"
 									<c:if test="${page.getComputerDto().getDiscontinued() != null}">
 										value="${page.getComputerDto().getDiscontinued()}"
 									</c:if>
-									placeholder="yyyy-MM-dd hh:mm:ss">
+									placeholder="<spring:message code="date.format"/>">
 							</div>
 							<c:if test="${!page.getCorrectField().isDiscontinuedDateTrue()}">
-								<font id="serviceDiscontinuedException" color="red">
-									Invalid discontinued date : respect yyyy-MM-dd HH:mm:ss</font>
+								<font id="serviceDiscontinuedException" color="red"> <spring:message
+										code="error.invalid.discontined.date" /> <spring:message
+										code="date.format" /></font>
+								</font>
 							</c:if>
 							<div class="form-group">
-								<label for="companyId">Company</label> <select
-									class="form-control" id="companyId" name="companyId">
+								<label for="companyId"><spring:message code="company" /></label>
+								<select class="form-control" id="companyId" name="companyId">
 									<option value=>--</option>
 									<c:forEach var="i" begin="0"
 										end="${page.getCompanies().size() - 1}">
@@ -73,16 +75,18 @@
 							</c:if>
 						</fieldset>
 						<div class="actions pull-right">
-							<input id="addButton" type="submit" value="Add"
-								class="btn btn-primary"> or <a href="dashboard"
-								class="btn btn-default">Cancel</a>
-
+							<input id="addButton" type="submit"
+								value="<spring:message code="button.add"/>"
+								class="btn btn-primary">
+							<spring:message code="or" />
+							<a href="dashboard" class="btn btn-default"><spring:message
+									code="button.cancel" /></a>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</section>
-	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/import/footer.jsp"></jsp:include>
 </body>
 </html>
