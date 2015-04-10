@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <company id="1" name="Apple Inc."/>
+    <company id="2" name="RCA"/>
+    <computer id="1" name="MacBook Pro 15.4 inch" company_id="1"/>
+    <computer id="2" name="PC 1" introduced="1991-01-01 00:00:00" company_id="1"/>
+    <computer id="3" name="PC 2" introduced="1991-01-01 00:00:00" company_id="1"/>
+    <computer id="4" name="PC 3" introduced="1991-01-01 00:00:00" company_id="1"/>
+    <computer id="5" name="PC 4" introduced="1991-01-01 00:00:00" company_id="2"/>
+</dataset>

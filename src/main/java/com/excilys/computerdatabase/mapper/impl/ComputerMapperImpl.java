@@ -6,7 +6,6 @@ package com.excilys.computerdatabase.mapper.impl;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +17,6 @@ import com.excilys.computerdatabase.mapper.CompanyMapper;
 import com.excilys.computerdatabase.mapper.ComputerMapper;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
-import com.excilys.computerdatabase.validation.Validator;
 
 @Service
 public class ComputerMapperImpl implements ComputerMapper{
@@ -29,9 +27,6 @@ public class ComputerMapperImpl implements ComputerMapper{
 	private static final String PARAM_INTRODUCED = "introduced";
 	private static final String PARAM_DISCONTINUED = "discontinued";
 	private static final String PARAM_COMPANY_ID = "company_id";
-
-	static final private DateTimeFormatter dateTimeFormatter = DateTimeFormatter
-			.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	@Autowired
 	private CompanyMapper companyMapper;
@@ -52,14 +47,12 @@ public class ComputerMapperImpl implements ComputerMapper{
 		}
 		computerDto.setName(computer.getName());
 		if (computer.getDiscontinued() != null) {
-			computerDto.setDiscontinued(computer.getDiscontinued().format(
-					dateTimeFormatter));
+			computerDto.setDiscontinued(DateMapper.convertIntoString(computer.getDiscontinued()));
 		} else {
 			computerDto.setDiscontinued(null);
 		}
 		if (computer.getIntroduced() != null) {
-			computerDto.setIntroduced(computer.getIntroduced().format(
-					dateTimeFormatter));
+			computerDto.setIntroduced(DateMapper.convertIntoString(computer.getIntroduced()));
 		} else {
 			computerDto.setIntroduced(null);
 		}
@@ -74,13 +67,12 @@ public class ComputerMapperImpl implements ComputerMapper{
 
 		computer.setCompany(company);
 		computer.setName(computerDto.getName());
-		computer.setIntroduced(getLocalDateTime(computerDto.getIntroduced()));
-		computer.setDiscontinued(getLocalDateTime(computerDto.getDiscontinued()));
+		computer.setIntroduced(DateMapper.exctractFromString(computerDto.getIntroduced()));
+		computer.setDiscontinued(DateMapper.exctractFromString(computerDto.getDiscontinued()));
 		computer.setId(getId(computerDto.getId()));
 
 		return computer;
 	}
-
 	
 	public Computer mapResultSetToModel(ResultSet resultSet) {
 		try {
@@ -105,18 +97,6 @@ public class ComputerMapperImpl implements ComputerMapper{
 			return new Computer(id, name, introduced, discontinued, company);
 		} catch (Exception e) {
 			throw new ParsingException(ParsingException.CAN_NOT_MAP_RESULT_SET);
-		}
-	}
-
-	private static LocalDateTime getLocalDateTime(String date) {
-		if (date == null) {
-			return null;
-		} else if ("".equals(date.trim())) {
-			return null;
-		} else if (Validator.isDateValid(date)) {
-			return LocalDateTime.parse(date, dateTimeFormatter);
-		} else {
-			throw new ParsingException(Validator.WRONG_DATE_FORMAT);
 		}
 	}
 

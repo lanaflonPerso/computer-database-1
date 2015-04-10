@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 
 <jsp:include page="/WEB-INF/views/import/header_css.jsp"></jsp:include>
 <body>
@@ -14,13 +16,15 @@
 					<h1>
 						<spring:message code="add.computer" />
 					</h1>
-					<form action="addComputer"
+					<form:form modelAttribute="computerDto" action="addComputer"
 						onsubmit="return checkPostForm(document)" method="POST">
 						<fieldset>
 							<div class="form-group">
-								<label for="computerName"><spring:message
-										code="computer.name" /></label> <input type="text"
-									class="form-control" id="computerName" name="computerName"
+								<label for="computerName"><spring:message code="computer.name" /></label>
+								<input 	type="text"
+										class="form-control"
+										id="computerName"
+										name="name"
 									<c:if test="${page.getComputerDto().getName() != null}">
 										value="${page.getComputerDto().getName()}"
 									</c:if>
@@ -58,7 +62,6 @@
 								<font id="serviceDiscontinuedException" color="red"> <spring:message
 										code="error.invalid.discontined.date" /> <spring:message
 										code="date.format" /></font>
-								</font>
 							</c:if>
 							<div class="form-group">
 								<label for="companyId"><spring:message code="company" /></label>
@@ -82,11 +85,12 @@
 							<a href="dashboard" class="btn btn-default"><spring:message
 									code="button.cancel" /></a>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>
 	</section>
+	<jsp:include page="/WEB-INF/views/import/validator.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/import/footer.jsp"></jsp:include>
 </body>
 </html>

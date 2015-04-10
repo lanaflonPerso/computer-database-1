@@ -11,7 +11,7 @@
 
 
 	<!-- DataSource creation -->
-	<context:property-placeholder location="classpath:/config.properties" />
+	<context:property-placeholder location="classpath:/test-config.properties" />
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${driverClassName}" />
@@ -20,12 +20,12 @@
 		<property name="password" value="${password}" />
 	</bean>
 
+
 	<context:component-scan base-package="com.excilys.computerdatabase.dao.impl" />
-	<context:component-scan base-package="com.excilys.computerdatabase.dto" />
 	<context:component-scan base-package="com.excilys.computerdatabase.mapper.impl" />
 	<context:component-scan base-package="com.excilys.computerdatabase.service.impl" />
 	<context:component-scan base-package="com.excilys.computerdatabase.util" />
-	<context:component-scan base-package="com.excilys.computerdatabase.controler" />
+	<context:component-scan base-package="com.excilys.computerdatabase.servlet" />
 	<context:component-scan base-package="com.excilys.computerdatabase.ui" />
 
 

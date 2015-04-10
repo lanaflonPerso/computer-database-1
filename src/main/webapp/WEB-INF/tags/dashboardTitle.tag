@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="mylib"%>
 
-<%@ attribute name="page" type="com.excilys.computerdatabase.dto.page.DashboardPage" description="Current page number"%>
+<%@ attribute name="page" type="com.excilys.computerdatabase.dto.page.model.DashboardPage" description="Current page number"%>
 <%@ attribute name="name" description="Column name"%>
 <%@ attribute name="sortColumn" description="Column ID"%>
 

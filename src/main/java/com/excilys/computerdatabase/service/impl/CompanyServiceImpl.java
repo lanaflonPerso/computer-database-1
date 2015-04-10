@@ -5,6 +5,8 @@ package com.excilys.computerdatabase.service.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.excilys.computerdatabase.dao.CompanyDao;
 import com.excilys.computerdatabase.dao.ComputerDao;
 import com.excilys.computerdatabase.exception.ServiceException;
-import com.excilys.computerdatabase.factory.ConnectionFactory;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.service.CompanyService;
 import com.excilys.computerdatabase.sort.SortCriteria;
@@ -20,15 +21,16 @@ import com.excilys.computerdatabase.validation.Validator;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+
 	@Autowired
 	ComputerDao computerDao;
 	@Autowired
 	CompanyDao companyDao;
-	@Autowired
-	ConnectionFactory connectionFactory;
 
 	@Override
 	public List<Company> list(SortCriteria sortCriteria) {
+		log.info("List companies");
 		if (!Validator.isSortCriteriaCorrect(sortCriteria)) {
 			throw new ServiceException(Validator.INVALID_SORT_CRITERIA);
 		}
@@ -37,11 +39,13 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public Long getNumberOfElement() {
+		log.info("Get number of companies");
 		return companyDao.getNumberOfElement();
 	}
 
 	@Override
 	public List<Company> list(Long from, Long to, SortCriteria sortCriteria) {
+		log.info("List companies");
 		if (!Validator.isDateFromToCorrect(from, to)) {
 			throw new ServiceException(Validator.INVALID_BOUND);
 		}
@@ -54,6 +58,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	@Transactional
 	public void delete(Long id) {
+		log.info("Delete company : {0}", id);
 		if (!Validator.isIdCorrect(id)) {
 			throw new ServiceException(Validator.INVALID_COMPANY_ID);
 		}
@@ -62,6 +67,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public void create(Company t) {
+		log.info("Company create : {0}", t);
 		if (!Validator.isCompanyCorrect(t)) {
 			throw new ServiceException(Validator.INVALID_COMPANY);
 		}
@@ -70,6 +76,7 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public Company getById(Long id) {
+		log.info("Find company with id : {0} ", id);
 		if (!Validator.isIdCorrect(id)) {
 			throw new ServiceException(Validator.INVALID_COMPANY_ID);
 		}

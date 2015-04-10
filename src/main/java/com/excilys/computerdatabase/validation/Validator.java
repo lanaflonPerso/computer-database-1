@@ -8,6 +8,7 @@ import org.apache.commons.validator.routines.DateValidator;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
 import com.excilys.computerdatabase.sort.SortCriteria;
+import com.excilys.computerdatabase.util.DateFormat;
 
 public class Validator {
 
@@ -21,9 +22,12 @@ public class Validator {
 	public static final String INVALID_STRING_FOR_SEARCH = "invalid string for search";
 	public static final String INVALID_SORT_CRITERIA = "invalid sort criteria";
 
-	public static boolean isDateValid(String inputString) {
-		return DateValidator.getInstance().isValid(inputString,
-				"yyyy-MM-dd HH:mm:ss");
+	public static boolean isDateValid(String date) {
+		return isDateValid(date, DateFormat.ENGLISH);
+	}
+
+	public static boolean isDateValid(String date, DateFormat dateFormat) {
+		return DateValidator.getInstance().isValid(date, dateFormat.toString());
 	}
 
 	public static boolean isComputerCorrect(Computer computer) {

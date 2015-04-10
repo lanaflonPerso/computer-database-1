@@ -17,6 +17,7 @@
 		<mysql-connector-version>5.1.6</mysql-connector-version>
 		<!-- Test -->
 		<junit-version>4.11</junit-version>
+		<dbunit-version>2.5.0</dbunit-version>
 		<mockito-all-version>1.9.0</mockito-all-version><!-- ATTENTION : ne pas 
 			mettre la version 1.9.5 -->
 		<!-- Servlet -->
@@ -73,6 +74,18 @@
 			<version>${mockito-all-version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<version>${dbunit-version}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>	
 		<!-- servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="mylib"%>
 
 <jsp:include page="/WEB-INF/views/import/header_css.jsp"></jsp:include>
@@ -13,11 +14,12 @@
 			<h1 id="homeTitle">${page.getNumberOfComputer()} <spring:message code="computer.found"/></h1>
 			<div id="actions" class="form-horizontal">
 				<div class="pull-left">
-					<form id="searchForm" action="dashboard" method="GET"
-						class="form-inline">
-						<input type="hidden" name="page" value="1" /> <input
-							type="hidden" name="size" value="${page.getSize()}" /> <input
-							type="search" id="searchbox" name="search" class="form-control"
+	
+					<form:form id="searchForm" action="dashboard" method="GET"
+						class="form-inline">					
+						<input type="hidden" name="page" value="1" /> 
+						<input type="hidden" name="size" value="${page.getSize()}" />
+						<input type="search" id="searchbox" name="search" class="form-control"
 							<c:if test="${page.getSearch() == null || page.getSearch() == \"\"}">
 								placeholder="<spring:message code="search.name"/>" 
 							</c:if>
@@ -26,7 +28,7 @@
 							</c:if> />
 						<input type="submit" id="searchsubmit" value="<spring:message code="filter.by.name"/>"
 							class="btn btn-primary" />
-					</form>
+					</form:form>
 				</div>
 				<div class="pull-right">
 					<a class="btn btn-success" id="addComputer" href="addComputer"><spring:message code="add.computer"/></a> <a class="btn btn-default" id="editComputer" href="#"
@@ -43,9 +45,6 @@
 			<table class="table table-striped table-bordered">
 				<thead>
 					<tr>
-						<!-- Variable declarations for passing labels as parameters -->
-						<!-- Table header for Computer Name -->
-
 						<th class="editMode" style="width: 60px; height: 22px;"><input
 							type="checkbox" id="selectall" /> <span
 							style="vertical-align: top;"> - <a href="#"
@@ -73,7 +72,7 @@
 						<tr>
 							<c:if test="${page.getComputers().size() > i}">
 								<td class="editMode"><input type="checkbox" name="cb"
-									id="selected_${i}" class="cb" value="${i}"></td>
+									id="selected_${i}" class="cb" value="${page.getComputers().get(i).getId()}"></td>
 								<td><a id="name_${i}"
 									href="editComputer?computerId=${page.getComputers().get(i).getId()}"
 									onclick="">${page.getComputers().get(i).getName()}</a></td>

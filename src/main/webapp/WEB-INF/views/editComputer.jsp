@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <jsp:include page="/WEB-INF/views/import/header_css.jsp"></jsp:include>
 <body>
@@ -34,15 +35,15 @@
 					<h1><spring:message
 										code="edit.computer" /></h1>
 
-					<form action="editComputer" method="POST"
+					<form:form modelAttribute="computerDto" action="editComputer" method="POST"
 						onsubmit="return checkPostForm(document)">
-						<input type="hidden" name="computerId" id="computerId"
+						<input type="hidden" name="id" id="computerId"
 							value="${page.getComputerDto().getId()}" />
 						<fieldset>
 							<div class="form-group">
 								<label for="computerName"><spring:message
 										code="computer.name" /></label> <input
-									name="computerName" type="text" class="form-control"
+									name="name" type="text" class="form-control"
 									id="computerName" value="${page.getComputerDto().getName()}">
 							</div>
 							<c:if
@@ -80,7 +81,7 @@
 								<label for="companyId"><spring:message
 										code="company" /></label> <select
 									class="form-control" id="companyId" name="companyId">
-								<option>--</option>
+								<option value=>--</option>
 									<c:forEach var="i" begin="0" end="${page.getCompanies().size() - 1}">
 										<option
 											<c:if test="${page.getCompanies().get(i).getName() == page.getComputerDto().getCompanyName()}">
@@ -104,11 +105,12 @@
 								class="btn btn-default"><spring:message
 										code="button.cancel" /></a>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>
 	</section>
+	<jsp:include page="/WEB-INF/views/import/validator.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/import/footer.jsp"></jsp:include>
 </body>
 </html>
