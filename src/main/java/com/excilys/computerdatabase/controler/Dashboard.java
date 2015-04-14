@@ -59,6 +59,9 @@ public class Dashboard {
 
 	private List<Long> getListLong(String selection) {
 		List<Long> list = new ArrayList<Long>();
+		if("".equals(selection)){
+			return list;
+		}
 		for (String s : selection.split(",")) {
 			list.add(Long.valueOf(s));
 		}

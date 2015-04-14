@@ -63,6 +63,8 @@ public class Validator {
 			return false;
 		} else if (from > to) {
 			return false;
+		} else if (from.equals(to)) {
+			return false;
 		} else {
 			return true;
 		}

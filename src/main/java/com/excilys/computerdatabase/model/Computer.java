@@ -6,34 +6,27 @@ package com.excilys.computerdatabase.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- * The Class Computer.
- */
-public class Computer implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-	/** The id. */
+import org.hibernate.annotations.Type;
+@Entity(name="computer")
+public class Computer implements Serializable {
+	private static final long serialVersionUID = 1L;
+	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
-	/** The name. */
 	private String name;
-	
-	/** The introduced. */
+	@Type(type="com.excilys.computerdatabase.mapper.impl.LocalDateTimeUserType")
 	private LocalDateTime introduced;
-	
-	/** The discontinued. */
+	@Type(type="com.excilys.computerdatabase.mapper.impl.LocalDateTimeUserType")
 	private LocalDateTime discontinued;
 	
-	/** The company. */
+	@OneToOne
 	private Company company;
-	
-	/**
-	 * Instantiates a new computer.
-	 */
+
 	public Computer() {
 		super();
 	}

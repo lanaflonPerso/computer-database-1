@@ -1,9 +1,10 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.test.fonctionnel;
+package com.excilys.computerdatabase.test.fonctionnel.editcomputer;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class TestEditComputer {
+public class TestEditComputerFirefox {
 	private WebDriver driver;
 
 	@Before
@@ -36,7 +37,7 @@ public class TestEditComputer {
 
 	@Test
 	public void testEditCorrectElement() {
-		driver.get("http://localhost:8080/computer-database/editComputer?computerId=104");
+		driver.findElement(By.id("name_1")).click();
 		
 		deleteComputer(driver);
 		String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -54,7 +55,7 @@ public class TestEditComputer {
 	
 	@Test
 	public void testEditElementWithWrongName() {
-		driver.get("http://localhost:8080/computer-database/editComputer?computerId=104");
+		driver.findElement(By.id("name_1")).click();
 		
 		deleteComputer(driver);
 		String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
@@ -63,12 +64,12 @@ public class TestEditComputer {
 		
 		driver.findElement(By.id("editButton")).click();
 		
-		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/computer-database/editComputer?computerId=104");
+		assertTrue(driver.getCurrentUrl().contains("http://localhost:8080/computer-database/editComputer?computerId="));
 	}
 	
 	@Test
 	public void testEditElementWithWrongDate() {
-		driver.get("http://localhost:8080/computer-database/editComputer?computerId=104");
+		driver.findElement(By.id("name_1")).click();
 	
 		
 		deleteComputer(driver);

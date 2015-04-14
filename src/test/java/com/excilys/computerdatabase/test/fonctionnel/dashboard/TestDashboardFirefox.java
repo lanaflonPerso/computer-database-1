@@ -1,4 +1,4 @@
-package com.excilys.computerdatabase.test.fonctionnel;
+package com.excilys.computerdatabase.test.fonctionnel.dashboard;
 
 import static org.junit.Assert.assertEquals;
 

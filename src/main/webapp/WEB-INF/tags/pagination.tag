@@ -39,13 +39,13 @@
 
 	<div class="btn-group btn-group-sm pull-right" role="group">
 		<button type="button" class="btn btn-default" 
-			<c:if test="${size == 10}">	style="background:#D8D8D8" </c:if>
+			<c:if test="${page.getSize() == 10}">	style="background:#D8D8D8" </c:if>
 			onclick="document.location.href='dashboard?size=10&sortColumn=${page.getSortColumn()}&sortDirection=${page.getSortDirection()}'">10</button>
 		<button type="button" class="btn btn-default"
-			<c:if test="${size == 50}">	style="background:#D8D8D8" </c:if>
+			<c:if test="${page.getSize() == 50}">	style="background:#D8D8D8" </c:if>
 			onclick="document.location.href='dashboard?size=50&sortColumn=${page.getSortColumn()}&sortDirection=${page.getSortDirection()}'">50</button>
 		<button type="button" class="btn btn-default"
-			<c:if test="${size == 100}">style="background:#D8D8D8" </c:if>
+			<c:if test="${page.getSize() == 100}">style="background:#D8D8D8" </c:if>
 			onclick="document.location.href='dashboard?size=100&sortColumn=${page.getSortColumn()}&sortDirection=${page.getSortDirection()}'">100</button>
 	</div>
 </div>

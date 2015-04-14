@@ -4,67 +4,59 @@
 package com.excilys.computerdatabase.test.unitaire.dao;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
 
+import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.dbunit.database.DatabaseConnection;
+import org.dbunit.database.IDatabaseConnection;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.excilys.computerdatabase.dao.impl.ComputerDaoImpl;
 import com.excilys.computerdatabase.exception.DaoException;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
+import com.excilys.computerdatabase.sort.SortColumn;
 import com.excilys.computerdatabase.sort.SortCriteria;
-import com.excilys.computerdatabase.test.databaseSimulator.DataBaseSimulator;
+import com.excilys.computerdatabase.sort.SortDirection;
 
+@Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/test-application-context.xml" })
 public class TestComputerDao {
-
 	@Autowired
 	private ComputerDaoImpl computerDao;
-
-	private static DataBaseSimulator dataBaseSimulator;
-
-	@BeforeClass
-	public static void test() {
-		@SuppressWarnings("resource")
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-				"classpath:/test-application-context.xml");
-		DataSource dataSource = applicationContext.getBean(DataSource.class);
-		dataBaseSimulator = new DataBaseSimulator(dataSource);
-		try {
-			dataBaseSimulator.initDatabase();
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail("can not create table");
-		}
-	}
+	@Autowired
+	private DataSource dataSource;
 
 	@Before
 	public void setUpDatabase() {
 		try {
-			dataBaseSimulator.resetTable();
+			IDatabaseConnection dbc = new DatabaseConnection(dataSource.getConnection());			 
+			IDataSet dataset = new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/database/fakeDatabase.xml"));
+			DatabaseOperation.CLEAN_INSERT.execute(dbc, dataset);
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail("can not reset table");
 		}
-	}
 
+	}
+	
 	@Test
-	public void testInsert() {
+	public void testInsertOk() {
 		Computer computer = new Computer(new Long(1), "test_name",
 				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
 				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
@@ -73,18 +65,18 @@ public class TestComputerDao {
 		assertEquals(computer.getId() == 1, false);
 
 		Computer computer2 = computerDao.getById(computer.getId());
-		assertEquals(computer2, computer);
+		assertEquals(computer, computer2);
 	}
 
 	@Test
 	public void testInsertNullDateTime() {
-		Computer computer = new Computer(new Long(1), "test_name", null, null,
+		Computer computer = new Computer(new Long(0), "test_name", null, null,
 				new Company(new Long(2), "RCA"));
 		computerDao.create(computer);
-		assertEquals(computer.getId() == 1, false);
+		assertEquals(computer.getId() == 0, false);
 
 		Computer computer2 = computerDao.getById(computer.getId());
-		assertEquals(computer2, computer);
+		assertEquals(computer, computer2);
 	}
 
 	@Test
@@ -94,8 +86,7 @@ public class TestComputerDao {
 				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
 				new Company(null, "Canon"));
 		computerDao.create(computer);
-		computer.getCompany().setName(null);
-		computer.getCompany().setId(new Long(0));
+		computer.setCompany(null);
 
 		Computer computer2 = computerDao.getById(computer.getId());
 		assertEquals(computer2, computer);
@@ -134,22 +125,66 @@ public class TestComputerDao {
 		assertEquals(computers.get(0), new Computer(1l,
 				"MacBook Pro 15.4 inch", null, null, new Company(new Long(1),
 						"Apple Inc.")));
-		assertEquals(computers.size() > 1, true);
+		assertEquals(computers.size() , 5);
 	}
 
+	@Test
+	public void testListComputerOrderByComputerNameASC(){
+		List<Computer> computers = computerDao.getAll(new SortCriteria(SortColumn.COMPUTER_NAME, SortDirection.ASC));
+		Computer previous = computers.get(0);
+		for(Computer current : computers) {
+			assertTrue(previous.getName().compareTo(current.getName()) <= 0);
+			previous = current;
+		}
+		
+	}
+	
+	@Test
+	public void testListComputerOrderByComputerNameDESC(){
+		List<Computer> computers = computerDao.getAll(new SortCriteria(SortColumn.COMPUTER_NAME, SortDirection.DESC));
+		Computer previous = computers.get(0);
+		for(Computer current : computers) {
+			assertTrue(previous.getName().compareTo(current.getName()) >= 0);
+			previous = current;
+		}
+		
+	}
+	
+	@Test
+	public void testListComputerOrderByCompanyNameASC(){
+		List<Computer> computers = computerDao.getAll(new SortCriteria(SortColumn.COMPANY_NAME, SortDirection.ASC));
+		Computer previous = computers.get(0);
+		for(Computer current : computers) {
+			assertTrue(previous.getCompany().getName().compareTo(current.getCompany().getName()) <= 0);
+			previous = current;
+		}
+		
+	}
+	
+	@Test
+	public void testListComputerOrderByCompanyNameDESC(){
+		List<Computer> computers = computerDao.getAll(new SortCriteria(SortColumn.COMPANY_NAME, SortDirection.DESC));
+		Computer previous = computers.get(0);
+		for(Computer current : computers) {
+			System.err.println(previous.getCompany().getName() + " " + current.getCompany().getName());
+			assertTrue(previous.getCompany().getName().compareTo(current.getCompany().getName()) >= 0);
+			previous = current;
+		}
+		
+	}
+	
+	
 	@Test
 	public void testDelete() {
 		Computer computer = new Computer(new Long(1), "test_name",
 				LocalDateTime.now(), LocalDateTime.now(), new Company(new Long(
 						2), "RCA"));
 		computerDao.create(computer);
+		System.err.println(computer);
 		computerDao.delete(computer.getId());
-		try {
-			computerDao.getById(computer.getId());
-			fail("testDelete : no exception");
-		} catch (DaoException e) {
-			assertEquals(e.getMessage(), DaoException.CAN_NOT_GET_ELEMENT);
-		}
+		Computer computer2 = computerDao.getById(computer.getId());
+		System.err.println(computer);
+		assertEquals(null, computer2);
 	}
 
 	@Test
@@ -165,11 +200,9 @@ public class TestComputerDao {
 		assertEquals(computer, computer2);
 	}
 
-	@Test
+	@Test(expected = DaoException.class)
 	public void testGetAllFromToWithZero() {
-		List<Computer> computers = computerDao.getAll(new Long(0), new Long(0),
-				new SortCriteria());
-		assertEquals(computers.size(), 0);
+		computerDao.getAll(new Long(0), new Long(0), new SortCriteria());
 	}
 
 	@Test
@@ -184,13 +217,15 @@ public class TestComputerDao {
 	public void testGetNumberOfElement() {
 		List<Computer> computers = computerDao.getAll(new SortCriteria());
 		Long total = computerDao.getNumberOfElement();
-		assertEquals(total, new Long(computers.size()));
+		assertEquals(new Long(computers.size()), total);
 	}
 
 	@Test
 	public void testNameContains() {
 		List<Computer> computers = computerDao.getByName("App", new Long(0),
 				new Long(10), new SortCriteria());
+		System.err.println(computers);
+		assertEquals(4, computers.size());
 		assertEquals(computers.get(0).getName(), "MacBook Pro 15.4 inch");
 	}
 

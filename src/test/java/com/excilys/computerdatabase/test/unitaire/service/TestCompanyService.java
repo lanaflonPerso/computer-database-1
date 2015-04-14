@@ -4,6 +4,7 @@
 package com.excilys.computerdatabase.test.unitaire.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -20,7 +21,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.excilys.computerdatabase.dao.CompanyDao;
 import com.excilys.computerdatabase.dao.impl.CompanyDaoImpl;
 import com.excilys.computerdatabase.dao.impl.ComputerDaoImpl;
-import com.excilys.computerdatabase.exception.DaoException;
 import com.excilys.computerdatabase.exception.ServiceException;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
@@ -103,16 +103,12 @@ public class TestCompanyService {
 
 		companyService.delete(company.getId());
 
-		try {
-			companyService.getById(company.getId());
-			fail("no exception throw");
-		} catch (DaoException ignored) {
-		}
-		try {
-			computerService.getById(computer.getId());
-			fail("no exception throw");
-		} catch (DaoException ignored) {
-		}
+		
+		Company company2 = companyService.getById(company.getId());
+		assertNull(company2);
+		Computer computer2 = computerService.getById(computer.getId());
+		assertNull(computer2);
+		
 	}
 
 	@Test

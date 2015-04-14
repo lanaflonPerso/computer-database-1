@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.excilys.computerdatabase.dao.ComputerDao;
 import com.excilys.computerdatabase.exception.ServiceException;
@@ -29,12 +30,14 @@ public class ComputerServiceImpl implements ComputerService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Computer> list(SortCriteria sortCriteria) {
 		log.info("List computers");
 		return computerDao.getAll(sortCriteria);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Computer getById(Long id) {
 		log.info("Get computer with id : {0}", id);
 		if (!Validator.isIdCorrect(id)) {
@@ -45,6 +48,7 @@ public class ComputerServiceImpl implements ComputerService {
 	}
 
 	@Override
+	@Transactional
 	public void create(Computer c) {
 		log.info("Update computer : {0}", c);
 		if (!Validator.isComputerCorrect(c)) {
@@ -54,6 +58,7 @@ public class ComputerServiceImpl implements ComputerService {
 	}
 
 	@Override
+	@Transactional
 	public void update(Computer c) {
 		log.info("Update computer : {0}", c);
 		if (!Validator.isComputerCorrect(c) && Validator.isIdCorrect(c.getId())) {
@@ -64,6 +69,7 @@ public class ComputerServiceImpl implements ComputerService {
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		log.info("Get computer with id : {0}", id);
 		if (!Validator.isIdCorrect(id)) {
@@ -73,12 +79,14 @@ public class ComputerServiceImpl implements ComputerService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Long getNumberOfElement() {
 		log.info("Get number of computers");
 		return computerDao.getNumberOfElement();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Computer> list(Long from, Long to, SortCriteria sortCriteria) {
 		log.info("List computers");
 		if (!Validator.isDateFromToCorrect(from, to)) {
@@ -91,6 +99,7 @@ public class ComputerServiceImpl implements ComputerService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Computer> getNameContains(String string, Long from, Long to,
 			SortCriteria sortCriteria) {
 		if (!Validator.isStringForSearchCorrect(string)) {
@@ -106,19 +115,20 @@ public class ComputerServiceImpl implements ComputerService {
 
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Long getNameContainsElement(String string) {
+		if (!Validator.isStringForSearchCorrect(string)) {
+			throw new ServiceException(Validator.INVALID_STRING_FOR_SEARCH);
+		}
+		return computerDao.getByNameNumberOfElement(string);
+	}
+	
 	public ComputerDao getComputerDao() {
 		return computerDao;
 	}
 
 	public void setComputerDao(ComputerDao computerDao) {
 		this.computerDao = computerDao;
-	}
-
-	@Override
-	public Long getNameContainsElement(String string) {
-		if (!Validator.isStringForSearchCorrect(string)) {
-			throw new ServiceException(Validator.INVALID_STRING_FOR_SEARCH);
-		}
-		return computerDao.getByNameNumberOfElement(string);
 	}
 }

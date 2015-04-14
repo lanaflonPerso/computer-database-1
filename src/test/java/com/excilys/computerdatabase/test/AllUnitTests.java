@@ -1,4 +1,4 @@
-package com.excilys.computerdatabase.test.unitaire;
+package com.excilys.computerdatabase.test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

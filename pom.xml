@@ -29,14 +29,16 @@
 		<!-- JSP + JSTL -->
 		<standard-version>1.1.2</standard-version>
 		<jstl-version>1.1.2</jstl-version>
-		<!-- log -->
+		<!-- Log -->
 		<slf4j-api-version>1.7.12</slf4j-api-version>
 		<logback-classic-version>1.1.3</logback-classic-version>
-		<!-- spring -->
+		<!-- Spring -->
 		<spring-version>4.1.5.RELEASE</spring-version>
 		<jcl-over-slf4j-version>1.7.10</jcl-over-slf4j-version>
 		<commons-logging-version>99-empty</commons-logging-version>
-		 <spring-data-jpa-version>1.7.2.RELEASE</spring-data-jpa-version>
+		<spring-data-jpa-version>1.7.2.RELEASE</spring-data-jpa-version>
+		<!-- Hibernate -->
+		<hibernate-version>5.0.0.Beta1</hibernate-version>
 	</properties>
 
 
@@ -85,7 +87,7 @@
 					<artifactId>slf4j-api</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>	
+		</dependency>
 		<!-- servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -177,6 +179,26 @@
 			<artifactId>commons-logging</artifactId>
 			<version>${commons-logging-version}</version>
 		</dependency>
+		
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate-version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-version}</version>
+		</dependency>
+
+
 
 	</dependencies>
 	<build>

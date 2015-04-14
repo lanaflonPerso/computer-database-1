@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.test.fonctionnel;
+package com.excilys.computerdatabase.test.fonctionnel.addcomputer;
 
 import static org.junit.Assert.assertEquals;
 

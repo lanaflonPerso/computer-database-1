@@ -1,10 +1,10 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.test.fonctionnel;
+package com.excilys.computerdatabase.test.fonctionnel.dashboard;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,24 +31,24 @@ public class TestDashboard {
 	@Test
 	public void testFirstElement() {
 		WebElement query = driver.findElement(By.id("companyName_0"));
-		assertThat(query != null, is(true));
-		assertThat(query.getText(), is("Apple Inc."));
+		assertNotNull(query);
+		assertEquals("Apple Inc.", query.getText());
 
 		query = driver.findElement(By.id("name_0"));
-		assertThat(query != null, is(true));
-		assertThat(query.getText(), is("MacBook Pro 15.4 inch"));
+		assertNotNull(query);
+		assertEquals("MacBook Pro 15.4 inch", query.getText());
 	}
 	
 	@Test
 	public void testGoToAddElementUrl() {
 		driver.findElement(By.id("addComputer")).click();
-		assertThat(driver.getCurrentUrl(), is("http://localhost:8080/computer-database/addComputer"));
+		assertEquals("http://localhost:8080/computer-database/addComputer", driver.getCurrentUrl());
 	}
 	
 	@Test
 	public void testGoToEditElementUrl() {
 		driver.findElement(By.id("name_0")).click();
-		assertThat(driver.getCurrentUrl(), is("http://localhost:8080/computer-database/editComputer?computerId=4"));
+		assertEquals(driver.getCurrentUrl().contains("http://localhost:8080/computer-database/editComputer?computerId="), true);
 	}
 	
 }
