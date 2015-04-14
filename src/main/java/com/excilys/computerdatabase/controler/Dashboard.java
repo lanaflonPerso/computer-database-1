@@ -26,7 +26,7 @@ import com.excilys.computerdatabase.service.ComputerService;
 
 @Controller
 @RequestMapping("/dashboard")
-public class Dashboard {
+public class Dashboard implements ControlerReference {
 	final static Logger log = LoggerFactory.getLogger(Dashboard.class);
 
 	@Autowired
@@ -40,11 +40,11 @@ public class Dashboard {
 	protected String doGet(DashboardPage dashboardPage, ModelMap modelMap) {
 		
 		log.info("Servlet : [GET] dashboard");
-
+		
 		DashboardPage page = dashboardPageCreator.getPageFromGetRequest(dashboardPage);
 		modelMap.addAttribute("page", page);
 
-		return "dashboard";
+		return DASHBOARD;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -54,7 +54,7 @@ public class Dashboard {
 
 		getListLong(selection).stream().forEach(e -> (computerService.delete(e)));
 
-		return "redirect:/dashboard";
+		return REDIRECT + DASHBOARD;
 	}
 
 	private List<Long> getListLong(String selection) {

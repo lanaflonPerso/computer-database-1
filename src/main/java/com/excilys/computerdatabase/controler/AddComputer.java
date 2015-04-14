@@ -21,7 +21,7 @@ import com.excilys.computerdatabase.service.ComputerService;
 
 @Controller
 @RequestMapping("/addComputer")
-public class AddComputer {
+public class AddComputer implements ControlerReference {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
@@ -39,7 +39,7 @@ public class AddComputer {
 		ComputerPage page = addPageCreator.getPageFromGetRequest();		
 		modelMap.addAttribute("page", page);
 		
-		return "addComputer";
+		return ADD_COMPUTER;
 
 	}
 
@@ -55,10 +55,10 @@ public class AddComputer {
 			Computer computer = computerMapper.mapDtoToModel(page.getComputerDto());
 			computerService.create(computer);
 			log.info("Computer added : " + computer);
-			return "redirect:/dashboard";
+			return REDIRECT + DASHBOARD;
 		} else {
 			log.info("Wrong input");
-			return "addComputer";
+			return ADD_COMPUTER;
 		}
 	}
 

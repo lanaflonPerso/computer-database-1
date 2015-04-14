@@ -5,9 +5,12 @@ package com.excilys.computerdatabase.dto.model;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 public class ComputerDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
+	@NotBlank(message = "{error.invalid.computer.name.dto}")
 	private String name;
 	private String introduced;
 	private String discontinued;

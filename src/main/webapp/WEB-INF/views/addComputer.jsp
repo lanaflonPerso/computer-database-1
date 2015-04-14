@@ -90,7 +90,7 @@
 			</div>
 		</div>
 	</section>
-	<jsp:include page="/WEB-INF/views/import/validator.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/import/validator_js.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/import/footer.jsp"></jsp:include>
 </body>
 </html>

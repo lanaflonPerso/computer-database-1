@@ -49,15 +49,4 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
-	<!-- Spring message (i18n) -->
-	<bean id="messageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="defaultEncoding" value="UTF-8" />
-		<property name="basenames">
-			<list>
-				<value>classpath:/message/springMessage</value>
-			</list>
-		</property>
-	</bean>
-
 </beans>
