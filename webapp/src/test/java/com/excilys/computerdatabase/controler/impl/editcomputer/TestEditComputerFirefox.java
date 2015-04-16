@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.controler.editcomputer;
+package com.excilys.computerdatabase.controler.impl.editcomputer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

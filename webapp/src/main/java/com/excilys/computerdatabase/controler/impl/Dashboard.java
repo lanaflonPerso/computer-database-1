@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.controler;
+package com.excilys.computerdatabase.controler.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.excilys.computerdatabase.controler.AbstractController;
 import com.excilys.computerdatabase.page.creator.impl.DashboardPageCreator;
 import com.excilys.computerdatabase.page.model.DashboardPage;
 import com.excilys.computerdatabase.service.ComputerService;
@@ -25,7 +26,7 @@ import com.excilys.computerdatabase.service.ComputerService;
 
 @Controller
 @RequestMapping("/dashboard")
-public class Dashboard implements ControlerReference {
+public class Dashboard extends AbstractController {
 	final static Logger log = LoggerFactory.getLogger(Dashboard.class);
 
 	@Autowired
@@ -34,7 +35,7 @@ public class Dashboard implements ControlerReference {
 	private DashboardPageCreator dashboardPageCreator;
 
 	@RequestMapping(method = RequestMethod.GET)
-	protected String doGet(DashboardPage dashboardPage, ModelMap modelMap) {
+	public String getDashboard(DashboardPage dashboardPage, ModelMap modelMap) {
 		
 		log.info("Servlet : [GET] dashboard");
 		
@@ -45,7 +46,7 @@ public class Dashboard implements ControlerReference {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	protected String doPost(@RequestParam("selection") String selection, ModelMap modelMap) {
+	public String deleteComputer(@RequestParam("selection") String selection, ModelMap modelMap) {
 		
 		log.info("Servlet : [POST] dashboard");
 
