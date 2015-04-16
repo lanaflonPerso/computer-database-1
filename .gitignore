@@ -1,0 +1,7 @@
+# Directories #
+/build/
+/bin/
+target/
+.project
+.classpath
+.settings
