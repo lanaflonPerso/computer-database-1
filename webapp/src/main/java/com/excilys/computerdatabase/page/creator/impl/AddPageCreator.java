@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.excilys.computerdatabase.dto.mapper.CompanyDtoMapper;
 import com.excilys.computerdatabase.dto.model.CompanyDto;
 import com.excilys.computerdatabase.dto.model.ComputerDto;
-import com.excilys.computerdatabase.mapper.CompanyDtoMapper;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.page.creator.AbstractPageCreator;
 import com.excilys.computerdatabase.page.model.ComputerPage;

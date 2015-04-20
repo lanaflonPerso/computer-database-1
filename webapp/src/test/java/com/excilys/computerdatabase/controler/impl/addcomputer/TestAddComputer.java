@@ -4,6 +4,7 @@
 package com.excilys.computerdatabase.controler.impl.addcomputer;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
@@ -15,13 +16,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-public class TestAddComputer {
-	private WebDriver driver;
+import com.excilys.computerdatabase.controler.impl.AbstractWebTest;
 
+public class TestAddComputer extends AbstractWebTest {
+	private WebDriver driver;
+	
 	@Before
 	public void init() {
 		driver = new HtmlUnitDriver();
-		driver.get("http://localhost:8080/webapp/dashboard?language=en");
+		login(driver);
 	}
 	
 	@After
@@ -32,7 +35,7 @@ public class TestAddComputer {
 	@Test
 	public void testAddWrongElement() {
 		Long computerFoundNumber1 = getComputerNumber(driver);
-		assertEquals(computerFoundNumber1 != null, true);
+		assertNotNull(computerFoundNumber1);
 
 		driver.findElement(By.id("addComputer")).click();
 		enterComputer(driver, "name", "wrongDate", "WrongDate", "Apple Inc.");

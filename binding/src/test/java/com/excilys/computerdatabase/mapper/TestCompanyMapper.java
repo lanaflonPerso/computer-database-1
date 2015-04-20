@@ -5,7 +5,6 @@ package com.excilys.computerdatabase.mapper;
 
 import static org.junit.Assert.assertEquals;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.excilys.computerdatabase.dto.mapper.CompanyDtoMapper;
 import com.excilys.computerdatabase.dto.model.CompanyDto;
-import com.excilys.computerdatabase.mapper.CompanyDtoMapper;
 import com.excilys.computerdatabase.model.Company;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,9 +24,6 @@ public class TestCompanyMapper {
 
 	@Autowired
 	CompanyDtoMapper companyDtoMapper;
-	
-	DateTimeFormatter dateTimeFormatter = DateTimeFormatter
-			.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	@Test
 	public void testMapperModelToDtoOk() {
@@ -37,6 +33,19 @@ public class TestCompanyMapper {
 		assertEquals(computerDto.getName(), "Company test");
 	}
 
+	@Test
+	public void testMapperModelToDtoNullAttributs() {
+		Company company = new Company(null, null);
+		CompanyDto computerDto = companyDtoMapper.mapFromModel(company);
+		assertEquals(null, computerDto.getId());
+		assertEquals(null, computerDto.getName());
+	}
+	
+	@Test(expected=NullPointerException.class)
+	public void testMapperModelToDtoNullCompany() {
+		companyDtoMapper.mapFromModel(null);
+	}
+	
 	@Test
 	public void testMapperListModelToDtoOk() {
 		Company company = new Company(new Long(4), "Company test");

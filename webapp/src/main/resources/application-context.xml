@@ -10,7 +10,7 @@
   		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
 	<!-- Package scan -->
+	<context:component-scan base-package="com.excilys.computerdatabase.session" />
 	<context:component-scan base-package="com.excilys.computerdatabase.page" />
-	<context:component-scan base-package="com.excilys.computerdatabase.mapper.impl" />
 
 </beans>

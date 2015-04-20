@@ -1,12 +1,12 @@
-package com.excilys.computerdatabase.mapper.impl;
+package com.excilys.computerdatabase.dto.mapper.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.excilys.computerdatabase.dto.mapper.CompanyDtoMapper;
+import com.excilys.computerdatabase.dto.mapper.ComputerDtoMapper;
 import com.excilys.computerdatabase.dto.model.CompanyDto;
 import com.excilys.computerdatabase.dto.model.ComputerDto;
-import com.excilys.computerdatabase.mapper.CompanyDtoMapper;
-import com.excilys.computerdatabase.mapper.ComputerDtoMapper;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
 

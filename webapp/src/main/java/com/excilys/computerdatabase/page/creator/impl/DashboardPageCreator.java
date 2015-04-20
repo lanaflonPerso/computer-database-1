@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.excilys.computerdatabase.dto.mapper.ComputerDtoMapper;
 import com.excilys.computerdatabase.dto.model.ComputerDto;
-import com.excilys.computerdatabase.mapper.ComputerDtoMapper;
 import com.excilys.computerdatabase.model.Computer;
 import com.excilys.computerdatabase.page.creator.AbstractPageCreator;
 import com.excilys.computerdatabase.page.model.DashboardPage;
@@ -28,11 +28,9 @@ public class DashboardPageCreator extends AbstractPageCreator {
 	@Autowired
 	private ComputerDtoMapper computerDtoMapper;
 
-	public DashboardPage getPageFromGetRequest(
-			DashboardPage currentDashboardPage) {
+	public DashboardPage getPageFromGetRequest(DashboardPage currentDashboardPage) {
 		DashboardPage dashboardPage = pageGet(currentDashboardPage);
-		pageConverter(dashboardPage, Locale.ENGLISH, LocaleContextHolder
-				.getLocaleContext().getLocale());
+		pageConverter(dashboardPage, Locale.ENGLISH, LocaleContextHolder.getLocaleContext().getLocale());
 		return dashboardPage;
 	}
 
@@ -49,7 +47,7 @@ public class DashboardPageCreator extends AbstractPageCreator {
 		}
 		String sortColumn = currentDashboardPage.getSortColumn();
 		String sortDirection = currentDashboardPage.getSortDirection();
-
+		
 		long size = currentDashboardPage.getSize();
 		if (size == 0) {
 			size = 10;
@@ -58,7 +56,7 @@ public class DashboardPageCreator extends AbstractPageCreator {
 		SortCriteria sortCriteria = new SortCriteria(
 				SortColumn.build(sortColumn),
 				SortDirection.build(sortDirection));
-
+		
 		if (search != null && !"".equals(search.trim())) {
 			computers = computerService.getNameContains(search, new Long(
 					(page - 1) * size), new Long(page * size), sortCriteria);
@@ -73,7 +71,7 @@ public class DashboardPageCreator extends AbstractPageCreator {
 		dashboardPage.setNumberOfComputer(String.valueOf(numberOfComputer));
 		dashboardPage.setPage(page);
 		dashboardPage.setSearch(search);
-		dashboardPage.setPageMax(numberOfComputer / size);
+		dashboardPage.setPageMax((numberOfComputer - 1 )/ size + 1);
 		dashboardPage.setSortColumn(sortCriteria.getSortColumn().toPrint());
 		dashboardPage.setSortDirection(sortCriteria.getSortDirection()
 				.toPrint());
@@ -85,7 +83,7 @@ public class DashboardPageCreator extends AbstractPageCreator {
 
 	private void listconverter(List<ComputerDto> list,
 			DateFormat dateFormatFrom, DateFormat dateFormatTo) {
-		list.stream().forEach(e->(convertDto(e, dateFormatFrom, dateFormatTo)));
+		list.stream().forEach(e->convertDto(e, dateFormatFrom, dateFormatTo));
 	}
 
 	public void pageConverter(DashboardPage page, Locale LocaleFrom,

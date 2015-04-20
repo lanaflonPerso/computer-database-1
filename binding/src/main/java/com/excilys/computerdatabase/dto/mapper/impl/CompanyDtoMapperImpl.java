@@ -1,9 +1,9 @@
-package com.excilys.computerdatabase.mapper.impl;
+package com.excilys.computerdatabase.dto.mapper.impl;
 
 import org.springframework.stereotype.Service;
 
+import com.excilys.computerdatabase.dto.mapper.CompanyDtoMapper;
 import com.excilys.computerdatabase.dto.model.CompanyDto;
-import com.excilys.computerdatabase.mapper.CompanyDtoMapper;
 import com.excilys.computerdatabase.model.Company;
 
 @Service

@@ -13,24 +13,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.excilys.computerdatabase.controler.AbstractController;
-import com.excilys.computerdatabase.dto.model.ComputerDto;
 import com.excilys.computerdatabase.page.creator.impl.EditPageCreator;
 import com.excilys.computerdatabase.page.model.ComputerPage;
+import com.excilys.computerdatabase.session.EditComputerSession;
 @Controller
 @RequestMapping("/editComputer")
 public class EditComputer extends AbstractController {
-	final static Logger log = LoggerFactory.getLogger(EditComputer.class);
-	
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	private EditComputerSession editComputerSession;
 	@Autowired
 	private EditPageCreator editPageCreator;
 
 	@RequestMapping(method = RequestMethod.GET)
-	protected String getEditComputerPage(@RequestParam("computerId") Long id, Model model) {
+	private String getEditComputerPage(@RequestParam(value="computerId", defaultValue="") Long id, Model model) {
 
-		log.info("Servlet : [GET] editComputer");
-
-		model.addAttribute("computerDto", new ComputerDto()); 
-		ComputerPage page = editPageCreator.getPageFromGetRequest(id);
+		log.info("Servlet : [GET] editComputer with id : {}", id);
+		
+		ComputerPage page = null;
+		if(id == null ) {
+			page = editPageCreator.getPageFromGetRequest(Long.valueOf(editComputerSession.getComputerDto().getId()));
+			page.setComputerDto(editComputerSession.getComputerDto());
+			model.addAttribute("org.springframework.validation.BindingResult.computerDto", editComputerSession.getBindingResult());
+		} else {
+			page = editPageCreator.getPageFromGetRequest(id);
+		}
 		model.addAttribute("page", page);
 		
 		return EDIT_COMPUTER;

@@ -14,13 +14,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-public class TestDashboard {
+import com.excilys.computerdatabase.controler.impl.AbstractWebTest;
+
+public class TestDashboard extends AbstractWebTest {
 	private WebDriver driver;
 
 	@Before
 	public void init() {
 		driver = new HtmlUnitDriver();
-		driver.get("http://localhost:8080/webapp/dashboard?language=en");
+		login(driver);
 	}
 	
 	@After

@@ -1,4 +1,4 @@
-package com.excilys.computerdatabase.validator;
+package com.excilys.computerdatabase.dto.validator;
 
 import java.util.Locale;
 

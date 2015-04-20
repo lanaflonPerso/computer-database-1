@@ -4,4 +4,4 @@
 	var button_edit = "<spring:message code='button.edit'/>";
 	var alert_message = "<spring:message code='alert.message'/>";
 </script>
-<script src="js/dashboard.js"></script>
+<script src="/webapp/js/dashboard.js"></script>

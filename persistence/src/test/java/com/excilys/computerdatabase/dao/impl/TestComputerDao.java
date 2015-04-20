@@ -165,7 +165,6 @@ public class TestComputerDao {
 		List<Computer> computers = computerDao.getAll(new SortCriteria(SortColumn.COMPANY_NAME, SortDirection.DESC));
 		Computer previous = computers.get(0);
 		for(Computer current : computers) {
-			System.err.println(previous.getCompany().getName() + " " + current.getCompany().getName());
 			assertTrue(previous.getCompany().getName().compareTo(current.getCompany().getName()) >= 0);
 			previous = current;
 		}
@@ -179,10 +178,8 @@ public class TestComputerDao {
 				LocalDateTime.now(), LocalDateTime.now(), new Company(new Long(
 						2), "RCA"));
 		computerDao.create(computer);
-		System.err.println(computer);
 		computerDao.delete(computer.getId());
 		Computer computer2 = computerDao.getById(computer.getId());
-		System.err.println(computer);
 		assertEquals(null, computer2);
 	}
 
@@ -223,7 +220,6 @@ public class TestComputerDao {
 	public void testNameContains() {
 		List<Computer> computers = computerDao.getByName("App", new Long(0),
 				new Long(10), new SortCriteria());
-		System.err.println(computers);
 		assertEquals(4, computers.size());
 		assertEquals(computers.get(0).getName(), "MacBook Pro 15.4 inch");
 	}

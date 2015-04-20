@@ -1,4 +1,4 @@
-package com.excilys.computerdatabase.mapper;
+package com.excilys.computerdatabase.dto.mapper;
 
 import com.excilys.computerdatabase.dto.model.ComputerDto;
 import com.excilys.computerdatabase.model.Computer;

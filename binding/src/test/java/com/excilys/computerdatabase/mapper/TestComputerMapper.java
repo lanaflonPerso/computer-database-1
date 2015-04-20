@@ -16,8 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.excilys.computerdatabase.dto.mapper.ComputerDtoMapper;
 import com.excilys.computerdatabase.dto.model.ComputerDto;
-import com.excilys.computerdatabase.mapper.ComputerDtoMapper;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
 

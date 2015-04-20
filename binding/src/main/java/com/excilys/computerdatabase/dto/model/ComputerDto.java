@@ -7,12 +7,12 @@ import java.io.Serializable;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.excilys.computerdatabase.validator.Date;
+import com.excilys.computerdatabase.dto.validator.Date;
 
 public class ComputerDto implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7688863162139310127L;
 	private String id;
-	@NotBlank(message = "{error.invalid.computer.name.dto}")
+	@NotBlank(message = "{error.invalid.computer.name}")
 	private String name;
 	@Date(message = "{error.invalid.introduced.date} {date.format}")
 	private String introduced;

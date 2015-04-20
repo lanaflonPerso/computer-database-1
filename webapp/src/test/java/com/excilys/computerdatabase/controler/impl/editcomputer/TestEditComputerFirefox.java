@@ -21,13 +21,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class TestEditComputerFirefox {
+import com.excilys.computerdatabase.controler.impl.AbstractWebTest;
+
+public class TestEditComputerFirefox extends AbstractWebTest {
 	private WebDriver driver;
 
 	@Before
 	public void init() {
 		driver = new FirefoxDriver();
-		driver.get("http://localhost:8080/webapp/dashboard?language=en");
+		login(driver);
 	}
 	
 	@After

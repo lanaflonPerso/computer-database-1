@@ -1,4 +1,4 @@
-package com.excilys.computerdatabase.mapper;
+package com.excilys.computerdatabase.dto.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;

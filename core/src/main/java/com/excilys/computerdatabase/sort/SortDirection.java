@@ -23,7 +23,6 @@ public enum SortDirection {
 		}
 		switch (string) {
 		case "":
-			return ASC;
 		case "ASC":
 			return ASC;
 		case "DESC":

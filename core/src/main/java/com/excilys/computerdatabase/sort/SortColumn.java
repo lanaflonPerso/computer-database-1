@@ -4,11 +4,11 @@
 package com.excilys.computerdatabase.sort;
 
 public enum SortColumn {
-	ID, COMPUTER_NAME, INTRODUCED_DATE, DISCONTINUED_DATE, COMPANY_NAME;
+	COMPUTER_ID, COMPUTER_NAME, INTRODUCED_DATE, DISCONTINUED_DATE, COMPANY_NAME;
 
 	public String toString() {
 		switch (this) {
-		case ID:
+		case COMPUTER_ID:
 			return "computer.id";
 		case COMPUTER_NAME:
 			return "computer.name";
@@ -25,7 +25,7 @@ public enum SortColumn {
 
 	public String toPrint() {
 		switch (this) {
-		case ID:
+		case COMPUTER_ID:
 			return "COMPUTER_ID";
 		case COMPUTER_NAME:
 			return "COMPUTER_NAME";
@@ -43,11 +43,12 @@ public enum SortColumn {
 	
 	public static SortColumn build(String string) {
 		if (string == null) {
-			return ID;
+			return COMPUTER_ID;
 		}
 		switch (string) {
+		case "":
 		case "COMPUTER_ID":
-			return ID;
+			return COMPUTER_ID;
 		case "COMPUTER_NAME":
 			return COMPUTER_NAME;
 		case "INTRODUCED_DATE":
@@ -57,7 +58,7 @@ public enum SortColumn {
 		case "COMPANY_NAME":
 			return COMPANY_NAME;
 		default:
-			return ID;
+			return COMPUTER_ID;
 		}
 	}
 

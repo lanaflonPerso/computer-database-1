@@ -10,7 +10,7 @@ public class SortCriteria {
 	
 	public SortCriteria() {
 		super();
-		this.sortColumn = SortColumn.ID;
+		this.sortColumn = SortColumn.COMPUTER_ID;
 		this.sortDirection = SortDirection.ASC;
 	}
 

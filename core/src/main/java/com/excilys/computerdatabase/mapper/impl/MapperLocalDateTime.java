@@ -24,7 +24,6 @@ public class MapperLocalDateTime implements EnhancedUserType, Serializable {
 	public int[] sqlTypes() {
 		return SQL_TYPES;
 	}
-
 	
 	@Override
 	@SuppressWarnings("rawtypes")

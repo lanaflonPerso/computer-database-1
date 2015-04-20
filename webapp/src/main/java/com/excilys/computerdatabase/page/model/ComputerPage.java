@@ -8,6 +8,7 @@ import java.util.List;
 import com.excilys.computerdatabase.dto.model.CompanyDto;
 import com.excilys.computerdatabase.dto.model.ComputerDto;
 
+
 public class ComputerPage {
 	private ComputerDto computerDto;
 	private List<CompanyDto> companies;
