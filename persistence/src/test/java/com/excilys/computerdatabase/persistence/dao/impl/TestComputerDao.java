@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.dao.impl;
+package com.excilys.computerdatabase.persistence.dao.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -26,10 +26,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.excilys.computerdatabase.dao.impl.ComputerDaoImpl;
 import com.excilys.computerdatabase.exception.DaoException;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
+import com.excilys.computerdatabase.persistence.dao.impl.ComputerDaoImpl;
 import com.excilys.computerdatabase.sort.SortColumn;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.sort.SortDirection;

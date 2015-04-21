@@ -2,7 +2,7 @@
  * @Author Vincent Galloy
  * 
  */
-package com.excilys.computerdatabase.ui;
+package com.excilys.computerdatabase.console;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -12,12 +12,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
+import com.excilys.computerdatabase.console.service.ConsoleService;
 import com.excilys.computerdatabase.exception.ParsingException;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
-import com.excilys.computerdatabase.service.CompanyService;
-import com.excilys.computerdatabase.service.ComputerService;
-import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.validation.Validator;
 
 /**
@@ -25,18 +23,11 @@ import com.excilys.computerdatabase.validation.Validator;
  */
 @Component
 public class CommandLineMenu {
-
+	@Autowired
+	private ConsoleService consoleService;
 	private Scanner scanner = new Scanner(System.in);
-	@Autowired
-	private ComputerService computerService;
-	@Autowired
-	private CompanyService companyService;
 
-	public CommandLineMenu() {
-		super();
-	}
-
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		@SuppressWarnings("resource")
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:/application-context.xml");
 		CommandLineMenu commandLineMenu = applicationContext.getBean(CommandLineMenu.class);
@@ -93,16 +84,16 @@ public class CommandLineMenu {
 	}
 
 	private void listComputer() {
-		Paginator.print(computerService.list(new SortCriteria()));
+		Paginator.print(consoleService.getAllComputer());
 	}
 
 	private void listCompanies() {
-		Paginator.print(computerService.list(new SortCriteria()));
+		Paginator.print(consoleService.getAllCompany());
 	}
 
 	private void showComputerDetails() {
 		Long id = getLongFromCommandLine("Computer Id : ");
-		Computer computer = computerService.getById(id);
+		Computer computer = consoleService.getComputerById(id);
 		System.out.println(computer.toString());
 	}
 
@@ -113,7 +104,7 @@ public class CommandLineMenu {
 		Long company_id = getLongFromCommandLine("Computer company_id : ");
 		Computer computer = new Computer(new Long(0), name, introduced,
 				discontinued, new Company(company_id, null));
-		computerService.create(computer);
+		consoleService.createComputer(computer);
 		System.out.println("computer created : " + computer.toString());
 	}
 
@@ -125,19 +116,19 @@ public class CommandLineMenu {
 		Long company_id = getLongFromCommandLine("Computer (new) company_id : ");
 		Computer computer = new Computer(id, name, introduced, discontinued,
 				new Company(company_id, null));
-		computerService.update(computer);
+		consoleService.updateComputer(computer);
 		System.out.println("computer updated : " + computer.toString());
 
 	}
 
 	private void deleteComputer() {
 		Long id = getLongFromCommandLine("Computer id : ");
-		computerService.delete(id);
+		consoleService.deleteComputer(id);
 	}
 
 	private void deleteCompany() {
 		Long id = getLongFromCommandLine("Company id : ");
-		companyService.delete(id);
+		consoleService.deleteCompany(id);
 	}
 
 	private Long getLongFromCommandLine(String request) {

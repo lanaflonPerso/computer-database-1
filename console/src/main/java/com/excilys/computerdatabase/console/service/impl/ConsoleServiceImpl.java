@@ -1,0 +1,84 @@
+package com.excilys.computerdatabase.console.service.impl;
+
+import java.util.List;
+
+import javax.ws.rs.core.MediaType;
+
+import org.springframework.stereotype.Service;
+
+import com.excilys.computerdatabase.console.service.ConsoleService;
+import com.excilys.computerdatabase.model.Company;
+import com.excilys.computerdatabase.model.Computer;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.GenericType;
+
+@Service
+public class ConsoleServiceImpl implements ConsoleService {
+	private static final String SERVER_ROOT_URI = "http://localhost:8080/webservice/rest";
+	private static final String SERVER_ROOT_COMPANY = SERVER_ROOT_URI + "/company";
+	private static final String SERVER_ROOT_COMPUTER = SERVER_ROOT_URI + "/computer";
+	
+	@Override
+	public List<Computer> getAllComputer() {
+		return Client.create()
+				.resource( SERVER_ROOT_COMPUTER + "/getAll")
+				.get( ClientResponse.class )
+				.getEntity(new GenericType<List<Computer>>(){});
+	}
+
+	@Override
+	public List<Company> getAllCompany() {
+		return Client.create()
+							.resource( SERVER_ROOT_COMPANY + "/getAll")
+							.get( ClientResponse.class )
+							.getEntity(new GenericType<List<Company>>(){});
+	}
+
+	@Override
+	public Computer getComputerById(Long id) {
+		return Client.create()
+				.resource( SERVER_ROOT_COMPUTER + "/getById" + "/" + id)
+				.get( ClientResponse.class )
+				.getEntity(new GenericType<Computer>(){});
+	}
+
+	@Override
+	public void createComputer(Computer c) {
+		c = Client.create()
+				.resource( SERVER_ROOT_COMPUTER + "/create")
+				.accept( MediaType.APPLICATION_XML )
+        .type( MediaType.APPLICATION_XML )
+        .entity( c )
+        .post( ClientResponse.class )
+        .getEntity(new GenericType<Computer>(){});
+	}
+
+	@Override
+	public void updateComputer(Computer c) {
+		c = Client.create()
+				.resource( SERVER_ROOT_COMPUTER + "/update")
+				.accept( MediaType.APPLICATION_XML )
+        .type( MediaType.APPLICATION_XML )
+        .entity( c )
+        .post( ClientResponse.class )
+        .getEntity(new GenericType<Computer>(){});
+	}
+
+	@Override
+	public void deleteComputer(Long id) {
+		Client.create()
+			.resource( SERVER_ROOT_COMPUTER + "/delete/" + id)
+			.header("Content-Type", "application/xml")
+			.delete( ClientResponse.class );
+	}
+
+	@Override
+	public void deleteCompany(Long id) {
+		Client.create()
+			.resource( SERVER_ROOT_COMPANY + "/delete/" + id)
+			.header("Content-Type", "application/xml")
+		.delete( ClientResponse.class );
+	}
+
+}

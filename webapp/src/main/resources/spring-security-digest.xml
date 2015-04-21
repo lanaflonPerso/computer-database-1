@@ -6,9 +6,18 @@
            http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http create-session="stateless" entry-point-ref="digestEntryPoint">
-		<intercept-url pattern="/editComputer*" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/addComputer*" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/dashboard*" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
+		<intercept-url pattern="/css/**" access="permitAll" />
+		<intercept-url pattern="/fonts/**" access="permitAll" />
+		<intercept-url pattern="/js/**" access="permitAll" />	
+		<intercept-url pattern="/customLogin" access="permitAll" />
+		<intercept-url pattern="/logout" access="permitAll" />
+		
+		<intercept-url pattern="/dashboard**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
+		<intercept-url pattern="/editComputer**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/addComputer**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/computer/**" access="hasRole('ROLE_ADMIN')" />
+		
+		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
 
 		<form-login login-page="/customLogin"
 					login-processing-url="/j_spring_security_check"

@@ -16,7 +16,7 @@
 						<h1>
 							<spring:message code="add.computer" />
 						</h1>
-						<form:form modelAttribute="computerDto" action="computer/add" onsubmit="return checkPostForm(document)" method="POST">
+						<form:form modelAttribute="addComputerDto" action="computer/add" onsubmit="return checkPostForm(document)" method="POST">
 							<fieldset>
 								<div class="form-group">
 									<spring:message code="computer.name" var="computer_name"/>

@@ -25,30 +25,21 @@
 		</property>
 	</bean>
 
+
+	<!-- Spring message (i18n) -->
 	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
 		<property name="defaultLocale" value="en" />
 	</bean>
-
 	<mvc:interceptors>
 		<bean id="localeChangeInterceptor"
 			class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 			<property name="paramName" value="language" />
 		</bean>
 	</mvc:interceptors>
-
-
-	<!-- Spring message (i18n) -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="defaultEncoding" value="UTF-8" />
-		<property name="basenames">
-			<list>
-				<value>classpath:/message/springMessage</value>
-			</list>
-		</property>
+		<property name="basenames" value="classpath:/message/springMessage" />
 	</bean>
-
-	
-
 </beans>

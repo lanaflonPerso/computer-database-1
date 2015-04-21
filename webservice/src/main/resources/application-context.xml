@@ -10,6 +10,7 @@
   		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
 	<!-- Package scan -->
-	<context:component-scan base-package="com.excilys.computerdatabase.console" />
+	<context:component-scan base-package="com.excilys.computerdatabase.webservice.impl" />
+
 
 </beans>

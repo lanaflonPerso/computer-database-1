@@ -20,24 +20,24 @@
 	</bean>
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
-	  <property name="dataSource" ref="dataSource" />
-	  <property name="packagesToScan" value="com.excilys.computerdatabase.model" />
+	 	<property name="dataSource" ref="dataSource" />
+	  	<property name="packagesToScan" value="com.excilys.computerdatabase.model" />
 		<property name="hibernateProperties">
-	    <props>
-	      <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-	      <prop key="hibernate.show_sql">true</prop>
-	    </props>
+		    <props>
+		      <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+		      <prop key="hibernate.show_sql">true</prop>
+		    </props>
 	  </property> 
 	</bean>
 
 	<!-- Transaction -->
-	<tx:annotation-driven proxy-target-class="true"		transaction-manager="transactionManager" />
+	<tx:annotation-driven transaction-manager="transactionManager" />
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
 	<!-- Package scan -->
-	<context:component-scan base-package="com.excilys.computerdatabase.dao.impl" />
-	<context:component-scan base-package="com.excilys.computerdatabase.mapper.impl" />
+	<context:component-scan base-package="com.excilys.computerdatabase.persistence.dao.impl" />
+	<context:component-scan base-package="com.excilys.computerdatabase.persistence.mapper.impl" />
 
 </beans>

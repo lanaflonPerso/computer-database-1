@@ -49,7 +49,7 @@ public class ComputerControler extends AbstractController {
 	private EditPageCreator editPageCreator;
 	
 	@RequestMapping(value="/computer/add", method = RequestMethod.POST)
-	public String addComputer(@Valid @ModelAttribute("computerDto") ComputerDto computerDto, BindingResult bindingResult) {
+	public String addComputer(@Valid @ModelAttribute("addComputerDto") ComputerDto computerDto, BindingResult bindingResult) {
 		
 		log.info("Servlet : [POST] computer-add {}", computerDto);
 		
@@ -70,7 +70,7 @@ public class ComputerControler extends AbstractController {
 	}
 	
 	@RequestMapping(value="/computer/edit", method = RequestMethod.POST)
-	public String editComputer(@Valid @ModelAttribute("computerDto") ComputerDto computerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+	public String editComputer(@Valid @ModelAttribute("editComputerDto") ComputerDto computerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
 		
 		log.info("Servlet : [POST] computer-edit {}", computerDto);
 		

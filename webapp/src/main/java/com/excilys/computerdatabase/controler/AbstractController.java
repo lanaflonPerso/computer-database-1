@@ -11,8 +11,13 @@ public abstract class AbstractController {
 	public static final String LOGIN = "customLogin";
 	public static final String REDIRECT = "redirect:/";
 	
-	@ModelAttribute("computerDto")
-	public ComputerDto getComputerDto(){
+	@ModelAttribute("addComputerDto")
+	public ComputerDto getAddComputerDto(){
+	    return new ComputerDto();
+	}
+	
+	@ModelAttribute("editComputerDto")
+	public ComputerDto getEditComputerDto(){
 	    return new ComputerDto();
 	}
 	

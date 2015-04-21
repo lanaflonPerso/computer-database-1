@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.excilys.computerdatabase.dao.ComputerDao;
 import com.excilys.computerdatabase.exception.ServiceException;
 import com.excilys.computerdatabase.model.Computer;
+import com.excilys.computerdatabase.persistence.dao.ComputerDao;
 import com.excilys.computerdatabase.service.ComputerService;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.validation.Validator;

@@ -18,12 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.excilys.computerdatabase.dao.CompanyDao;
-import com.excilys.computerdatabase.dao.impl.CompanyDaoImpl;
-import com.excilys.computerdatabase.dao.impl.ComputerDaoImpl;
 import com.excilys.computerdatabase.exception.ServiceException;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
+import com.excilys.computerdatabase.persistence.dao.CompanyDao;
+import com.excilys.computerdatabase.persistence.dao.impl.CompanyDaoImpl;
+import com.excilys.computerdatabase.persistence.dao.impl.ComputerDaoImpl;
 import com.excilys.computerdatabase.service.ComputerService;
 import com.excilys.computerdatabase.service.impl.CompanyServiceImpl;
 import com.excilys.computerdatabase.sort.SortCriteria;

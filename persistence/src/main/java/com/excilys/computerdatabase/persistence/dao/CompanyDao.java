@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.dao;
+package com.excilys.computerdatabase.persistence.dao;
 
 import com.excilys.computerdatabase.model.Company;
 

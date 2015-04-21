@@ -33,7 +33,7 @@
 	</bean>
 
 	<!-- Package scan -->
-	<context:component-scan base-package="com.excilys.computerdatabase.dao.impl" />
+	<context:component-scan base-package="com.excilys.computerdatabase.persistence.dao.impl" />
 	<context:component-scan base-package="com.excilys.computerdatabase.service.impl" />
 
 	<!-- Transaction -->

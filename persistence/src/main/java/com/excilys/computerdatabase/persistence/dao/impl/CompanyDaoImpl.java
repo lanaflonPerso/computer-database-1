@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.dao.impl;
+package com.excilys.computerdatabase.persistence.dao.impl;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.excilys.computerdatabase.dao.CompanyDao;
 import com.excilys.computerdatabase.exception.DaoException;
 import com.excilys.computerdatabase.model.Company;
+import com.excilys.computerdatabase.persistence.dao.CompanyDao;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.validation.Validator;
 

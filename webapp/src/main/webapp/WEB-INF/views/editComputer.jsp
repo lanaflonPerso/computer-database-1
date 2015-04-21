@@ -20,13 +20,18 @@
 				</div>
 				<div id="navbar" class="collapse navbar-collapse pull-right">
 					<ul class="nav navbar-nav">
-						<li class="dropdown"><a href="#" class="dropdown-toggle "
-							data-toggle="dropdown" role="button" aria-expanded="false"><spring:message
-									code="button.language" /> <span class="caret"></span> </a>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="false">
+								<spring:message code="flag" var="flag" />
+								<img src="/webapp/fonts/flags/${flag}.png" alt="uk flag" style="width:25px;height:20px">
+								<spring:message code="button.language" />
+								<span class="caret"></span>
+							</a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="?language=en&computerId=${page.getComputerDto().getId()}"><img src="fonts/uk.png" alt="uk flag" style="width:25px;height:20px"> English</a></li>
 								<li><a href="?language=fr&computerId=${page.getComputerDto().getId()}"><img src="fonts/fr.png" alt="fr flag" style="width:25px;height:20px"> Français</a></li>
-							</ul></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -37,7 +42,7 @@
 					<div class="col-xs-8 col-xs-offset-2 box">
 						<div id="computer_Id" class="label label-default pull-right">id:${page.getComputerDto().getId()}</div>
 						<h1><spring:message	code="edit.computer" /></h1>
-						<form:form modelAttribute="computerDto" action="computer/edit" method="POST"	onsubmit="return checkPostForm(document)" >
+						<form:form modelAttribute="editComputerDto" action="computer/edit" method="POST"	onsubmit="return checkPostForm(document)" >
 							<input type="hidden" name="id" id="computerId" value="${page.getComputerDto().getId()}" />
 							<fieldset>
 								<div class="form-group">

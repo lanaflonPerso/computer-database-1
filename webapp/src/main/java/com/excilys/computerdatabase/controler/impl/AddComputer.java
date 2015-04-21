@@ -35,7 +35,7 @@ public class AddComputer extends AbstractController {
 		ComputerPage page = addPageCreator.getPageFromGetRequest();
 		if(addComputerSession.getComputerDto() != null) {
 			page.setComputerDto(addComputerSession.getComputerDto());
-			model.addAttribute("org.springframework.validation.BindingResult.computerDto", addComputerSession.getBindingResult());
+			model.addAttribute("org.springframework.validation.BindingResult.addComputerDto", addComputerSession.getBindingResult());
 		} 
 		model.addAttribute("page", page);
 		

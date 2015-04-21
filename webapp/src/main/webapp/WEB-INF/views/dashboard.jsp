@@ -12,7 +12,8 @@
 		<jsp:include page="/WEB-INF/views/import/header_menu.jsp"></jsp:include>
 		<section id="main">
 			<div class="container">
-				<h1 id="homeTitle">${page.getNumberOfComputer()} <spring:message code="computer.found"/></h1>
+				<h1 id="homeTitle">${page.getNumberOfComputer()}   
+							<spring:message code="computer.found"/></h1>
 				<div id="actions" class="form-horizontal">
 					<div class="pull-left">
 		

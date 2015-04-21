@@ -34,7 +34,7 @@ public class EditComputer extends AbstractController {
 		if(id == null ) {
 			page = editPageCreator.getPageFromGetRequest(Long.valueOf(editComputerSession.getComputerDto().getId()));
 			page.setComputerDto(editComputerSession.getComputerDto());
-			model.addAttribute("org.springframework.validation.BindingResult.computerDto", editComputerSession.getBindingResult());
+			model.addAttribute("org.springframework.validation.BindingResult.editComputerDto", editComputerSession.getBindingResult());
 		} else {
 			page = editPageCreator.getPageFromGetRequest(id);
 		}

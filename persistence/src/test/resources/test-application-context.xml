@@ -33,7 +33,7 @@
 	</bean>
 
 	<!-- Package scan -->
-	<context:component-scan base-package="com.excilys.computerdatabase.dao.impl" />
+	<context:component-scan base-package="com.excilys.computerdatabase.persistence.dao.impl" />
 
 	<!-- Transaction -->
 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
