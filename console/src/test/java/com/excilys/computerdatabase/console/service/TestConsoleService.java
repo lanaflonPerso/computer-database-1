@@ -19,7 +19,7 @@ import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/test-application-context.xml" })
+@ContextConfiguration(locations = { "classpath:/test-console-context.xml" })
 public class TestConsoleService {
 	@Autowired
 	ConsoleService consoleService;

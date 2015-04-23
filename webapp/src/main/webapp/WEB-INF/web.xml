@@ -29,6 +29,28 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	
+	
+	<!-- UTF-8 Encoding -->
+		<filter>
+	     <filter-name>encoding-filter</filter-name>
+	     <filter-class>
+	  		org.springframework.web.filter.CharacterEncodingFilter
+	     </filter-class>
+	     <init-param>
+	  <param-name>encoding</param-name>
+	  <param-value>UTF-8</param-value>
+	     </init-param>
+	     <init-param>
+	     <param-name>forceEncoding</param-name>
+	     <param-value>true</param-value>
+	     </init-param>
+	 </filter>
+	
+	 <filter-mapping>
+	     <filter-name>encoding-filter</filter-name>
+	     <url-pattern>/*</url-pattern>
+	 </filter-mapping> 
+	
 	<!-- Spring security -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
@@ -72,4 +94,7 @@
 		<error-code>500</error-code>
 		<location>/WEB-INF/views/500.jsp</location>
 	</error-page>
+	
+	
+       
 </web-app>

@@ -18,7 +18,7 @@
 		<intercept-url pattern="/editComputer**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/addComputer**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/computer/**" access="hasRole('ROLE_ADMIN')" />
-		
+		<intercept-url pattern="/" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
 		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
 
 		<form-login login-page="/customLogin"

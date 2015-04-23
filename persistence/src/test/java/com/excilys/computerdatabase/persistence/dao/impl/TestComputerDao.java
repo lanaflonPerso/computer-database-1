@@ -35,7 +35,7 @@ import com.excilys.computerdatabase.sort.SortDirection;
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/test-application-context.xml" })
+@ContextConfiguration(locations = { "classpath:/test-persistence-context.xml" })
 public class TestComputerDao {
 	@Autowired
 	private ComputerDaoImpl computerDao;

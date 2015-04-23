@@ -6,9 +6,9 @@
 			<div id="logout_div" class="collapse navbar-collapse pull-right">
 				<a class="navbar-brand" href="/webapp/logout" >
 					<font style="font-size:12px">
-						<i class="fa fa-power-off"></i> Log out
+						<i class="fa fa-power-off"></i><spring:message code="log.out"/>
 					</font>
-				</a>
+				</a>			
 			</div>
 			<div id="navbar" class="collapse navbar-collapse pull-right">
 				<ul class="nav navbar-nav">

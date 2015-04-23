@@ -37,8 +37,8 @@
 		<mysql-connector-version>5.1.6</mysql-connector-version>
 		<!-- Test -->
 		<dbunit-version>2.5.0</dbunit-version>
-		<mockito-all-version>1.9.0</mockito-all-version><!-- ATTENTION : ne pas 
-			mettre la version 1.9.5 -->
+		<mockito-all-version>1.9.0</mockito-all-version><!-- don't change into 
+			1.9.5 -->
 		<!-- Servlet -->
 		<javax.servlet-api-version>3.1.0</javax.servlet-api-version>
 		<!-- Selenium -->
@@ -56,10 +56,10 @@
 		<jcl-over-slf4j-version>1.7.10</jcl-over-slf4j-version>
 		<commons-logging-version>99-empty</commons-logging-version>
 		<spring-data-jpa-version>1.7.2.RELEASE</spring-data-jpa-version>
+		<spring-security-version>4.0.0.RELEASE</spring-security-version>
 		<!-- Hibernate -->
 		<hibernate-version>5.0.0.Beta1</hibernate-version>
 		<hibernate-validator-version>5.1.3.Final</hibernate-validator-version>
-		<spring-security-version>4.0.0.RELEASE</spring-security-version>
 		<!-- Jersey -->
 		<jersey-version>2.17</jersey-version>
 		<jersey-bundle-version>1.10-b01</jersey-bundle-version>
@@ -100,6 +100,10 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
+        <dependency>
+          <groupId>org.springframework.security</groupId>
+          <artifactId>spring-security-taglibs</artifactId>
+        </dependency>
 		<!-- Hibernate --> <!-- Don't move it : Hibernate Log bug -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -110,6 +114,27 @@
 					<artifactId>xml-apis</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<!-- Log -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-api-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback-classic-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${jcl-over-slf4j-version}</version><!-- Override Log for Spring -->
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId><!-- Empty jar for create a bridge -->
+			<artifactId>commons-logging</artifactId>
+			<version>${commons-logging-version}</version>
 		</dependency>
 	</dependencies>
 
@@ -198,17 +223,6 @@
 				<version>${jstl-version}</version>
 				<scope>runtime</scope>
 			</dependency>
-			<!-- log -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>${slf4j-api-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-classic</artifactId>
-				<version>${logback-classic-version}</version>
-			</dependency>
 			<!-- Spring -->
 			<dependency>
 				<groupId>org.springframework</groupId>
@@ -269,16 +283,6 @@
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-taglibs</artifactId>
 				<version>${spring-security-version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>jcl-over-slf4j</artifactId>
-				<version>${jcl-over-slf4j-version}</version><!-- Override Log for Spring -->
-			</dependency>
-			<dependency>
-				<groupId>commons-logging</groupId><!-- Empty jar for create a bridge -->
-				<artifactId>commons-logging</artifactId>
-				<version>${commons-logging-version}</version>
 			</dependency>
 			<!-- Hibernate -->
 			<dependency>
