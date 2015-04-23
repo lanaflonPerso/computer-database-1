@@ -7,8 +7,8 @@ import java.util.Locale;
 
 import org.springframework.stereotype.Service;
 
-import com.excilys.computerdatabase.dto.mapper.impl.DateMapper;
 import com.excilys.computerdatabase.dto.model.ComputerDto;
+import com.excilys.computerdatabase.mapper.impl.DateMapper;
 import com.excilys.computerdatabase.page.model.ComputerPage;
 import com.excilys.computerdatabase.util.DateFormat;
 

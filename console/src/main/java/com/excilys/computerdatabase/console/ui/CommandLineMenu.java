@@ -2,7 +2,7 @@
  * @Author Vincent Galloy
  * 
  */
-package com.excilys.computerdatabase.console;
+package com.excilys.computerdatabase.console.ui;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;

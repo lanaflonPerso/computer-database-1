@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.excilys.computerdatabase.exception.ServiceException;
 import com.excilys.computerdatabase.model.Computer;
 import com.excilys.computerdatabase.persistence.dao.ComputerDao;
 import com.excilys.computerdatabase.service.ComputerService;
+import com.excilys.computerdatabase.service.exception.ServiceException;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.validation.Validator;
 
@@ -39,7 +39,7 @@ public class ComputerServiceImpl implements ComputerService {
 	@Override
 	@Transactional(readOnly = true)
 	public Computer getById(Long id) {
-		log.info("Get computer with id : {0}", id);
+		log.info("Get computer with id : {}", id);
 		if (!Validator.isIdCorrect(id)) {
 			throw new ServiceException(Validator.INVALID_COMPUTER_ID);
 		}
@@ -50,7 +50,7 @@ public class ComputerServiceImpl implements ComputerService {
 	@Override
 	@Transactional
 	public void create(Computer c) {
-		log.info("Update computer : {0}", c);
+		log.info("Update computer : {}", c);
 		if (!Validator.isComputerCorrect(c)) {
 			throw new ServiceException(Validator.INVALID_COMPUTER);
 		}
@@ -60,7 +60,7 @@ public class ComputerServiceImpl implements ComputerService {
 	@Override
 	@Transactional
 	public void update(Computer c) {
-		log.info("Update computer : {0}", c);
+		log.info("Update computer : {}", c);
 		if (!Validator.isComputerCorrect(c) && Validator.isIdCorrect(c.getId())) {
 			throw new ServiceException(Validator.INVALID_COMPUTER);
 		}
@@ -71,7 +71,7 @@ public class ComputerServiceImpl implements ComputerService {
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		log.info("Get computer with id : {0}", id);
+		log.info("Get computer with id : {}", id);
 		if (!Validator.isIdCorrect(id)) {
 			throw new ServiceException(Validator.INVALID_COMPUTER);
 		}

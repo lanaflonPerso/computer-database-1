@@ -32,6 +32,7 @@
 	<authentication-manager>
 		<authentication-provider>
 			<jdbc-user-service data-source-ref="dataSource"/>
+			<password-encoder hash="bcrypt" />
 		</authentication-provider>
 	</authentication-manager>
 

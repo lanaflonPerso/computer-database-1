@@ -15,7 +15,7 @@ import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.type.StandardBasicTypes;
 import org.hibernate.usertype.EnhancedUserType;
 
-public class MapperLocalDateTime implements EnhancedUserType, Serializable {
+public class LocalDateTimeHibernateMapper implements EnhancedUserType, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final int[] SQL_TYPES = new int[] { Types.TIMESTAMP };

@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.excilys.computerdatabase.exception.ServiceException;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.persistence.dao.CompanyDao;
 import com.excilys.computerdatabase.persistence.dao.ComputerDao;
 import com.excilys.computerdatabase.service.CompanyService;
+import com.excilys.computerdatabase.service.exception.ServiceException;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.validation.Validator;
 
@@ -61,7 +61,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		log.info("Delete company : {0}", id);
+		log.info("Delete company : {}", id);
 		if (!Validator.isIdCorrect(id)) {
 			throw new ServiceException(Validator.INVALID_COMPANY_ID);
 		}
@@ -71,7 +71,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	@Transactional
 	public void create(Company t) {
-		log.info("Company create : {0}", t);
+		log.info("Company create : {}", t);
 		if (!Validator.isCompanyCorrect(t)) {
 			throw new ServiceException(Validator.INVALID_COMPANY);
 		}
@@ -81,7 +81,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	@Transactional(readOnly = true)
 	public Company getById(Long id) {
-		log.info("Find company with id : {0} ", id);
+		log.info("Find company with id : {} ", id);
 		if (!Validator.isIdCorrect(id)) {
 			throw new ServiceException(Validator.INVALID_COMPANY_ID);
 		}

@@ -1,4 +1,4 @@
-package com.excilys.computerdatabase.mapper;
+package com.excilys.computerdatabase.validation;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 
 import org.junit.Test;
 
-import com.excilys.computerdatabase.dto.mapper.impl.DateMapper;
 import com.excilys.computerdatabase.exception.ParsingException;
+import com.excilys.computerdatabase.mapper.impl.DateMapper;
 import com.excilys.computerdatabase.util.DateFormat;
 
 public class TestDateMapper {

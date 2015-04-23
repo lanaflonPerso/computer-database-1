@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.console;
+package com.excilys.computerdatabase.console.ui;
 
 import java.util.List;
 import java.util.Scanner;

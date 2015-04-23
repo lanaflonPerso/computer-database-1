@@ -14,6 +14,10 @@
 			<groupId>computer-database</groupId>
 			<artifactId>core</artifactId>
 		</dependency>
+			<dependency>
+			<groupId>computer-database</groupId>
+			<artifactId>binding</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
 			<artifactId>jersey-bundle</artifactId>

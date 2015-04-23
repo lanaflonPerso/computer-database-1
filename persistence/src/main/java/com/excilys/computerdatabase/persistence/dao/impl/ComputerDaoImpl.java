@@ -16,9 +16,9 @@ import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.excilys.computerdatabase.exception.DaoException;
 import com.excilys.computerdatabase.model.Computer;
 import com.excilys.computerdatabase.persistence.dao.ComputerDao;
+import com.excilys.computerdatabase.persistence.exception.DaoException;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.sort.SortDirection;
 import com.excilys.computerdatabase.validation.Validator;

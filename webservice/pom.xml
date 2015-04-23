@@ -13,94 +13,32 @@
 		<!-- Module -->
 		<dependency>
 			<groupId>computer-database</groupId>
-			<artifactId>persistence</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>computer-database</groupId>
 			<artifactId>service</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>computer-database</groupId>
-			<artifactId>core</artifactId>
-		</dependency>
+		<!-- Dependencies -->
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.0</version>
 		</dependency>
-
-
-	<dependency>
-		<groupId>com.sun.jersey</groupId>
-		<artifactId>jersey-core</artifactId>
-		<version>1.19</version>
-	</dependency>
-		
 		<dependency>
-    <groupId>org.glassfish.jersey.containers</groupId>
-    <artifactId>jersey-container-servlet</artifactId>
-    <version>2.17</version>
-    <scope>provided</scope>
-</dependency>
-<!-- if you are using Jersey client specific features without the server side -->
-<dependency>
-    <groupId>org.glassfish.jersey.core</groupId>
-    <artifactId>jersey-client</artifactId>
-    <version>2.17</version>
-    <scope>provided</scope>
-</dependency>
-		
-		
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
 		<dependency>
-	<groupId>org.glassfish.jersey.bundles</groupId>
-	<artifactId>jaxrs-ri</artifactId>
-	<version>2.17</version>
-</dependency>
-		
-		
-		
-<dependency>
-    <groupId>org.glassfish.jersey.containers</groupId>
-    <artifactId>jersey-container-grizzly2-http</artifactId>
-    <version>2.17</version>
-</dependency>
- 
-<dependency>
-    <groupId>org.glassfish.jersey.containers</groupId>
-    <artifactId>jersey-container-grizzly2-servlet</artifactId>
-    <version>2.17</version>
-</dependency>
- 
-<dependency>
-    <groupId>org.glassfish.jersey.containers</groupId>
-    <artifactId>jersey-container-jdk-http</artifactId>
-    <version>2.17</version>
-</dependency>
- 
-<dependency>
-    <groupId>org.glassfish.jersey.containers</groupId>
-    <artifactId>jersey-container-simple-http</artifactId>
-    <version>2.17</version>
-</dependency> 
-
-<dependency>
-    <groupId>org.glassfish.jersey.containers</groupId>
-    <artifactId>jersey-container-jetty-http</artifactId>
-    <version>2.17</version>
-</dependency>
- 
-<dependency>
-    <groupId>org.glassfish.jersey.containers</groupId>
-    <artifactId>jersey-container-jetty-servlet</artifactId>
-    <version>2.17</version>
-</dependency>
-	
-<dependency>
-    <groupId>org.glassfish.jersey.ext</groupId>
-    <artifactId>jersey-spring3</artifactId>
-    <version>2.17</version>
-</dependency>
-		
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.bundles</groupId>
+			<artifactId>jaxrs-ri</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.ext</groupId>
+			<artifactId>jersey-spring3</artifactId>
+		</dependency>
 	</dependencies>
-
 </project>

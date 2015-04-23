@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.exception;
+package com.excilys.computerdatabase.service.exception;
 
 public class ServiceException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

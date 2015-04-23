@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.exception;
+package com.excilys.computerdatabase.persistence.exception;
 
 /**
  * The Class DataBaseException.

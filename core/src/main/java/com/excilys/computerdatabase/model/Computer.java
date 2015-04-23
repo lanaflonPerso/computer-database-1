@@ -12,21 +12,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.hibernate.annotations.Type;
 
+import com.excilys.computerdatabase.mapper.impl.LocalDateTimeBindMapper;
+
 @XmlRootElement
-@Entity(name="computer")
+@Entity(name = "computer")
 public class Computer implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
-	@Type(type="com.excilys.computerdatabase.mapper.impl.MapperLocalDateTime")
+	@Type(type = "com.excilys.computerdatabase.mapper.impl.LocalDateTimeHibernateMapper")
 	private LocalDateTime introduced;
-	@Type(type="com.excilys.computerdatabase.mapper.impl.MapperLocalDateTime")
+	@Type(type = "com.excilys.computerdatabase.mapper.impl.LocalDateTimeHibernateMapper")
 	private LocalDateTime discontinued;
-	
+
 	@OneToOne
 	private Company company;
 
@@ -64,6 +67,7 @@ public class Computer implements Serializable {
 		return introduced;
 	}
 
+	@XmlJavaTypeAdapter(LocalDateTimeBindMapper.class)
 	public void setIntroduced(LocalDateTime introduced) {
 		this.introduced = introduced;
 	}
@@ -72,6 +76,7 @@ public class Computer implements Serializable {
 		return discontinued;
 	}
 
+	@XmlJavaTypeAdapter(LocalDateTimeBindMapper.class)
 	public void setDiscontinued(LocalDateTime discontinued) {
 		this.discontinued = discontinued;
 	}

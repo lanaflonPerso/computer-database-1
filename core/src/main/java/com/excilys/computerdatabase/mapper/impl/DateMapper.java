@@ -1,4 +1,4 @@
-package com.excilys.computerdatabase.dto.mapper.impl;
+package com.excilys.computerdatabase.mapper.impl;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
