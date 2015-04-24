@@ -11,22 +11,28 @@
 		<intercept-url pattern="/css/**" access="permitAll" />
 		<intercept-url pattern="/fonts/**" access="permitAll" />
 		<intercept-url pattern="/js/**" access="permitAll" />	
-		<intercept-url pattern="/customLogin" access="permitAll" />
-		<intercept-url pattern="/logout" access="permitAll" />
+		<intercept-url pattern="/global/view/customLogin" access="permitAll" />
+		<intercept-url pattern="/global/view/logout" access="permitAll" />
 		
-		<intercept-url pattern="/dashboard**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
-		<intercept-url pattern="/editComputer**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/addComputer**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/computer/**" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
-		<intercept-url pattern="/**" access="hasRole('ROLE_ADMIN')" />
+        <!-- CONNECTED -->    
+        <intercept-url pattern="/global/view/home" access="isAuthenticated()" />
+        <!-- USER -->    
+        <intercept-url pattern="/" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
+		<intercept-url pattern="/computer/view/dashboard" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
+        <!-- ADMIN -->   
+        <intercept-url pattern="/computer/crud/**" access="hasAnyRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/computer/view/**" access="hasAnyRole('ROLE_ADMIN')" />
+        <!-- SUPER-ADMIN -->   
+        <intercept-url pattern="/user/view/dashboard**" access="hasAnyRole('ROLE_SUPER_ADMIN')" />
+        <intercept-url pattern="/user/crud/**" access="hasAnyRole('ROLE_SUPER_ADMIN')" />
 
-		<form-login login-page="/customLogin"
+		<intercept-url pattern="/**" access="isAuthenticated()" />
+
+		<form-login login-page="/global/view/customLogin"
 					login-processing-url="/j_spring_security_check"
 					username-parameter="username"
 					password-parameter="password"
-					authentication-failure-url="/customLogin?auth=false" />
-
+					authentication-failure-url="/global/view/customLogin?auth=false" />
 	</http>
 
 	<authentication-manager>

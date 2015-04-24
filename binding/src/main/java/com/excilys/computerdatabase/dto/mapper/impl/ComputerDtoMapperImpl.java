@@ -12,11 +12,11 @@ import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
 
 @Service
-public class ComputerDtoMapperImpl implements ComputerDtoMapper{
+public class ComputerDtoMapperImpl implements ComputerDtoMapper {
 
 	@Autowired
 	private CompanyDtoMapper companyDtoMapper;
-	
+
 	@Override
 	public ComputerDto mapFromModel(Computer model) {
 		ComputerDto computerDto = new ComputerDto();
@@ -48,8 +48,7 @@ public class ComputerDtoMapperImpl implements ComputerDtoMapper{
 	@Override
 	public Computer mapToModel(ComputerDto dto) {
 		Computer computer = new Computer();
-		Company company = companyDtoMapper.mapToModel(new CompanyDto(
-				dto.getCompanyId(), dto.getCompanyName()));
+		Company company = companyDtoMapper.mapToModel(new CompanyDto(dto.getCompanyId(), dto.getCompanyName()));
 
 		computer.setCompany(company);
 		computer.setName(dto.getName());

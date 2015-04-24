@@ -7,9 +7,9 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/tx 
-  		http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+  		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-	<!-- Package scan -->
+	<!-- DataSource creation -->
 	<context:property-placeholder location="classpath:/test-config.properties" />
 	<tx:annotation-driven proxy-target-class="true"		transaction-manager="transactionManager" />
 	
@@ -23,7 +23,7 @@
 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" >
 	  <property name="dataSource" ref="dataSource" />
-	  <property name="packagesToScan" value="com.excilys.computerdatabase.model" />
+	  <property name="packagesToScan" value="com.excilys.computerdatabase" />
 		<property name="hibernateProperties">
 	    <props>
 	      <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -34,11 +34,13 @@
 
 	<!-- Package scan -->
 	<context:component-scan base-package="com.excilys.computerdatabase.persistence.dao.impl" />
-	<context:component-scan base-package="com.excilys.computerdatabase.service.impl" />
+	<context:component-scan base-package="com.excilys.computerdatabase.service.dao" />
+    <context:component-scan base-package="com.excilys.computerdatabase.service.impl" />
 
 	<!-- Transaction -->
-	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+ 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
+	</bean> 
+
 
 </beans>

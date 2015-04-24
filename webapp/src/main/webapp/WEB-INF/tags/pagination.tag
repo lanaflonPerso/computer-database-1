@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="mylib"%>
 
-<%@ attribute name="page" required="true" type="com.excilys.computerdatabase.page.model.DashboardPage" description="Contains all the information of the page"%>
+<%@ attribute name="page" required="true" type="com.excilys.computerdatabase.page.model.ComputerDashboardPage" description="Contains all the information of the page"%>
 
 
 <div class="container text-center">

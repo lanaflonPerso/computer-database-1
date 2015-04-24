@@ -7,7 +7,7 @@ import com.excilys.computerdatabase.dto.model.CompanyDto;
 import com.excilys.computerdatabase.model.Company;
 
 @Service
-public class CompanyDtoMapperImpl implements CompanyDtoMapper{
+public class CompanyDtoMapperImpl implements CompanyDtoMapper {
 
 	@Override
 	public CompanyDto mapFromModel(Company model) {
@@ -31,5 +31,4 @@ public class CompanyDtoMapperImpl implements CompanyDtoMapper{
 		return company;
 	}
 
-	
 }

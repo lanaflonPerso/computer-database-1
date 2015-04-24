@@ -1,3 +1,9 @@
+
+checkName(document)
+checkIntroduced(document)
+checkDiscontinued(document)
+document.getElementById("companyId").style.borderColor = "green";
+
 function checkPostForm(document) {
 	value = true;
 	if (checkName(document) == false)
@@ -12,17 +18,16 @@ function checkPostForm(document) {
 function checkName(document) {
 	element = document.getElementById("computerName")
 	re = /^[ ]+$/
-	if (re.test(element.value)) {
+	if (re.test(element.value) || element.value == "" || element.value == null) {
 		element.style.borderColor = "red";
-		return false;
-	} else if (element.value == "" || element.value == null) {
-		element.style.borderColor = "red";
+		document.getElementById("nameError").style.display = "block";
 		return false;
 	} else {
 		if (document.getElementById("serviceNameException") != null) {
 			document.getElementById("serviceNameException").style.visibility = "hidden";
 		}
-		element.style.borderColor = "#CCC";
+		document.getElementById("nameError").style.display = "none";
+		element.style.borderColor = "green";
 		return true;
 	}
 }
@@ -35,9 +40,11 @@ function checkIntroduced(document) {
 		if (document.getElementById("serviceIntroducedException") != null) {
 			document.getElementById("serviceIntroducedException").style.visibility = "hidden";
 		}
-		element.style.borderColor = "#CCC";
+		document.getElementById("introducedError").style.display = "none";
+		element.style.borderColor = "green";
 		return true;
 	} else {
+		document.getElementById("introducedError").style.display = "block";
 		element.style.borderColor = "red";
 		return false;
 	}
@@ -51,9 +58,11 @@ function checkDiscontinued(document) {
 		if (document.getElementById("serviceDiscontinuedException") != null) {
 			document.getElementById("serviceDiscontinuedException").style.visibility = "hidden";
 		}
-		element.style.borderColor = "#CCC";
+		document.getElementById("discontinuedError").style.display = "none";
+		element.style.borderColor = "green";
 		return true;
 	} else {
+		document.getElementById("discontinuedError").style.display = "block";
 		element.style.borderColor = "red";
 		return false;
 	}

@@ -28,7 +28,7 @@ public class TestDashboardFirefox extends AbstractWebTest {
 	}
 	
 	@Test
-	public void testdeleteElement() {
+	public void testdeleteElement() throws Exception {
 		Long numberofElement = getComputerNumber(driver);
 		driver.findElement(By.id("editComputer")).click();
 		driver.findElement(By.id("selected_3")).click();

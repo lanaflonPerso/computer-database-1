@@ -5,4 +5,5 @@
 			<link href="/webapp/css/bootstrap.min.css" rel="stylesheet" media="screen">
 			<link href="/webapp/css/font-awesome.css" rel="stylesheet" media="screen">
 			<link href="/webapp/css/main.css" rel="stylesheet" media="screen">
+    		<link href="/webapp/css/modal.css" rel="stylesheet" type="text/css" />
 		</head>

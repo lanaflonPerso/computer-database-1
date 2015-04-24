@@ -6,8 +6,6 @@ package com.excilys.computerdatabase.controler.impl.addcomputer;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,14 +31,14 @@ public class TestAddComputer extends AbstractWebTest {
 	}
 
 	@Test
-	public void testAddWrongElement() {
+	public void testAddWrongElement() throws Exception {
 		Long computerFoundNumber1 = getComputerNumber(driver);
 		assertNotNull(computerFoundNumber1);
 
 		driver.findElement(By.id("addComputer")).click();
 		enterComputer(driver, "name", "wrongDate", "WrongDate", "Apple Inc.");
 		driver.findElement(By.id("addButton")).click();
-		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/webapp/addComputer");
+		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/webapp/computer/view/add");
 	}
 
 	@Test
@@ -55,28 +53,6 @@ public class TestAddComputer extends AbstractWebTest {
 		Long computerFoundNumber2 = getComputerNumber(driver);
 		assertEquals(computerFoundNumber2 != null, true);
 		assertEquals(computerFoundNumber1, new Long(computerFoundNumber2 - 1));
-	}
-	
-	private void enterComputer(WebDriver driver2, String name,
-			String introduced, String discontinued, String companyName) {
-		WebElement webElement = null;
-		webElement = driver.findElement(By.id("computerName"));
-		webElement.sendKeys(name);
-		webElement = driver.findElement(By.id("introduced"));
-		webElement.sendKeys(introduced);
-		webElement = driver.findElement(By.id("discontinued"));
-		webElement.sendKeys(discontinued);
-		
-		webElement = driver.findElement(By.id("companyId"));
-		List<WebElement> webElements = webElement.findElements(By.tagName("option"));
-		for(WebElement webElement2 : webElements) {
-			if( companyName != null ) {
-				if (companyName.equals(webElement2.getText())){
-					webElement2.click();
-				}
-			}
-		}
-
 	}
 
 	private Long getComputerNumber(WebDriver driver) {

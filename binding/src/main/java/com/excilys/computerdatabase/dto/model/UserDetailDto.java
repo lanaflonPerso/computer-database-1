@@ -1,0 +1,49 @@
+package com.excilys.computerdatabase.dto.model;
+
+import java.util.List;
+
+public class UserDetailDto {
+	private String userName;
+	private String password;
+	private List<String> roles;
+
+	public UserDetailDto() {
+		super();
+	}
+
+	public UserDetailDto(String userName, List<String> roles) {
+		super();
+		this.userName = userName;
+		this.roles = roles;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "UserDetailDto [userName=" + userName + ", password=" + password + ", roles=" + roles + "]";
+	}
+	
+}

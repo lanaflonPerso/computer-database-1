@@ -27,3 +27,60 @@ input[type='checkbox'] {
     border-radius: 5px;
     white-space: nowrap;
 }
+
+.white-color {
+	color: #FFFFFF !important;
+}
+
+.black-color {
+	color: #000000 !important;
+}
+
+.btn-logout {
+	font-size: 14px;
+}
+
+.user-color {
+	background-color: #D42C2C !important;
+}
+
+.btn-user {
+	background-color: #FFB1B1;
+}
+
+.company-color {
+	background-color: #148114 !important;
+}
+
+.btn-company {
+	background-color: #B1FFB1;
+}
+
+.computer-color {
+	background-color: #141481 !important;
+}
+
+.btn-computer {
+	background-color: #B1B1FF;
+}
+
+.home-icone {
+	padding: 60px;
+	padding-top: 120px;
+	padding-bottom: 120px;
+	background-color:#A0A0A0;
+	margin:30px;
+	border-radius:60px;
+	font-size:280px;
+	color:#000000;
+}
+
+.user-home-icone:hover {
+	background-color:#D42C2C;
+	color:#000000;
+}
+
+.computer-home-icone:hover {
+	background-color:#141481;
+	color:#000000;
+}
