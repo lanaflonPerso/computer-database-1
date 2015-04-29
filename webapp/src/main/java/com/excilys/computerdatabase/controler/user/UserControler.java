@@ -36,7 +36,7 @@ public class UserControler extends AbstractController {
 	@RequestMapping(value = USER + CRUD + ADD, method = RequestMethod.POST)
 	public String addUser(@Valid @ModelAttribute("userDetailDto") UserDetailDto userDetailDto, BindingResult bindingResult) {
 
-		log.info("Servlet : [POST] computer-add {}", userDetailDto);
+		log.info("Servlet : [POST] user: add {}", userDetailDto);
 
 		if (bindingResult.hasErrors()) {
 			log.info("Wrong input");
@@ -79,14 +79,14 @@ public class UserControler extends AbstractController {
 	@RequestMapping(value = USER + CRUD + DELETE, method = RequestMethod.POST)
 	public String deleteComputer(String selection) {
 
-		log.info("Servlet : [POST] user-delete {}", selection);
+		log.info("Servlet : [POST] user: delete {}", selection);
 
-		getListLong(selection).stream().forEach(securityService::delete);
+		getList(selection).stream().forEach(securityService::delete);
 
 		return REDIRECT + USER + VIEW + DASHBOARD;
 	}
 
-	private List<String> getListLong(String selection) {
+	private List<String> getList(String selection) {
 		List<String> list = new ArrayList<String>();
 		if ("".equals(selection)) {
 			return list;

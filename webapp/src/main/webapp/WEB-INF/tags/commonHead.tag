@@ -15,9 +15,12 @@
 				          <a href="#" class="dropdown-toggle white-color ${colorMenu}" data-toggle="dropdown" role="button" aria-expanded="false">Selection <span class="caret"></span></a>
 				          <ul class="dropdown-menu dropdown-menu-right" role="menu">
 				          		<security:authorize access="hasRole('ROLE_SUPER_ADMIN')">
-					            <li><a class="btn-warning btn-computer " href="/webapp/computer/view/dashboard">Computer</a></li>
+					            	<li><a class="btn-warning btn-user" href="/webapp/user/view/dashboard"><spring:message code="user" /></a></li>
 					            </security:authorize>
-					            <li><a class="btn-warning btn-user" href="/webapp/user/view/dashboard">User</a></li>
+					            <li><a class="btn-warning btn-computer " href="/webapp/computer/view/dashboard"><spring:message code="computer" /></a></li>
+				          		<security:authorize access="hasRole('ROLE_ADMIN')">
+					            	<li><a class="btn-warning btn-company" href="/webapp/company/view/dashboard"><spring:message code="company" /></a></li>
+					            </security:authorize>
 				          </ul>
 			        </li>
 		      	</ul>

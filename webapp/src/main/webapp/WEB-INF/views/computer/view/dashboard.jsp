@@ -98,6 +98,12 @@
 		<footer class="navbar-fixed-bottom">
 			<mylib:pagination page="${page}" />			
 		</footer>
-		<jsp:include page="/WEB-INF/views/import/footer.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"></jsp:include>
+		<script type="text/javascript">
+			var button_view = "<spring:message code='button.cancel'/>";
+			var button_edit = "<spring:message code='button.delete'/>";
+			var alert_message = "<spring:message code='delete.computer.message'/>";
+		</script>
+		<script src="/webapp/js/dashboard.js"></script>
 	</body>
 </html>

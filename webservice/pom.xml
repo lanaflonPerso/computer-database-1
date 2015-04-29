@@ -1,44 +1,49 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>webservice</artifactId>
-	<packaging>war</packaging>
-
-	<parent>
-		<groupId>computer-database</groupId>
-		<artifactId>mainParent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>
-	<dependencies>
-		<!-- Module -->
-		<dependency>
-			<groupId>computer-database</groupId>
-			<artifactId>service</artifactId>
-		</dependency>
-		<!-- Dependencies -->
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.media</groupId>
-			<artifactId>jersey-media-json-jackson</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.bundles</groupId>
-			<artifactId>jaxrs-ri</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.ext</groupId>
-			<artifactId>jersey-spring3</artifactId>
-		</dependency>
-	</dependencies>
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>webservice</artifactId>
+  <packaging>war</packaging>
+  <parent>
+    <groupId>com.excilys</groupId>
+    <artifactId>computer-database</artifactId>
+    <version>1.0-RELEASE</version>
+  </parent>
+  <dependencies>
+    <!-- Module -->
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>service</artifactId>
+    </dependency>
+    <!-- Dependencies -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>javax.ws.rs-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.media</groupId>
+      <artifactId>jersey-media-json-jackson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.bundles</groupId>
+      <artifactId>jaxrs-ri</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jersey.ext</groupId>
+      <artifactId>jersey-spring3</artifactId>
+    </dependency>
+  </dependencies>
 </project>

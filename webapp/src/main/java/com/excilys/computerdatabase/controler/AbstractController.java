@@ -2,6 +2,7 @@ package com.excilys.computerdatabase.controler;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import com.excilys.computerdatabase.dto.model.CompanyDto;
 import com.excilys.computerdatabase.dto.model.ComputerDto;
 import com.excilys.computerdatabase.dto.model.RuleDto;
 import com.excilys.computerdatabase.dto.model.UserDetailDto;
@@ -45,5 +46,10 @@ public abstract class AbstractController {
 	@ModelAttribute("ruleDto")
 	public RuleDto getRuleDto(){
 	    return new RuleDto();
+	}
+	
+	@ModelAttribute("companyDto")
+	public CompanyDto getCompanyDto(){
+	    return new CompanyDto();
 	}
 }

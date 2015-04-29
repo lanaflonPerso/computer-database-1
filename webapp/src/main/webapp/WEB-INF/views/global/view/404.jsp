@@ -15,6 +15,6 @@
 				</div>
 			</div>
 		</section>
-	<jsp:include page="/WEB-INF/views/import/footer.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"></jsp:include>
 	</body>
 </html>

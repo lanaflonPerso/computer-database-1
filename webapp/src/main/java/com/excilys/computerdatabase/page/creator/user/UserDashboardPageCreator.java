@@ -20,6 +20,7 @@ public class UserDashboardPageCreator extends AbstractPageCreator {
 	private SecurityService securityService;
 	@Autowired
 	private UserDetailDtoMapper userDetailDtoMapper;
+
 	public UserDashboardPage getPageFromGetRequest() {
 		return pageGet();
 	}
@@ -27,7 +28,7 @@ public class UserDashboardPageCreator extends AbstractPageCreator {
 	private UserDashboardPage pageGet() {
 		UserDashboardPage newPage = new UserDashboardPage();
 		List<UserDetail> list = securityService.getAll();
-		newPage.setUserList(userDetailDtoMapper.mapListFromModel(list));		
+		newPage.setUserList(userDetailDtoMapper.mapListFromModel(list));
 		return newPage;
 	}
 

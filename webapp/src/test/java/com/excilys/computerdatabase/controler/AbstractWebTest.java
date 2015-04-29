@@ -1,4 +1,4 @@
-package com.excilys.computerdatabase.controler.impl;
+package com.excilys.computerdatabase.controler;
 
 import java.util.List;
 import static org.junit.Assert.fail;

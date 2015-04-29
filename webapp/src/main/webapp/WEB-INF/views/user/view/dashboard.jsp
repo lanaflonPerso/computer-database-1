@@ -49,7 +49,9 @@
 		                    <tr>
 								<td class="editMode"><input type="checkbox" name="cb" class="cb" value="${page.getUserList().get(i).getUserName()}"></td>
 		                        <td>${page.getUserList().get(i).getUserName()}</td>
-		                        <td><a class="btn btn-danger" href="#resetPassword" onclick="save('test')"><spring:message code="reset.password"/></a></td>
+								<c:set var="nameForInput" value="${page.getUserList().get(i).getUserName()}_1548664" />
+								<td class="hidden"><input id="${nameForInput}" value="${page.getUserList().get(i).getUserName()}"/></td>
+		                        <td><a class="btn btn-danger" href="#resetPassword" onclick="save(${nameForInput})"><spring:message code="reset.password"/></a></td>
 								<td>
 									<c:set var="name" value="${\"ruleForm\"}${page.getUserList().get(i).getUserName()}0" />
 									<form:form modelAttribute="ruleDto" id="${name}" action="/webapp/user/crud/edit" method="POST">
@@ -95,16 +97,17 @@
 	            </table>
 	        </div>       
 	    </section>
-	    
-	   	<jsp:include page="/WEB-INF/views/user/popup/resetPassword.jsp"></jsp:include>
+	    <!-- Popup -->
 	   	<jsp:include page="/WEB-INF/views/user/popup/addUser.jsp"></jsp:include>
-		<jsp:include page="/WEB-INF/views/import/footer.jsp"></jsp:include>
-		
+	   	<jsp:include page="/WEB-INF/views/user/popup/resetPassword.jsp"></jsp:include>
+	   	<!-- Javascript -->
+		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"></jsp:include>
+		<script src="/webapp/js/user.js"></script>	
 		<script type="text/javascript">
-	    function save(object){
-	    	sessionStorage.setItem("objectSaved", "t")
-	    }
-	    </script>
-		
+			var button_view = "<spring:message code='button.cancel'/>";
+			var button_edit = "<spring:message code='button.delete'/>";
+			var alert_message = "<spring:message code='delete.user.message'/>";
+		</script>
+		<script src="/webapp/js/dashboard.js"></script>
 	</body>
 </html>

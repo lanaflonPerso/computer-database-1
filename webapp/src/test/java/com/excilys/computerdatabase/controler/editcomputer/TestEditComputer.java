@@ -1,4 +1,4 @@
-package com.excilys.computerdatabase.controler.impl.editcomputer;
+package com.excilys.computerdatabase.controler.editcomputer;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.excilys.computerdatabase.controler.impl.AbstractWebTest;
+import com.excilys.computerdatabase.controler.AbstractWebTest;
 
 public class TestEditComputer extends AbstractWebTest {
 	private WebDriver driver;

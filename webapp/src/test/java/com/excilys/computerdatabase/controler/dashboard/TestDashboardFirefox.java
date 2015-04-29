@@ -1,4 +1,4 @@
-package com.excilys.computerdatabase.controler.impl.dashboard;
+package com.excilys.computerdatabase.controler.dashboard;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import com.excilys.computerdatabase.controler.impl.AbstractWebTest;
+import com.excilys.computerdatabase.controler.AbstractWebTest;
 
 public class TestDashboardFirefox extends AbstractWebTest {
 

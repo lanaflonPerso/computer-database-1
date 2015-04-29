@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.controler.impl.addcomputer;
+package com.excilys.computerdatabase.controler.addcomputer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -14,7 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.excilys.computerdatabase.controler.impl.AbstractWebTest;
+import com.excilys.computerdatabase.controler.AbstractWebTest;
 
 public class TestAddComputer extends AbstractWebTest {
 	private WebDriver driver;

@@ -84,3 +84,8 @@ input[type='checkbox'] {
 	background-color:#141481;
 	color:#000000;
 }
+
+.company-home-icone:hover {
+	background-color:#148114;
+	color:#000000;
+}

@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.controler.user;
+package com.excilys.computerdatabase.controler.company;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.excilys.computerdatabase.controler.AbstractController;
-import com.excilys.computerdatabase.page.creator.user.UserDashboardPageCreator;
-import com.excilys.computerdatabase.page.model.UserDashboardPage;
+import com.excilys.computerdatabase.page.creator.company.CompanyDashboardPageCreator;
+import com.excilys.computerdatabase.page.model.CompanyDashboardPage;
 import com.excilys.computerdatabase.service.ComputerService;
 
 /**
@@ -21,22 +21,22 @@ import com.excilys.computerdatabase.service.ComputerService;
  */
 
 @Controller
-public class UserDashboard extends AbstractController {
+public class CompanyDashboard extends AbstractController {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private ComputerService computerService;
 	@Autowired
-	private UserDashboardPageCreator pageCreator;
+	private CompanyDashboardPageCreator pageCreator;
 
-	@RequestMapping(value = USER + VIEW + DASHBOARD, method = RequestMethod.GET)
+	@RequestMapping(value = COMPANY + VIEW + DASHBOARD, method = RequestMethod.GET)
 	public String getDashboard(ModelMap modelMap) {
 		
-		log.info("Servlet : [GET] user: dashboard ");
+		log.info("Servlet : [GET] company dashboard ");
 			
-		UserDashboardPage newPage = pageCreator.getPageFromGetRequest();
+		CompanyDashboardPage newPage = pageCreator.getPageFromGetRequest();
 		modelMap.addAttribute("page", newPage);
 
-		return USER + VIEW + DASHBOARD;
+		return COMPANY + VIEW + DASHBOARD;
 	}
 }

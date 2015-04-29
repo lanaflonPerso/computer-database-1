@@ -94,12 +94,12 @@ public class ComputerControler extends AbstractController {
 		
 		log.info("Servlet : [POST] computer-delete {}", selection);
 
-		getListLong(selection).stream().forEach(computerService::delete);
+		getList(selection).stream().forEach(computerService::delete);
 
 		return REDIRECT + COMPUTER + VIEW + DASHBOARD;
 	}
 
-	private List<Long> getListLong(String selection) {
+	private List<Long> getList(String selection) {
 		List<Long> list = new ArrayList<Long>();
 		if ("".equals(selection)) {
 			return list;
