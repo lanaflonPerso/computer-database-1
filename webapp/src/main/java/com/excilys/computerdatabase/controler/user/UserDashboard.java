@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.excilys.computerdatabase.controler.AbstractController;
 import com.excilys.computerdatabase.page.creator.user.UserDashboardPageCreator;
 import com.excilys.computerdatabase.page.model.UserDashboardPage;
-import com.excilys.computerdatabase.service.ComputerService;
+import com.excilys.computerdatabase.service.services.ComputerService;
 
 /**
  * Servlet implementation class Dashboard

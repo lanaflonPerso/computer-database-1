@@ -26,7 +26,7 @@ public class UserDetailDtoMapperImpl implements UserDetailDtoMapper {
 		userDetail.setUserName(dto.getUserName());
 		userDetail.setPassword(dto.getPassword());
 		if (dto.getRoles() != null) {
-			userDetail.setRoles(dto.getRoles().stream().map(Role::build).collect(Collectors.toList()));
+			userDetail.setRoles(dto.getRoles().stream().map(Role::build).collect(Collectors.toSet()));
 		}
 		return userDetail;
 	}

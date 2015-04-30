@@ -15,7 +15,7 @@ import com.excilys.computerdatabase.dto.model.ComputerDto;
 import com.excilys.computerdatabase.model.Computer;
 import com.excilys.computerdatabase.page.creator.AbstractPageCreator;
 import com.excilys.computerdatabase.page.model.ComputerDashboardPage;
-import com.excilys.computerdatabase.service.ComputerService;
+import com.excilys.computerdatabase.service.services.ComputerService;
 import com.excilys.computerdatabase.sort.SortColumn;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.sort.SortDirection;

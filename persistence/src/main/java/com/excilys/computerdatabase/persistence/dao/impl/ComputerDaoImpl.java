@@ -174,7 +174,7 @@ public class ComputerDaoImpl implements ComputerDao {
 				.add(Restrictions.like("company.id", id))
 				.list();
 	}
-
+	
 	@Override 
 	public Long getByNameNumberOfElement(String search) {
 		Session session = sf.getCurrentSession();
@@ -193,7 +193,6 @@ public class ComputerDaoImpl implements ComputerDao {
 				  .setProjection(Projections.rowCount())
 				  .list()
 				  .get(0);
-		
 	}
 
 }

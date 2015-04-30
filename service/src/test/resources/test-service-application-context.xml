@@ -11,7 +11,6 @@
 
 	<!-- DataSource creation -->
 	<context:property-placeholder location="classpath:/test-config.properties" />
-	<tx:annotation-driven proxy-target-class="true"		transaction-manager="transactionManager" />
 	
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -32,15 +31,14 @@
 	  </property> 
 	</bean>
 
+    <!-- Transaction -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+      <property name="sessionFactory" ref="sessionFactory"/>
+    </bean> 
+
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
 	<!-- Package scan -->
-	<context:component-scan base-package="com.excilys.computerdatabase.persistence.dao.impl" />
-	<context:component-scan base-package="com.excilys.computerdatabase.service.dao" />
-    <context:component-scan base-package="com.excilys.computerdatabase.service.impl" />
-
-	<!-- Transaction -->
- 	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean> 
-
+	<context:component-scan base-package="com.excilys.computerdatabase" />
 
 </beans>

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.excilys.computerdatabase.controler.AbstractController;
 import com.excilys.computerdatabase.page.creator.computer.ComputerDashboardPageCreator;
 import com.excilys.computerdatabase.page.model.ComputerDashboardPage;
-import com.excilys.computerdatabase.service.ComputerService;
+import com.excilys.computerdatabase.service.services.ComputerService;
 
 @Controller
 public class ComputerDashboard extends AbstractController {

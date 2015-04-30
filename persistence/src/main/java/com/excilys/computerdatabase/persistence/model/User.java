@@ -1,74 +1,82 @@
 package com.excilys.computerdatabase.persistence.model;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@Entity(name = "users")
-public class User {
-	@Id
-	private String userName;
-	private String password;	
-	
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
+
+	private static final long serialVersionUID = -1574644808526138085L;
+	private String username;
+	private String password;
+	private boolean enabled;
+	private Set<UserRole> userRole = new HashSet<UserRole>(0);
+
 	public User() {
-		super();
 	}
 
-	public User(String userName, String password) {
-		super();
-		this.userName = userName;
+	public User(String username, String password, boolean enabled) {
+		this.username = username;
 		this.password = password;
+		this.enabled = enabled;
 	}
 
-	public String getUserName() {
-		return userName;
+	public User(String username, String password, boolean enabled, Set<UserRole> userRole) {
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
+		this.userRole = userRole;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	@Id
+	@Column(name = "username", unique = true, nullable = false, length = 100)
+	public String getUsername() {
+		return this.username;
 	}
 
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@Column(name = "password", nullable = false, length = 100)
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
-		return result;
+	@Column(name = "enabled", nullable = false)
+	public boolean isEnabled() {
+		return this.enabled;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (userName == null) {
-			if (other.userName != null)
-				return false;
-		} else if (!userName.equals(other.userName))
-			return false;
-		return true;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<UserRole> getUserRole() {
+		return this.userRole;
+	}
+
+	public void setUserRole(Set<UserRole> userRole) {
+		this.userRole = userRole;
 	}
 
 	@Override
 	public String toString() {
-		return "DaoUser [userName=" + userName + ", password=" + password + "]";
+		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", userRole=" + userRole + "]";
 	}
-	
+
 }

@@ -7,7 +7,10 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +23,7 @@ import com.excilys.computerdatabase.validation.Validator;
 @Repository
 @SuppressWarnings("unchecked")
 public class CompanyDaoImpl implements CompanyDao {
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private SessionFactory sf;
 
@@ -27,6 +31,7 @@ public class CompanyDaoImpl implements CompanyDao {
 	public void create(Company t) {
 		Session session = sf.getCurrentSession();
 		if (!Validator.isCompanyCorrect(t)) {
+			log.warn(Validator.INVALID_COMPANY);
 			throw new DaoException(Validator.INVALID_COMPANY);
 		}
 		Long id = (Long) session.save(t);
@@ -36,13 +41,14 @@ public class CompanyDaoImpl implements CompanyDao {
 	@Override
 	public List<Company> getAll(SortCriteria sortCriteria) {
 		Session session = sf.getCurrentSession();
-		return session.createCriteria(Company.class).list();
+		return session.createCriteria(Company.class).addOrder(Order.asc("name")).list();
 	}
 
 	@Override
 	public List<Company> getAll(Long from, Long to, SortCriteria sortCriteria) {
 		Session session = sf.getCurrentSession();
 		if (!Validator.isDateFromToCorrect(from, to)) {
+			log.warn(Validator.INVALID_BOUND);
 			throw new DaoException(Validator.INVALID_BOUND);
 		}
 		return session.createCriteria(Company.class)
@@ -64,6 +70,7 @@ public class CompanyDaoImpl implements CompanyDao {
 	public void delete(Long id) {
 		Session session = sf.getCurrentSession();
 		if (!Validator.isIdCorrect(id)) {
+			log.warn(Validator.INVALID_COMPANY_ID);
 			throw new DaoException(Validator.INVALID_COMPANY_ID);
 		}
 		Company company = (Company) session.get(Company.class, id);
@@ -77,6 +84,7 @@ public class CompanyDaoImpl implements CompanyDao {
 	public Company getById(Long id) {
 		Session session = sf.getCurrentSession();
 		if (!Validator.isIdCorrect(id)) {
+			log.warn(Validator.INVALID_COMPANY_ID);
 			throw new DaoException(Validator.INVALID_COMPANY_ID);
 		}
 		return (Company) session.get(Company.class, id);

@@ -12,7 +12,7 @@ import com.excilys.computerdatabase.dto.mapper.UserDetailDtoMapper;
 import com.excilys.computerdatabase.model.UserDetail;
 import com.excilys.computerdatabase.page.creator.AbstractPageCreator;
 import com.excilys.computerdatabase.page.model.UserDashboardPage;
-import com.excilys.computerdatabase.service.SecurityService;
+import com.excilys.computerdatabase.service.services.SecurityService;
 
 @Service
 public class UserDashboardPageCreator extends AbstractPageCreator {

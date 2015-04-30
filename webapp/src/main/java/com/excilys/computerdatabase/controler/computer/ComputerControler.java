@@ -26,7 +26,7 @@ import com.excilys.computerdatabase.page.creator.AbstractPageCreator;
 import com.excilys.computerdatabase.page.creator.computer.AddPageCreator;
 import com.excilys.computerdatabase.page.creator.computer.EditPageCreator;
 import com.excilys.computerdatabase.page.model.ComputerPage;
-import com.excilys.computerdatabase.service.ComputerService;
+import com.excilys.computerdatabase.service.services.ComputerService;
 import com.excilys.computerdatabase.session.AddComputerSession;
 import com.excilys.computerdatabase.session.EditComputerSession;
 

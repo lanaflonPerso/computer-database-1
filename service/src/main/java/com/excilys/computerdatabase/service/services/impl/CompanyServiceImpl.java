@@ -1,7 +1,4 @@
-/**
- * @Author Vincent Galloy
- */
-package com.excilys.computerdatabase.service.impl;
+package com.excilys.computerdatabase.service.services.impl;
 
 import java.util.List;
 
@@ -14,12 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.persistence.dao.CompanyDao;
 import com.excilys.computerdatabase.persistence.dao.ComputerDao;
-import com.excilys.computerdatabase.service.CompanyService;
+import com.excilys.computerdatabase.service.services.CompanyService;
 import com.excilys.computerdatabase.service.exception.ServiceException;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.validation.Validator;
 
 @Service
+@Transactional(readOnly = true)
 public class CompanyServiceImpl implements CompanyService {
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -29,7 +27,6 @@ public class CompanyServiceImpl implements CompanyService {
 	CompanyDao companyDao;
 
 	@Override
-	@Transactional(readOnly = true)
 	public List<Company> list(SortCriteria sortCriteria) {
 		log.info("List companies");
 		if (!Validator.isSortCriteriaCorrect(sortCriteria)) {
@@ -39,14 +36,12 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Long getNumberOfElement() {
 		log.info("Get number of companies");
 		return companyDao.getNumberOfElement();
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public List<Company> list(Long from, Long to, SortCriteria sortCriteria) {
 		log.info("List companies");
 		if (!Validator.isDateFromToCorrect(from, to)) {
@@ -59,7 +54,7 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly=false)
 	public void delete(Long id) {
 		log.info("Delete company : {}", id);
 		if (!Validator.isIdCorrect(id)) {
@@ -69,7 +64,7 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly=false)
 	public void create(Company t) {
 		log.info("Company create : {}", t);
 		if (!Validator.isCompanyCorrect(t)) {
@@ -79,7 +74,6 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public Company getById(Long id) {
 		log.info("Find company with id : {} ", id);
 		if (!Validator.isIdCorrect(id)) {

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.excilys.computerdatabase.model.Company;
-import com.excilys.computerdatabase.service.CompanyService;
+import com.excilys.computerdatabase.service.services.CompanyService;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.webservice.CompanyRessource;
 

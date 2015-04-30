@@ -21,7 +21,7 @@ import com.excilys.computerdatabase.dto.model.RuleDto;
 import com.excilys.computerdatabase.dto.model.UserDetailDto;
 import com.excilys.computerdatabase.model.Rule;
 import com.excilys.computerdatabase.model.UserDetail;
-import com.excilys.computerdatabase.service.SecurityService;
+import com.excilys.computerdatabase.service.services.SecurityService;
 
 @Controller
 public class UserControler extends AbstractController {

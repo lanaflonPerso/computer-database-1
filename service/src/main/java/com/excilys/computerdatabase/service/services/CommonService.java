@@ -1,15 +1,12 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.service;
+package com.excilys.computerdatabase.service.services;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.excilys.computerdatabase.sort.SortCriteria;
 
-@Service
 public interface CommonService<T> {
 
 	public Long getNumberOfElement();

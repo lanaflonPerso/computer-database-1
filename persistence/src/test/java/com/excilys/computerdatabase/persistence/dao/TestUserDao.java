@@ -8,7 +8,8 @@ import static org.junit.Assert.assertEquals;
 import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.sql.DataSource;
 
@@ -25,15 +26,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.excilys.computerdatabase.persistence.dao.UserDao;
-import com.excilys.computerdatabase.persistence.model.User;
+import com.excilys.computerdatabase.model.Role;
+import com.excilys.computerdatabase.model.UserDetail;
 
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/test-persistence-context.xml" })
 public class TestUserDao {
 	@Autowired
-	private UserDao userDao;
+	private UserDetailDao userDetailDao;
 	@Autowired
 	private DataSource dataSource;
 
@@ -47,45 +48,96 @@ public class TestUserDao {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Test
-	public void testCreateUserOk() {
-		User daoUser = new User("test", "test");
-		userDao.create(daoUser);
-		User daoUser2 = userDao.getByName(daoUser.getUserName());
-		assertEquals(daoUser, daoUser2);
-	}
-
-	@Test
-	public void testGetAllUserOk() {
-		int numberOfElement = userDao.getAll().size();
-		User daoUser = new User("test" + LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), "test");
-		userDao.create(daoUser);
-		List<User> daoUsers2 = userDao.getAll();
-		int numberOfElement2 = daoUsers2.size();
-		assertEquals(numberOfElement + 1 , numberOfElement2);
+	public void testCreateOk() {
+		UserDetail userDetail = new UserDetail();
+		userDetail.setUserName("name");
+		userDetail.setPassword("password");
+		userDetailDao.create(userDetail);
+		UserDetail userDetail2 = userDetailDao.getByUsername(userDetail.getUserName());
+		assertEquals(userDetail, userDetail2);
 	}
 	
 	@Test
-	public void testUpdateUserOk() {
-		List<User> daoUsers = userDao.getAll();
-		User daoUser = daoUsers.get(0);
-		daoUser.setPassword("test2");
-		userDao.update(daoUser);
-		List<User> daoUsers2 = userDao.getAll();
-		assertEquals(daoUsers, daoUsers2);
+	public void testCreateWithRolesOk2() {
+		UserDetail userDetail = new UserDetail();
+		userDetail.setUserName("name");
+		userDetail.setPassword("password");
+		Set<Role> roles = new HashSet<Role>();
+		roles.add(Role.ADMIN);
+		roles.add(Role.SUPER_ADMIN);
+		userDetail.setRoles(roles);
+		userDetailDao.create(userDetail);
+		UserDetail userDetail2 = userDetailDao.getByUsername(userDetail.getUserName());
+		assertEquals(userDetail, userDetail2);
+	}
+
+	@Test
+	public void testGetAllOk() {
+		UserDetail userDetail = new UserDetail();
+		userDetail.setUserName("name");
+		userDetail.setPassword("password");
+		int count = userDetailDao.getAll().size();
+		userDetailDao.create(userDetail);
+		int count2 = userDetailDao.getAll().size();
+		assertEquals(count + 1, count2);
 	}
 	
 	@Test
-	public void testDeleteUserOk() {
-		User daoUser = new User("test", "test");
-		int numberOfElement = userDao.getAll().size();
-		userDao.create(daoUser);
-		int numberOfElement2 = userDao.getAll().size();
-		assertEquals(numberOfElement + 1 , numberOfElement2);
-		userDao.delete(daoUser.getUserName());		
-		int numberOfElement3 = userDao.getAll().size();
-		assertEquals(numberOfElement, numberOfElement3);
+	public void testUpdateOk() {
+		UserDetail userDetail = new UserDetail();
+		userDetail.setUserName("name");
+		userDetail.setPassword("password");
+		userDetailDao.create(userDetail);
+		userDetail.setPassword("password2");
+		userDetailDao.update(userDetail);
+		UserDetail userDetail2 = userDetailDao.getByUsername(userDetail.getUserName());
+		assertEquals(userDetail, userDetail2);
+	}
+
+	@Test
+	public void testUpdatePasswordOk2() {
+		UserDetail userDetail = new UserDetail();
+		userDetail.setUserName("name");
+		userDetail.setPassword("password");
+		Set<Role> roles = new HashSet<Role>();
+		roles.add(Role.ADMIN);
+		userDetail.setRoles(roles);
+		userDetailDao.create(userDetail);
+		userDetail.setPassword("password2");
+		userDetailDao.update(userDetail);
+		UserDetail userDetail2 = userDetailDao.getByUsername(userDetail.getUserName());
+		assertEquals(userDetail, userDetail2);
+	}
+	
+	@Test
+	public void testUpdateRightOk3() {
+		UserDetail userDetail = new UserDetail();
+		userDetail.setUserName("name");
+		userDetail.setPassword("password");
+		Set<Role> roles = new HashSet<Role>();
+		roles.add(Role.ADMIN);
+		userDetail.setRoles(roles);
+		userDetailDao.create(userDetail);
+		roles.add(Role.USER);
+		userDetailDao.update(userDetail);
+		UserDetail userDetail2 = userDetailDao.getByUsername(userDetail.getUserName());
+		assertEquals(userDetail, userDetail2);
+	}
+	
+	@Test
+	public void testDeleteOk() {
+		UserDetail userDetail = new UserDetail();
+		userDetail.setUserName("name" + LocalDateTime.now().truncatedTo(ChronoUnit.NANOS));
+		userDetail.setPassword("password");
+		int count = userDetailDao.getAll().size();
+		userDetailDao.create(userDetail);
+		int count2 = userDetailDao.getAll().size();
+		userDetailDao.delete(userDetail.getUserName());
+		int count3 = userDetailDao.getAll().size();
+		assertEquals(count + 1, count2);
+		assertEquals(count, count3);
 	}
 	
 }

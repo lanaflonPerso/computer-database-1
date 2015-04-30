@@ -1,17 +1,18 @@
 package com.excilys.computerdatabase.model;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserDetail {
 	private String userName;
 	private String password;
-	private List<Role> roles;
+	private Set<Role> roles = new HashSet<Role>();
 
 	public UserDetail() {
 		super();
 	}
 
-	public UserDetail(String userName, String password, List<Role> roles) {
+	public UserDetail(String userName, String password, Set<Role> roles) {
 		super();
 		this.userName = userName;
 		this.password = password;
@@ -34,11 +35,11 @@ public class UserDetail {
 		this.password = password;
 	}
 
-	public List<Role> getRoles() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
 

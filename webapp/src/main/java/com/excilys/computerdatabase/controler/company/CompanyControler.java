@@ -18,7 +18,7 @@ import com.excilys.computerdatabase.controler.AbstractController;
 import com.excilys.computerdatabase.dto.mapper.CompanyDtoMapper;
 import com.excilys.computerdatabase.dto.model.CompanyDto;
 import com.excilys.computerdatabase.model.Company;
-import com.excilys.computerdatabase.service.CompanyService;
+import com.excilys.computerdatabase.service.services.CompanyService;
 
 @Controller
 public class CompanyControler extends AbstractController {

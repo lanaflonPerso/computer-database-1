@@ -1,7 +1,7 @@
 /**
  * @Author Vincent Galloy
  */
-package com.excilys.computerdatabase.service;
+package com.excilys.computerdatabase.service.services;
 
 import com.excilys.computerdatabase.model.Company;
 

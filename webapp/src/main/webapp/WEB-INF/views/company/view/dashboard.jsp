@@ -14,7 +14,7 @@
 		<mylib:commonHead colorMenu="company-color"/>
 	    <section id="main">
 	        <div class="container">
-	            <h1 id="homeTitle"> ${page.getCompanyList().size()} <spring:message code="user.found"/> </h1>
+	            <h1 id="homeTitle"> ${page.getCompanyList().size()} <spring:message code="company.found"/> </h1>
 	            <div id="actions" class="form-horizontal">
 	                <div class="pull-right">
 	                    <a class="btn btn-success" id="addComputer" href="#addCompany"><spring:message code="add.company"/></a> 

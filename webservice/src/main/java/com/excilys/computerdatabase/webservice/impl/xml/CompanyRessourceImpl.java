@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.excilys.computerdatabase.model.Company;
-import com.excilys.computerdatabase.service.CompanyService;
+import com.excilys.computerdatabase.service.services.CompanyService;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.webservice.CompanyRessource;
 

@@ -16,8 +16,8 @@ import com.excilys.computerdatabase.dto.model.ComputerDto;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.page.creator.AbstractPageCreator;
 import com.excilys.computerdatabase.page.model.ComputerPage;
-import com.excilys.computerdatabase.service.CompanyService;
-import com.excilys.computerdatabase.service.ComputerService;
+import com.excilys.computerdatabase.service.services.CompanyService;
+import com.excilys.computerdatabase.service.services.ComputerService;
 import com.excilys.computerdatabase.sort.SortCriteria;
 
 @Service

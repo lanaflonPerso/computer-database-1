@@ -1,9 +1,9 @@
-package com.excilys.computerdatabase.dto.mapper;
+package com.excilys.computerdatabase.mapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public interface DtoMapper<Model, Dto> {
+public interface Mapper <Model, Dto>{
 	public Dto mapFromModel(Model model);
 
 	public Model mapToModel(Dto dto);
@@ -14,13 +14,5 @@ public interface DtoMapper<Model, Dto> {
 
 	default List<Model> mapListToModel(List<Dto> list) {
 		return list.stream().map(this::mapToModel).collect(Collectors.toList());
-	}
-
-	default Long getId(String id) {
-		if (id == null) {
-			return null;
-		} else {
-			return Long.valueOf(id);
-		}
 	}
 }

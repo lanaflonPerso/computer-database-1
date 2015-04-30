@@ -34,12 +34,10 @@
 					password-parameter="password"
 					authentication-failure-url="/global/view/customLogin?auth=false" />
 	</http>
-
+  
 	<authentication-manager>
-		<authentication-provider>
-			<jdbc-user-service data-source-ref="dataSource"/>
-			<password-encoder hash="bcrypt" />
-		</authentication-provider>
+      <authentication-provider user-service-ref="userDetailsService">
+        <password-encoder hash="bcrypt" />
+      </authentication-provider>
 	</authentication-manager>
-
 </beans:beans>

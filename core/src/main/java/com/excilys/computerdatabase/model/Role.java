@@ -33,4 +33,6 @@ public enum Role {
 			return NONE;
 		}
 	}
+	
+	
 }

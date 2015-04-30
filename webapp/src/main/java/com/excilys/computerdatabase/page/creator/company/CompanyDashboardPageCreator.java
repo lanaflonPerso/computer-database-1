@@ -12,7 +12,7 @@ import com.excilys.computerdatabase.dto.mapper.CompanyDtoMapper;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.page.creator.AbstractPageCreator;
 import com.excilys.computerdatabase.page.model.CompanyDashboardPage;
-import com.excilys.computerdatabase.service.CompanyService;
+import com.excilys.computerdatabase.service.services.CompanyService;
 import com.excilys.computerdatabase.sort.SortCriteria;
 
 @Service
