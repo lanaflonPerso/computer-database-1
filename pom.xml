@@ -291,11 +291,6 @@
         <version>${jersey-bundle-version}</version>
       </dependency>
       <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-annotations</artifactId>
-        <version>${jackson-annotation-version}</version>
-      </dependency>
-      <dependency>
         <groupId>org.glassfish.jersey.media</groupId>
         <artifactId>jersey-media-json-jackson</artifactId>
         <version>${jersey-version}</version>
@@ -311,6 +306,17 @@
         <version>${jersey-version}</version>
       </dependency>
       <dependency>
+        <groupId>org.glassfish.jersey.media</groupId>
+        <artifactId>jersey-media-moxy</artifactId>
+        <version>${jersey-version}</version>
+      </dependency>
+      <!-- Conversion JSON/XML -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson-annotation-version}</version>
+      </dependency>
+      <dependency>
         <groupId>javax.ws.rs</groupId>
         <artifactId>javax.ws.rs-api</artifactId>
         <version>${java-rs-version}</version>
@@ -323,6 +329,14 @@
     </dependencies>
   </dependencyManagement>
   <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-war-plugin</artifactId>
+          <version>${maven-war-plugin-version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -331,10 +345,6 @@
           <source>${java-source-version}</source>
           <target>${java-target-version}</target>
         </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>${maven-war-plugin-version}</version>
       </plugin>
     </plugins>
   </build>
