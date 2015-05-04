@@ -123,6 +123,16 @@ public class CompanyServiceImpl implements CompanyService {
 		companyDao.delete(id);
 	}
 
+	@Override
+	@Transactional(readOnly=false)
+	public void update(Company t) {
+		log.info("Company update : {}", t);
+		if (!Validator.isCompanyCorrect(t)) {
+			throw new ServiceException(Validator.INVALID_COMPANY);
+		}
+		companyDao.update(t);
+	}
+	
 	/**
 	 * Gets the company dao.
 	 *

@@ -17,7 +17,9 @@
 				          		<security:authorize access="hasRole('ROLE_SUPER_ADMIN')">
 					            	<li><a class="btn-warning btn-user" href="/webapp/user/view/dashboard"><spring:message code="user" /></a></li>
 					            </security:authorize>
-					            <li><a class="btn-warning btn-computer " href="/webapp/computer/view/dashboard"><spring:message code="computer" /></a></li>
+					            <security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+					            	<li><a class="btn-warning btn-computer " href="/webapp/computer/view/dashboard"><spring:message code="computer" /></a></li>
+					            </security:authorize>
 				          		<security:authorize access="hasRole('ROLE_ADMIN')">
 					            	<li><a class="btn-warning btn-company" href="/webapp/company/view/dashboard"><spring:message code="company" /></a></li>
 					            </security:authorize>

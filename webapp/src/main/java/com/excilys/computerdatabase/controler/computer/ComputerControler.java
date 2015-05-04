@@ -81,14 +81,14 @@ public class ComputerControler extends AbstractController {
 		log.info("Servlet : [POST] computer-add {}", computerDto);
 
 		ComputerPage page = addPageCreator.getPageFromPostRequest(computerDto);
-		addComputerSession.setComputerDto(page.getComputerDto());
-		addComputerSession.setBindingResult(bindingResult);
 
 		if (bindingResult.hasErrors()) {
 			log.info("Wrong input");
 			return REDIRECT + COMPUTER + VIEW + ADD;
 		} else {
 			AbstractPageCreator.pageConverter(page, LocaleContextHolder.getLocaleContext().getLocale(), Locale.ENGLISH);
+			addComputerSession.setComputerDto(page.getComputerDto());
+			addComputerSession.setBindingResult(bindingResult);
 			Computer computer = computerDtoMapper.mapToModel(page.getComputerDto());
 			computerService.create(computer);
 			log.info("Computer added : " + computer);

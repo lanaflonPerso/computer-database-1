@@ -37,7 +37,7 @@
 	                                    </a>
 	                            </span>
 	                        </th>
-	                        <th><spring:message code="username"/></th>
+	                        <th><spring:message code="company.name"/></th>
 	                    </tr>
 	                </thead>
 	                <tbody id="list">

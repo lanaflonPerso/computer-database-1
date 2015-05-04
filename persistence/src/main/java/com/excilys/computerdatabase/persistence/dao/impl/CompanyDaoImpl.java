@@ -29,6 +29,7 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public void create(Company t) {
+		log.info("Company update : {}", t);
 		Session session = sf.getCurrentSession();
 		if (!Validator.isCompanyCorrect(t)) {
 			log.warn(Validator.INVALID_COMPANY);
@@ -40,12 +41,14 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public List<Company> getAll(SortCriteria sortCriteria) {
+		log.info("Company getAll");
 		Session session = sf.getCurrentSession();
 		return session.createCriteria(Company.class).addOrder(Order.asc("name")).list();
 	}
 
 	@Override
 	public List<Company> getAll(Long from, Long to, SortCriteria sortCriteria) {
+		log.info("Company update : {} to {}", from , to);
 		Session session = sf.getCurrentSession();
 		if (!Validator.isDateFromToCorrect(from, to)) {
 			log.warn(Validator.INVALID_BOUND);
@@ -59,6 +62,7 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public Long getNumberOfElement() {
+		log.info("Company getNumberOfElement");
 		Session session = sf.getCurrentSession();
 		return (Long) session.createCriteria(Company.class)
 				.setProjection(Projections.rowCount())
@@ -68,6 +72,7 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public void delete(Long id) {
+		log.info("Company delete : {}", id);
 		Session session = sf.getCurrentSession();
 		if (!Validator.isIdCorrect(id)) {
 			log.warn(Validator.INVALID_COMPANY_ID);
@@ -82,12 +87,24 @@ public class CompanyDaoImpl implements CompanyDao {
 
 	@Override
 	public Company getById(Long id) {
+		log.info("Company getById : {}", id);
 		Session session = sf.getCurrentSession();
 		if (!Validator.isIdCorrect(id)) {
 			log.warn(Validator.INVALID_COMPANY_ID);
 			throw new DaoException(Validator.INVALID_COMPANY_ID);
 		}
 		return (Company) session.get(Company.class, id);
+	}
+
+	@Override
+	public void update(Company t) {
+		log.info("Company update : {}", t);
+		Session session = sf.getCurrentSession();
+		if (!Validator.isCompanyCorrect(t)) {
+			log.warn(Validator.INVALID_COMPANY);
+			throw new DaoException(Validator.INVALID_COMPANY);
+		}
+		session.merge(t);
 	}
 
 }

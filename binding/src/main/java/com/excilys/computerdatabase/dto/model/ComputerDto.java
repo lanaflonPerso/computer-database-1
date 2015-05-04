@@ -25,11 +25,11 @@ public class ComputerDto implements Serializable {
 	private String name;
 	
 	/** The introduced. */
-	@Date(message = "{error.invalid.introduced.date} {date.format}")
+	@Date(message = "{error.invalid.introduced.date} {date.condition}")
 	private String introduced;
 	
 	/** The discontinued. */
-	@Date(message = "{error.invalid.discontined.date} {date.format}")
+	@Date(message = "{error.invalid.discontined.date} {date.condition}")
 	private String discontinued;
 	
 	/** The company id. */

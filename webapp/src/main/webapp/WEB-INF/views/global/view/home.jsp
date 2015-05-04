@@ -8,17 +8,17 @@
 <html>
 	<jsp:include page="/WEB-INF/views/import/head.jsp"></jsp:include>
 	<body>
-		<div>
-			<div id="user-icone" class="col-md-2"></div>
+		<mylib:commonHead /> 
+		<div class="row">
+			<div class="col-md-2"></div>
 			<security:authorize access="!hasRole('ROLE_SUPER_ADMIN')">
-				<div id="user-icone" class="col-md-1"></div>
+				<div class="col-md-1"></div>
 			</security:authorize>
 			<security:authorize access="!hasRole('ROLE_ADMIN')">
-				<div id="user-icone" class="col-md-1"></div>
+				<div class="col-md-1"></div>
 			</security:authorize>
-			<mylib:commonHead /> 
 			<security:authorize access="hasRole('ROLE_SUPER_ADMIN')">
-				<div id="user-icone" class="col-md-3">
+				<div class="col-md-3" id="user-icone">
 					<a href="/webapp/user/view/dashboard"><i class="fa fa-users home-icone user-home-icone"></i></a>
 				</div>
 			</security:authorize>
@@ -32,6 +32,32 @@
 					<a href="/webapp/company/view/dashboard"><i class="fa fa-building home-icone company-home-icone"></i></a>
 				</div>
 			</security:authorize>	
+		</div>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<security:authorize access="!hasRole('ROLE_SUPER_ADMIN')">
+				<div class="col-md-1"></div>
+			</security:authorize>
+			<security:authorize access="!hasRole('ROLE_ADMIN')">
+				<div class="col-md-1"></div>
+			</security:authorize>
+			<security:authorize access="hasRole('ROLE_SUPER_ADMIN')">
+				<div id="user-icone" class="col-md-3">
+					<span class="home-text"><spring:message code="user" /></span>
+				</div>
+			</security:authorize>
+			<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+				<div class="col-md-3" id="computer-icone">
+					<span class="home-text"><spring:message code="computer" /></span>
+				</div>
+			</security:authorize>
+			<security:authorize access="hasRole('ROLE_ADMIN')">
+				<div class="col-md-2" id="company-icone">
+					<span class="home-text"><spring:message code="company" /></span>
+				</div>
+			</security:authorize>	
+		
+		
 		</div>
 		<script src="/webapp/js/jquery.min.js"></script>
 		<script src="/webapp/js/bootstrap.min.js"></script>

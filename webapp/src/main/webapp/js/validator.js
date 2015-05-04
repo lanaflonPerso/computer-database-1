@@ -1,7 +1,6 @@
 
 checkName(document)
-checkIntroduced(document)
-checkDiscontinued(document)
+init();
 document.getElementById("companyId").style.borderColor = "green";
 
 function checkPostForm(document) {
@@ -34,9 +33,8 @@ function checkName(document) {
 
 function checkIntroduced(document) {
 	element = document.getElementById("introduced")
-	re = date_regex
 	
-	if (element.value == "" || element.value.match(re)) {
+	if (element.value == "" || element.value.match(date_regex)) {
 		if (document.getElementById("serviceIntroducedException") != null) {
 			document.getElementById("serviceIntroducedException").style.visibility = "hidden";
 		}
@@ -52,9 +50,8 @@ function checkIntroduced(document) {
 
 function checkDiscontinued(document) {
 	element = document.getElementById("discontinued")
-	re = date_regex
 
-	if (element.value == "" || element.value.match(re)) {
+	if (element.value == "" || element.value.match(date_regex)) {
 		if (document.getElementById("serviceDiscontinuedException") != null) {
 			document.getElementById("serviceDiscontinuedException").style.visibility = "hidden";
 		}
@@ -67,3 +64,25 @@ function checkDiscontinued(document) {
 		return false;
 	}
 }
+
+function init() {
+	element = document.getElementById("discontinued")
+	if (element.value == "" || element.value == null) {
+		if (document.getElementById("serviceDiscontinuedException") != null) {
+			document.getElementById("serviceDiscontinuedException").style.visibility = "hidden";
+		}
+		document.getElementById("discontinuedError").style.display = "none";
+		element.style.borderColor = "green";
+	}
+	
+	element = document.getElementById("introduced")
+	console.log(element)
+	if (element.value == "" || element.value == null) {
+		if (document.getElementById("serviceIntroducedException") != null) {
+			document.getElementById("serviceIntroducedException").style.visibility = "hidden";
+		}
+		document.getElementById("introducedError").style.display = "none";
+		element.style.borderColor = "green";
+	}
+}
+

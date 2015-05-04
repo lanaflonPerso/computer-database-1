@@ -79,9 +79,7 @@ public interface CommonService<T> {
 	 *
 	 * @param t the t
 	 */
-	public default void update(T t) {
-		throw new UnsupportedOperationException();
-	}
+	public void update(T t);
 
 	/**
 	 * Delete.

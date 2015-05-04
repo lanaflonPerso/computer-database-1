@@ -26,9 +26,7 @@ public interface CommonDao<T> {
 	 *
 	 * @param t the t
 	 */
-	public default void update(T t) {
-		throw new UnsupportedOperationException();
-	}
+	public void update(T t);
 
 	/**
 	 * Gets the all.
@@ -59,7 +57,7 @@ public interface CommonDao<T> {
 	 * Gets the by id.
 	 *
 	 * @param id the id
-	 * @return the by id
+	 * @return the object by id
 	 */
 	public T getById(Long id);
 

@@ -3,9 +3,12 @@
  */
 package com.excilys.computerdatabase.controler.computer;
 
+import java.util.Locale;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.excilys.computerdatabase.controler.AbstractController;
+import com.excilys.computerdatabase.page.creator.AbstractPageCreator;
 import com.excilys.computerdatabase.page.creator.computer.AddPageCreator;
 import com.excilys.computerdatabase.page.model.ComputerPage;
 import com.excilys.computerdatabase.session.AddComputerSession;
@@ -49,6 +53,7 @@ public class ComputerAdd extends AbstractController {
 		ComputerPage page = addPageCreator.getPageFromGetRequest();
 		if (addComputerSession.getComputerDto() != null) {
 			page.setComputerDto(addComputerSession.getComputerDto());
+			AbstractPageCreator.pageConverter(page, Locale.ENGLISH, LocaleContextHolder.getLocaleContext().getLocale());
 			model.addAttribute("org.springframework.validation.BindingResult.addComputerDto", addComputerSession.getBindingResult());
 		}
 		model.addAttribute("page", page);

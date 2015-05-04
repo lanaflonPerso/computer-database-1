@@ -40,7 +40,7 @@ public class AddPageCreator extends AbstractPageCreator {
 	
 	public ComputerPage getPageFromGetRequest() {		
 		ComputerPage page = pageGet();
-		pageConverter(page, Locale.ENGLISH ,LocaleContextHolder.getLocaleContext().getLocale());
+		pageConverter(page, Locale.ENGLISH, LocaleContextHolder.getLocaleContext().getLocale());
 		return page;
 	}
 	
