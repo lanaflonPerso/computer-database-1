@@ -13,10 +13,10 @@ import com.excilys.computerdatabase.util.DateFormat;
 public class TestDateMapper {
 	@Test
 	public void testExtractEnglishOk(){
-		LocalDateTime localDateTime = DateMapper.exctractFromString("2000-10-10 10:10:10", DateFormat.ENGLISH);
-		assertEquals(localDateTime.getSecond(), 10);
-		assertEquals(localDateTime.getMinute(), 10);
-		assertEquals(localDateTime.getHour(), 10);
+		LocalDateTime localDateTime = DateMapper.exctractFromString("2000-10-10", DateFormat.ENGLISH);
+		assertEquals(localDateTime.getSecond(), 0);
+		assertEquals(localDateTime.getMinute(), 0);
+		assertEquals(localDateTime.getHour(), 0);
 		assertEquals(localDateTime.getDayOfMonth(), 10);
 		assertEquals(localDateTime.getMonthValue(), 10);
 		assertEquals(localDateTime.getYear(), 2000);
@@ -24,10 +24,10 @@ public class TestDateMapper {
 	
 	@Test
 	public void testExtractFrenchOk(){
-		LocalDateTime localDateTime = DateMapper.exctractFromString("10/10/2000 10:10:10", DateFormat.FRENCH);
-		assertEquals(localDateTime.getSecond(), 10);
-		assertEquals(localDateTime.getMinute(), 10);
-		assertEquals(localDateTime.getHour(), 10);
+		LocalDateTime localDateTime = DateMapper.exctractFromString("10/10/2000", DateFormat.FRENCH);
+		assertEquals(localDateTime.getSecond(), 0);
+		assertEquals(localDateTime.getMinute(), 0);
+		assertEquals(localDateTime.getHour(), 0);
 		assertEquals(localDateTime.getDayOfMonth(), 10);
 		assertEquals(localDateTime.getMonthValue(), 10);
 		assertEquals(localDateTime.getYear(), 2000);

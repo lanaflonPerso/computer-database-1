@@ -17,9 +17,9 @@ public enum DateFormat {
 	public String toString(){
 		switch (this) {
 		case FRENCH:
-			return "dd/MM/yyyy HH:mm:ss";
+			return "dd/MM/yyyy";
 		case ENGLISH:
-			return "yyyy-MM-dd HH:mm:ss";
+			return "yyyy-MM-dd";
 		default:
 			return null;
 		}

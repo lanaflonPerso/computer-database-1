@@ -16,6 +16,9 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
+import com.excilys.computerdatabase.mapper.impl.DateMapper;
+import com.excilys.computerdatabase.validation.Validator;
+
 /**
  * The Class DateValidator.
  */
@@ -64,8 +67,8 @@ public class DateValidator implements ConstraintValidator<Date, String> {
 	 * @return true, if is correct date
 	 */
 	private boolean isCorrectDate(String date, String pattern) {
-		if (org.apache.commons.validator.routines.DateValidator.getInstance().isValid(date, pattern)) {
-			LocalDateTime localDateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern(pattern));
+		if (Validator.isDateValid(date, pattern)) {
+			LocalDateTime localDateTime = DateMapper.exctractFromString(date, pattern);
 			LocalDateTime localDateTimeAfter = LocalDateTime.parse("1970-01-01 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 			LocalDateTime localDateTimeBefore = LocalDateTime.parse("2038-01-01 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 			return localDateTime.isAfter(localDateTimeAfter) && localDateTime.isBefore(localDateTimeBefore);

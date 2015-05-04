@@ -13,20 +13,25 @@ import com.excilys.computerdatabase.model.UserDetail;
 import com.excilys.computerdatabase.page.creator.AbstractPageCreator;
 import com.excilys.computerdatabase.page.model.UserDashboardPage;
 import com.excilys.computerdatabase.service.services.SecurityService;
+import com.excilys.computerdatabase.session.UserSession;
 
 /**
  * The Class UserDashboardPageCreator.
  */
 @Service
 public class UserDashboardPageCreator extends AbstractPageCreator {
-	
+
 	/** The security service. */
 	@Autowired
 	private SecurityService securityService;
-	
+
 	/** The user detail dto mapper. */
 	@Autowired
 	private UserDetailDtoMapper userDetailDtoMapper;
+
+	/** The user session. */
+	@Autowired
+	private UserSession userSession;
 
 	public UserDashboardPage getPageFromGetRequest() {
 		return pageGet();
@@ -41,6 +46,7 @@ public class UserDashboardPageCreator extends AbstractPageCreator {
 		UserDashboardPage newPage = new UserDashboardPage();
 		List<UserDetail> list = securityService.getAll();
 		newPage.setUserList(userDetailDtoMapper.mapListFromModel(list));
+		newPage.setErrorMessage(userSession.getErrorMessage());
 		return newPage;
 	}
 

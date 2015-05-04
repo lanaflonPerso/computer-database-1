@@ -6,6 +6,8 @@ package com.excilys.computerdatabase.controler.addcomputer;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.time.LocalDateTime;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +17,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.excilys.computerdatabase.controler.AbstractWebTest;
+import com.excilys.computerdatabase.mapper.impl.DateMapper;
 
 public class TestAddComputer extends AbstractWebTest {
 	private WebDriver driver;
@@ -47,11 +50,11 @@ public class TestAddComputer extends AbstractWebTest {
 		assertEquals(computerFoundNumber1 != null, true);
 
 		driver.findElement(By.id("addComputer")).click();
-		enterComputer(driver, "name", "1999-10-09 01:02:03", "1999-10-09 01:02:03", "Apple Inc.");
+		enterComputer(driver, "name", DateMapper.convertIntoString(LocalDateTime.now()), DateMapper.convertIntoString(LocalDateTime.now()), "Apple Inc.");
 		driver.findElement(By.id("addButton")).click();
 
 		Long computerFoundNumber2 = getComputerNumber(driver);
-		assertEquals(computerFoundNumber2 != null, true);
+		assertNotNull(computerFoundNumber2);
 		assertEquals(computerFoundNumber1, new Long(computerFoundNumber2 - 1));
 	}
 

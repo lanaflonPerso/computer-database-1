@@ -11,18 +11,26 @@
 	<body>
 		<mylib:commonHead />
 		<div id="login-box">
-			<form class="form-signin" name="f" action="/webapp/j_spring_security_check" method="POST">
+			<form class="login-form" name="f" action="/webapp/j_spring_security_check" method="POST">
 				<spring:message code="password" var="password"/>
 				<spring:message code="username" var="username"/>
 				<h2 class="form-signin-heading"><spring:message code="please.log.in" /></h2>
-				<label for="inputEmail" class="sr-only">${username}</label>
-				<input type="text" name="username" id="username" class="form-control" placeholder="${username}" required autofocus>
-				<label for="inputPassword" class="sr-only">${password}</label>
-				<input type="password" name="password" id="password" class="form-control" placeholder="${password}" required>
+				<div class="form-group input-group">
+					<span class="input-group-addon">
+						<i class="glyphicon glyphicon-user"></i>
+					</span>
+					<input type="text" name="username" id="username" class="form-control" placeholder="${username}" required autofocus>
+				</div>
+				<div class="form-group input-group">
+					<span class="input-group-addon">
+						<i class="glyphicon glyphicon-lock"></i>
+					</span>
+					<input type="password" name="password" id="password" class="form-control" placeholder="${password}" required autofocus>
+				</div>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<c:if test="${auth == false}">
-					<div>
-						<font color="red"><spring:message code="error.auth.fail" /></font>
+					<div id="loginError" class="alert alert-danger" role="alert">
+						<spring:message code="error.auth.fail" />
 					</div>
 				</c:if>
 				<button id="login" class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="log.in" /></button>

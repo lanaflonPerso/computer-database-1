@@ -60,9 +60,20 @@ public class Validator {
 	 * @return true, if is date valid
 	 */
 	public static boolean isDateValid(String date, DateFormat dateFormat) {
-		return DateValidator.getInstance().isValid(date, dateFormat.toString());
+		return isDateValid(date, dateFormat.toString());
 	}
 
+	/**
+	 * Checks if is date valid.
+	 *
+	 * @param date the date
+	 * @param pattern the pattern
+	 * @return true, if is date valid
+	 */
+	public static boolean isDateValid(String date, String pattern){
+		return DateValidator.getInstance().isValid(date, pattern);
+	}
+	
 	/**
 	 * Checks if is computer correct.
 	 *

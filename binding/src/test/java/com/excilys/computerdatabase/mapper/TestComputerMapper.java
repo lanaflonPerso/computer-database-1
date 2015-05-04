@@ -18,43 +18,42 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.excilys.computerdatabase.dto.mapper.ComputerDtoMapper;
 import com.excilys.computerdatabase.dto.model.ComputerDto;
+import com.excilys.computerdatabase.mapper.impl.DateMapper;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
+import com.excilys.computerdatabase.util.DateFormat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/test-binding-context.xml" })
 public class TestComputerMapper {
 
 	@Autowired
-	ComputerDtoMapper computerDtoMapper;
-	
-	DateTimeFormatter dateTimeFormatter = DateTimeFormatter
-			.ofPattern("yyyy-MM-dd HH:mm:ss");
+	private ComputerDtoMapper computerDtoMapper;
 
-	@Test
-	public void testMapperModelToDtoOk2() {
-		Computer computer = new Computer(new Long(0), "name",
-				LocalDateTime.parse("2000-10-10 10:10:10", dateTimeFormatter),
-				null, new Company(new Long(0), "name"));
+	private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DateFormat.ENGLISH.toString());
+
+	private final String currentStringDate = LocalDateTime.now().format(dateTimeFormatter);
+	private final LocalDateTime currentDate = DateMapper.exctractFromString(currentStringDate, DateFormat.ENGLISH);
+	
+	
+	
+	@Test public void testMapperModelToDtoOk2() {
+		Computer computer = new Computer(new Long(0), "name", currentDate, null, new Company(new Long(0), "name"));
 		ComputerDto computerDto = computerDtoMapper.mapFromModel(computer);
-		assertEquals(computerDto.getIntroduced(), "2000-10-10 10:10:10");
+		assertEquals(computerDto.getIntroduced(), currentStringDate);
 	}
 
 	@Test
 	public void testMapperModelToDtoOk3() {
-		Computer computer = new Computer(null, "name", null,
-				LocalDateTime.parse("2000-10-10 10:10:10", dateTimeFormatter),
-				new Company(null, "name"));
+		Computer computer = new Computer(null, "name", null, currentDate, new Company(null, "name"));
 		ComputerDto computerDto = computerDtoMapper.mapFromModel(computer);
 		assertEquals(computerDto.getIntroduced(), null);
-		assertEquals(computerDto.getDiscontinued(), "2000-10-10 10:10:10");
+		assertEquals(computerDto.getDiscontinued(), currentStringDate);
 	}
 
 	@Test
 	public void testMapperListModelToDtoOk() {
-		Computer computer = new Computer(null, "name", null,
-				LocalDateTime.parse("2000-10-10 10:10:10", dateTimeFormatter),
-				new Company(null, "name"));
+		Computer computer = new Computer(null, "name", null, currentDate, new Company(null, "name"));
 		List<Computer> computers = new ArrayList<Computer>();
 		computers.add(computer);
 		computers.add(new Computer());
@@ -72,11 +71,11 @@ public class TestComputerMapper {
 	public void testMapperDaoListWrong() {
 		computerDtoMapper.mapListFromModel(null);
 	}
-	
+
 	@Test
-	public void testMapperDtoToModelOk(){
-		Computer computer2 = new Computer(new Long(5), "name", LocalDateTime.parse("2000-10-10 20:25:26", dateTimeFormatter), null, new Company(new Long(4), null));
-		Computer computer = computerDtoMapper.mapToModel(new ComputerDto("5", "name", "2000-10-10 20:25:26", "", "4", null));
+	public void testMapperDtoToModelOk() {
+		Computer computer2 = new Computer(new Long(5), "name", currentDate, null, new Company(new Long(4), null));
+		Computer computer = computerDtoMapper.mapToModel(new ComputerDto("5", "name", currentStringDate, "", "4", null));
 		assertEquals(computer.hashCode(), computer2.hashCode());
 		assertEquals(computer, computer2);
 	}

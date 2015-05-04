@@ -34,7 +34,7 @@ public class TestEditComputer extends AbstractWebTest {
 		driver.findElement(By.id("editButton")).click();
 
 		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/webapp/computer/view/edit");
-		assertEquals("Invalid discontinued date : respect yyyy-MM-dd HH:mm:ss", driver.findElement(By.id("serviceDiscontinuedException")).getText());
+		assertEquals("Invalid discontinued date : respect (1) yyyy-MM-dd (2) After year : 1970 (3) Before year : 2038", driver.findElement(By.id("serviceDiscontinuedException")).getText());
 	}
 
 }

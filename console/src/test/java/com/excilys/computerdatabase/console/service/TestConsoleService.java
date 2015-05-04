@@ -46,7 +46,7 @@ public class TestConsoleService {
 	
 	@Test
 	public void testAddComputerOk(){
-		Computer computer = new Computer(0L, "name-test-2", LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), null, new Company());
+		Computer computer = new Computer(0L, "name-test-2", LocalDateTime.now().truncatedTo(ChronoUnit.DAYS), null, new Company());
 		consoleService.createComputer(computer);
 		assertNotEquals((Long) computer.getId(), (Long) 0L);
 		assertEquals(computer, consoleService.getComputerById(computer.getId()));

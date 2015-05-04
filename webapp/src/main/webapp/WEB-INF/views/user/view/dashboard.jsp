@@ -95,7 +95,12 @@
 						</c:forEach>               
 	                </tbody>
 	            </table>
-	        </div>       
+	            <c:if test="${page.getErrorMessage() != null}">
+	             	<div id="loginError" class="alert alert-danger" role="alert">
+						${page.getErrorMessage()}
+					</div>  
+				</c:if>
+	        </div> 
 	    </section>
 	    <!-- Popup -->
 	   	<jsp:include page="/WEB-INF/views/user/popup/addUser.jsp"></jsp:include>

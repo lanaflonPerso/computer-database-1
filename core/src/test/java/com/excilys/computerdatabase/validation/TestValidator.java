@@ -16,7 +16,7 @@ import com.excilys.computerdatabase.validation.Validator;
 public class TestValidator {
 	@Test
 	public void testDateValidatorCorrectDate() {
-		String stringDate = "2100-10-12 10:10:12";
+		String stringDate = "2100-10-12";
 		assertEquals(Validator.isDateValid(stringDate), true);
 	}
 
@@ -44,22 +44,19 @@ public class TestValidator {
 
 	@Test
 	public void testComputerCorrectComputer() {
-		Computer computer = new Computer(null, "name", null, null, new Company(
-				new Long(1), "company_name"));
-		assertEquals(Validator.isComputerCorrect(computer),	true);
+		Computer computer = new Computer(null, "name", null, null, new Company(new Long(1), "company_name"));
+		assertEquals(Validator.isComputerCorrect(computer), true);
 	}
 
 	@Test
 	public void testComputerNullCompanyId() {
-		Computer computer = new Computer(null, "name", null, null, new Company(
-				null, "company_name"));
+		Computer computer = new Computer(null, "name", null, null, new Company(null, "company_name"));
 		assertEquals(Validator.isComputerCorrect(computer), true);
 	}
 
 	@Test
 	public void testComputerNullCompanyName() {
-		Computer computer = new Computer(null, "name", null, null, new Company(
-				null, null));
+		Computer computer = new Computer(null, "name", null, null, new Company(null, null));
 		assertEquals(Validator.isComputerCorrect(computer), true);
 	}
 
@@ -83,8 +80,7 @@ public class TestValidator {
 
 	@Test
 	public void testComputerNullName() {
-		Computer computer = new Computer(null, null, LocalDateTime.now(),
-				LocalDateTime.now(), new Company(new Long(1), "company_name"));
+		Computer computer = new Computer(null, null, LocalDateTime.now(), LocalDateTime.now(), new Company(new Long(1), "company_name"));
 		assertEquals(Validator.isComputerCorrect(computer), false);
 	}
 
@@ -93,7 +89,7 @@ public class TestValidator {
 		Computer computer = new Computer(null, "", null, null, null);
 		assertEquals(Validator.isComputerCorrect(computer), false);
 	}
-	
+
 	/*
 	 * Test computer Id
 	 */
@@ -102,70 +98,70 @@ public class TestValidator {
 	public void testComputerIdOk() {
 		assertEquals(Validator.isIdCorrect(new Long(4)), true);
 	}
-	
+
 	@Test
 	public void testComputerIdNull() {
 		assertEquals(Validator.isIdCorrect(null), false);
 	}
-	
+
 	@Test
 	public void testComputerIdNegtif() {
 		assertEquals(Validator.isIdCorrect(new Long(-4)), false);
 	}
-	
+
 	@Test
 	public void testComputerIdZero() {
 		assertEquals(Validator.isIdCorrect(new Long(0)), false);
 	}
-	
+
 	/*
 	 * Test from to
 	 */
-	
+
 	@Test
 	public void checkComputerFromToOk() {
 		assertEquals(Validator.isDateFromToCorrect(new Long(1), new Long(2)), true);
 	}
-	
+
 	@Test
 	public void checkComputerFromToNegatif1() {
 		assertEquals(Validator.isDateFromToCorrect(new Long(-1), new Long(1)), false);
 	}
-	
+
 	@Test
 	public void checkComputerFromToNegatif2() {
 		assertEquals(Validator.isDateFromToCorrect(new Long(1), new Long(-1)), false);
 	}
-	
+
 	@Test
 	public void checkComputerFromToNull1() {
 		assertEquals(Validator.isDateFromToCorrect(new Long(0), null), false);
 	}
-	
+
 	@Test
 	public void checkComputerFromToNull2() {
 		assertEquals(Validator.isDateFromToCorrect(null, new Long(0)), false);
 	}
-	
+
 	@Test
 	public void checkComputerFromToNotSorted() {
 		assertEquals(Validator.isDateFromToCorrect(new Long(4), new Long(3)), false);
 	}
-	
+
 	/*
 	 * Test name for search
 	 */
-	
+
 	@Test
 	public void checkNameforSearchCorrect() {
 		assertEquals(Validator.isStringForSearchCorrect("test"), true);
 	}
-	
+
 	@Test
 	public void checkNameforSearchWrong() {
 		assertEquals(Validator.isStringForSearchCorrect("   "), false);
 	}
-	
+
 	@Test
 	public void checkNameforSearchNull() {
 		assertEquals(Validator.isStringForSearchCorrect(null), false);

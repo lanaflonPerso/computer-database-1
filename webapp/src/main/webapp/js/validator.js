@@ -67,20 +67,12 @@ function checkDiscontinued(document) {
 
 function init() {
 	element = document.getElementById("discontinued")
-	if (element.value == "" || element.value == null) {
-		if (document.getElementById("serviceDiscontinuedException") != null) {
-			document.getElementById("serviceDiscontinuedException").style.visibility = "hidden";
-		}
+	if (element.value == "" || element.value.match(date_regex)) {
 		document.getElementById("discontinuedError").style.display = "none";
 		element.style.borderColor = "green";
-	}
-	
+	}	
 	element = document.getElementById("introduced")
-	console.log(element)
-	if (element.value == "" || element.value == null) {
-		if (document.getElementById("serviceIntroducedException") != null) {
-			document.getElementById("serviceIntroducedException").style.visibility = "hidden";
-		}
+	if (element.value == "" || element.value.match(date_regex)) {
 		document.getElementById("introducedError").style.display = "none";
 		element.style.borderColor = "green";
 	}

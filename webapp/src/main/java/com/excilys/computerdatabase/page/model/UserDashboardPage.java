@@ -12,9 +12,12 @@ import com.excilys.computerdatabase.dto.model.UserDetailDto;
  * The Class UserDashboardPage.
  */
 public class UserDashboardPage {
-	
+
 	/** The user list. */
 	private List<UserDetailDto> userList;
+	
+	/** The Error message. */
+	private String ErrorMessage = null;
 
 	/**
 	 * Instantiates a new user dashboard page.
@@ -27,36 +30,33 @@ public class UserDashboardPage {
 	 * Instantiates a new user dashboard page.
 	 *
 	 * @param userList the user list
+	 * @param errorMessage the error message
 	 */
-	public UserDashboardPage(List<UserDetailDto> userList) {
+	public UserDashboardPage(List<UserDetailDto> userList, String errorMessage) {
 		super();
 		this.userList = userList;
+		ErrorMessage = errorMessage;
 	}
 
-	/**
-	 * Gets the user list.
-	 *
-	 * @return the user list
-	 */
 	public List<UserDetailDto> getUserList() {
 		return userList;
 	}
 
-	/**
-	 * Sets the user list.
-	 *
-	 * @param userList the new user list
-	 */
 	public void setUserList(List<UserDetailDto> userList) {
 		this.userList = userList;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+	public String getErrorMessage() {
+		return ErrorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		ErrorMessage = errorMessage;
+	}
+
 	@Override
 	public String toString() {
-		return "UserDashboardPage [userList=" + userList + "]";
+		return "UserDashboardPage [userList=" + userList + ", ErrorMessage=" + ErrorMessage + "]";
 	}
-	
+
 }

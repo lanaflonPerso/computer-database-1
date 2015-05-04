@@ -4,6 +4,7 @@
 package com.excilys.computerdatabase.service.services.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
@@ -26,7 +27,6 @@ import com.excilys.computerdatabase.persistence.dao.CompanyDao;
 import com.excilys.computerdatabase.persistence.dao.ComputerDao;
 import com.excilys.computerdatabase.service.exception.ServiceException;
 import com.excilys.computerdatabase.service.services.ComputerService;
-import com.excilys.computerdatabase.service.services.impl.CompanyServiceImpl;
 import com.excilys.computerdatabase.sort.SortCriteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -85,16 +85,27 @@ public class TestCompanyService extends AbstractTransactionalJUnit4SpringContext
 		companyServiceImpl.getById(null);
 	}
 
-	@Test(expected = UnsupportedOperationException.class)
+	@Test(expected = ServiceException.class)
 	public void testUpdateWrong() {
 		companyServiceImpl.update(null);
 	}
 
+	@Test
+	public void testUpdateOk() {
+		Company company = new Company(0L, "name");
+		companyServiceImpl.create(company);
+		assertNotEquals((long) company.getId(), 0L);
+		assertEquals(company,companyServiceImpl.getById(company.getId()));
+		company.setName("name2");
+		companyServiceImpl.update(company);
+		assertEquals(company,companyServiceImpl.getById(company.getId()));
+	}
+	
 	@Test(expected = ServiceException.class)
 	public void testDeleteWrong() {
 		companyServiceImpl.delete(null);
 	}
-
+	
 	@Test
 	public void testDeleteOk() {
 		Company company = new Company(null, "company_test");

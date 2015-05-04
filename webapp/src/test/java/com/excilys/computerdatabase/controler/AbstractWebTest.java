@@ -11,8 +11,8 @@ import org.openqa.selenium.WebElement;
 
 public abstract class AbstractWebTest {
 
-	public static final String ADMIN_USERNAME = "admin";
-	public static final String ADMIN_PASSWORD = "admin";
+	public static final String ADMIN_USERNAME = "all";
+	public static final String ADMIN_PASSWORD = "all";
 
 	protected void login(WebDriver driver) {
 		driver.manage().timeouts().pageLoadTimeout(5000L, TimeUnit.MILLISECONDS);

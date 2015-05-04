@@ -17,6 +17,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import com.excilys.computerdatabase.controler.AbstractWebTest;
+import com.excilys.computerdatabase.mapper.impl.DateMapper;
 
 public class TestEditComputerFirefox extends AbstractWebTest {
 	private WebDriver driver;
@@ -37,7 +38,7 @@ public class TestEditComputerFirefox extends AbstractWebTest {
 		driver.findElement(By.id("name_1")).click();
 
 		deleteComputer(driver);
-		String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		String date = DateMapper.convertIntoString(LocalDateTime.now());
 		String name = "editComputerTest3";
 		enterComputer(driver, name, "", date, "Nokia");
 

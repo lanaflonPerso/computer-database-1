@@ -81,11 +81,22 @@ public class TestCompanyDao {
 		assertNull(c);		
 	}
 	
-	@Test(expected = UnsupportedOperationException.class)
-	public void testUpdate() {
+	@Test(expected = DaoException.class)
+	public void testUpdateWrong() {
 		companyDao.update(null);
 	}
 
+	@Test
+	public void testUpdateOk() {
+		Company company = new Company(0L, "name");
+		companyDao.create(company);
+		assertNotEquals((long) company.getId(), 0L);
+		assertEquals(company, companyDao.getById(company.getId()));
+		company.setName("name2");
+		companyDao.update(company);
+		assertEquals(company, companyDao.getById(company.getId()));
+	}
+	
 	@Test(expected = DaoException.class)
 	public void testGetByIdWithNullCompany() {
 		assertEquals(companyDao.getById(null), null);

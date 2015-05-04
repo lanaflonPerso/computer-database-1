@@ -60,7 +60,7 @@ public class TestUserDao {
 	}
 	
 	@Test
-	public void testCreateWithRolesOk2() {
+	public void testCreateWithRolesOk() {
 		UserDetail userDetail = new UserDetail();
 		userDetail.setUserName("name");
 		userDetail.setPassword("password");
@@ -97,7 +97,7 @@ public class TestUserDao {
 	}
 
 	@Test
-	public void testUpdatePasswordOk2() {
+	public void testUpdatePasswordOk() {
 		UserDetail userDetail = new UserDetail();
 		userDetail.setUserName("name");
 		userDetail.setPassword("password");
@@ -112,7 +112,7 @@ public class TestUserDao {
 	}
 	
 	@Test
-	public void testUpdateRightOk3() {
+	public void testUpdateRightOk() {
 		UserDetail userDetail = new UserDetail();
 		userDetail.setUserName("name");
 		userDetail.setPassword("password");

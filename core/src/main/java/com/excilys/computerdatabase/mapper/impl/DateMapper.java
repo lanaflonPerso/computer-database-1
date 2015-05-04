@@ -1,5 +1,6 @@
 package com.excilys.computerdatabase.mapper.impl;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,19 +11,25 @@ import com.excilys.computerdatabase.validation.Validator;
 public class DateMapper {
 	
 	public static LocalDateTime exctractFromString(String date, DateFormat dateFormat) {
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat.toString());
+		return exctractFromString(date, dateFormat.toString());
+	}
+	
+	public static LocalDateTime exctractFromString(String date, String pattern) {		
 		if (date == null) {
 			return null;
 		} else if ("".equals(date.trim())) {
 			return null;
-		} else if (Validator.isDateValid(date, dateFormat)) {
-			return LocalDateTime.parse(date, dateTimeFormatter);
+		} else if (Validator.isDateValid(date, pattern)) {
+			DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
+			LocalDate localDate = LocalDate.parse(date, dateTimeFormatter);
+			return LocalDateTime.of(localDate.getYear(), localDate.getMonth(), localDate.getDayOfMonth(), 0, 0);
 		} else {
 			throw new ParsingException(Validator.WRONG_DATE_FORMAT);
 		}
+		
 	}
 	
-	public static String convertIntoString(LocalDateTime localDateTime, DateFormat dateFormat) {
+	public static String convertIntoString(LocalDateTime localDateTime, DateFormat dateFormat) {		
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat.toString());
 		if(localDateTime == null) {
 			return null;

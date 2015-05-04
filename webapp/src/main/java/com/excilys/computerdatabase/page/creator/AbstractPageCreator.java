@@ -11,6 +11,7 @@ import com.excilys.computerdatabase.dto.model.ComputerDto;
 import com.excilys.computerdatabase.mapper.impl.DateMapper;
 import com.excilys.computerdatabase.page.model.ComputerPage;
 import com.excilys.computerdatabase.util.DateFormat;
+import com.excilys.computerdatabase.validation.Validator;
 
 /**
  * The Class AbstractPageCreator.
@@ -26,8 +27,16 @@ public abstract class AbstractPageCreator {
 	 * @param dateFormatTo the date format to
 	 */
 	protected static void convertDto(ComputerDto computerDto, DateFormat dateFormatFrom, DateFormat dateFormatTo) {
-		computerDto.setIntroduced(DateMapper.convertString(computerDto.getIntroduced(), dateFormatFrom, dateFormatTo));
-		computerDto.setDiscontinued(DateMapper.convertString(computerDto.getDiscontinued(), dateFormatFrom, dateFormatTo));
+		if(Validator.isDateValid(computerDto.getIntroduced(), dateFormatFrom)) {
+			computerDto.setIntroduced(DateMapper.convertString(computerDto.getIntroduced(), dateFormatFrom, dateFormatTo));
+		} else {
+			computerDto.setIntroduced(computerDto.getIntroduced());
+		}
+		if(Validator.isDateValid(computerDto.getDiscontinued(), dateFormatFrom)) {
+			computerDto.setDiscontinued(DateMapper.convertString(computerDto.getDiscontinued(), dateFormatFrom, dateFormatTo));
+		} else {
+			computerDto.setDiscontinued(computerDto.getDiscontinued());
+		}
 	}
 	
 	/**
