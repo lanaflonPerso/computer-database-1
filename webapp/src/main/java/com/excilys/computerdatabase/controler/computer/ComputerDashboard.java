@@ -16,15 +16,30 @@ import com.excilys.computerdatabase.page.creator.computer.ComputerDashboardPageC
 import com.excilys.computerdatabase.page.model.ComputerDashboardPage;
 import com.excilys.computerdatabase.service.services.ComputerService;
 
+/**
+ * The Class ComputerDashboard.
+ */
 @Controller
 public class ComputerDashboard extends AbstractController {
+	
+	/** The Constant log. */
 	final static Logger log = LoggerFactory.getLogger(ComputerDashboard.class);
 
+	/** The computer service. */
 	@Autowired
 	private ComputerService computerService;
+	
+	/** The dashboard page creator. */
 	@Autowired
 	private ComputerDashboardPageCreator dashboardPageCreator;
 
+	/**
+	 * Gets the dashboard.
+	 *
+	 * @param dashboardPage the dashboard page
+	 * @param modelMap the model map
+	 * @return the dashboard
+	 */
 	@RequestMapping(value = COMPUTER + VIEW + DASHBOARD, method = RequestMethod.GET)
 	public String getDashboard(ComputerDashboardPage dashboardPage, ModelMap modelMap) {
 

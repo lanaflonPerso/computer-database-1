@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.webservice.impl.json;
 
 import java.util.List;
@@ -20,12 +24,20 @@ import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.webservice.CompanyRessource;
 
 
+/**
+ * The Class CompanyRestControler.
+ */
 @RestController
 @RequestMapping("rest/json/company")
 public class CompanyRestControler implements CompanyRessource {
+	
+	/** The company service. */
 	@Autowired
 	private CompanyService companyService;
 	
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#getAll()
+	 */
 	@Override
 	@GET
 	@RequestMapping("getAll")
@@ -33,6 +45,9 @@ public class CompanyRestControler implements CompanyRessource {
 		return companyService.list(new SortCriteria());
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#getById(java.lang.Long)
+	 */
 	@Override
 	@GET
 	@RequestMapping("getById/{id}")
@@ -40,6 +55,9 @@ public class CompanyRestControler implements CompanyRessource {
 		return companyService.getById(id);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#create(java.lang.Object)
+	 */
 	@Override
 	@POST
 	@RequestMapping("create")
@@ -48,6 +66,9 @@ public class CompanyRestControler implements CompanyRessource {
 		return t;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#update(java.lang.Object)
+	 */
 	@Override
 	@POST
 	@RequestMapping("update")
@@ -56,6 +77,9 @@ public class CompanyRestControler implements CompanyRessource {
 		return t;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#delete(java.lang.Long)
+	 */
 	@Override
 	@DELETE
 	@Produces(MediaType.TEXT_HTML)

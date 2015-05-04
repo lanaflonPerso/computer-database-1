@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.service.services.impl;
 
 import java.util.List;
@@ -16,16 +20,27 @@ import com.excilys.computerdatabase.service.exception.ServiceException;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.validation.Validator;
 
+/**
+ * The Class CompanyServiceImpl.
+ */
 @Service
 @Transactional(readOnly = true)
 public class CompanyServiceImpl implements CompanyService {
+	
+	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+	/** The computer dao. */
 	@Autowired
 	ComputerDao computerDao;
+	
+	/** The company dao. */
 	@Autowired
 	CompanyDao companyDao;
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#list(com.excilys.computerdatabase.sort.SortCriteria)
+	 */
 	@Override
 	public List<Company> list(SortCriteria sortCriteria) {
 		log.info("List companies");
@@ -35,12 +50,18 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyDao.getAll(sortCriteria);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#getNumberOfElement()
+	 */
 	@Override
 	public Long getNumberOfElement() {
 		log.info("Get number of companies");
 		return companyDao.getNumberOfElement();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#list(java.lang.Long, java.lang.Long, com.excilys.computerdatabase.sort.SortCriteria)
+	 */
 	@Override
 	public List<Company> list(Long from, Long to, SortCriteria sortCriteria) {
 		log.info("List companies");
@@ -53,6 +74,9 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyDao.getAll(from, to, sortCriteria);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#delete(java.lang.Long)
+	 */
 	@Override
 	@Transactional(readOnly=false)
 	public void delete(Long id) {
@@ -63,6 +87,9 @@ public class CompanyServiceImpl implements CompanyService {
 		deleteCompany(id);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#create(java.lang.Object)
+	 */
 	@Override
 	@Transactional(readOnly=false)
 	public void create(Company t) {
@@ -73,6 +100,9 @@ public class CompanyServiceImpl implements CompanyService {
 		companyDao.create(t);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#getById(java.lang.Long)
+	 */
 	@Override
 	public Company getById(Long id) {
 		log.info("Find company with id : {} ", id);
@@ -82,24 +112,49 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyDao.getById(id);
 	}
 	
+	/**
+	 * Delete company.
+	 *
+	 * @param id the id
+	 */
 	private void deleteCompany(Long id) {
 		computerDao.getByCompanyId(id).stream()
 				.forEach(e -> computerDao.delete(e.getId()));
 		companyDao.delete(id);
 	}
 
+	/**
+	 * Gets the company dao.
+	 *
+	 * @return the company dao
+	 */
 	public CompanyDao getCompanyDao() {
 		return companyDao;
 	}
 
+	/**
+	 * Sets the company dao.
+	 *
+	 * @param companyDao the new company dao
+	 */
 	public void setCompanyDao(CompanyDao companyDao) {
 		this.companyDao = companyDao;
 	}
 
+	/**
+	 * Gets the computer dao.
+	 *
+	 * @return the computer dao
+	 */
 	public ComputerDao getComputerDao() {
 		return computerDao;
 	}
 
+	/**
+	 * Sets the computer dao.
+	 *
+	 * @param computerDao the new computer dao
+	 */
 	public void setComputerDao(ComputerDao computerDao) {
 		this.computerDao = computerDao;
 	}

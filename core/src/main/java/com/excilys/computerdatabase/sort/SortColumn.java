@@ -3,9 +3,25 @@
  */
 package com.excilys.computerdatabase.sort;
 
+/**
+ * The Enum SortColumn.
+ */
 public enum SortColumn {
-	COMPUTER_ID, COMPUTER_NAME, INTRODUCED_DATE, DISCONTINUED_DATE, COMPANY_NAME;
+	
+	/** The computer id. */
+	COMPUTER_ID, 
+ /** The computer name. */
+ COMPUTER_NAME, 
+ /** The introduced date. */
+ INTRODUCED_DATE, 
+ /** The discontinued date. */
+ DISCONTINUED_DATE, 
+ /** The company name. */
+ COMPANY_NAME;
 
+	/* (non-Javadoc)
+	 * @see java.lang.Enum#toString()
+	 */
 	public String toString() {
 		switch (this) {
 		case COMPUTER_ID:
@@ -23,6 +39,11 @@ public enum SortColumn {
 		}
 	}
 
+	/**
+	 * To print.
+	 *
+	 * @return the string
+	 */
 	public String toPrint() {
 		switch (this) {
 		case COMPUTER_ID:
@@ -41,6 +62,12 @@ public enum SortColumn {
 	}
 	
 	
+	/**
+	 * Builds the.
+	 *
+	 * @param string the string
+	 * @return the sort column
+	 */
 	public static SortColumn build(String string) {
 		if (string == null) {
 			return COMPUTER_ID;

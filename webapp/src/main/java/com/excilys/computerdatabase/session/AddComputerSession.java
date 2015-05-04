@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.session;
 
 import java.io.Serializable;
@@ -9,29 +13,61 @@ import org.springframework.validation.BindingResult;
 
 import com.excilys.computerdatabase.dto.model.ComputerDto;
 
+/**
+ * The Class AddComputerSession.
+ */
 @Component
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class AddComputerSession implements Serializable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -1774961026585136517L;
+	
+	/** The computer dto. */
 	private ComputerDto computerDto;
+	
+	/** The binding result. */
 	private BindingResult bindingResult;
 
+	/**
+	 * Gets the computer dto.
+	 *
+	 * @return the computer dto
+	 */
 	public ComputerDto getComputerDto() {
 		return computerDto;
 	}
 
+	/**
+	 * Sets the computer dto.
+	 *
+	 * @param computerDto the new computer dto
+	 */
 	public void setComputerDto(ComputerDto computerDto) {
 		this.computerDto = computerDto;
 	}
 
+	/**
+	 * Gets the binding result.
+	 *
+	 * @return the binding result
+	 */
 	public BindingResult getBindingResult() {
 		return bindingResult;
 	}
 
+	/**
+	 * Sets the binding result.
+	 *
+	 * @param bindingResult the new binding result
+	 */
 	public void setBindingResult(BindingResult bindingResult) {
 		this.bindingResult = bindingResult;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -43,6 +79,9 @@ public class AddComputerSession implements Serializable {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -65,6 +104,9 @@ public class AddComputerSession implements Serializable {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "AddComputerSession [computerDto=" + computerDto

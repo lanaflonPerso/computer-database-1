@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.controler.computer;
 
 import java.util.ArrayList;
@@ -30,23 +34,47 @@ import com.excilys.computerdatabase.service.services.ComputerService;
 import com.excilys.computerdatabase.session.AddComputerSession;
 import com.excilys.computerdatabase.session.EditComputerSession;
 
+/**
+ * The Class ComputerControler.
+ */
 @Controller
 @SessionAttributes({ "computerDto" })
 public class ComputerControler extends AbstractController {
+	
+	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	/** The add computer session. */
 	@Autowired
 	private AddComputerSession addComputerSession;
+	
+	/** The edit computer session. */
 	@Autowired
 	private EditComputerSession editComputerSession;
+	
+	/** The computer service. */
 	@Autowired
 	private ComputerService computerService;
+	
+	/** The computer dto mapper. */
 	@Autowired
 	private ComputerDtoMapper computerDtoMapper;
+	
+	/** The add page creator. */
 	@Autowired
 	private AddPageCreator addPageCreator;
+	
+	/** The edit page creator. */
 	@Autowired
 	private EditPageCreator editPageCreator;
 
+	/**
+	 * Adds the computer.
+	 *
+	 * @param computerDto the computer dto
+	 * @param bindingResult the binding result
+	 * @return the string
+	 */
 	@RequestMapping(value = COMPUTER + CRUD + ADD, method = RequestMethod.POST)
 	public String addComputer(@Valid @ModelAttribute("addComputerDto") ComputerDto computerDto, BindingResult bindingResult) {
 
@@ -68,6 +96,14 @@ public class ComputerControler extends AbstractController {
 		}
 	}
 
+	/**
+	 * Edits the computer.
+	 *
+	 * @param computerDto the computer dto
+	 * @param bindingResult the binding result
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(value = COMPUTER + CRUD + EDIT, method = RequestMethod.POST)
 	public String editComputer(@Valid @ModelAttribute("editComputerDto") ComputerDto computerDto, BindingResult bindingResult, Model model) {
 
@@ -89,6 +125,12 @@ public class ComputerControler extends AbstractController {
 		}
 	}
 
+	/**
+	 * Delete computer.
+	 *
+	 * @param selection the selection
+	 * @return the string
+	 */
 	@RequestMapping(value = COMPUTER + CRUD + DELETE, method = RequestMethod.POST)
 	public String deleteComputer(String selection) {
 		
@@ -99,6 +141,12 @@ public class ComputerControler extends AbstractController {
 		return REDIRECT + COMPUTER + VIEW + DASHBOARD;
 	}
 
+	/**
+	 * Gets the list.
+	 *
+	 * @param selection the selection
+	 * @return the list
+	 */
 	private List<Long> getList(String selection) {
 		List<Long> list = new ArrayList<Long>();
 		if ("".equals(selection)) {

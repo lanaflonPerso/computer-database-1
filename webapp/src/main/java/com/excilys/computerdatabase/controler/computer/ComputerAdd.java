@@ -17,15 +17,30 @@ import com.excilys.computerdatabase.page.creator.computer.AddPageCreator;
 import com.excilys.computerdatabase.page.model.ComputerPage;
 import com.excilys.computerdatabase.session.AddComputerSession;
 
+/**
+ * The Class ComputerAdd.
+ */
 @Controller
 @SessionAttributes({ "computerDto" })
 public class ComputerAdd extends AbstractController {
+	
+	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	/** The add computer session. */
 	@Autowired
 	private AddComputerSession addComputerSession;
+	
+	/** The add page creator. */
 	@Autowired
 	private AddPageCreator addPageCreator;
 
+	/**
+	 * Gets the adds the computer page.
+	 *
+	 * @param model the model
+	 * @return the adds the computer page
+	 */
 	@RequestMapping(value = COMPUTER + VIEW + ADD, method = RequestMethod.GET)
 	private String getAddComputerPage(Model model) {
 

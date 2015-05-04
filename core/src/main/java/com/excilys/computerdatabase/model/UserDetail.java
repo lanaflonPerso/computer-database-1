@@ -3,15 +3,34 @@ package com.excilys.computerdatabase.model;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The Class UserDetail.
+ */
 public class UserDetail {
+	
+	/** The user name. */
 	private String userName;
+	
+	/** The password. */
 	private String password;
+	
+	/** The roles. */
 	private Set<Role> roles = new HashSet<Role>();
 
+	/**
+	 * Instantiates a new user detail.
+	 */
 	public UserDetail() {
 		super();
 	}
 
+	/**
+	 * Instantiates a new user detail.
+	 *
+	 * @param userName the user name
+	 * @param password the password
+	 * @param roles the roles
+	 */
 	public UserDetail(String userName, String password, Set<Role> roles) {
 		super();
 		this.userName = userName;
@@ -19,30 +38,63 @@ public class UserDetail {
 		this.roles = roles;
 	}
 
+	/**
+	 * Gets the user name.
+	 *
+	 * @return the user name
+	 */
 	public String getUserName() {
 		return userName;
 	}
 
+	/**
+	 * Sets the user name.
+	 *
+	 * @param userName the new user name
+	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
+	/**
+	 * Gets the password.
+	 *
+	 * @return the password
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * Sets the password.
+	 *
+	 * @param password the new password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	/**
+	 * Gets the roles.
+	 *
+	 * @return the roles
+	 */
 	public Set<Role> getRoles() {
 		return roles;
 	}
 
+	/**
+	 * Sets the roles.
+	 *
+	 * @param roles the new roles
+	 */
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -53,6 +105,9 @@ public class UserDetail {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -80,6 +135,9 @@ public class UserDetail {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "UserDetail [userName=" + userName + ", password=" + password + ", roles=" + roles + "]";

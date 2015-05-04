@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.dto.mapper.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +15,19 @@ import com.excilys.computerdatabase.mapper.impl.DateMapper;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
 
+/**
+ * The Class ComputerDtoMapperImpl.
+ */
 @Service
 public class ComputerDtoMapperImpl implements ComputerDtoMapper {
 
+	/** The company dto mapper. */
 	@Autowired
 	private CompanyDtoMapper companyDtoMapper;
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.dto.mapper.DtoMapper#mapFromModel(java.lang.Object)
+	 */
 	@Override
 	public ComputerDto mapFromModel(Computer model) {
 		ComputerDto computerDto = new ComputerDto();
@@ -45,6 +56,9 @@ public class ComputerDtoMapperImpl implements ComputerDtoMapper {
 		return computerDto;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.dto.mapper.DtoMapper#mapToModel(java.lang.Object)
+	 */
 	@Override
 	public Computer mapToModel(ComputerDto dto) {
 		Computer computer = new Computer();

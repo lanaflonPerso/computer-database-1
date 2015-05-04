@@ -9,22 +9,52 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.excilys.computerdatabase.dto.validator.Date;
 
+/**
+ * The Class ComputerDto.
+ */
 public class ComputerDto implements Serializable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 7688863162139310127L;
+	
+	/** The id. */
 	private String id;
+	
+	/** The name. */
 	@NotBlank(message = "{error.invalid.computer.name}")
 	private String name;
+	
+	/** The introduced. */
 	@Date(message = "{error.invalid.introduced.date} {date.format}")
 	private String introduced;
+	
+	/** The discontinued. */
 	@Date(message = "{error.invalid.discontined.date} {date.format}")
 	private String discontinued;
+	
+	/** The company id. */
 	private String companyId;
+	
+	/** The company name. */
 	private String companyName;
 
+	/**
+	 * Instantiates a new computer dto.
+	 */
 	public ComputerDto() {
 		super();
 	}
 
+	/**
+	 * Instantiates a new computer dto.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param introduced the introduced
+	 * @param discontinued the discontinued
+	 * @param companyId the company id
+	 * @param companyName the company name
+	 */
 	public ComputerDto(String id, String name, String introduced,
 			String discontinued, String companyId, String companyName) {
 		super();
@@ -36,54 +66,117 @@ public class ComputerDto implements Serializable {
 		this.companyName = companyName;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Gets the introduced.
+	 *
+	 * @return the introduced
+	 */
 	public String getIntroduced() {
 		return introduced;
 	}
 
+	/**
+	 * Sets the introduced.
+	 *
+	 * @param introduced the new introduced
+	 */
 	public void setIntroduced(String introduced) {
 		this.introduced = introduced;
 	}
 
+	/**
+	 * Gets the discontinued.
+	 *
+	 * @return the discontinued
+	 */
 	public String getDiscontinued() {
 		return discontinued;
 	}
 
+	/**
+	 * Sets the discontinued.
+	 *
+	 * @param discontinued the new discontinued
+	 */
 	public void setDiscontinued(String discontinued) {
 		this.discontinued = discontinued;
 	}
 
+	/**
+	 * Gets the company id.
+	 *
+	 * @return the company id
+	 */
 	public String getCompanyId() {
 		return companyId;
 	}
 
+	/**
+	 * Sets the company id.
+	 *
+	 * @param companyId the new company id
+	 */
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
 	}
 
+	/**
+	 * Gets the company name.
+	 *
+	 * @return the company name
+	 */
 	public String getCompanyName() {
 		return companyName;
 	}
 
+	/**
+	 * Sets the company name.
+	 *
+	 * @param companyName the new company name
+	 */
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -100,6 +193,9 @@ public class ComputerDto implements Serializable {
 		return result;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -142,6 +238,9 @@ public class ComputerDto implements Serializable {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "ComputerDto [id=" + id + ", name=" + name + ", introduced="

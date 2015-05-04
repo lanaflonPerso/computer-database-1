@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.webservice.impl.xml;
 
 import java.util.List;
@@ -19,13 +23,21 @@ import com.excilys.computerdatabase.service.services.CompanyService;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.webservice.CompanyRessource;
 
+/**
+ * The Class CompanyRessourceImpl.
+ */
 @Path("/company")
 @Produces(MediaType.APPLICATION_XML)
 @Consumes(MediaType.APPLICATION_XML)
 public class CompanyRessourceImpl implements CompanyRessource {
+	
+	/** The company service. */
 	@Autowired
 	private CompanyService companyService;
 	
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#getAll()
+	 */
 	@Override
 	@GET
 	@Path("getAll")
@@ -33,6 +45,9 @@ public class CompanyRessourceImpl implements CompanyRessource {
 		return companyService.list(new SortCriteria());
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#getById(java.lang.Long)
+	 */
 	@Override
 	@GET
 	@Path("getById/{id}")
@@ -40,6 +55,9 @@ public class CompanyRessourceImpl implements CompanyRessource {
 		return companyService.getById(id);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#create(java.lang.Object)
+	 */
 	@Override
 	@POST
 	@Path("create")
@@ -48,6 +66,9 @@ public class CompanyRessourceImpl implements CompanyRessource {
 		return t;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#update(java.lang.Object)
+	 */
 	@Override
 	@POST
 	@Path("update")
@@ -56,6 +77,9 @@ public class CompanyRessourceImpl implements CompanyRessource {
 		return t;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#delete(java.lang.Long)
+	 */
 	@Override
 	@DELETE
 	@Produces(MediaType.TEXT_HTML)

@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.dto.mapper.impl;
 
 import org.springframework.stereotype.Service;
@@ -6,9 +10,15 @@ import com.excilys.computerdatabase.dto.mapper.CompanyDtoMapper;
 import com.excilys.computerdatabase.dto.model.CompanyDto;
 import com.excilys.computerdatabase.model.Company;
 
+/**
+ * The Class CompanyDtoMapperImpl.
+ */
 @Service
 public class CompanyDtoMapperImpl implements CompanyDtoMapper {
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.dto.mapper.DtoMapper#mapFromModel(java.lang.Object)
+	 */
 	@Override
 	public CompanyDto mapFromModel(Company model) {
 		CompanyDto companyDto = new CompanyDto();
@@ -21,6 +31,9 @@ public class CompanyDtoMapperImpl implements CompanyDtoMapper {
 		return companyDto;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.dto.mapper.DtoMapper#mapToModel(java.lang.Object)
+	 */
 	@Override
 	public Company mapToModel(CompanyDto dto) {
 		Company company = new Company();

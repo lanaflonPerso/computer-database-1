@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.dto.mapper.impl;
 
 import java.util.stream.Collectors;
@@ -9,9 +13,15 @@ import com.excilys.computerdatabase.dto.model.UserDetailDto;
 import com.excilys.computerdatabase.model.Role;
 import com.excilys.computerdatabase.model.UserDetail;
 
+/**
+ * The Class UserDetailDtoMapperImpl.
+ */
 @Service
 public class UserDetailDtoMapperImpl implements UserDetailDtoMapper {
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.dto.mapper.DtoMapper#mapFromModel(java.lang.Object)
+	 */
 	@Override
 	public UserDetailDto mapFromModel(UserDetail model) {
 		UserDetailDto userDetailDto = new UserDetailDto();
@@ -20,6 +30,9 @@ public class UserDetailDtoMapperImpl implements UserDetailDtoMapper {
 		return userDetailDto;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.dto.mapper.DtoMapper#mapToModel(java.lang.Object)
+	 */
 	@Override
 	public UserDetail mapToModel(UserDetailDto dto) {
 		UserDetail userDetail = new UserDetail();

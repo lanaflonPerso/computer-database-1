@@ -17,18 +17,29 @@ import com.excilys.computerdatabase.page.model.UserDashboardPage;
 import com.excilys.computerdatabase.service.services.ComputerService;
 
 /**
- * Servlet implementation class Dashboard
+ * The Class UserDashboard.
  */
 
 @Controller
 public class UserDashboard extends AbstractController {
+	
+	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+	/** The computer service. */
 	@Autowired
 	private ComputerService computerService;
+	
+	/** The page creator. */
 	@Autowired
 	private UserDashboardPageCreator pageCreator;
 
+	/**
+	 * Gets the dashboard.
+	 *
+	 * @param modelMap the model map
+	 * @return the dashboard
+	 */
 	@RequestMapping(value = USER + VIEW + DASHBOARD, method = RequestMethod.GET)
 	public String getDashboard(ModelMap modelMap) {
 		

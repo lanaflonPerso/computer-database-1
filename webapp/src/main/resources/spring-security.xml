@@ -17,7 +17,7 @@
         <!-- CONNECTED -->    
         <intercept-url pattern="/global/view/home" access="isAuthenticated()" />
         <!-- USER -->    
-        <intercept-url pattern="/" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
+        <intercept-url pattern="/" access="isAuthenticated()" />
 		<intercept-url pattern="/computer/view/dashboard" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
         <!-- ADMIN -->   
         <intercept-url pattern="/computer/crud/**" access="hasAnyRole('ROLE_ADMIN')" />

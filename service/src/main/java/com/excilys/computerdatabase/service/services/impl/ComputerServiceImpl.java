@@ -18,20 +18,32 @@ import com.excilys.computerdatabase.service.services.ComputerService;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.validation.Validator;
 
+/**
+ * The Class ComputerServiceImpl.
+ */
 @Service
 @Transactional(readOnly=true)
 public class ComputerServiceImpl implements ComputerService {
+	
+	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+	/** The computer dao. */
 	@Autowired
 	private ComputerDao computerDao;
 	
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#list(com.excilys.computerdatabase.sort.SortCriteria)
+	 */
 	@Override
 	public List<Computer> list(SortCriteria sortCriteria) {
 		log.info("List computers with criteria : {} ", sortCriteria);
 		return computerDao.getAll(sortCriteria);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#getById(java.lang.Long)
+	 */
 	@Override
 	public Computer getById(Long id) {
 		log.info("Get computer with id : {}", id);
@@ -42,6 +54,9 @@ public class ComputerServiceImpl implements ComputerService {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#create(java.lang.Object)
+	 */
 	@Override
 	@Transactional(readOnly=false)
 	public void create(Computer c) {
@@ -52,6 +67,9 @@ public class ComputerServiceImpl implements ComputerService {
 		computerDao.create(c);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#update(java.lang.Object)
+	 */
 	@Override
 	@Transactional(readOnly=false)
 	public void update(Computer c) {
@@ -63,6 +81,9 @@ public class ComputerServiceImpl implements ComputerService {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#delete(java.lang.Long)
+	 */
 	@Override
 	@Transactional(readOnly=false)
 	public void delete(Long id) {
@@ -73,12 +94,18 @@ public class ComputerServiceImpl implements ComputerService {
 		computerDao.delete(id);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#getNumberOfElement()
+	 */
 	@Override
 	public Long getNumberOfElement() {
 		log.info("Get number of computers");
 		return computerDao.getNumberOfElement();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.CommonService#list(java.lang.Long, java.lang.Long, com.excilys.computerdatabase.sort.SortCriteria)
+	 */
 	@Override
 	public List<Computer> list(Long from, Long to, SortCriteria sortCriteria) {
 		log.info("List computers with criteria : {} from {} to {} ", sortCriteria, from, to);
@@ -91,6 +118,9 @@ public class ComputerServiceImpl implements ComputerService {
 		return computerDao.getAll(from, to, sortCriteria);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.ComputerService#getNameContains(java.lang.String, java.lang.Long, java.lang.Long, com.excilys.computerdatabase.sort.SortCriteria)
+	 */
 	@Override
 	public List<Computer> getNameContains(String search, Long from, Long to,
 			SortCriteria sortCriteria) {
@@ -108,6 +138,9 @@ public class ComputerServiceImpl implements ComputerService {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.ComputerService#getNameContainsElement(java.lang.String)
+	 */
 	@Override
 	public Long getNameContainsElement(String string) {
 		if (!Validator.isStringForSearchCorrect(string)) {
@@ -116,10 +149,20 @@ public class ComputerServiceImpl implements ComputerService {
 		return computerDao.getByNameNumberOfElement(string);
 	}
 	
+	/**
+	 * Gets the computer dao.
+	 *
+	 * @return the computer dao
+	 */
 	public ComputerDao getComputerDao() {
 		return computerDao;
 	}
 	
+	/**
+	 * Sets the computer dao.
+	 *
+	 * @param computerDao the new computer dao
+	 */
 	public void setComputerDao(ComputerDao computerDao) {
 		this.computerDao = computerDao;
 	}

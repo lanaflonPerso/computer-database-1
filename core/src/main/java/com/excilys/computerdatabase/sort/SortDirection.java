@@ -3,9 +3,19 @@
  */
 package com.excilys.computerdatabase.sort;
 
+/**
+ * The Enum SortDirection.
+ */
 public enum SortDirection {
-	ASC, DESC;
+	
+	/** The asc. */
+	ASC, 
+ /** The desc. */
+ DESC;
 
+	/* (non-Javadoc)
+	 * @see java.lang.Enum#toString()
+	 */
 	public String toString() {
 		switch (this) {
 		case ASC:
@@ -17,6 +27,12 @@ public enum SortDirection {
 		}
 	}
 
+	/**
+	 * Builds the.
+	 *
+	 * @param string the string
+	 * @return the sort direction
+	 */
 	public static SortDirection build(String string) {
 		if (string == null) {
 			return ASC;
@@ -32,6 +48,11 @@ public enum SortDirection {
 		}
 	}
 
+	/**
+	 * To print.
+	 *
+	 * @return the string
+	 */
 	public String toPrint() {
 		switch (this) {
 		case ASC:

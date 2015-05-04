@@ -14,6 +14,8 @@ public class ParsingException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	/** The Constant CAN_NOT_PARSE_INTO_LONG. */
 	public static final String CAN_NOT_PARSE_INTO_LONG = "can not parse into Long";
+	
+	/** The Constant CAN_NOT_MAP_RESULT_SET. */
 	public static final String CAN_NOT_MAP_RESULT_SET = "can not map result set";
 
 	/**

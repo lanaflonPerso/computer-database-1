@@ -14,10 +14,17 @@ import com.excilys.computerdatabase.page.creator.AbstractPageCreator;
 import com.excilys.computerdatabase.page.model.UserDashboardPage;
 import com.excilys.computerdatabase.service.services.SecurityService;
 
+/**
+ * The Class UserDashboardPageCreator.
+ */
 @Service
 public class UserDashboardPageCreator extends AbstractPageCreator {
+	
+	/** The security service. */
 	@Autowired
 	private SecurityService securityService;
+	
+	/** The user detail dto mapper. */
 	@Autowired
 	private UserDetailDtoMapper userDetailDtoMapper;
 
@@ -25,6 +32,11 @@ public class UserDashboardPageCreator extends AbstractPageCreator {
 		return pageGet();
 	}
 
+	/**
+	 * Page get.
+	 *
+	 * @return the user dashboard page
+	 */
 	private UserDashboardPage pageGet() {
 		UserDashboardPage newPage = new UserDashboardPage();
 		List<UserDetail> list = securityService.getAll();

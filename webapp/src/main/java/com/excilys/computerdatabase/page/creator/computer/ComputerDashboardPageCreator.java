@@ -21,19 +21,38 @@ import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.sort.SortDirection;
 import com.excilys.computerdatabase.util.DateFormat;
 
+/**
+ * The Class ComputerDashboardPageCreator.
+ */
 @Service
 public class ComputerDashboardPageCreator extends AbstractPageCreator {
+	
+	/** The computer service. */
 	@Autowired
 	private ComputerService computerService;
+	
+	/** The computer dto mapper. */
 	@Autowired
 	private ComputerDtoMapper computerDtoMapper;
 
+	/**
+	 * Gets the page from get request.
+	 *
+	 * @param currentDashboardPage the current dashboard page
+	 * @return the page from get request
+	 */
 	public ComputerDashboardPage getPageFromGetRequest(ComputerDashboardPage currentDashboardPage) {
 		ComputerDashboardPage dashboardPage = pageGet(currentDashboardPage);
 		pageConverter(dashboardPage, Locale.ENGLISH, LocaleContextHolder.getLocaleContext().getLocale());
 		return dashboardPage;
 	}
 
+	/**
+	 * Page get.
+	 *
+	 * @param currentDashboardPage the current dashboard page
+	 * @return the computer dashboard page
+	 */
 	private ComputerDashboardPage pageGet(ComputerDashboardPage currentDashboardPage) {
 		ComputerDashboardPage dashboardPage = new ComputerDashboardPage();
 
@@ -81,11 +100,25 @@ public class ComputerDashboardPageCreator extends AbstractPageCreator {
 		return dashboardPage;
 	}
 
+	/**
+	 * Listconverter.
+	 *
+	 * @param list the list
+	 * @param dateFormatFrom the date format from
+	 * @param dateFormatTo the date format to
+	 */
 	private void listconverter(List<ComputerDto> list,
 			DateFormat dateFormatFrom, DateFormat dateFormatTo) {
 		list.stream().forEach(e->convertDto(e, dateFormatFrom, dateFormatTo));
 	}
 
+	/**
+	 * Page converter.
+	 *
+	 * @param page the page
+	 * @param LocaleFrom the locale from
+	 * @param LocaleTo the locale to
+	 */
 	public void pageConverter(ComputerDashboardPage page, Locale LocaleFrom,
 			Locale LocaleTo) {
 		DateFormat dateFormatFrom = DateFormat.ENGLISH;

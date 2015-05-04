@@ -12,14 +12,31 @@ import com.excilys.computerdatabase.mapper.impl.DateMapper;
 import com.excilys.computerdatabase.page.model.ComputerPage;
 import com.excilys.computerdatabase.util.DateFormat;
 
+/**
+ * The Class AbstractPageCreator.
+ */
 @Service
 public abstract class AbstractPageCreator {
 	
+	/**
+	 * Convert dto.
+	 *
+	 * @param computerDto the computer dto
+	 * @param dateFormatFrom the date format from
+	 * @param dateFormatTo the date format to
+	 */
 	protected static void convertDto(ComputerDto computerDto, DateFormat dateFormatFrom, DateFormat dateFormatTo) {
 		computerDto.setIntroduced(DateMapper.convertString(computerDto.getIntroduced(), dateFormatFrom, dateFormatTo));
 		computerDto.setDiscontinued(DateMapper.convertString(computerDto.getDiscontinued(), dateFormatFrom, dateFormatTo));
 	}
 	
+	/**
+	 * Page converter.
+	 *
+	 * @param page the page
+	 * @param LocaleFrom the locale from
+	 * @param LocaleTo the locale to
+	 */
 	public static void pageConverter(ComputerPage page, Locale LocaleFrom, Locale LocaleTo) {
 		DateFormat dateFormatFrom 	= DateFormat.ENGLISH;
 		DateFormat dateFormatTo 	= DateFormat.ENGLISH;	
@@ -32,6 +49,11 @@ public abstract class AbstractPageCreator {
 		convertDto(page.getComputerDto(), dateFormatFrom, dateFormatTo);
 	}
 	
+	/**
+	 * Map computer dto.
+	 *
+	 * @param computerDto the computer dto
+	 */
 	protected void mapComputerDto(ComputerDto computerDto) {
 		if(computerDto.getIntroduced() == null || "".equals(computerDto.getIntroduced().trim())){
 			computerDto.setIntroduced(null);

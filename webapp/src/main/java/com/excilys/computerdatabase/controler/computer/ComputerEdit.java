@@ -17,14 +17,30 @@ import com.excilys.computerdatabase.page.creator.computer.EditPageCreator;
 import com.excilys.computerdatabase.page.model.ComputerPage;
 import com.excilys.computerdatabase.session.EditComputerSession;
 
+/**
+ * The Class ComputerEdit.
+ */
 @Controller
 public class ComputerEdit extends AbstractController {
+	
+	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	/** The edit computer session. */
 	@Autowired
 	private EditComputerSession editComputerSession;
+	
+	/** The edit page creator. */
 	@Autowired
 	private EditPageCreator editPageCreator;
 
+	/**
+	 * Gets the edits the computer page.
+	 *
+	 * @param id the id
+	 * @param model the model
+	 * @return the edits the computer page
+	 */
 	@RequestMapping(value = COMPUTER + VIEW + EDIT, method = RequestMethod.GET)
 	private String getEditComputerPage(@RequestParam(value = "computerId", defaultValue = "") Long id, Model model) {
 
@@ -32,7 +48,6 @@ public class ComputerEdit extends AbstractController {
 
 		ComputerPage page = null;
 		if (id == null) {
-			System.err.println(editComputerSession);
 			page = editPageCreator.getPageFromGetRequest(Long.valueOf(editComputerSession.getComputerDto().getId()));
 			page.setComputerDto(editComputerSession.getComputerDto());
 			model.addAttribute("org.springframework.validation.BindingResult.editComputerDto", editComputerSession.getBindingResult());

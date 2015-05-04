@@ -1,8 +1,22 @@
 package com.excilys.computerdatabase.model;
 
+/**
+ * The Enum Role.
+ */
 public enum Role {
-	NONE, USER, ADMIN, SUPER_ADMIN;
+	
+	/** The none. */
+	NONE, 
+ /** The user. */
+ USER, 
+ /** The admin. */
+ ADMIN, 
+ /** The super admin. */
+ SUPER_ADMIN;
 
+	/* (non-Javadoc)
+	 * @see java.lang.Enum#toString()
+	 */
 	@Override
 	public String toString() {
 		switch (this) {
@@ -18,6 +32,12 @@ public enum Role {
 		}
 	}
 
+	/**
+	 * Builds the.
+	 *
+	 * @param role the role
+	 * @return the role
+	 */
 	public static Role build(String role) {
 		if(role == null) {
 			return NONE;

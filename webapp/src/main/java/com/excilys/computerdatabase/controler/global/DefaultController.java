@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.controler.global;
 
 import org.slf4j.Logger;
@@ -9,10 +13,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.excilys.computerdatabase.controler.AbstractController;
 
+/**
+ * The Class DefaultController.
+ */
 @Controller
 public class DefaultController extends AbstractController{
+	
+	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
+	/**
+	 * Gets the edits the computer page.
+	 *
+	 * @param model the model
+	 * @return the edits the computer page
+	 */
 	@RequestMapping(method = RequestMethod.GET)
 	protected String getEditComputerPage(Model model) {
 
@@ -21,6 +36,12 @@ public class DefaultController extends AbstractController{
 		return REDIRECT + GLOBAL + VIEW + HOME;
 	}
 	
+	/**
+	 * Gets the home.
+	 *
+	 * @param model the model
+	 * @return the home
+	 */
 	@RequestMapping(value = GLOBAL + VIEW + HOME ,method = RequestMethod.GET)
 	protected String getHome(Model model) {
 

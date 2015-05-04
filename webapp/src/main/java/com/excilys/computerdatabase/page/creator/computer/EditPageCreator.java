@@ -22,29 +22,58 @@ import com.excilys.computerdatabase.service.services.CompanyService;
 import com.excilys.computerdatabase.service.services.ComputerService;
 import com.excilys.computerdatabase.sort.SortCriteria;
 
+/**
+ * The Class EditPageCreator.
+ */
 @Service
 public class EditPageCreator extends AbstractPageCreator {
+	
+	/** The company service. */
 	@Autowired
 	private CompanyService companyService;
+	
+	/** The computer service. */
 	@Autowired
 	private ComputerService computerService;
+	
+	/** The computer dto mapper. */
 	@Autowired
 	private ComputerDtoMapper computerDtoMapper;
+	
+	/** The company dto mapper. */
 	@Autowired
 	private CompanyDtoMapper companyDtoMapper;
 
+	/**
+	 * Gets the page from get request.
+	 *
+	 * @param id the id
+	 * @return the page from get request
+	 */
 	public ComputerPage getPageFromGetRequest(Long id) {
 		ComputerPage page = pageGet(id);
 		pageConverter(page, Locale.ENGLISH, LocaleContextHolder.getLocaleContext().getLocale());
 		return page;
 	}
 	
+	/**
+	 * Gets the page from post request.
+	 *
+	 * @param computerDto the computer dto
+	 * @return the page from post request
+	 */
 	public ComputerPage getPageFromPostRequest(ComputerDto computerDto) {
 		mapComputerDto(computerDto);
 		ComputerPage page = pagePost(computerDto);
 		return page;
 	}
 	
+	/**
+	 * Page get.
+	 *
+	 * @param id the id
+	 * @return the computer page
+	 */
 	private ComputerPage pageGet(Long id) {
 		ComputerPage page = new ComputerPage();
 		List<Company> companies = companyService.list(new SortCriteria());
@@ -56,6 +85,12 @@ public class EditPageCreator extends AbstractPageCreator {
 		return page;
 	}
 	
+	/**
+	 * Page post.
+	 *
+	 * @param computerDto the computer dto
+	 * @return the computer page
+	 */
 	private ComputerPage pagePost(ComputerDto computerDto) {
 		ComputerPage page = new ComputerPage();
 		List<Company> companies = companyService.list(new SortCriteria());

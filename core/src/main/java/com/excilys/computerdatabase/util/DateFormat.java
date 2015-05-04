@@ -1,8 +1,18 @@
 package com.excilys.computerdatabase.util;
 
+/**
+ * The Enum DateFormat.
+ */
 public enum DateFormat {
-	FRENCH, ENGLISH;
+	
+	/** The french. */
+	FRENCH, 
+ /** The english. */
+ ENGLISH;
 
+	/* (non-Javadoc)
+	 * @see java.lang.Enum#toString()
+	 */
 	@Override
 	public String toString(){
 		switch (this) {

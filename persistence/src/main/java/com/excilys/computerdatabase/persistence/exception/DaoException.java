@@ -18,20 +18,28 @@ public class DaoException extends RuntimeException {
 	/** The Constant CAN_NOT_CREATE_CONNECTION. */
 	public static final String CAN_NOT_CREATE_CONNECTION = "can not create connection";
 
+	/** The Constant CAN_NOT_UPDATE_ELEMENT. */
 	public static final String CAN_NOT_UPDATE_ELEMENT = "can not update the element";
 
+	/** The Constant CAN_NOT_DELETE_ELEMENT. */
 	public static final String CAN_NOT_DELETE_ELEMENT = "can not delete the element";
 
+	/** The Constant CAN_NOT_GET_ELEMENT. */
 	public static final String CAN_NOT_GET_ELEMENT = "can not get the element";
 
+	/** The Constant CAN_NOT_INSERT_ELEMENT. */
 	public static final String CAN_NOT_INSERT_ELEMENT = "can not insert the element";
 
+	/** The Constant CAN_NOT_CLOSE_CONNECTION. */
 	public static final String CAN_NOT_CLOSE_CONNECTION = "can not close connection";
 
+	/** The Constant CAN_NOT_CLOSE_STATEMENT. */
 	public static final String CAN_NOT_CLOSE_STATEMENT = "can not close statement";
 
+	/** The Constant CAN_NOT_COMMIT_TRANSACTION. */
 	public static final String CAN_NOT_COMMIT_TRANSACTION = "can not commit transaction";
 
+	/** The Constant CAN_NOT_ROLLBACK_TRANSACTION. */
 	public static final String CAN_NOT_ROLLBACK_TRANSACTION = "can not rollback transaction";
 
 

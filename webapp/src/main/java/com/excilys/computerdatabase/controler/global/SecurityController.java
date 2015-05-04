@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.controler.global;
 
 import org.slf4j.Logger;
@@ -11,10 +15,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.excilys.computerdatabase.controler.AbstractController;
 
+/**
+ * The Class SecurityController.
+ */
 @Controller
 public class SecurityController extends AbstractController {
+	
+	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
+	/**
+	 * Login.
+	 *
+	 * @param auth the auth
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(value = GLOBAL + VIEW + LOGIN, method = RequestMethod.GET)
 	public String login(@RequestParam(value="auth", required=false) String auth, Model model) {
 		
@@ -27,6 +43,12 @@ public class SecurityController extends AbstractController {
 		return GLOBAL + VIEW + LOGIN;
 	}
 	
+	/**
+	 * Login.
+	 *
+	 * @param model the model
+	 * @return the string
+	 */
 	@RequestMapping(value = GLOBAL + VIEW + LOGOUT, method = RequestMethod.GET)
 	public String login(Model model) {
 		

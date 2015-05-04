@@ -23,10 +23,19 @@ import com.excilys.computerdatabase.validation.Validator;
  */
 @Component
 public class CommandLineMenu {
+	
+	/** The console service. */
 	@Autowired
 	private ConsoleService consoleService;
+	
+	/** The scanner. */
 	private Scanner scanner = new Scanner(System.in);
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {		
 		@SuppressWarnings("resource")
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:/application-context.xml");
@@ -34,6 +43,9 @@ public class CommandLineMenu {
 		commandLineMenu.displayMainMenu();
 	}
 
+	/**
+	 * Display main menu.
+	 */
 	private void displayMainMenu() {
 		System.out.println("Chose operation : ");
 		System.out.println("1 - List computers");
@@ -55,6 +67,11 @@ public class CommandLineMenu {
 		scanner.close();
 	}
 
+	/**
+	 * Operation switch.
+	 *
+	 * @param resultAsAnInt the result as an int
+	 */
 	private void operationSwitch(int resultAsAnInt) {
 		switch (resultAsAnInt) {
 		case 1:
@@ -83,20 +100,32 @@ public class CommandLineMenu {
 		}
 	}
 
+	/**
+	 * List computer.
+	 */
 	private void listComputer() {
 		Paginator.print(consoleService.getAllComputer());
 	}
 
+	/**
+	 * List companies.
+	 */
 	private void listCompanies() {
 		Paginator.print(consoleService.getAllCompany());
 	}
 
+	/**
+	 * Show computer details.
+	 */
 	private void showComputerDetails() {
 		Long id = getLongFromCommandLine("Computer Id : ");
 		Computer computer = consoleService.getComputerById(id);
 		System.out.println(computer.toString());
 	}
 
+	/**
+	 * Creates the computer.
+	 */
 	private void createComputer() {
 		String name = getStringFromCommandLine("Computer name : ");
 		LocalDateTime introduced = getLocalDateTimeFromCommandLine("Computer introduced : ");
@@ -108,6 +137,9 @@ public class CommandLineMenu {
 		System.out.println("computer created : " + computer.toString());
 	}
 
+	/**
+	 * Update computer.
+	 */
 	private void updateComputer() {
 		Long id = getLongFromCommandLine("Computer id : ");
 		String name = getStringFromCommandLine("Computer (new) name : ");
@@ -121,16 +153,28 @@ public class CommandLineMenu {
 
 	}
 
+	/**
+	 * Delete computer.
+	 */
 	private void deleteComputer() {
 		Long id = getLongFromCommandLine("Computer id : ");
 		consoleService.deleteComputer(id);
 	}
 
+	/**
+	 * Delete company.
+	 */
 	private void deleteCompany() {
 		Long id = getLongFromCommandLine("Company id : ");
 		consoleService.deleteCompany(id);
 	}
 
+	/**
+	 * Gets the long from command line.
+	 *
+	 * @param request the request
+	 * @return the long from command line
+	 */
 	private Long getLongFromCommandLine(String request) {
 		System.out.println(request);
 		String result = scanner.nextLine();
@@ -143,12 +187,24 @@ public class CommandLineMenu {
 		return resultAsALong;
 	}
 
+	/**
+	 * Gets the string from command line.
+	 *
+	 * @param request the request
+	 * @return the string from command line
+	 */
 	private String getStringFromCommandLine(String request) {
 		System.out.println(request);
 		String result = scanner.nextLine();
 		return result;
 	}
 
+	/**
+	 * Gets the local date time from command line.
+	 *
+	 * @param request the request
+	 * @return the local date time from command line
+	 */
 	private LocalDateTime getLocalDateTimeFromCommandLine(String request) {
 		System.out.println(request);
 		String result = scanner.nextLine();

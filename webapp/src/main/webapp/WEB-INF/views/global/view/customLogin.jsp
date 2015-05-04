@@ -25,7 +25,7 @@
 						<font color="red"><spring:message code="error.auth.fail" /></font>
 					</div>
 				</c:if>
-				<button id="login" class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+				<button id="login" class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="log.in" /></button>
 			</form>
 		</div>
 		<script src="/webapp/js/jquery.min.js"></script>

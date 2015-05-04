@@ -32,14 +32,14 @@
 									<form:input onkeyup="checkIntroduced(document)" path="introduced" name="introduced" type="text" class="form-control" id="introduced" value="${page.getComputerDto().getIntroduced()}" placeholder="${date_format}"></form:input>
 									<form:errors path="introduced" id="serviceIntroducedException" style="color:red"></form:errors>
 								</div>
-								<div id="introducedError" class="alert alert-danger" role="alert"><spring:message code="error.invalid.introduced.date"/><spring:message code="date.format"/></div>
+								<div id="introducedError" class="alert alert-danger" role="alert"><spring:message code="error.invalid.introduced.date"/> <spring:message code="date.format"/></div>
 								<div class="form-group">
 									<spring:message code="date.format" var="date_format"/>
 									<form:label path="discontinued" for="discontinued"><spring:message code="discontined.date" /></form:label>
 									<form:input	onkeyup="checkDiscontinued(document)" path="discontinued" name="discontinued" type="text" class="form-control" id="discontinued" value="${page.getComputerDto().getDiscontinued()}" placeholder="${date_format}"></form:input>
 									<form:errors path="discontinued" id="serviceDiscontinuedException" style="color:red"></form:errors>
 								</div>
-								<div id="discontinuedError" class="alert alert-danger" role="alert"><spring:message code="error.invalid.discontined.date"/><spring:message code="date.format"/></div>
+								<div id="discontinuedError" class="alert alert-danger" role="alert"><spring:message code="error.invalid.discontined.date"/> <spring:message code="date.format"/></div>
 								<div class="form-group">
 									<form:label path="companyId" for="companyId"><spring:message code="company" /></form:label>
 									<form:select path="companyId" class="form-control" id="companyId" name="companyId">

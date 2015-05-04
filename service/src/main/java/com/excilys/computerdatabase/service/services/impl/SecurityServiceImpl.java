@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.service.services.impl;
 
 import java.util.List;
@@ -19,16 +23,27 @@ import com.excilys.computerdatabase.service.services.SecurityService;
 import com.excilys.computerdatabase.service.util.CodingUtil;
 import com.excilys.computerdatabase.service.validation.ServiceValidator;
 
+/**
+ * The Class SecurityServiceImpl.
+ */
 @Service("userDetailsService")
 @Transactional(readOnly=false)
 public class SecurityServiceImpl implements SecurityService, UserDetailsService {
+	
+	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
+	/** The user detail dao. */
 	@Autowired
 	private UserDetailDao userDetailDao;
+	
+	/** The user details mapper. */
 	@Autowired
 	private UserDetailsMapper userDetailsMapper;
 	
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.SecurityService#getByName(java.lang.String)
+	 */
 	@Override
 	@Transactional(readOnly=true)
 	public UserDetail getByName(String userName) {
@@ -39,6 +54,9 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
 		return userDetailDao.getByUsername(userName);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.SecurityService#create(com.excilys.computerdatabase.model.UserDetail)
+	 */
 	@Override
 	public void create(UserDetail userDetail) {
 		log.info("create : {} ", userDetail);
@@ -49,6 +67,9 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
 		userDetailDao.create(userDetail);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.SecurityService#resetPassword(com.excilys.computerdatabase.model.UserDetail)
+	 */
 	@Override
 	public void resetPassword(UserDetail userDetail) {
 		log.info("resetPassword : {} ", userDetail);
@@ -65,6 +86,9 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
 		userDetailDao.update(newUserDetail);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.SecurityService#delete(java.lang.String)
+	 */
 	@Override
 	public void delete(String userName) {
 		log.info("delete : {} ", userName);
@@ -74,6 +98,9 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
 		userDetailDao.delete(userName);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.SecurityService#getAll()
+	 */
 	@Override
 	@Transactional(readOnly=true)
 	public List<UserDetail> getAll() {
@@ -81,6 +108,9 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
 		return userDetailDao.getAll();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.service.services.SecurityService#updateRight(com.excilys.computerdatabase.model.Rule)
+	 */
 	@Override
 	public void updateRight(Rule rule) {
 		log.info("updateRight : {} ", rule);
@@ -96,6 +126,9 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
 		userDetailDao.update(userDetail);
 	}
 
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
+	 */
 	@Override
 	@Transactional(readOnly=true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

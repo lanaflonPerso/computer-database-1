@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.controler.company;
 
 import java.util.ArrayList;
@@ -20,21 +24,37 @@ import com.excilys.computerdatabase.dto.model.CompanyDto;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.service.services.CompanyService;
 
+/**
+ * The Class CompanyControler.
+ */
 @Controller
 public class CompanyControler extends AbstractController {
+	
+	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	/** The company service. */
 	@Autowired
 	private CompanyService companyService;
+	
+	/** The company dto mapper. */
 	@Autowired
 	private CompanyDtoMapper companyDtoMapper;
 
+	/**
+	 * Adds the company.
+	 *
+	 * @param companyDto the company dto
+	 * @param bindingResult the binding result
+	 * @return the string
+	 */
 	@RequestMapping(value = COMPANY + CRUD + ADD, method = RequestMethod.POST)
 	public String addCompany(@Valid @ModelAttribute("companyDto") CompanyDto companyDto, BindingResult bindingResult) {
 
 		log.info("Servlet : [POST] company: add {}", companyDto);
 
-		if (bindingResult.hasErrors()) {
-			log.info("Wrong input");
+		if (bindingResult.hasErrors() || companyDto.getName().trim().isEmpty()) {
+			log.warn("Wrong input");
 		} else {
 			Company company = companyDtoMapper.mapToModel(companyDto);
 			companyService.create(company);
@@ -43,13 +63,20 @@ public class CompanyControler extends AbstractController {
 		return REDIRECT + COMPANY + VIEW + DASHBOARD;
 	}
 
+	/**
+	 * Edits the rule.
+	 *
+	 * @param companyDto the company dto
+	 * @param bindingResult the binding result
+	 * @return the string
+	 */
 	@RequestMapping(value = COMPANY + CRUD + EDIT, method = RequestMethod.POST)
 	public String editRule(@Valid @ModelAttribute("companyDto") CompanyDto companyDto, BindingResult bindingResult) {
 
 		log.info("Servlet : [POST] company: edit {}", companyDto);
 
-		if (bindingResult.hasErrors()) {
-			log.info("Wrong input");
+		if (bindingResult.hasErrors() || companyDto.getName().trim().isEmpty()) {
+			log.warn("Wrong input");
 		} else {
 			Company company = companyDtoMapper.mapToModel(companyDto);
 			companyService.update(company);
@@ -57,6 +84,12 @@ public class CompanyControler extends AbstractController {
 		return REDIRECT + COMPANY + VIEW + DASHBOARD;
 	}
 	
+	/**
+	 * Delete computer.
+	 *
+	 * @param selection the selection
+	 * @return the string
+	 */
 	@RequestMapping(value = COMPANY + CRUD + DELETE, method = RequestMethod.POST)
 	public String deleteComputer(String selection) {
 
@@ -67,6 +100,12 @@ public class CompanyControler extends AbstractController {
 		return REDIRECT + COMPANY + VIEW + DASHBOARD;
 	}
 
+	/**
+	 * Gets the list.
+	 *
+	 * @param selection the selection
+	 * @return the list
+	 */
 	private List<Long> getList(String selection) {
 		List<Long> list = new ArrayList<Long>();
 		if ("".equals(selection)) {

@@ -1,3 +1,7 @@
+/**
+ * @Author Vincent Galloy
+ * 
+ */
 package com.excilys.computerdatabase.webservice.impl.json;
 
 import java.util.List;
@@ -20,12 +24,20 @@ import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.webservice.ComputerRessource;
 
 
+/**
+ * The Class ComputerRestControler.
+ */
 @RestController
 @RequestMapping("rest/json/computer")
 public class ComputerRestControler implements ComputerRessource {
+	
+	/** The Computer service. */
 	@Autowired
 	private ComputerService ComputerService;
 	
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#getAll()
+	 */
 	@Override
 	@GET
 	@RequestMapping("getAll")
@@ -33,6 +45,9 @@ public class ComputerRestControler implements ComputerRessource {
 		return ComputerService.list(new SortCriteria());
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#getById(java.lang.Long)
+	 */
 	@Override
 	@GET
 	@RequestMapping("getById/{id}")
@@ -40,6 +55,9 @@ public class ComputerRestControler implements ComputerRessource {
 		return ComputerService.getById(id);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#create(java.lang.Object)
+	 */
 	@Override
 	@POST
 	@RequestMapping("create")
@@ -48,6 +66,9 @@ public class ComputerRestControler implements ComputerRessource {
 		return t;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#update(java.lang.Object)
+	 */
 	@Override
 	@POST
 	@RequestMapping("update")
@@ -56,6 +77,9 @@ public class ComputerRestControler implements ComputerRessource {
 		return t;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.excilys.computerdatabase.webservice.CommonRessource#delete(java.lang.Long)
+	 */
 	@Override
 	@DELETE
 	@Produces(MediaType.TEXT_HTML)
