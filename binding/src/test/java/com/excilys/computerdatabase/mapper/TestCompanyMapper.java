@@ -40,12 +40,12 @@ public class TestCompanyMapper {
 		assertEquals(null, computerDto.getId());
 		assertEquals(null, computerDto.getName());
 	}
-	
-	@Test(expected=NullPointerException.class)
+
+	@Test(expected = NullPointerException.class)
 	public void testMapperModelToDtoNullCompany() {
 		companyDtoMapper.mapFromModel(null);
 	}
-	
+
 	@Test
 	public void testMapperListModelToDtoOk() {
 		Company company = new Company(new Long(4), "Company test");
@@ -66,9 +66,9 @@ public class TestCompanyMapper {
 	public void testMapperDaoListWrong() {
 		companyDtoMapper.mapListFromModel(null);
 	}
-	
+
 	@Test
-	public void testMapperDtoToModelOk(){
+	public void testMapperDtoToModelOk() {
 		Company company2 = new Company(new Long(4), "Company test");
 		Company company = companyDtoMapper.mapToModel(new CompanyDto("4", "Company test"));
 		assertEquals(company.hashCode(), company2.hashCode());

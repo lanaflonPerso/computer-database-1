@@ -20,21 +20,17 @@ public class ConsoleServiceImpl implements ConsoleService {
 	private static final String SERVER_ROOT_URI = "http://localhost:8080/webservice/rest/xml";
 	private static final String SERVER_ROOT_COMPANY = SERVER_ROOT_URI + "/company";
 	private static final String SERVER_ROOT_COMPUTER = SERVER_ROOT_URI + "/computer";
-	
+
 	@Override
 	public List<Computer> getAllComputer() {
-		return Client.create()
-				.resource( SERVER_ROOT_COMPUTER + "/getAll")
-				.get( ClientResponse.class )
-				.getEntity(new GenericType<List<Computer>>(){});
+		return Client.create().resource(SERVER_ROOT_COMPUTER + "/getAll").get(ClientResponse.class).getEntity(new GenericType<List<Computer>>() {
+		});
 	}
 
 	@Override
 	public List<Company> getAllCompany() {
-		return Client.create()
-							.resource( SERVER_ROOT_COMPANY + "/getAll")
-							.get( ClientResponse.class )
-							.getEntity(new GenericType<List<Company>>(){});
+		return Client.create().resource(SERVER_ROOT_COMPANY + "/getAll").get(ClientResponse.class).getEntity(new GenericType<List<Company>>() {
+		});
 	}
 
 	@Override
@@ -42,10 +38,8 @@ public class ConsoleServiceImpl implements ConsoleService {
 		if (!Validator.isIdCorrect(id)) {
 			throw new ConsoleException(Validator.INVALID_COMPUTER_ID);
 		}
-		Computer c = Client.create()
-				.resource( SERVER_ROOT_COMPUTER + "/getById" + "/" + id)
-				.get( ClientResponse.class )
-				.getEntity(new GenericType<Computer>(){});
+		Computer c = Client.create().resource(SERVER_ROOT_COMPUTER + "/getById" + "/" + id).get(ClientResponse.class).getEntity(new GenericType<Computer>() {
+		});
 		if (c.getCompany() == null) {
 			c.setCompany(new Company());
 		}
@@ -57,14 +51,8 @@ public class ConsoleServiceImpl implements ConsoleService {
 		if (!Validator.isComputerCorrect(c)) {
 			throw new ConsoleException(Validator.INVALID_COMPUTER);
 		}
-		Long id = Client.create()
-				.resource( SERVER_ROOT_COMPUTER + "/create")
-				.accept( MediaType.APPLICATION_XML )
-        .type( MediaType.APPLICATION_XML )
-        .entity( c )
-        .post( ClientResponse.class )
-        .getEntity(new GenericType<Computer>(){})
-        .getId();
+		Long id = Client.create().resource(SERVER_ROOT_COMPUTER + "/create").accept(MediaType.APPLICATION_XML).type(MediaType.APPLICATION_XML).entity(c).post(ClientResponse.class).getEntity(new GenericType<Computer>() {
+		}).getId();
 		c.setId(id);
 	}
 
@@ -73,13 +61,8 @@ public class ConsoleServiceImpl implements ConsoleService {
 		if (!Validator.isComputerCorrect(c)) {
 			throw new ConsoleException(Validator.INVALID_COMPUTER);
 		}
-		c = Client.create()
-				.resource( SERVER_ROOT_COMPUTER + "/update")
-				.accept( MediaType.APPLICATION_XML )
-        .type( MediaType.APPLICATION_XML )
-        .entity( c )
-        .post( ClientResponse.class )
-        .getEntity(new GenericType<Computer>(){});
+		c = Client.create().resource(SERVER_ROOT_COMPUTER + "/update").accept(MediaType.APPLICATION_XML).type(MediaType.APPLICATION_XML).entity(c).post(ClientResponse.class).getEntity(new GenericType<Computer>() {
+		});
 	}
 
 	@Override
@@ -87,10 +70,7 @@ public class ConsoleServiceImpl implements ConsoleService {
 		if (!Validator.isIdCorrect(id)) {
 			throw new ConsoleException(Validator.INVALID_COMPUTER_ID);
 		}
-		Client.create()
-			.resource( SERVER_ROOT_COMPUTER + "/delete/" + id)
-			.header("Content-Type", "application/xml")
-			.delete( ClientResponse.class );
+		Client.create().resource(SERVER_ROOT_COMPUTER + "/delete/" + id).header("Content-Type", "application/xml").delete(ClientResponse.class);
 	}
 
 	@Override
@@ -98,10 +78,7 @@ public class ConsoleServiceImpl implements ConsoleService {
 		if (!Validator.isIdCorrect(id)) {
 			throw new ConsoleException(Validator.INVALID_COMPANY_ID);
 		}
-		Client.create()
-			.resource( SERVER_ROOT_COMPANY + "/delete/" + id)
-			.header("Content-Type", "application/xml")
-		.delete( ClientResponse.class );
+		Client.create().resource(SERVER_ROOT_COMPANY + "/delete/" + id).header("Content-Type", "application/xml").delete(ClientResponse.class);
 	}
 
 }

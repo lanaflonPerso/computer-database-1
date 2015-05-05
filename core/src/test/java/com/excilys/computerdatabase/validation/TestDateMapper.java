@@ -12,7 +12,7 @@ import com.excilys.computerdatabase.util.DateFormat;
 
 public class TestDateMapper {
 	@Test
-	public void testExtractEnglishOk(){
+	public void testExtractEnglishOk() {
 		LocalDateTime localDateTime = DateMapper.exctractFromString("2000-10-10", DateFormat.ENGLISH);
 		assertEquals(localDateTime.getSecond(), 0);
 		assertEquals(localDateTime.getMinute(), 0);
@@ -21,9 +21,9 @@ public class TestDateMapper {
 		assertEquals(localDateTime.getMonthValue(), 10);
 		assertEquals(localDateTime.getYear(), 2000);
 	}
-	
+
 	@Test
-	public void testExtractFrenchOk(){
+	public void testExtractFrenchOk() {
 		LocalDateTime localDateTime = DateMapper.exctractFromString("10/10/2000", DateFormat.FRENCH);
 		assertEquals(localDateTime.getSecond(), 0);
 		assertEquals(localDateTime.getMinute(), 0);
@@ -32,20 +32,20 @@ public class TestDateMapper {
 		assertEquals(localDateTime.getMonthValue(), 10);
 		assertEquals(localDateTime.getYear(), 2000);
 	}
-	
+
 	@Test
-	public void testExtractNull(){
+	public void testExtractNull() {
 		LocalDateTime localDateTime = DateMapper.exctractFromString(null, DateFormat.ENGLISH);
 		assertEquals(localDateTime, null);
 	}
-	
-	@Test(expected=ParsingException.class)
-	public void testExtractWrong(){
+
+	@Test(expected = ParsingException.class)
+	public void testExtractWrong() {
 		DateMapper.exctractFromString("azerty", DateFormat.ENGLISH);
 	}
-	
-	@Test(expected=ParsingException.class)
-	public void testExtractWrongFormat(){
+
+	@Test(expected = ParsingException.class)
+	public void testExtractWrongFormat() {
 		DateMapper.exctractFromString("10/10/2000 10:10:10", DateFormat.ENGLISH);
 	}
 }

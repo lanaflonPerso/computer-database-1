@@ -18,59 +18,66 @@ import com.excilys.computerdatabase.validation.Validator;
  */
 @Service
 public abstract class AbstractPageCreator {
-	
+
 	/**
 	 * Convert dto.
 	 *
-	 * @param computerDto the computer dto
-	 * @param dateFormatFrom the date format from
-	 * @param dateFormatTo the date format to
+	 * @param computerDto
+	 *          the computer dto
+	 * @param dateFormatFrom
+	 *          the date format from
+	 * @param dateFormatTo
+	 *          the date format to
 	 */
 	protected static void convertDto(ComputerDto computerDto, DateFormat dateFormatFrom, DateFormat dateFormatTo) {
-		if(Validator.isDateValid(computerDto.getIntroduced(), dateFormatFrom)) {
+		if (Validator.isDateValid(computerDto.getIntroduced(), dateFormatFrom)) {
 			computerDto.setIntroduced(DateMapper.convertString(computerDto.getIntroduced(), dateFormatFrom, dateFormatTo));
 		} else {
 			computerDto.setIntroduced(computerDto.getIntroduced());
 		}
-		if(Validator.isDateValid(computerDto.getDiscontinued(), dateFormatFrom)) {
+		if (Validator.isDateValid(computerDto.getDiscontinued(), dateFormatFrom)) {
 			computerDto.setDiscontinued(DateMapper.convertString(computerDto.getDiscontinued(), dateFormatFrom, dateFormatTo));
 		} else {
 			computerDto.setDiscontinued(computerDto.getDiscontinued());
 		}
 	}
-	
+
 	/**
 	 * Page converter.
 	 *
-	 * @param page the page
-	 * @param LocaleFrom the locale from
-	 * @param LocaleTo the locale to
+	 * @param page
+	 *          the page
+	 * @param LocaleFrom
+	 *          the locale from
+	 * @param LocaleTo
+	 *          the locale to
 	 */
 	public static void pageConverter(ComputerPage page, Locale LocaleFrom, Locale LocaleTo) {
-		DateFormat dateFormatFrom 	= DateFormat.ENGLISH;
-		DateFormat dateFormatTo 	= DateFormat.ENGLISH;	
-		if(LocaleFrom.equals(Locale.FRENCH)) {
+		DateFormat dateFormatFrom = DateFormat.ENGLISH;
+		DateFormat dateFormatTo = DateFormat.ENGLISH;
+		if (LocaleFrom.equals(Locale.FRENCH)) {
 			dateFormatFrom = DateFormat.FRENCH;
 		}
-		if(LocaleTo.equals(Locale.FRENCH)) {
+		if (LocaleTo.equals(Locale.FRENCH)) {
 			dateFormatTo = DateFormat.FRENCH;
-		}	
+		}
 		convertDto(page.getComputerDto(), dateFormatFrom, dateFormatTo);
 	}
-	
+
 	/**
 	 * Map computer dto.
 	 *
-	 * @param computerDto the computer dto
+	 * @param computerDto
+	 *          the computer dto
 	 */
 	protected void mapComputerDto(ComputerDto computerDto) {
-		if(computerDto.getIntroduced() == null || "".equals(computerDto.getIntroduced().trim())){
+		if (computerDto.getIntroduced() == null || "".equals(computerDto.getIntroduced().trim())) {
 			computerDto.setIntroduced(null);
 		}
-		if(computerDto.getDiscontinued() == null || "".equals(computerDto.getDiscontinued().trim())){
+		if (computerDto.getDiscontinued() == null || "".equals(computerDto.getDiscontinued().trim())) {
 			computerDto.setDiscontinued(null);
 		}
-		if(computerDto.getCompanyId() == null || "".equals(computerDto.getCompanyId().trim())){
+		if (computerDto.getCompanyId() == null || "".equals(computerDto.getCompanyId().trim())) {
 			computerDto.setCompanyId(null);
 		}
 	}

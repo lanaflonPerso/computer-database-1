@@ -52,11 +52,11 @@ public class UserControler extends AbstractController {
 	/** The rule dto mapper. */
 	@Autowired
 	private RuleDtoMapper ruleDtoMapper;
-	
+
 	/** The user session. */
 	@Autowired
 	private UserSession userSession;
-	
+
 	/** The message source. */
 	@Autowired
 	private MessageSource messageSource;
@@ -64,8 +64,10 @@ public class UserControler extends AbstractController {
 	/**
 	 * Adds the user.
 	 *
-	 * @param userDetailDto the user detail dto
-	 * @param bindingResult the binding result
+	 * @param userDetailDto
+	 *          the user detail dto
+	 * @param bindingResult
+	 *          the binding result
 	 * @return the string
 	 */
 	@RequestMapping(value = USER + CRUD + ADD, method = RequestMethod.POST)
@@ -73,12 +75,12 @@ public class UserControler extends AbstractController {
 
 		log.info("Servlet : [POST] user: add {}", userDetailDto);
 		userSession.setErrorMessage(null);
-		
+
 		if (bindingResult.hasErrors() || userDetailDto.getUserName().trim().isEmpty() || userDetailDto.getPassword().trim().isEmpty()) {
 			log.warn("Wrong input");
-			if(userDetailDto.getUserName().trim().isEmpty()){
+			if (userDetailDto.getUserName().trim().isEmpty()) {
 				userSession.setErrorMessage(messageSource.getMessage("username.can.not.be.null", null, LocaleContextHolder.getLocale()));
-			} else if (userDetailDto.getPassword().trim().isEmpty()){
+			} else if (userDetailDto.getPassword().trim().isEmpty()) {
 				userSession.setErrorMessage(messageSource.getMessage("password.can.not.be.null", null, LocaleContextHolder.getLocale()));
 			}
 		} else {
@@ -92,8 +94,10 @@ public class UserControler extends AbstractController {
 	/**
 	 * Edits the rule.
 	 *
-	 * @param ruleDto the rule dto
-	 * @param bindingResult the binding result
+	 * @param ruleDto
+	 *          the rule dto
+	 * @param bindingResult
+	 *          the binding result
 	 * @return the string
 	 */
 	@RequestMapping(value = USER + CRUD + EDIT, method = RequestMethod.POST)
@@ -106,7 +110,7 @@ public class UserControler extends AbstractController {
 
 		if (bindingResult.hasErrors() || ruleDto.equals(ruleDto2)) {
 			log.warn("Wrong input");
-			if( ruleDto.equals(ruleDto2)){
+			if (ruleDto.equals(ruleDto2)) {
 				userSession.setErrorMessage(messageSource.getMessage("can.not.remove.this.authorities", null, LocaleContextHolder.getLocale()));
 			}
 		} else {
@@ -119,8 +123,10 @@ public class UserControler extends AbstractController {
 	/**
 	 * Reset password.
 	 *
-	 * @param userDetailDto the user detail dto
-	 * @param bindingResult the binding result
+	 * @param userDetailDto
+	 *          the user detail dto
+	 * @param bindingResult
+	 *          the binding result
 	 * @return the string
 	 */
 	@RequestMapping(value = USER + CRUD + RESET_PASSWORD, method = RequestMethod.POST)
@@ -131,7 +137,7 @@ public class UserControler extends AbstractController {
 
 		if (bindingResult.hasErrors() || userDetailDto.getPassword().trim().isEmpty()) {
 			log.info("Wrong input");
-			if (userDetailDto.getPassword().trim().isEmpty()){
+			if (userDetailDto.getPassword().trim().isEmpty()) {
 				userSession.setErrorMessage(messageSource.getMessage("password.can.not.be.null", null, LocaleContextHolder.getLocale()));
 			}
 		} else {
@@ -144,7 +150,8 @@ public class UserControler extends AbstractController {
 	/**
 	 * Delete computer.
 	 *
-	 * @param selection the selection
+	 * @param selection
+	 *          the selection
 	 * @return the string
 	 */
 	@RequestMapping(value = USER + CRUD + DELETE, method = RequestMethod.POST)
@@ -161,7 +168,8 @@ public class UserControler extends AbstractController {
 	/**
 	 * Gets the list.
 	 *
-	 * @param selection the selection
+	 * @param selection
+	 *          the selection
 	 * @return the list
 	 */
 	private List<String> getList(String selection) {
@@ -171,7 +179,7 @@ public class UserControler extends AbstractController {
 		}
 		for (String s : selection.split(",")) {
 			if (SecurityContextHolder.getContext().getAuthentication().getName().equals(s)) {
-					userSession.setErrorMessage(messageSource.getMessage("can.not.delete.yourself", null, LocaleContextHolder.getLocale()));
+				userSession.setErrorMessage(messageSource.getMessage("can.not.delete.yourself", null, LocaleContextHolder.getLocale()));
 				log.warn("wrong input : can't delete the current user");
 			} else {
 				list.add(s);

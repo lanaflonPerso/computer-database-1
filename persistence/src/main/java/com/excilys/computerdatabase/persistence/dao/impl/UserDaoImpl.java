@@ -28,7 +28,7 @@ public class UserDaoImpl implements UserDetailDao {
 		log.info("create : {}", userDetail);
 		User user = userPersistenceMapper.mapFromModel(userDetail);
 		sf.getCurrentSession().save(user);
-		for(int i = 0; i < user.getUserRole().size(); i ++ ) {
+		for (int i = 0; i < user.getUserRole().size(); i++) {
 			user.getUserRole().stream().forEach(sf.getCurrentSession()::save);
 		}
 	}
@@ -37,9 +37,7 @@ public class UserDaoImpl implements UserDetailDao {
 	@SuppressWarnings("unchecked")
 	public List<UserDetail> getAll() {
 		log.info("getAll :");
-		List<User> list = sf.getCurrentSession()
-												.createCriteria(User.class)
-												.list();
+		List<User> list = sf.getCurrentSession().createCriteria(User.class).list();
 		return userPersistenceMapper.mapListToModel(list);
 	}
 
@@ -47,11 +45,8 @@ public class UserDaoImpl implements UserDetailDao {
 	@SuppressWarnings("unchecked")
 	public UserDetail getByUsername(String userName) {
 		log.info("getByName : {}", userName);
-		List<User> list = sf.getCurrentSession()
-												.createCriteria(User.class)
-												.add(Restrictions.eq("username", userName))
-												.list();
-		if(list.size() != 1) {
+		List<User> list = sf.getCurrentSession().createCriteria(User.class).add(Restrictions.eq("username", userName)).list();
+		if (list.size() != 1) {
 			return null;
 		} else {
 			return userPersistenceMapper.mapToModel(list.get(0));
@@ -70,15 +65,13 @@ public class UserDaoImpl implements UserDetailDao {
 		log.info("delete : {}", userName);
 		Session session = sf.getCurrentSession();
 		UserDetail userDetail = getByUsername(userName);
-		User user = (User) session.createCriteria(User.class)
-				.add(Restrictions.eq("username", userName))
-				.list().get(0);
-		if(userDetail != null ){
+		User user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", userName)).list().get(0);
+		if (userDetail != null) {
 			session.delete(user);
 		} else {
 			log.warn("delete unexisting user with username : {}", userName);
 		}
-		
+
 	}
 
 }

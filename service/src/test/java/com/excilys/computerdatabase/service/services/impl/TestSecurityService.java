@@ -28,17 +28,17 @@ import com.excilys.computerdatabase.service.services.SecurityService;
 @ContextConfiguration(locations = { "classpath:/test-service-application-context.xml" })
 public class TestSecurityService extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
-	private SecurityService securityService;	
-	
+	private SecurityService securityService;
+
 	@Test
-	public void testGetAll(){
+	public void testGetAll() {
 		List<UserDetail> list = securityService.getAll();
 		assertNotNull(list);
 		assertNotEquals(list.size(), 0);
 	}
-	
+
 	@Test
-	public void testCreateOk(){
+	public void testCreateOk() {
 		UserDetail userDetail = new UserDetail();
 		userDetail.setPassword("password");
 		userDetail.setUserName("username" + System.currentTimeMillis());
@@ -46,9 +46,9 @@ public class TestSecurityService extends AbstractTransactionalJUnit4SpringContex
 		UserDetail userDetail2 = securityService.getByName(userDetail.getUserName());
 		assertEquals(userDetail, userDetail2);
 	}
-	
+
 	@Test
-	public void testCreateWithRoleOk(){
+	public void testCreateWithRoleOk() {
 		UserDetail userDetail = new UserDetail();
 		userDetail.setPassword("password");
 		userDetail.setUserName("username" + System.currentTimeMillis());
@@ -59,9 +59,9 @@ public class TestSecurityService extends AbstractTransactionalJUnit4SpringContex
 		UserDetail userDetail2 = securityService.getByName(userDetail.getUserName());
 		assertEquals(userDetail, userDetail2);
 	}
-	
+
 	@Test
-	public void testDeleteOk(){
+	public void testDeleteOk() {
 		UserDetail userDetail = new UserDetail();
 		userDetail.setPassword("password");
 		userDetail.setUserName("username" + System.currentTimeMillis());
@@ -75,7 +75,7 @@ public class TestSecurityService extends AbstractTransactionalJUnit4SpringContex
 	}
 
 	@Test
-	public void testResetPasswordOk(){
+	public void testResetPasswordOk() {
 		UserDetail userDetail = new UserDetail();
 		userDetail.setPassword("password");
 		userDetail.setUserName("username" + System.currentTimeMillis());
@@ -87,7 +87,7 @@ public class TestSecurityService extends AbstractTransactionalJUnit4SpringContex
 	}
 
 	@Test
-	public void testResetPasswordOk2(){
+	public void testResetPasswordOk2() {
 		UserDetail userDetail = new UserDetail();
 		userDetail.setPassword("password");
 		userDetail.setUserName("username" + System.currentTimeMillis());
@@ -101,9 +101,9 @@ public class TestSecurityService extends AbstractTransactionalJUnit4SpringContex
 		assertEquals(userDetail, userDetail2);
 		assertTrue(userDetail.getRoles().contains(Role.ADMIN));
 	}
-	
+
 	@Test
-	public void testUpdateRuleOk(){
+	public void testUpdateRuleOk() {
 		UserDetail userDetail = new UserDetail();
 		userDetail.setPassword("password");
 		userDetail.setUserName("username" + System.currentTimeMillis());

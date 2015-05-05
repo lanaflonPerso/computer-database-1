@@ -46,20 +46,17 @@ public class TestComputerDao {
 	@Before
 	public void setUpDatabase() {
 		try {
-			IDatabaseConnection dbc = new DatabaseConnection(dataSource.getConnection());			 
+			IDatabaseConnection dbc = new DatabaseConnection(dataSource.getConnection());
 			IDataSet dataset = new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/database/fakeDatabase.xml"));
 			DatabaseOperation.CLEAN_INSERT.execute(dbc, dataset);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testInsertOk() {
-		Computer computer = new Computer(new Long(1), "test_name",
-				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
-				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
-				new Company(new Long(2), "RCA"));
+		Computer computer = new Computer(new Long(1), "test_name", LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), new Company(new Long(2), "RCA"));
 		computerDao.create(computer);
 		assertEquals(computer.getId() == 1, false);
 
@@ -69,8 +66,7 @@ public class TestComputerDao {
 
 	@Test
 	public void testInsertNullDateTime() {
-		Computer computer = new Computer(new Long(0), "test_name", null, null,
-				new Company(new Long(2), "RCA"));
+		Computer computer = new Computer(new Long(0), "test_name", null, null, new Company(new Long(2), "RCA"));
 		computerDao.create(computer);
 		assertEquals(computer.getId() == 0, false);
 
@@ -80,10 +76,7 @@ public class TestComputerDao {
 
 	@Test
 	public void testInsertNullCompanyId() {
-		Computer computer = new Computer(new Long(1), "test_name",
-				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
-				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
-				new Company(null, "Canon"));
+		Computer computer = new Computer(new Long(1), "test_name", LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), new Company(null, "Canon"));
 		computerDao.create(computer);
 		computer.setCompany(null);
 
@@ -93,16 +86,13 @@ public class TestComputerDao {
 
 	@Test(expected = DaoException.class)
 	public void testInsertNullName() {
-		Computer computer = new Computer(new Long(1), null, LocalDateTime.now()
-				.truncatedTo(ChronoUnit.SECONDS), LocalDateTime.now()
-				.truncatedTo(ChronoUnit.SECONDS), new Company(null, "Canon"));
+		Computer computer = new Computer(new Long(1), null, LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), new Company(null, "Canon"));
 		computerDao.create(computer);
 	}
 
 	@Test(expected = DaoException.class)
 	public void testInsertEmptyName() {
-		Computer computer = new Computer(new Long(1), "", LocalDateTime.now(),
-				LocalDateTime.now(), new Company(new Long(15), "Canon"));
+		Computer computer = new Computer(new Long(1), "", LocalDateTime.now(), LocalDateTime.now(), new Company(new Long(15), "Canon"));
 		computerDao.create(computer);
 	}
 
@@ -121,62 +111,57 @@ public class TestComputerDao {
 	@Test
 	public void testListComputer() {
 		List<Computer> computers = computerDao.getAll(new SortCriteria());
-		assertEquals(computers.get(0), new Computer(1l,
-				"MacBook Pro 15.4 inch", null, null, new Company(new Long(1),
-						"Apple Inc.")));
-		assertEquals(computers.size() , 5);
+		assertEquals(computers.get(0), new Computer(1l, "MacBook Pro 15.4 inch", null, null, new Company(new Long(1), "Apple Inc.")));
+		assertEquals(computers.size(), 5);
 	}
 
 	@Test
-	public void testListComputerOrderByComputerNameASC(){
+	public void testListComputerOrderByComputerNameASC() {
 		List<Computer> computers = computerDao.getAll(new SortCriteria(SortColumn.COMPUTER_NAME, SortDirection.ASC));
 		Computer previous = computers.get(0);
-		for(Computer current : computers) {
+		for (Computer current : computers) {
 			assertTrue(previous.getName().compareTo(current.getName()) <= 0);
 			previous = current;
 		}
-		
+
 	}
-	
+
 	@Test
-	public void testListComputerOrderByComputerNameDESC(){
+	public void testListComputerOrderByComputerNameDESC() {
 		List<Computer> computers = computerDao.getAll(new SortCriteria(SortColumn.COMPUTER_NAME, SortDirection.DESC));
 		Computer previous = computers.get(0);
-		for(Computer current : computers) {
+		for (Computer current : computers) {
 			assertTrue(previous.getName().compareTo(current.getName()) >= 0);
 			previous = current;
 		}
-		
+
 	}
-	
+
 	@Test
-	public void testListComputerOrderByCompanyNameASC(){
+	public void testListComputerOrderByCompanyNameASC() {
 		List<Computer> computers = computerDao.getAll(new SortCriteria(SortColumn.COMPANY_NAME, SortDirection.ASC));
 		Computer previous = computers.get(0);
-		for(Computer current : computers) {
+		for (Computer current : computers) {
 			assertTrue(previous.getCompany().getName().compareTo(current.getCompany().getName()) <= 0);
 			previous = current;
 		}
-		
+
 	}
-	
+
 	@Test
-	public void testListComputerOrderByCompanyNameDESC(){
+	public void testListComputerOrderByCompanyNameDESC() {
 		List<Computer> computers = computerDao.getAll(new SortCriteria(SortColumn.COMPANY_NAME, SortDirection.DESC));
 		Computer previous = computers.get(0);
-		for(Computer current : computers) {
+		for (Computer current : computers) {
 			assertTrue(previous.getCompany().getName().compareTo(current.getCompany().getName()) >= 0);
 			previous = current;
 		}
-		
+
 	}
-	
-	
+
 	@Test
 	public void testDelete() {
-		Computer computer = new Computer(new Long(1), "test_name",
-				LocalDateTime.now(), LocalDateTime.now(), new Company(new Long(
-						2), "RCA"));
+		Computer computer = new Computer(new Long(1), "test_name", LocalDateTime.now(), LocalDateTime.now(), new Company(new Long(2), "RCA"));
 		computerDao.create(computer);
 		computerDao.delete(computer.getId());
 		Computer computer2 = computerDao.getById(computer.getId());
@@ -185,10 +170,7 @@ public class TestComputerDao {
 
 	@Test
 	public void testUpdate() {
-		Computer computer = new Computer(new Long(1), "test_name_2",
-				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
-				LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS),
-				new Company(new Long(1), "Apple Inc."));
+		Computer computer = new Computer(new Long(1), "test_name_2", LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), new Company(new Long(1), "Apple Inc."));
 		computerDao.create(computer);
 		computer.setName("second_name");
 		computerDao.update(computer);
@@ -203,8 +185,7 @@ public class TestComputerDao {
 
 	@Test
 	public void testGetAllFromTo() {
-		List<Computer> computers = computerDao.getAll(new Long(0), new Long(1),
-				new SortCriteria());
+		List<Computer> computers = computerDao.getAll(new Long(0), new Long(1), new SortCriteria());
 		assertEquals(computers.size(), 1);
 		assertEquals(computers.get(0).getName(), "MacBook Pro 15.4 inch");
 	}
@@ -218,8 +199,7 @@ public class TestComputerDao {
 
 	@Test
 	public void testNameContains() {
-		List<Computer> computers = computerDao.getByName("App", new Long(0),
-				new Long(10), new SortCriteria());
+		List<Computer> computers = computerDao.getByName("App", new Long(0), new Long(10), new SortCriteria());
 		assertEquals(4, computers.size());
 		assertEquals(computers.get(0).getName(), "MacBook Pro 15.4 inch");
 	}
@@ -227,9 +207,7 @@ public class TestComputerDao {
 	@Test
 	public void testGetByNameNumberOfElement() {
 		Long l1 = computerDao.getByNameNumberOfElement("test");
-		Long l2 = (long) computerDao.getByName("test", new Long(0),
-				new Long(computerDao.getNumberOfElement()), new SortCriteria())
-				.size();
+		Long l2 = (long) computerDao.getByName("test", new Long(0), new Long(computerDao.getNumberOfElement()), new SortCriteria()).size();
 		assertEquals(l1, l2);
 	}
 
