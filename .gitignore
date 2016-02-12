@@ -6,3 +6,5 @@ target/
 .classpath
 .settings
 .gitignore
+.idea
+*.iml
