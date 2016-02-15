@@ -20,5 +20,4 @@ public class TestConsoleService {
         Computer computer = new Computer(0L, "name-test-2", null, null, null);
         consoleService.createComputer(computer);
     }
-
 }

@@ -1,11 +1,10 @@
 package com.excilys.computerdatabase.console.exception;
 
 /**
+ * @author Vincent Galloy
  * The Class ConsoleException.
  */
 public class ConsoleException extends RuntimeException {
-
-	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4752359502580121210L;
 
 	/**
@@ -16,5 +15,4 @@ public class ConsoleException extends RuntimeException {
 	public ConsoleException(String message) {
 		super(message);
 	}
-
 }

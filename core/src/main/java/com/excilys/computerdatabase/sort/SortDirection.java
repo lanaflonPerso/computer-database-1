@@ -1,63 +1,53 @@
-/**
- * @author Vincent Galloy
- */
 package com.excilys.computerdatabase.sort;
 
 /**
- * The Enum SortDirection.
+ * @author Vincent Galloy
+ *         The Enum SortDirection.
  */
 public enum SortDirection {
-	
-	/** The asc. */
-	ASC, 
- /** The desc. */
- DESC;
+    ASC("ASC"),
+    DESC("DESC");
+    private final String value;
 
-	public String toString() {
-		switch (this) {
-		case ASC:
-			return "ASC";
-		case DESC:
-			return "DESC";
-		default:
-			return "ASC";
-		}
-	}
+    SortDirection(String value) {
+        this.value = value;
+    }
 
-	/**
-	 * Builds the.
-	 *
-	 * @param string the string
-	 * @return the sort direction
-	 */
-	public static SortDirection build(String string) {
-		if (string == null) {
-			return ASC;
-		}
-		switch (string) {
-		case "":
-		case "ASC":
-			return ASC;
-		case "DESC":
-			return DESC;
-		default:
-			return ASC;
-		}
-	}
+    public String toString() {
+        return value.toString();
+    }
 
-	/**
-	 * To print.
-	 *
-	 * @return the string
-	 */
-	public String toPrint() {
-		switch (this) {
-		case ASC:
-			return "ASC";
-		case DESC:
-			return "DESC";
-		default:
-			return "ASC";
-		}
-	}
+    /**
+     * Builds the SortDirection from a String
+     *
+     * @param value the string
+     * @return the SortDirection
+     */
+    public static SortDirection build(String value) {
+        if (value == null) {
+            return ASC;
+        }
+        for (SortDirection sortDirection : values()) {
+            if (value.equals(sortDirection.toString())) {
+                return sortDirection;
+            }
+        }
+        return ASC;
+    }
+
+    /**
+     * To print.
+     *
+     * @return the string
+     */
+    public String toPrint() {
+        switch (this) {
+            case ASC:
+                return "ASC";
+            case DESC:
+                return "DESC";
+            default:
+                return "ASC";
+        }
+    }
 }
