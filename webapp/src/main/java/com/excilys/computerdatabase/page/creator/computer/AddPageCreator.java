@@ -30,10 +30,6 @@ public class AddPageCreator extends AbstractPageCreator {
 	@Autowired
 	private CompanyService companyService;
 	
-	/** The computer service. */
-	@Autowired
-	private ComputerService computerService;
-	
 	/** The company dto mapper. */
 	@Autowired
 	private CompanyDtoMapper companyDtoMapper;
@@ -69,19 +65,4 @@ public class AddPageCreator extends AbstractPageCreator {
 		page.setComputerDto(new ComputerDto());
 		return page;
 	}
-	
-	/**
-	 * Page post.
-	 *
-	 * @param computerDto the computer dto
-	 * @return the computer page
-	 */
-	private ComputerPage pagePost(ComputerDto computerDto) {
-		ComputerPage page = new ComputerPage();
-		List<Company> companies = companyService.list(new SortCriteria());
-		List<CompanyDto> companyDtos = companyDtoMapper.mapListFromModel(companies);
-		page.setCompanies(companyDtos);
-		page.setComputerDto(computerDto);
-		return page;
-	}	
 }

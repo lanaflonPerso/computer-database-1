@@ -1,73 +1,61 @@
-/**
- * @author Vincent Galloy
- * 
- */
 package com.excilys.computerdatabase.dto.model;
 
 import java.util.List;
 
 /**
- * The Class UserDetailDto.
+ * @author Vincent Galloy
+ *         The Class UserDetailDto.
  */
 public class UserDetailDto {
+    private String userName;
+    private String password;
+    private List<String> roles;
 
-	/** The user name. */
-	private String userName;
+    /**
+     * Instantiates a new user detail dto.
+     */
+    public UserDetailDto() {
+        super();
+    }
 
-	/** The password. */
-	private String password;
+    /**
+     * Instantiates a new user detail dto.
+     *
+     * @param userName the user name
+     * @param roles    the roles
+     */
+    public UserDetailDto(String userName, List<String> roles) {
+        super();
+        this.userName = userName;
+        this.roles = roles;
+    }
 
-	/** The roles. */
-	private List<String> roles;
+    public String getUserName() {
+        return userName;
+    }
 
-	/**
-	 * Instantiates a new user detail dto.
-	 */
-	public UserDetailDto() {
-		super();
-	}
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-	/**
-	 * Instantiates a new user detail dto.
-	 *
-	 * @param userName
-	 *          the user name
-	 * @param roles
-	 *          the roles
-	 */
-	public UserDetailDto(String userName, List<String> roles) {
-		super();
-		this.userName = userName;
-		this.roles = roles;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getUserName() {
-		return userName;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
+    public List<String> getRoles() {
+        return roles;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
+    }
 
-	public List<String> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<String> roles) {
-		this.roles = roles;
-	}
-
-	@Override
-	public String toString() {
-		return "UserDetailDto [userName=" + userName + ", password=" + password + ", roles=" + roles + "]";
-	}
-
+    @Override
+    public String toString() {
+        return "UserDetailDto [userName=" + userName + ", password=" + password + ", roles=" + roles + "]";
+    }
 }

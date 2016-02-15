@@ -1,15 +1,12 @@
-/**
- * @author Vincent Galloy
- * 
- */
 package com.excilys.computerdatabase.dto.mapper;
 
 import com.excilys.computerdatabase.dto.model.CompanyDto;
 import com.excilys.computerdatabase.model.Company;
 
 /**
- * The Interface CompanyDtoMapper.
+ * @author Vincent Galloy
+ *         The Interface CompanyDtoMapper.
  */
-public interface CompanyDtoMapper extends DtoMapper<Company, CompanyDto>{
+public interface CompanyDtoMapper extends DtoMapper<Company, CompanyDto> {
 
 }

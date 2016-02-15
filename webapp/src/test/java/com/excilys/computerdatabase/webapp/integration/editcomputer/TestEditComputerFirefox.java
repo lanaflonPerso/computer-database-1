@@ -1,8 +1,7 @@
-
 package com.excilys.computerdatabase.webapp.integration.editcomputer;
 
-import com.excilys.computerdatabase.webapp.integration.AbstractWebTest;
 import com.excilys.computerdatabase.mapper.impl.DateMapper;
+import com.excilys.computerdatabase.webapp.integration.AbstractWebTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;

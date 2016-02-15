@@ -32,6 +32,7 @@
         <cobertura.version>2.7</cobertura.version>
         <maven-surefire-version>2.18</maven-surefire-version>
         <maven-failsafe-version>2.19.1</maven-failsafe-version>
+        <sonar-maven-plugin.version>2.7</sonar-maven-plugin.version>
 
         <cargo-servlet-port>8080</cargo-servlet-port>
         <cargo-tomcat-ajp-port>8009</cargo-tomcat-ajp-port>
@@ -377,7 +378,6 @@
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <version>${cargo-maven2-version}</version>
                 <configuration>
-                    <type>embedded</type>
                     <container>
                         <containerId>tomcat8x</containerId>
                         <output>${project.build.directory}/tomcat8x/container.log</output>
@@ -420,6 +420,12 @@
                         <format>xml</format>
                     </formats>
                 </configuration>
+            </plugin>
+            <!-- Sonar -->
+              <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar-maven-plugin.version}</version>
             </plugin>
         </plugins>
     </build>
