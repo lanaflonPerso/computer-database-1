@@ -8,15 +8,7 @@ import java.util.Scanner;
  *         The Enum Paginator.
  */
 public class Paginator {
-
-    /**
-     * The Constant SIZE.
-     */
     private static final int SIZE = 10;
-
-    /**
-     * The Constant scanner.
-     */
     private static final Scanner scanner = new Scanner(System.in);
 
     /**

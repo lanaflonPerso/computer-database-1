@@ -13,6 +13,9 @@ import org.springframework.stereotype.Service;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
+/**
+ * @author Vincent Galloy
+ */
 @Service
 public class ConsoleServiceImpl implements ConsoleService {
     private static final String SERVER_ROOT_URI = "http://localhost:8080/webservice/rest/xml";

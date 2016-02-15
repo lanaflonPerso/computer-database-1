@@ -19,16 +19,8 @@ import java.util.Scanner;
  */
 @Component
 public class CommandLineMenu {
-
-    /**
-     * The console service.
-     */
     @Autowired
     private ConsoleService consoleService;
-
-    /**
-     * The scanner.
-     */
     private Scanner scanner = new Scanner(System.in);
 
     /**
@@ -60,7 +52,8 @@ public class CommandLineMenu {
         try {
             resultAsAnInt = Integer.parseInt(result);
         } catch (NumberFormatException e) {
-
+            System.out.println("You should enter a number");
+            System.exit(1);
         }
         operationSwitch(resultAsAnInt);
         scanner.close();
@@ -130,7 +123,7 @@ public class CommandLineMenu {
         LocalDateTime introduced = getLocalDateTimeFromCommandLine("Computer introduced : ");
         LocalDateTime discontinued = getLocalDateTimeFromCommandLine("Computer discontinued : ");
         Long company_id = getLongFromCommandLine("Computer company_id : ");
-        Computer computer = new Computer(new Long(0), name, introduced,
+        Computer computer = new Computer(0L, name, introduced,
                 discontinued, new Company(company_id, null));
         consoleService.createComputer(computer);
         System.out.println("computer created : " + computer.toString());
