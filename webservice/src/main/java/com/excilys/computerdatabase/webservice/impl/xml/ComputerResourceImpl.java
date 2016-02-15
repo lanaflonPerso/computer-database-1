@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  * 
  */
 package com.excilys.computerdatabase.webservice.impl.xml;
@@ -16,48 +16,39 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.excilys.computerdatabase.webservice.ComputerResource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.excilys.computerdatabase.model.Computer;
 import com.excilys.computerdatabase.service.services.ComputerService;
 import com.excilys.computerdatabase.sort.SortCriteria;
-import com.excilys.computerdatabase.webservice.ComputerRessource;
 
 /**
- * The Class ComputerRessourceImpl.
+ * The Class ComputerResourceImpl.
  */
 @Path("/computer")
 @Produces(MediaType.APPLICATION_XML)
 @Consumes(MediaType.APPLICATION_XML)
-public class ComputerRessourceImpl implements ComputerRessource {
+public class ComputerResourceImpl implements ComputerResource {
 	
 	/** The computer service. */
 	@Autowired
 	private ComputerService computerService;
-	
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.webservice.CommonRessource#getAll()
-	 */
+
 	@Override
 	@GET
 	@Path("getAll")
 	public List<Computer> getAll() {
 		return computerService.list(new SortCriteria());
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.webservice.CommonRessource#getById(java.lang.Long)
-	 */
+
 	@Override
 	@GET
 	@Path("getById/{id}")
 	public Computer getById(@PathParam("id") Long id) {
 		return computerService.getById(id);
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.webservice.CommonRessource#create(java.lang.Object)
-	 */
+
 	@Override
 	@POST
 	@Path("create")
@@ -66,9 +57,6 @@ public class ComputerRessourceImpl implements ComputerRessource {
 		return t;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.webservice.CommonRessource#update(java.lang.Object)
-	 */
 	@Override
 	@POST
 	@Path("update")
@@ -77,9 +65,6 @@ public class ComputerRessourceImpl implements ComputerRessource {
 		return t;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.webservice.CommonRessource#delete(java.lang.Long)
-	 */
 	@Override
 	@DELETE
 	@Produces(MediaType.TEXT_HTML)

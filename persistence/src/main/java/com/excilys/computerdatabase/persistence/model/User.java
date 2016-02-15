@@ -144,9 +144,7 @@ public class User implements Serializable {
 		this.userRole = userRole;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", userRole=" + userRole + "]";

@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  * 
  */
 package com.excilys.computerdatabase.dto.model;
@@ -93,9 +93,6 @@ public class RuleDto {
 		this.authorized = authorized;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -106,9 +103,6 @@ public class RuleDto {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -133,9 +127,6 @@ public class RuleDto {
 		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Rule [userName=" + userName + ", role=" + role + ", authorized=" + authorized + "]";

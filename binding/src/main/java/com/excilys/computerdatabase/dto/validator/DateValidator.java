@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  * 
  */
 package com.excilys.computerdatabase.dto.validator;
@@ -29,23 +29,10 @@ public class DateValidator implements ConstraintValidator<Date, String> {
 	@Autowired
 	private MessageSource messageSource;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * javax.validation.ConstraintValidator#initialize(java.lang.annotation.Annotation
-	 * )
-	 */
 	@Override
 	public void initialize(Date constraintAnnotation) {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.validation.ConstraintValidator#isValid(java.lang.Object,
-	 * javax.validation.ConstraintValidatorContext)
-	 */
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		if (value == null) {
@@ -68,7 +55,7 @@ public class DateValidator implements ConstraintValidator<Date, String> {
 	 */
 	private boolean isCorrectDate(String date, String pattern) {
 		if (Validator.isDateValid(date, pattern)) {
-			LocalDateTime localDateTime = DateMapper.exctractFromString(date, pattern);
+			LocalDateTime localDateTime = DateMapper.extractFromString(date, pattern);
 			LocalDateTime localDateTimeAfter = LocalDateTime.parse("1970-01-01 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 			LocalDateTime localDateTimeBefore = LocalDateTime.parse("2038-01-01 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 			return localDateTime.isAfter(localDateTimeAfter) && localDateTime.isBefore(localDateTimeBefore);

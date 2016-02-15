@@ -1,7 +1,4 @@
-/**
- * @Author Vincent Galloy
- * 
- */
+
 package com.excilys.computerdatabase.dto.mapper.impl;
 
 import org.slf4j.Logger;
@@ -15,6 +12,7 @@ import com.excilys.computerdatabase.model.Rule;
 
 /**
  * The Class RuleDtoMapperImpl.
+ * @author Vincent Galloy
  */
 @Service
 public class RuleDtoMapperImpl implements RuleDtoMapper {
@@ -22,18 +20,12 @@ public class RuleDtoMapperImpl implements RuleDtoMapper {
 	/** The log. */
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.dto.mapper.DtoMapper#mapFromModel(java.lang.Object)
-	 */
 	@Override
 	public RuleDto mapFromModel(Rule model) {
 		log.warn("mapFromModel : unsupportedOperation");
 		throw new UnsupportedOperationException();
 	}
 
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.dto.mapper.DtoMapper#mapToModel(java.lang.Object)
-	 */
 	@Override
 	public Rule mapToModel(RuleDto dto) {
 		Rule rule = new Rule();

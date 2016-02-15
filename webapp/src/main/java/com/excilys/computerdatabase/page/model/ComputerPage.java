@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  */
 package com.excilys.computerdatabase.page.model;
 
@@ -55,10 +55,7 @@ public class ComputerPage {
 	public void setCompanies(List<CompanyDto> companies) {
 		this.companies = companies;
 	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+
 	@Override
 	public String toString() {
 		return "ComputerPage [computerDto=" + computerDto + ", companies="

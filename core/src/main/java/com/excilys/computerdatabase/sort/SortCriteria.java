@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  */
 package com.excilys.computerdatabase.sort;
 
@@ -71,9 +71,6 @@ public class SortCriteria {
 		this.sortDirection = sortDirection;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	public String toString() {
 		return sortColumn.toString() + " " + sortDirection.toString();
 	}

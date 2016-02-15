@@ -16,7 +16,7 @@ public interface Mapper <Model, Dto>{
 	 * @param model the model
 	 * @return the dto
 	 */
-	public Dto mapFromModel(Model model);
+	Dto mapFromModel(Model model);
 
 	/**
 	 * Map to model.
@@ -24,7 +24,7 @@ public interface Mapper <Model, Dto>{
 	 * @param dto the dto
 	 * @return the model
 	 */
-	public Model mapToModel(Dto dto);
+	Model mapToModel(Dto dto);
 
 	/**
 	 * Map list from model.

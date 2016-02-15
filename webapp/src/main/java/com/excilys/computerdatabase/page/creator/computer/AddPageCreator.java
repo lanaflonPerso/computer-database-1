@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  */
 package com.excilys.computerdatabase.page.creator.computer;
 
@@ -38,7 +38,7 @@ public class AddPageCreator extends AbstractPageCreator {
 	@Autowired
 	private CompanyDtoMapper companyDtoMapper;
 	
-	public ComputerPage getPageFromGetRequest() {		
+	public ComputerPage getPageFromGetRequest() {
 		ComputerPage page = pageGet();
 		pageConverter(page, Locale.ENGLISH, LocaleContextHolder.getLocaleContext().getLocale());
 		return page;

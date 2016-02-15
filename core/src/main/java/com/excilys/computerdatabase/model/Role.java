@@ -14,9 +14,6 @@ public enum Role {
  /** The super admin. */
  SUPER_ADMIN;
 
-	/* (non-Javadoc)
-	 * @see java.lang.Enum#toString()
-	 */
 	@Override
 	public String toString() {
 		switch (this) {

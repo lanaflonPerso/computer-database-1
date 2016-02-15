@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  * 
  */
 package com.excilys.computerdatabase.webservice.impl.json;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.excilys.computerdatabase.model.Computer;
 import com.excilys.computerdatabase.service.services.ComputerService;
 import com.excilys.computerdatabase.sort.SortCriteria;
-import com.excilys.computerdatabase.webservice.ComputerRessource;
+import com.excilys.computerdatabase.webservice.ComputerResource;
 
 
 /**
@@ -29,35 +29,26 @@ import com.excilys.computerdatabase.webservice.ComputerRessource;
  */
 @RestController
 @RequestMapping("rest/json/computer")
-public class ComputerRestControler implements ComputerRessource {
+public class ComputerRestController implements ComputerResource {
 	
 	/** The Computer service. */
 	@Autowired
 	private ComputerService ComputerService;
-	
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.webservice.CommonRessource#getAll()
-	 */
+
 	@Override
 	@GET
 	@RequestMapping("getAll")
 	public List<Computer> getAll() {
 		return ComputerService.list(new SortCriteria());
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.webservice.CommonRessource#getById(java.lang.Long)
-	 */
+
 	@Override
 	@GET
 	@RequestMapping("getById/{id}")
 	public Computer getById(@PathParam("id") Long id) {
 		return ComputerService.getById(id);
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.webservice.CommonRessource#create(java.lang.Object)
-	 */
+
 	@Override
 	@POST
 	@RequestMapping("create")
@@ -66,9 +57,6 @@ public class ComputerRestControler implements ComputerRessource {
 		return t;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.webservice.CommonRessource#update(java.lang.Object)
-	 */
 	@Override
 	@POST
 	@RequestMapping("update")
@@ -77,9 +65,6 @@ public class ComputerRestControler implements ComputerRessource {
 		return t;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.webservice.CommonRessource#delete(java.lang.Long)
-	 */
 	@Override
 	@DELETE
 	@Produces(MediaType.TEXT_HTML)

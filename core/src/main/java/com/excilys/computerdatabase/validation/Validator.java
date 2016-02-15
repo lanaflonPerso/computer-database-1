@@ -1,6 +1,3 @@
-/**
- * @Author Vincent Galloy
- */
 package com.excilys.computerdatabase.validation;
 
 import org.apache.commons.validator.routines.DateValidator;
@@ -11,6 +8,7 @@ import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.util.DateFormat;
 
 /**
+ * @author Vincent Galloy
  * The Class Validator.
  */
 public class Validator {
@@ -23,9 +21,6 @@ public class Validator {
 	
 	/** The Constant INVALID_COMPUTER_ID. */
 	public static final String INVALID_COMPUTER_ID = "computer's id is invalid";
-	
-	/** The Constant INVALID_PARAMETER. */
-	public static final String INVALID_PARAMETER = "invalid parameters";
 	
 	/** The Constant INVALID_COMPANY. */
 	public static final String INVALID_COMPANY = "company is invalid";
@@ -118,19 +113,7 @@ public class Validator {
 	 * @return true, if is date from to correct
 	 */
 	public static boolean isDateFromToCorrect(Long from, Long to) {
-		if (from == null || to == null) {
-			return false;
-		} else if (from < 0L) {
-			return false;
-		} else if (to < 0L) {
-			return false;
-		} else if (from > to) {
-			return false;
-		} else if (from.equals(to)) {
-			return false;
-		} else {
-			return true;
-		}
+		return !(from == null || to == null) && from >= 0L && to >= 0L && from <= to && !from.equals(to);
 	}
 
 	/**
@@ -140,13 +123,7 @@ public class Validator {
 	 * @return true, if is string for search correct
 	 */
 	public static boolean isStringForSearchCorrect(String string) {
-		if (string == null) {
-			return false;
-		} else if ("".equals(string.trim())) {
-			return false;
-		} else {
-			return true;
-		}
+		return string != null && !"".equals(string.trim());
 	}
 
 	/**
@@ -156,15 +133,7 @@ public class Validator {
 	 * @return true, if is company correct
 	 */
 	public static boolean isCompanyCorrect(Company company) {
-		if (company == null) {
-			return false;
-		} else if (company.getName() == null) {
-			return false;
-		} else if ("".equals(company.getName().trim())) {
-			return false;
-		} else {
-			return true;
-		}
+		return company != null && company.getName() != null && !"".equals(company.getName().trim());
 	}
 
 	/**
@@ -174,15 +143,7 @@ public class Validator {
 	 * @return true, if is sort criteria correct
 	 */
 	public static boolean isSortCriteriaCorrect(SortCriteria sortCriteria) {
-		if (sortCriteria == null) {
-			return false;
-		} else if (sortCriteria.getSortColumn() == null) {
-			return false;
-		} else if (sortCriteria.getSortDirection() == null) {
-			return false;
-		} else {
-			return true;
-		}
+		return sortCriteria != null && sortCriteria.getSortColumn() != null && sortCriteria.getSortDirection() != null;
 	}
 
 }

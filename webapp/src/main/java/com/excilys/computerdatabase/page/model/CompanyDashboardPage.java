@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  * 
  */
 package com.excilys.computerdatabase.page.model;
@@ -41,9 +41,6 @@ public class CompanyDashboardPage {
 		this.companyList = companyList;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "CompanyDashboardPage [companyList=" + companyList + "]";

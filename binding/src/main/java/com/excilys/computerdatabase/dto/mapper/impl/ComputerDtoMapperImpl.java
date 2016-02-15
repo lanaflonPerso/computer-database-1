@@ -1,6 +1,6 @@
 /**
- * @Author Vincent Galloy
- * 
+ * @author Vincent Galloy
+ *
  */
 package com.excilys.computerdatabase.dto.mapper.impl;
 
@@ -16,6 +16,7 @@ import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
 
 /**
+ * @author Vincent Galloy
  * The Class ComputerDtoMapperImpl.
  */
 @Service
@@ -25,9 +26,6 @@ public class ComputerDtoMapperImpl implements ComputerDtoMapper {
 	@Autowired
 	private CompanyDtoMapper companyDtoMapper;
 
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.dto.mapper.DtoMapper#mapFromModel(java.lang.Object)
-	 */
 	@Override
 	public ComputerDto mapFromModel(Computer model) {
 		ComputerDto computerDto = new ComputerDto();
@@ -56,9 +54,6 @@ public class ComputerDtoMapperImpl implements ComputerDtoMapper {
 		return computerDto;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.dto.mapper.DtoMapper#mapToModel(java.lang.Object)
-	 */
 	@Override
 	public Computer mapToModel(ComputerDto dto) {
 		Computer computer = new Computer();
@@ -66,8 +61,8 @@ public class ComputerDtoMapperImpl implements ComputerDtoMapper {
 
 		computer.setCompany(company);
 		computer.setName(dto.getName());
-		computer.setIntroduced(DateMapper.exctractFromString(dto.getIntroduced()));
-		computer.setDiscontinued(DateMapper.exctractFromString(dto.getDiscontinued()));
+		computer.setIntroduced(DateMapper.extractFromString(dto.getIntroduced()));
+		computer.setDiscontinued(DateMapper.extractFromString(dto.getDiscontinued()));
 		computer.setId(getId(dto.getId()));
 
 		return computer;

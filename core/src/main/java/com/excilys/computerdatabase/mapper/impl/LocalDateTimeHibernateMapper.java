@@ -26,7 +26,6 @@ public class LocalDateTimeHibernateMapper implements EnhancedUserType, Serializa
 	}
 	
 	@Override
-	@SuppressWarnings("rawtypes")
 	public Class returnedClass() {
 		return LocalDateTime.class;
 	}

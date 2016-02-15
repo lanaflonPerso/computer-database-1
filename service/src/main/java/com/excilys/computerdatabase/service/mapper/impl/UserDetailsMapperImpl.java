@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  * 
  */
 package com.excilys.computerdatabase.service.mapper.impl;
@@ -23,9 +23,6 @@ import com.excilys.computerdatabase.service.mapper.UserDetailsMapper;
 @Component
 public class UserDetailsMapperImpl implements UserDetailsMapper {
 
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.mapper.Mapper#mapFromModel(java.lang.Object)
-	 */
 	@Override
 	public UserDetails mapFromModel(UserDetail model) {
 		Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
@@ -35,9 +32,6 @@ public class UserDetailsMapperImpl implements UserDetailsMapper {
 		return new User(model.getUserName(), model.getPassword(), true, true, true, true, grantedAuthorities);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.excilys.computerdatabase.mapper.Mapper#mapToModel(java.lang.Object)
-	 */
 	@Override
 	public UserDetail mapToModel(UserDetails dto) {
 		throw new UnsupportedOperationException();

@@ -6,7 +6,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-default ${colorMenu}" role="navigation">
 	<div class="container-fluid">
 	    <div class="col-md-5 navbar-header ">	
-	     	<a class="navbar-brand white-color" href="/webapp"> Application computer database</a>
+	     	<a class="navbar-brand white-color" href="/webapp/view/home"> Application computer database</a>
 	    </div>
 	    <div class="col-md-4 navbar-header">
 		    <security:authorize access="isAuthenticated()">
@@ -39,7 +39,7 @@
 				</a>
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="?language=en"><img src="/webapp/fonts/flags/uk.png" alt="uk flag" style="width:25px;height:20px"> English</a></li>
-					<li><a href="?language=fr"><img src="/webapp/fonts/flags/fr.png" alt="fr flag" style="width:25px;height:20px"> Français</a></li>
+					<li><a href="?language=fr"><img src="/webapp/fonts/flags/fr.png" alt="fr flag" style="width:25px;height:20px"> FranÃ§ais</a></li>
 				</ul></li>
 			</ul>
 	    </div>    

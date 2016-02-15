@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  */
 package com.excilys.computerdatabase.sort;
 
@@ -19,9 +19,6 @@ public enum SortColumn {
  /** The company name. */
  COMPANY_NAME;
 
-	/* (non-Javadoc)
-	 * @see java.lang.Enum#toString()
-	 */
 	public String toString() {
 		switch (this) {
 		case COMPUTER_ID:

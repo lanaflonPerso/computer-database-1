@@ -1,6 +1,3 @@
-/**
- * @Author Vincent Galloy
- */
 package com.excilys.computerdatabase.validation;
 
 import static org.junit.Assert.assertEquals;

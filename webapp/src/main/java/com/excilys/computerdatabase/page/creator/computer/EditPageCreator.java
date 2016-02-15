@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  */
 package com.excilys.computerdatabase.page.creator.computer;
 
@@ -99,5 +99,4 @@ public class EditPageCreator extends AbstractPageCreator {
 		page.setComputerDto(computerDto);
 		return page;
 	}
-	
 }

@@ -10,11 +10,11 @@ import com.excilys.computerdatabase.validation.Validator;
 
 public class DateMapper {
 	
-	public static LocalDateTime exctractFromString(String date, DateFormat dateFormat) {
-		return exctractFromString(date, dateFormat.toString());
+	public static LocalDateTime extractFromString(String date, DateFormat dateFormat) {
+		return extractFromString(date, dateFormat.toString());
 	}
 	
-	public static LocalDateTime exctractFromString(String date, String pattern) {		
+	public static LocalDateTime extractFromString(String date, String pattern) {
 		if (date == null) {
 			return null;
 		} else if ("".equals(date.trim())) {
@@ -41,12 +41,12 @@ public class DateMapper {
 		return convertIntoString(localDateTime, DateFormat.ENGLISH);
 	}
 
-	public static LocalDateTime exctractFromString(String date) {
-		return exctractFromString(date, DateFormat.ENGLISH);
+	public static LocalDateTime extractFromString(String date) {
+		return extractFromString(date, DateFormat.ENGLISH);
 	}
 	
 	public static String convertString(String currentDate, DateFormat dateFormatFrom, DateFormat dateFormatTo) {
-		LocalDateTime localDateTime = DateMapper.exctractFromString(currentDate, dateFormatFrom);
+		LocalDateTime localDateTime = DateMapper.extractFromString(currentDate, dateFormatFrom);
 		return DateMapper.convertIntoString(localDateTime, dateFormatTo);
 	}
 }

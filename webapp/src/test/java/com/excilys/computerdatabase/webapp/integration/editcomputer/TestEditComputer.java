@@ -1,18 +1,14 @@
-package com.excilys.computerdatabase.controler.editcomputer;
+package com.excilys.computerdatabase.webapp.integration.editcomputer;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.After;
+import com.excilys.computerdatabase.webapp.integration.AbstractWebTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.excilys.computerdatabase.controler.AbstractWebTest;
-
 public class TestEditComputer extends AbstractWebTest {
-	private WebDriver driver;
 
 	@Before
 	public void init() {
@@ -20,13 +16,8 @@ public class TestEditComputer extends AbstractWebTest {
 		login(driver);
 	}
 
-	@After
-	public void close() {
-		driver.close();
-	}
-
 	@Test
-	public void testEditElementWithWrongDate() throws Exception {
+	public void testEditElementWithWrongDate() {
 		driver.findElement(By.id("name_1")).click();
 
 		deleteComputer(driver);
@@ -36,5 +27,4 @@ public class TestEditComputer extends AbstractWebTest {
 		assertEquals(driver.getCurrentUrl(), "http://localhost:8080/webapp/computer/view/edit");
 		assertEquals("Invalid discontinued date : respect (1) yyyy-MM-dd (2) After year : 1970 (3) Before year : 2038", driver.findElement(By.id("serviceDiscontinuedException")).getText());
 	}
-
 }

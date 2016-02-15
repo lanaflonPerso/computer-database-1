@@ -1,6 +1,3 @@
-/**
- * @Author Vincent Galloy
- */
 package com.excilys.computerdatabase.model;
 
 import java.io.Serializable;
@@ -12,6 +9,7 @@ import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * @author Vincent Galloy
  * The Class Company.
  */
 @XmlRootElement
@@ -83,17 +81,11 @@ public class Company implements Serializable {
 		this.name = name;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Company [id=" + id + ", name=" + name + "]";
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -103,9 +95,6 @@ public class Company implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

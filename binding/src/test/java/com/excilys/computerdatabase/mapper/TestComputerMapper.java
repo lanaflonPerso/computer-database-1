@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  */
 package com.excilys.computerdatabase.mapper;
 
@@ -33,7 +33,7 @@ public class TestComputerMapper {
 	private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DateFormat.ENGLISH.toString());
 
 	private final String currentStringDate = LocalDateTime.now().format(dateTimeFormatter);
-	private final LocalDateTime currentDate = DateMapper.exctractFromString(currentStringDate, DateFormat.ENGLISH);
+	private final LocalDateTime currentDate = DateMapper.extractFromString(currentStringDate, DateFormat.ENGLISH);
 	
 	
 	

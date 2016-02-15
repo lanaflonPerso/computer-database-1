@@ -1,7 +1,3 @@
-/**
- * @Author Vincent Galloy
- * 
- */
 package com.excilys.computerdatabase.webservice;
 
 import java.util.List;
@@ -9,9 +5,7 @@ import java.util.List;
 import javax.ws.rs.core.Response;
 
 /**
- * The Interface CommonRessource.
- *
- * @param <T> the generic type
+ * @author Vincent Galloy
  */
 public interface CommonRessource <T>{
 	
@@ -20,7 +14,7 @@ public interface CommonRessource <T>{
 	 *
 	 * @return the all
 	 */
-	public List<T> getAll();
+	List<T> getAll();
 	
 	/**
 	 * Gets the by id.
@@ -28,7 +22,7 @@ public interface CommonRessource <T>{
 	 * @param id the id
 	 * @return the by id
 	 */
-	public T getById(Long id);
+	T getById(Long id);
 	
 	/**
 	 * Creates the.
@@ -36,7 +30,7 @@ public interface CommonRessource <T>{
 	 * @param t the t
 	 * @return the t
 	 */
-	public T create(T t);
+	T create(T t);
 	
 	/**
 	 * Update.
@@ -44,7 +38,7 @@ public interface CommonRessource <T>{
 	 * @param t the t
 	 * @return the t
 	 */
-	public default T update(T t) {
+	default T update(T t) {
 		throw new UnsupportedOperationException();
 	}
 	
@@ -54,5 +48,5 @@ public interface CommonRessource <T>{
 	 * @param id the id
 	 * @return the response
 	 */
-	public Response delete(Long id);
+	Response delete(Long id);
 }

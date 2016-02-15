@@ -15,14 +15,14 @@ public interface ConsoleService {
 	 *
 	 * @return the all computer
 	 */
-	public List<Computer> getAllComputer();
+	List<Computer> getAllComputer();
 	
 	/**
 	 * Gets the all company.
 	 *
 	 * @return the all company
 	 */
-	public List<Company> getAllCompany();
+	List<Company> getAllCompany();
 	
 	/**
 	 * Gets the computer by id.
@@ -30,33 +30,33 @@ public interface ConsoleService {
 	 * @param id the id
 	 * @return the computer by id
 	 */
-	public Computer getComputerById(Long id);
+	Computer getComputerById(Long id);
 	
 	/**
 	 * Creates the computer.
 	 *
 	 * @param c the c
 	 */
-	public void createComputer(Computer c);
+	void createComputer(Computer c);
 	
 	/**
 	 * Update computer.
 	 *
 	 * @param c the c
 	 */
-	public void updateComputer(Computer c);
+	void updateComputer(Computer c);
 	
 	/**
 	 * Delete computer.
 	 *
 	 * @param id the id
 	 */
-	public void deleteComputer(Long id);
+	void deleteComputer(Long id);
 	
 	/**
 	 * Delete company.
 	 *
 	 * @param id the id
 	 */
-	public void deleteCompany(Long id);
+	void deleteCompany(Long id);
 }

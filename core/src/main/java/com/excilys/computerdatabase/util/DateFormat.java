@@ -10,11 +10,6 @@ public enum DateFormat {
 	/** The english. */
 	ENGLISH;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Enum#toString()
-	 */
 	@Override
 	public String toString() {
 		switch (this) {

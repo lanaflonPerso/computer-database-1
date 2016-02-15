@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  */
 package com.excilys.computerdatabase.dto.model;
 
@@ -57,7 +57,6 @@ public class ComputerDto implements Serializable {
 	 */
 	public ComputerDto(String id, String name, String introduced,
 			String discontinued, String companyId, String companyName) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.introduced = introduced;
@@ -174,9 +173,6 @@ public class ComputerDto implements Serializable {
 		this.companyName = companyName;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -193,9 +189,6 @@ public class ComputerDto implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -238,9 +231,6 @@ public class ComputerDto implements Serializable {
 		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "ComputerDto [id=" + id + ", name=" + name + ", introduced="

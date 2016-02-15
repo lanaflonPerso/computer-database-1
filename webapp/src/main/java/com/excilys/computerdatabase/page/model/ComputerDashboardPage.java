@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  */
 package com.excilys.computerdatabase.page.model;
 
@@ -181,9 +181,6 @@ public class ComputerDashboardPage {
 		this.numberOfComputer = numberOfComputer;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "DashboardPage [page=" + page + ", size=" + size + ", search="

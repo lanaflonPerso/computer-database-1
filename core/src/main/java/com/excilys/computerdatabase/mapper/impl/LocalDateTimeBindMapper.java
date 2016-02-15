@@ -8,7 +8,7 @@ public class LocalDateTimeBindMapper extends XmlAdapter<String, LocalDateTime> {
 
 	@Override
 	public LocalDateTime unmarshal(String date) throws Exception {
-		return DateMapper.exctractFromString(date);
+		return DateMapper.extractFromString(date);
 	}
 
 	@Override

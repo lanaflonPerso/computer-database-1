@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  */
 package com.excilys.computerdatabase.sort;
 
@@ -13,9 +13,6 @@ public enum SortDirection {
  /** The desc. */
  DESC;
 
-	/* (non-Javadoc)
-	 * @see java.lang.Enum#toString()
-	 */
 	public String toString() {
 		switch (this) {
 		case ASC:

@@ -1,5 +1,5 @@
 /**
- * @Author Vincent Galloy
+ * @author Vincent Galloy
  */
 package com.excilys.computerdatabase.model;
 
@@ -24,21 +24,21 @@ import com.excilys.computerdatabase.mapper.impl.LocalDateTimeBindMapper;
 @XmlRootElement
 @Entity(name = "computer")
 public class Computer implements Serializable {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The id. */
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	/** The name. */
 	private String name;
-	
+
 	/** The introduced. */
 	@Type(type = "com.excilys.computerdatabase.mapper.impl.LocalDateTimeHibernateMapper")
 	private LocalDateTime introduced;
-	
+
 	/** The discontinued. */
 	@Type(type = "com.excilys.computerdatabase.mapper.impl.LocalDateTimeHibernateMapper")
 	private LocalDateTime discontinued;
@@ -165,9 +165,6 @@ public class Computer implements Serializable {
 		this.company = company;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -182,9 +179,6 @@ public class Computer implements Serializable {
 		return result;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -222,9 +216,6 @@ public class Computer implements Serializable {
 		return true;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Computer [id=" + id + ", name=" + name + ", introduced="
