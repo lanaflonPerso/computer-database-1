@@ -419,6 +419,10 @@
                         <format>html</format>
                         <format>xml</format>
                     </formats>
+                    <instrumentation>
+                        <ignoreTrivial>true</ignoreTrivial>
+                    </instrumentation>
+                    <aggregate>true</aggregate>
                 </configuration>
             </plugin>
             <!-- Sonar -->
