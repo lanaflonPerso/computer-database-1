@@ -82,7 +82,7 @@ public class ComputerDaoImpl implements ComputerDao {
 		if (!Validator.isSortCriteriaCorrect(sortCriteria)) {
 			throw new DaoException(Validator.INVALID_SORT_CRITERIA);
 		}
-		Order order = null;
+		Order order;
 		if(sortCriteria.getSortDirection() == SortDirection.ASC){
 			order = Order.asc(sortCriteria.getSortColumn().toString());
 		} else {
@@ -104,7 +104,7 @@ public class ComputerDaoImpl implements ComputerDao {
 			throw new DaoException(Validator.INVALID_SORT_CRITERIA);
 		}
 		
-		Order order = null;
+		Order order;
 		if(sortCriteria.getSortDirection() == SortDirection.ASC){
 			order = Order.asc(sortCriteria.getSortColumn().toString());
 		} else {
@@ -143,7 +143,7 @@ public class ComputerDaoImpl implements ComputerDao {
 		}
 		
 		
-		Order order = null;
+		Order order;
 		if(sortCriteria.getSortDirection() == SortDirection.ASC){
 			order = Order.asc(sortCriteria.getSortColumn().toString());
 		} else {
@@ -194,5 +194,4 @@ public class ComputerDaoImpl implements ComputerDao {
 				  .list()
 				  .get(0);
 	}
-
 }

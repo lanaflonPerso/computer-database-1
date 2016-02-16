@@ -6,7 +6,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top navbar-default ${colorMenu}" role="navigation">
 	<div class="container-fluid">
 	    <div class="col-md-5 navbar-header ">	
-	     	<a class="navbar-brand white-color" href="/webapp/view/home"> Application computer database</a>
+	     	<a class="navbar-brand white-color" href="${pageContext.request.contextPath}/view/home"> Application computer database</a>
 	    </div>
 	    <div class="col-md-4 navbar-header">
 		    <security:authorize access="isAuthenticated()">
@@ -15,13 +15,13 @@
 				          <a href="#" class="dropdown-toggle white-color ${colorMenu}" data-toggle="dropdown" role="button" aria-expanded="false">Selection <span class="caret"></span></a>
 				          <ul class="dropdown-menu dropdown-menu-right" role="menu">
 				          		<security:authorize access="hasRole('ROLE_SUPER_ADMIN')">
-					            	<li><a class="btn-warning btn-user" href="/webapp/user/view/dashboard"><spring:message code="user" /></a></li>
+					            	<li><a class="btn-warning btn-user" href="${pageContext.request.contextPath}/user/view/dashboard"><spring:message code="user" /></a></li>
 					            </security:authorize>
 					            <security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-					            	<li><a class="btn-warning btn-computer " href="/webapp/computer/view/dashboard"><spring:message code="computer" /></a></li>
+					            	<li><a class="btn-warning btn-computer " href="${pageContext.request.contextPath}/computer/view/dashboard"><spring:message code="computer" /></a></li>
 					            </security:authorize>
 				          		<security:authorize access="hasRole('ROLE_ADMIN')">
-					            	<li><a class="btn-warning btn-company" href="/webapp/company/view/dashboard"><spring:message code="company" /></a></li>
+					            	<li><a class="btn-warning btn-company" href="${pageContext.request.contextPath}/company/view/dashboard"><spring:message code="company" /></a></li>
 					            </security:authorize>
 				          </ul>
 			        </li>
@@ -38,14 +38,14 @@
 					<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu" role="menu">
-					<li><a href="?language=en"><img src="/webapp/fonts/flags/uk.png" alt="uk flag" style="width:25px;height:20px"> English</a></li>
-					<li><a href="?language=fr"><img src="/webapp/fonts/flags/fr.png" alt="fr flag" style="width:25px;height:20px"> Français</a></li>
+					<li><a href="?language=en"><img src="${pageContext.request.contextPath}/fonts/flags/uk.png" alt="uk flag" style="width:25px;height:20px"> English</a></li>
+					<li><a href="?language=fr"><img src="${pageContext.request.contextPath}/fonts/flags/fr.png" alt="fr flag" style="width:25px;height:20px"> Français</a></li>
 				</ul></li>
 			</ul>
 	    </div>    
 	    <security:authorize access="isAuthenticated()">
 		    <div class="col-md-1 navbar-header">
-				<a class="white-color navbar-brand btn-logout" href="/webapp/global/view/logout"><i class="fa fa-power-off"></i> <spring:message code="log.out"/></a>
+				<a class="white-color navbar-brand btn-logout" href="${pageContext.request.contextPath}/global/view/logout"><i class="fa fa-power-off"></i> <spring:message code="log.out"/></a>
 		    </div> 
 	    </security:authorize>
 	</div>

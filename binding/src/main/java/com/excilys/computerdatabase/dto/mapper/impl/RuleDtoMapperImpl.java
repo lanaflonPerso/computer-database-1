@@ -14,11 +14,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RuleDtoMapperImpl implements RuleDtoMapper {
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(RuleDtoMapperImpl.class);
 
     @Override
     public RuleDto mapFromModel(Rule model) {
-        log.warn("mapFromModel : unsupportedOperation");
+        LOGGER.warn("mapFromModel : unsupportedOperation");
         throw new UnsupportedOperationException();
     }
 
