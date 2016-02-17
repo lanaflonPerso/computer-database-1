@@ -14,7 +14,7 @@ import java.io.Serializable;
 @XmlRootElement
 @Entity(name = "company")
 public class Company implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -1751983284847786681L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

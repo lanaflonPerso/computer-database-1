@@ -1,62 +1,43 @@
-/**
- * @author Vincent Galloy
- * 
- */
 package com.excilys.computerdatabase.page.model;
-
-import java.util.List;
 
 import com.excilys.computerdatabase.dto.model.UserDetailDto;
 
+import java.util.List;
+
 /**
- * The Class UserDashboardPage.
+ * @author Vincent Galloy
+ *         The Class UserDashboardPage.
  */
 public class UserDashboardPage {
+    private List<UserDetailDto> userList;
+    private String ErrorMessage;
 
-	/** The user list. */
-	private List<UserDetailDto> userList;
-	
-	/** The Error message. */
-	private String ErrorMessage = null;
+    /**
+     * Instantiates a new user dashboard page.
+     */
+    public UserDashboardPage() {
+        super();
+    }
 
-	/**
-	 * Instantiates a new user dashboard page.
-	 */
-	public UserDashboardPage() {
-		super();
-	}
+    public List<UserDetailDto> getUserList() {
+        return userList;
+    }
 
-	/**
-	 * Instantiates a new user dashboard page.
-	 *
-	 * @param userList the user list
-	 * @param errorMessage the error message
-	 */
-	public UserDashboardPage(List<UserDetailDto> userList, String errorMessage) {
-		super();
-		this.userList = userList;
-		ErrorMessage = errorMessage;
-	}
+    public void setUserList(List<UserDetailDto> userList) {
+        this.userList = userList;
+    }
 
-	public List<UserDetailDto> getUserList() {
-		return userList;
-	}
+    public String getErrorMessage() {
+        return ErrorMessage;
+    }
 
-	public void setUserList(List<UserDetailDto> userList) {
-		this.userList = userList;
-	}
+    public void setErrorMessage(String errorMessage) {
+        ErrorMessage = errorMessage;
+    }
 
-	public String getErrorMessage() {
-		return ErrorMessage;
-	}
-
-	public void setErrorMessage(String errorMessage) {
-		ErrorMessage = errorMessage;
-	}
-
-	@Override
-	public String toString() {
-		return "UserDashboardPage [userList=" + userList + ", ErrorMessage=" + ErrorMessage + "]";
-	}
+    @Override
+    public String toString() {
+        return "UserDashboardPage [userList=" + userList + ", ErrorMessage=" + ErrorMessage + "]";
+    }
 
 }

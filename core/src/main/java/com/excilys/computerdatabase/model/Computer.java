@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @XmlRootElement
 @Entity(name = "computer")
 public class Computer implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 8483783012500208376L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

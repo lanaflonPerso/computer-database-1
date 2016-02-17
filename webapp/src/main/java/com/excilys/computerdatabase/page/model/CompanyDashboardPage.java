@@ -1,49 +1,34 @@
-/**
- * @author Vincent Galloy
- * 
- */
 package com.excilys.computerdatabase.page.model;
-
-import java.util.List;
 
 import com.excilys.computerdatabase.dto.model.CompanyDto;
 
+import java.util.List;
+
 /**
- * The Class CompanyDashboardPage.
+ * @author Vincent Galloy
+ *         The Class CompanyDashboardPage.
  */
 public class CompanyDashboardPage {
-	
-	/** The company list. */
-	private List<CompanyDto> companyList;
+    private List<CompanyDto> companyList;
 
-	/**
-	 * Instantiates a new company dashboard page.
-	 */
-	public CompanyDashboardPage() {
-		super();
-	}
+    /**
+     * Instantiates a new company dashboard page.
+     */
+    public CompanyDashboardPage() {
+        super();
+    }
 
-	/**
-	 * Gets the company list.
-	 *
-	 * @return the company list
-	 */
-	public List<CompanyDto> getCompanyList() {
-		return companyList;
-	}
+    public List<CompanyDto> getCompanyList() {
+        return companyList;
+    }
 
-	/**
-	 * Sets the company list.
-	 *
-	 * @param companyList the new company list
-	 */
-	public void setCompanyList(List<CompanyDto> companyList) {
-		this.companyList = companyList;
-	}
+    public void setCompanyList(List<CompanyDto> companyList) {
+        this.companyList = companyList;
+    }
 
-	@Override
-	public String toString() {
-		return "CompanyDashboardPage [companyList=" + companyList + "]";
-	}
-	
+    @Override
+    public String toString() {
+        return "CompanyDashboardPage [companyList=" + companyList + "]";
+    }
+
 }

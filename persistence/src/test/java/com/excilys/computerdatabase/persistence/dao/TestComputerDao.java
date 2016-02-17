@@ -1,6 +1,3 @@
-/**
- * @author Vincent Galloy
- */
 package com.excilys.computerdatabase.persistence.dao;
 
 import com.excilys.computerdatabase.model.Company;
@@ -26,6 +23,9 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @author Vincent Galloy
+ */
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/test-persistence-context.xml"})

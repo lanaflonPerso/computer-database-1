@@ -1,6 +1,3 @@
-/**
- * @author Vincent Galloy
- */
 package com.excilys.computerdatabase.page.creator.computer;
 
 import com.excilys.computerdatabase.dto.mapper.CompanyDtoMapper;
@@ -22,32 +19,17 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * The Class EditPageCreator.
+ * @author Vincent Galloy
+ *         The Class EditPageCreator.
  */
 @Service
 public class EditPageCreator extends AbstractPageCreator {
-
-    /**
-     * The company service.
-     */
     @Autowired
     private CompanyService companyService;
-
-    /**
-     * The computer service.
-     */
     @Autowired
     private ComputerService computerService;
-
-    /**
-     * The computer dto mapper.
-     */
     @Autowired
     private ComputerDtoMapper computerDtoMapper;
-
-    /**
-     * The company dto mapper.
-     */
     @Autowired
     private CompanyDtoMapper companyDtoMapper;
 

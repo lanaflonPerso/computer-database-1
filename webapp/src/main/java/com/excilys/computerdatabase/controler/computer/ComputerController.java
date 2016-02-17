@@ -126,7 +126,7 @@ public class ComputerController extends AbstractController {
      * @return the list
      */
     private List<Long> getList(String selection) {
-        List<Long> list = new ArrayList<Long>();
+        List<Long> list = new ArrayList<>();
         if ("".equals(selection)) {
             return list;
         }

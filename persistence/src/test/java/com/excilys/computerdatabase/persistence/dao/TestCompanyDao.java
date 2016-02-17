@@ -3,11 +3,6 @@ package com.excilys.computerdatabase.persistence.dao;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.persistence.exception.DaoException;
 import com.excilys.computerdatabase.sort.SortCriteria;
-import org.dbunit.database.DatabaseConnection;
-import org.dbunit.database.IDatabaseConnection;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
-import java.io.FileInputStream;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;

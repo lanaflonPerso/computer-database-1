@@ -1,6 +1,3 @@
-/**
- * @author Vincent Galloy
- */
 package com.excilys.computerdatabase.page.creator;
 
 import com.excilys.computerdatabase.dto.mapper.CompanyDtoMapper;
@@ -20,7 +17,8 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * The Class AbstractPageCreator.
+ * @author Vincent Galloy
+ *         The Class AbstractPageCreator.
  */
 @Service
 public abstract class AbstractPageCreator {
