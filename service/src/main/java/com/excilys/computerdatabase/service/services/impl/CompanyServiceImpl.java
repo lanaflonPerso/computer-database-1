@@ -100,8 +100,7 @@ public class CompanyServiceImpl implements CompanyService {
      * @param id the id
      */
     private void deleteCompany(Long id) {
-        computerDao.getByCompanyId(id).stream()
-                .forEach(e -> computerDao.delete(e.getId()));
+        computerDao.getByCompanyId(id).stream().forEach(e -> computerDao.delete(e.getId()));
         companyDao.delete(id);
     }
 

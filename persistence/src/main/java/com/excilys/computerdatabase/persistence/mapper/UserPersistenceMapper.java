@@ -8,4 +8,5 @@ import com.excilys.computerdatabase.persistence.model.User;
  * The Interface UserPersistenceMapper.
  */
 public interface UserPersistenceMapper extends Mapper <UserDetail, User>{
+
 }

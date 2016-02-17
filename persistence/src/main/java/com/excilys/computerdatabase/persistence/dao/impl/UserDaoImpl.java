@@ -14,12 +14,15 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author Vincent Galloy
+ */
 @Repository
 @SuppressWarnings("unchecked")
 public class UserDaoImpl implements UserDetailDao {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserDaoImpl.class);
     @Autowired
-    private SessionFactory sf;
+    private SessionFactory sessionFactory;
     @Autowired
     private UserPersistenceMapper userPersistenceMapper;
 
@@ -27,23 +30,23 @@ public class UserDaoImpl implements UserDetailDao {
     public void create(UserDetail userDetail) {
         LOGGER.info("create : {}", userDetail);
         User user = userPersistenceMapper.mapFromModel(userDetail);
-        sf.getCurrentSession().save(user);
+        sessionFactory.getCurrentSession().save(user);
         for (int i = 0; i < user.getUserRole().size(); i++) {
-            user.getUserRole().stream().forEach(sf.getCurrentSession()::save);
+            user.getUserRole().stream().forEach(sessionFactory.getCurrentSession()::save);
         }
     }
 
     @Override
     public List<UserDetail> getAll() {
         LOGGER.info("getAll :");
-        List<User> list = sf.getCurrentSession().createCriteria(User.class).list();
+        List<User> list = sessionFactory.getCurrentSession().createCriteria(User.class).list();
         return userPersistenceMapper.mapListToModel(list);
     }
 
     @Override
     public UserDetail getByUsername(String userName) {
         LOGGER.info("getByName : {}", userName);
-        List<User> list = sf.getCurrentSession().createCriteria(User.class).add(Restrictions.eq("username", userName)).list();
+        List<User> list = sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq("username", userName)).list();
         if (list.size() != 1) {
             return null;
         } else {
@@ -61,7 +64,7 @@ public class UserDaoImpl implements UserDetailDao {
     @Override
     public void delete(String userName) {
         LOGGER.info("delete : {}", userName);
-        Session session = sf.getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         UserDetail userDetail = getByUsername(userName);
         User user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", userName)).list().get(0);
         if (userDetail != null) {

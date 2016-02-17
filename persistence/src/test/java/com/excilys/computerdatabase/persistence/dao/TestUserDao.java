@@ -32,7 +32,7 @@ import com.excilys.computerdatabase.model.UserDetail;
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/test-persistence-context.xml" })
-public class TestUserDao {
+public class TestUserDao extends AbstractTestDao {
 	@Autowired
 	private UserDetailDao userDetailDao;
 	@Autowired
@@ -40,15 +40,10 @@ public class TestUserDao {
 
 	@Before
 	public void setUpDatabase() {
-		try {
-			IDatabaseConnection dbc = new DatabaseConnection(dataSource.getConnection());			 
-			IDataSet dataset = new FlatXmlDataSetBuilder().build(new FileInputStream("src/test/resources/database/fakeDatabase.xml"));
-			DatabaseOperation.CLEAN_INSERT.execute(dbc, dataset);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		super.setUpDatabase(dataSource);
 	}
-	
+
+
 	@Test
 	public void testCreateOk() {
 		UserDetail userDetail = new UserDetail();

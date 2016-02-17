@@ -1,7 +1,5 @@
 package com.excilys.computerdatabase.persistence.model;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,102 +10,69 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 /**
- * The Class UserRole.
+ * @author Vincent Galloy
+ *         The Class UserRole.
  */
 @Entity
-@Table(name = "authorities", uniqueConstraints = @UniqueConstraint(columnNames = { "role", "username" }))
+@Table(name = "authorities", uniqueConstraints = @UniqueConstraint(columnNames = {"role", "username"}))
 public class UserRole {
+    private Integer userRoleId;
+    private User user;
+    private String role;
 
-	/** The user role id. */
-	private Integer userRoleId;
-	
-	/** The user. */
-	private User user;
-	
-	/** The role. */
-	private String role;
+    /**
+     * Instantiates a new user role.
+     */
+    public UserRole() {
+    }
 
-	/**
-	 * Instantiates a new user role.
-	 */
-	public UserRole() {
-	}
+    /**
+     * Instantiates a new user role.
+     *
+     * @param user the user
+     * @param role the role
+     */
+    public UserRole(User user, String role) {
+        this.user = user;
+        this.role = role;
+    }
 
-	/**
-	 * Instantiates a new user role.
-	 *
-	 * @param user the user
-	 * @param role the role
-	 */
-	public UserRole(User user, String role) {
-		this.user = user;
-		this.role = role;
-	}
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "user_role_id", unique = true, nullable = false)
+    public Integer getUserRoleId() {
+        return this.userRoleId;
+    }
 
-	/**
-	 * Gets the user role id.
-	 *
-	 * @return the user role id
-	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "user_role_id", unique = true, nullable = false)
-	public Integer getUserRoleId() {
-		return this.userRoleId;
-	}
+    public void setUserRoleId(Integer userRoleId) {
+        this.userRoleId = userRoleId;
+    }
 
-	/**
-	 * Sets the user role id.
-	 *
-	 * @param userRoleId the new user role id
-	 */
-	public void setUserRoleId(Integer userRoleId) {
-		this.userRoleId = userRoleId;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "username", nullable = false)
+    public User getUser() {
+        return this.user;
+    }
 
-	/**
-	 * Gets the user.
-	 *
-	 * @return the user
-	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "username", nullable = false)
-	public User getUser() {
-		return this.user;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	/**
-	 * Sets the user.
-	 *
-	 * @param user the new user
-	 */
-	public void setUser(User user) {
-		this.user = user;
-	}
+    @Column(name = "role", nullable = false, length = 100)
+    public String getRole() {
+        return this.role;
+    }
 
-	/**
-	 * Gets the role.
-	 *
-	 * @return the role
-	 */
-	@Column(name = "role", nullable = false, length = 100)
-	public String getRole() {
-		return this.role;
-	}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-	/**
-	 * Sets the role.
-	 *
-	 * @param role the new role
-	 */
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	@Override
-	public String toString() {
-		return "UserRole [userRoleId=" + userRoleId + ", role=" + role + "]";
-	}
+    @Override
+    public String toString() {
+        return "UserRole [userRoleId=" + userRoleId + ", role=" + role + "]";
+    }
 
 }
