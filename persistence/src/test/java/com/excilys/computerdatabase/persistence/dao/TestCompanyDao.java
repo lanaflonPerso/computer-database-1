@@ -1,6 +1,3 @@
-/**
- * @author Vincent Galloy
- */
 package com.excilys.computerdatabase.persistence.dao;
 
 import com.excilys.computerdatabase.model.Company;
@@ -25,8 +22,12 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+/**
+ * @author Vincent Galloy
+ */
 @Transactional
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/test-persistence-context.xml"})
@@ -43,7 +44,7 @@ public class TestCompanyDao extends AbstractTestDao {
 
     @Test
     public void testCreateCompany() {
-        Company company = new Company(new Long(0), "company_test");
+        Company company = new Company(0L, "company_test");
 
         companyDao.create(company);
         Company company2 = companyDao.getById(company.getId());
@@ -55,13 +56,13 @@ public class TestCompanyDao extends AbstractTestDao {
     @Test
     public void testListCompany() {
         List<Company> companies = companyDao.getAll(new SortCriteria());
-        assertEquals(companies.get(0), new Company(1l, "Apple Inc."));
+        assertEquals(companies.get(0), new Company(1L, "Apple Inc."));
         assertEquals(companies.size(), 2);
     }
 
     @Test
     public void testDeleteOk() {
-        Company company = new Company(new Long(0), "company_test");
+        Company company = new Company(0L, "company_test");
         companyDao.create(company);
         assertNotEquals(company.getId(), new Long(0));
         companyDao.delete(company.getId());
@@ -92,32 +93,32 @@ public class TestCompanyDao extends AbstractTestDao {
 
     @Test
     public void testGetByIdOk() {
-        Company company = companyDao.getById(new Long(2));
+        Company company = companyDao.getById(2L);
         assertEquals(company.getId(), new Long(2));
     }
 
     @Test(expected = DaoException.class)
     public void testGetAllFromToWithZero() {
-        companyDao.getAll(new Long(0), new Long(0), new SortCriteria());
+        companyDao.getAll(0L, 0L, new SortCriteria());
     }
 
     @Test
     public void testGetAllFromTo() {
-        List<Company> companies = companyDao.getAll(new Long(0), new Long(1),
+        List<Company> companies = companyDao.getAll(0L, 1L,
                 new SortCriteria());
-        assertEquals(companies == null, false);
+        assertNotNull(companies);
         assertEquals(companies.size(), 1);
         assertEquals(companies.get(0).getName(), "Apple Inc.");
     }
 
     @Test(expected = DaoException.class)
     public void testGetAllFromToWrong() {
-        companyDao.getAll(null, new Long(1), new SortCriteria());
+        companyDao.getAll(null, 1L, new SortCriteria());
     }
 
     @Test(expected = DaoException.class)
     public void testGetAllFromToWrong2() {
-        companyDao.getAll(new Long(4), new Long(1), new SortCriteria());
+        companyDao.getAll(4L, 1L, new SortCriteria());
     }
 
     @Test
@@ -130,7 +131,7 @@ public class TestCompanyDao extends AbstractTestDao {
 
     @Test
     public void testDeleteElementOk() {
-        Company company = new Company(new Long(0), "company_test");
+        Company company = new Company(0L, "company_test");
         companyDao.create(company);
         Long total = companyDao.getNumberOfElement();
         companyDao.delete(company.getId());
@@ -139,11 +140,10 @@ public class TestCompanyDao extends AbstractTestDao {
 
     @Test
     public void testDeleteElementWrong() {
-        Company company = new Company(new Long(0), "company_test");
+        Company company = new Company(0L, "company_test");
         companyDao.create(company);
         Long total = companyDao.getNumberOfElement();
         companyDao.delete(company.getId() + 1);
         assertEquals(total, companyDao.getNumberOfElement());
     }
-
 }

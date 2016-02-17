@@ -196,5 +196,4 @@ public class TestComputerDao extends AbstractTestDao {
         Long l2 = (long) computerDao.getByName("test", 0L, computerDao.getNumberOfElement(), new SortCriteria()).size();
         assertEquals(l1, l2);
     }
-
 }

@@ -43,7 +43,6 @@ public class TestUserDao extends AbstractTestDao {
 		super.setUpDatabase(dataSource);
 	}
 
-
 	@Test
 	public void testCreateOk() {
 		UserDetail userDetail = new UserDetail();
@@ -59,7 +58,7 @@ public class TestUserDao extends AbstractTestDao {
 		UserDetail userDetail = new UserDetail();
 		userDetail.setUserName("name");
 		userDetail.setPassword("password");
-		Set<Role> roles = new HashSet<Role>();
+		Set<Role> roles = new HashSet<>();
 		roles.add(Role.ADMIN);
 		roles.add(Role.SUPER_ADMIN);
 		userDetail.setRoles(roles);
@@ -96,7 +95,7 @@ public class TestUserDao extends AbstractTestDao {
 		UserDetail userDetail = new UserDetail();
 		userDetail.setUserName("name");
 		userDetail.setPassword("password");
-		Set<Role> roles = new HashSet<Role>();
+		Set<Role> roles = new HashSet<>();
 		roles.add(Role.ADMIN);
 		userDetail.setRoles(roles);
 		userDetailDao.create(userDetail);
@@ -111,7 +110,7 @@ public class TestUserDao extends AbstractTestDao {
 		UserDetail userDetail = new UserDetail();
 		userDetail.setUserName("name");
 		userDetail.setPassword("password");
-		Set<Role> roles = new HashSet<Role>();
+		Set<Role> roles = new HashSet<>();
 		roles.add(Role.ADMIN);
 		userDetail.setRoles(roles);
 		userDetailDao.create(userDetail);
@@ -134,5 +133,4 @@ public class TestUserDao extends AbstractTestDao {
 		assertEquals(count + 1, count2);
 		assertEquals(count, count3);
 	}
-	
 }

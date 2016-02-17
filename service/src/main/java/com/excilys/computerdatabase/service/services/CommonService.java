@@ -1,91 +1,86 @@
-/**
- * @author Vincent Galloy
- */
 package com.excilys.computerdatabase.service.services;
-
-import java.util.List;
 
 import com.excilys.computerdatabase.sort.SortCriteria;
 
+import java.util.List;
+
 /**
- * The Interface CommonService.
- *
- * @param <T> the generic type
+ * @author Vincent Galloy
+ *         The Interface CommonService.
  */
 public interface CommonService<T> {
 
-	/**
-	 * Gets the number of element.
-	 *
-	 * @return the number of element
-	 */
-	public Long getNumberOfElement();
-	
-	/**
-	 * List.
-	 *
-	 * @param sortCriteria the sort criteria
-	 * @return the list
-	 */
-	public List<T> list(SortCriteria sortCriteria);
+    /**
+     * Gets the number of element.
+     *
+     * @return the number of element
+     */
+    Long getNumberOfElement();
 
-	/**
-	 * List.
-	 *
-	 * @return the list
-	 */
-	public default List<T> list() {
-		return list(new SortCriteria());
-	}
-	
-	/**
-	 * List.
-	 *
-	 * @param from the from
-	 * @param to the to
-	 * @param sortCriteria the sort criteria
-	 * @return the list
-	 */
-	public List<T> list(Long from, Long to, SortCriteria sortCriteria);
-	
-	/**
-	 * List.
-	 *
-	 * @param from the from
-	 * @param to the to
-	 * @return the list
-	 */
-	public default List<T> list(Long from, Long to) {
-		return list(from, to, new SortCriteria());
-	}
-	
-	/**
-	 * Gets the by id.
-	 *
-	 * @param id the id
-	 * @return the by id
-	 */
-	public T getById(Long id);
+    /**
+     * List.
+     *
+     * @param sortCriteria the sort criteria
+     * @return the list
+     */
+    List<T> list(SortCriteria sortCriteria);
 
-	/**
-	 * Creates the.
-	 *
-	 * @param t the t
-	 */
-	public void create(T t);
+    /**
+     * List.
+     *
+     * @return the list
+     */
+    default List<T> list() {
+        return list(new SortCriteria());
+    }
 
-	/**
-	 * Update.
-	 *
-	 * @param t the t
-	 */
-	public void update(T t);
+    /**
+     * List.
+     *
+     * @param from         the from
+     * @param to           the to
+     * @param sortCriteria the sort criteria
+     * @return the list
+     */
+    List<T> list(Long from, Long to, SortCriteria sortCriteria);
 
-	/**
-	 * Delete.
-	 *
-	 * @param id the id
-	 */
-	public void delete(Long id);
-	
+    /**
+     * List.
+     *
+     * @param from the from
+     * @param to   the to
+     * @return the list
+     */
+    default List<T> list(Long from, Long to) {
+        return list(from, to, new SortCriteria());
+    }
+
+    /**
+     * Gets the by id.
+     *
+     * @param id the id
+     * @return the by id
+     */
+    T getById(Long id);
+
+    /**
+     * Creates the.
+     *
+     * @param t the t
+     */
+    void create(T t);
+
+    /**
+     * Update.
+     *
+     * @param t the t
+     */
+    void update(T t);
+
+    /**
+     * Delete.
+     *
+     * @param id the id
+     */
+    void delete(Long id);
 }
