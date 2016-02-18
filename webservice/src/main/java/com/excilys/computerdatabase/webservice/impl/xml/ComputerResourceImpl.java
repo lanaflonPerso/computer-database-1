@@ -1,7 +1,3 @@
-/**
- * @author Vincent Galloy
- * 
- */
 package com.excilys.computerdatabase.webservice.impl.xml;
 
 import java.util.List;
@@ -24,14 +20,13 @@ import com.excilys.computerdatabase.service.services.ComputerService;
 import com.excilys.computerdatabase.sort.SortCriteria;
 
 /**
+ * @author Vincent Galloy
  * The Class ComputerResourceImpl.
  */
 @Path("/computer")
 @Produces(MediaType.APPLICATION_XML)
 @Consumes(MediaType.APPLICATION_XML)
 public class ComputerResourceImpl implements ComputerResource {
-	
-	/** The computer service. */
 	@Autowired
 	private ComputerService computerService;
 

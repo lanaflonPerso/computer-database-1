@@ -17,7 +17,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-
 /**
  * @author Vincent Galloy
  *         The Class CompanyRestControler.
@@ -25,10 +24,6 @@ import java.util.List;
 @RestController
 @RequestMapping("rest/json/company")
 public class CompanyRestController implements CompanyResource {
-
-    /**
-     * The company service.
-     */
     @Autowired
     private CompanyService companyService;
 
@@ -70,5 +65,4 @@ public class CompanyRestController implements CompanyResource {
         companyService.delete(id);
         return Response.ok("ok").build();
     }
-
 }

@@ -6,6 +6,6 @@ import com.excilys.computerdatabase.model.Company;
  * @author Vincent Galloy
  *         The Interface CompanyResource.
  */
-public interface CompanyResource extends CommonRessource<Company> {
+public interface CompanyResource extends CommonResource<Company> {
 
 }

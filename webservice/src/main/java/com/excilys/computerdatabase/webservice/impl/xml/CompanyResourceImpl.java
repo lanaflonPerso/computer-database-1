@@ -1,7 +1,3 @@
-/**
- * @author Vincent Galloy
- * 
- */
 package com.excilys.computerdatabase.webservice.impl.xml;
 
 import java.util.List;
@@ -24,14 +20,13 @@ import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.webservice.CompanyResource;
 
 /**
+ * @author Vincent Galloy
  * The Class CompanyResourceImpl.
  */
 @Path("/company")
 @Produces(MediaType.APPLICATION_XML)
 @Consumes(MediaType.APPLICATION_XML)
 public class CompanyResourceImpl implements CompanyResource {
-	
-	/** The company service. */
 	@Autowired
 	private CompanyService companyService;
 

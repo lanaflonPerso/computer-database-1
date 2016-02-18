@@ -1,14 +1,11 @@
-/*
- * @author Vincent Galloy
- * 
- */
 package com.excilys.computerdatabase.webservice;
 
 import com.excilys.computerdatabase.model.Computer;
 
 /**
- * The Interface ComputerResource.
+ * @author Vincent Galloy
+ *         The Interface ComputerResource.
  */
-public interface ComputerResource extends CommonRessource<Computer> {
+public interface ComputerResource extends CommonResource<Computer> {
 
 }
