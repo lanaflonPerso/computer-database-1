@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class UserDashboardPage {
     private List<UserDetailDto> userList;
-    private String ErrorMessage;
+    private String errorMessage;
 
     /**
      * Instantiates a new user dashboard page.
@@ -28,16 +28,16 @@ public class UserDashboardPage {
     }
 
     public String getErrorMessage() {
-        return ErrorMessage;
+        return errorMessage;
     }
 
     public void setErrorMessage(String errorMessage) {
-        ErrorMessage = errorMessage;
+        this.errorMessage = errorMessage;
     }
 
     @Override
     public String toString() {
-        return "UserDashboardPage [userList=" + userList + ", ErrorMessage=" + ErrorMessage + "]";
+        return "UserDashboardPage [userList=" + userList + ", errorMessage=" + errorMessage + "]";
     }
 
 }

@@ -1,6 +1,3 @@
-/**
- * @author Vincent Galloy
- */
 package com.excilys.computerdatabase.service.services.impl;
 
 import com.excilys.computerdatabase.model.Company;
@@ -25,6 +22,9 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+/**
+ * @author Vincent Galloy
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/test-service-application-context.xml"})
 public class TestComputerService {

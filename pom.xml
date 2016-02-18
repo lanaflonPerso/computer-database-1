@@ -409,7 +409,6 @@
                     <target>${java-target-version}</target>
                 </configuration>
             </plugin>
-
             <!-- Cobertura -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

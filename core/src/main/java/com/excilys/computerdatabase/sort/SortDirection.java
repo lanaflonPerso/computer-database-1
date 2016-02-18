@@ -13,8 +13,9 @@ public enum SortDirection {
         this.value = value;
     }
 
+    @Override
     public String toString() {
-        return value.toString();
+        return value;
     }
 
     /**
@@ -41,13 +42,6 @@ public enum SortDirection {
      * @return the string
      */
     public String toPrint() {
-        switch (this) {
-            case ASC:
-                return "ASC";
-            case DESC:
-                return "DESC";
-            default:
-                return "ASC";
-        }
+        return this.value;
     }
 }

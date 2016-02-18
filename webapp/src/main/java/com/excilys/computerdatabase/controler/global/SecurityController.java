@@ -25,15 +25,15 @@ public class SecurityController extends AbstractController {
      * @param model the model
      * @return the string
      */
-    @RequestMapping(value = GLOBAL + VIEW + LOGIN, method = RequestMethod.GET)
+    @RequestMapping(value = GLOBAL + VIEW + CUSTOM_LOGIN, method = RequestMethod.GET)
     public String login(@RequestParam(value = "auth", required = false) String auth, Model model) {
         LOGGER.debug("Login");
 
-        if (auth == null || !auth.equals("false")) {
+        if (auth == null || !"false".equals(auth)) {
             auth = "true";
         }
         model.addAttribute("auth", auth);
-        return GLOBAL + VIEW + LOGIN;
+        return GLOBAL + VIEW + CUSTOM_LOGIN;
     }
 
     /**
@@ -47,6 +47,6 @@ public class SecurityController extends AbstractController {
 
         SecurityContextHolder.getContext().getAuthentication().setAuthenticated(false);
 
-        return REDIRECT + GLOBAL + VIEW + LOGIN;
+        return REDIRECT + GLOBAL + VIEW + CUSTOM_LOGIN;
     }
 }

@@ -16,14 +16,13 @@ public class Paginator {
      *
      * @param list the list
      */
-    public static void print(List<? extends Object> list) {
+    public static void print(List<?> list) {
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
                 Object o = list.get(i);
                 System.out.println(o.toString());
-                if ((i + 1) % SIZE == 0) {
-                    if (!waitEnter())
-                        return;
+                if ((i + 1) % SIZE == 0 && !waitEnter()) {
+                    return;
                 }
             }
         }

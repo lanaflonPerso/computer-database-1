@@ -6,6 +6,9 @@ import com.excilys.computerdatabase.dto.model.RuleDto;
 import com.excilys.computerdatabase.dto.model.UserDetailDto;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Vincent Galloy
  *         The Class AbstractController.
@@ -21,11 +24,12 @@ public abstract class AbstractController {
     public static final String ADD = "add";
     public static final String DELETE = "delete";
     public static final String DASHBOARD = "dashboard";
-    public static final String LOGIN = "customLogin";
+    public static final String CUSTOM_LOGIN = "customLogin";
     public static final String LOGOUT = "logout";
     public static final String HOME = "home";
     public static final String RESET_PASSWORD = "resetPassword";
     public static final String REDIRECT = "redirect:/";
+    public static final String WRONG_INPUT = "Wrong input";
 
     /**
      * Gets the adds the computer dto.
@@ -75,5 +79,22 @@ public abstract class AbstractController {
     @ModelAttribute("companyDto")
     public CompanyDto getCompanyDto() {
         return new CompanyDto();
+    }
+
+    /**
+     * Gets the list.
+     *
+     * @param selection the selection
+     * @return the list
+     */
+    protected static List<Long> getList(String selection) {
+        List<Long> list = new ArrayList<>();
+        if ("".equals(selection)) {
+            return list;
+        }
+        for (String s : selection.split(",")) {
+            list.add(Long.valueOf(s));
+        }
+        return list;
     }
 }

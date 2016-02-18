@@ -39,9 +39,8 @@ public class AddPageCreator extends AbstractPageCreator {
      * @return the page from post request
      */
     public ComputerPage getPageFromPostRequest(ComputerDto computerDto) {
-        mapComputerDto(computerDto);
-        ComputerPage page = pagePost(computerDto);
-        return page;
+        convertEmptyFieldIntoNull(computerDto);
+        return pagePost(computerDto);
     }
 
     /**

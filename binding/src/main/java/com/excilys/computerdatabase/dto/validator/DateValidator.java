@@ -38,7 +38,7 @@ public class DateValidator implements ConstraintValidator<Date, String> {
      * @param pattern the pattern
      * @return true, if is correct date
      */
-    private boolean isCorrectDate(String date, String pattern) {
+    private static boolean isCorrectDate(String date, String pattern) {
         if (Validator.isDateValid(date, pattern)) {
             LocalDateTime localDateTime = DateMapper.extractFromString(date, pattern);
             LocalDateTime localDateTimeAfter = LocalDateTime.parse("1970-01-01 00:00:00", DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));

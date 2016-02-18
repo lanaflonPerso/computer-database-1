@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import java.io.Serializable;
+
 import static javax.persistence.GenerationType.IDENTITY;
 
 /**
@@ -18,7 +20,8 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 @Entity
 @Table(name = "authorities", uniqueConstraints = @UniqueConstraint(columnNames = {"role", "username"}))
-public class UserRole {
+public class UserRole implements Serializable {
+    private static final long serialVersionUID = -2736938120189054963L;
     private Integer userRoleId;
     private User user;
     private String role;
@@ -27,6 +30,7 @@ public class UserRole {
      * Instantiates a new user role.
      */
     public UserRole() {
+        super();
     }
 
     /**

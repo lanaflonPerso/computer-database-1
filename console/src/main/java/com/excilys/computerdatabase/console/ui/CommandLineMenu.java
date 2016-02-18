@@ -122,9 +122,8 @@ public class CommandLineMenu {
         String name = getStringFromCommandLine("Computer name : ");
         LocalDateTime introduced = getLocalDateTimeFromCommandLine("Computer introduced : ");
         LocalDateTime discontinued = getLocalDateTimeFromCommandLine("Computer discontinued : ");
-        Long company_id = getLongFromCommandLine("Computer company_id : ");
-        Computer computer = new Computer(0L, name, introduced,
-                discontinued, new Company(company_id, null));
+        Long companyId = getLongFromCommandLine("Computer company_id : ");
+        Computer computer = new Computer(0L, name, introduced, discontinued, new Company(companyId, null));
         consoleService.createComputer(computer);
         System.out.println("computer created : " + computer.toString());
     }
@@ -137,9 +136,8 @@ public class CommandLineMenu {
         String name = getStringFromCommandLine("Computer (new) name : ");
         LocalDateTime introduced = getLocalDateTimeFromCommandLine("Computer (new) introduced : ");
         LocalDateTime discontinued = getLocalDateTimeFromCommandLine("Computer (new) discontinued : ");
-        Long company_id = getLongFromCommandLine("Computer (new) company_id : ");
-        Computer computer = new Computer(id, name, introduced, discontinued,
-                new Company(company_id, null));
+        Long companyId = getLongFromCommandLine("Computer (new) company_id : ");
+        Computer computer = new Computer(id, name, introduced, discontinued, new Company(companyId, null));
         consoleService.updateComputer(computer);
         System.out.println("computer updated : " + computer.toString());
     }

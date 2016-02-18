@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -57,7 +58,7 @@ public class UserController extends AbstractController {
         userSession.setErrorMessage(null);
 
         if (bindingResult.hasErrors() || userDetailDto.getUserName().trim().isEmpty() || userDetailDto.getPassword().trim().isEmpty()) {
-            LOGGER.warn("Wrong input");
+            LOGGER.warn(WRONG_INPUT);
             if (userDetailDto.getUserName().trim().isEmpty()) {
                 userSession.setErrorMessage(messageSource.getMessage("username.can.not.be.null", null, LocaleContextHolder.getLocale()));
             } else if (userDetailDto.getPassword().trim().isEmpty()) {
@@ -86,7 +87,7 @@ public class UserController extends AbstractController {
         RuleDto ruleDto2 = new RuleDto(SecurityContextHolder.getContext().getAuthentication().getName(), Role.SUPER_ADMIN.toString(), false);
 
         if (bindingResult.hasErrors() || ruleDto.equals(ruleDto2)) {
-            LOGGER.warn("Wrong input");
+            LOGGER.warn(WRONG_INPUT);
             if (ruleDto.equals(ruleDto2)) {
                 userSession.setErrorMessage(messageSource.getMessage("can.not.remove.this.authorities", null, LocaleContextHolder.getLocale()));
             }
@@ -110,7 +111,7 @@ public class UserController extends AbstractController {
         userSession.setErrorMessage(null);
 
         if (bindingResult.hasErrors() || userDetailDto.getPassword().trim().isEmpty()) {
-            LOGGER.info("Wrong input");
+            LOGGER.info(WRONG_INPUT);
             if (userDetailDto.getPassword().trim().isEmpty()) {
                 userSession.setErrorMessage(messageSource.getMessage("password.can.not.be.null", null, LocaleContextHolder.getLocale()));
             }
@@ -132,7 +133,15 @@ public class UserController extends AbstractController {
         LOGGER.info("Servlet : [POST] user: delete {}", selection);
         userSession.setErrorMessage(null);
 
-        getList(selection).stream().forEach(securityService::delete);
+        List<String> usernameList = getUsernameList(selection);
+        for (String username : usernameList) {
+            if (SecurityContextHolder.getContext().getAuthentication().getName().equals(username)) {
+                userSession.setErrorMessage(messageSource.getMessage("can.not.delete.yourself", null, LocaleContextHolder.getLocale()));
+                LOGGER.warn("Wrong input : can't delete the current user");
+            } else {
+                securityService.delete(username);
+            }
+        }
 
         return REDIRECT + USER + VIEW + DASHBOARD;
     }
@@ -143,19 +152,12 @@ public class UserController extends AbstractController {
      * @param selection the selection
      * @return the list
      */
-    private List<String> getList(String selection) {
+    private List<String> getUsernameList(String selection) {
         List<String> list = new ArrayList<>();
         if ("".equals(selection)) {
             return list;
         }
-        for (String s : selection.split(",")) {
-            if (SecurityContextHolder.getContext().getAuthentication().getName().equals(s)) {
-                userSession.setErrorMessage(messageSource.getMessage("can.not.delete.yourself", null, LocaleContextHolder.getLocale()));
-                LOGGER.warn("wrong input : can't delete the current user");
-            } else {
-                list.add(s);
-            }
-        }
+        Collections.addAll(list, selection.split(","));
         return list;
     }
 }

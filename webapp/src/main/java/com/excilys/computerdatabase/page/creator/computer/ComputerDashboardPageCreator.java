@@ -107,17 +107,16 @@ public class ComputerDashboardPageCreator extends AbstractPageCreator {
      * Page converter.
      *
      * @param page       the page
-     * @param LocaleFrom the locale from
-     * @param LocaleTo   the locale to
+     * @param localeFrom the locale from
+     * @param localeTo   the locale to
      */
-    public void pageConverter(ComputerDashboardPage page, Locale LocaleFrom,
-                              Locale LocaleTo) {
+    public void pageConverter(ComputerDashboardPage page, Locale localeFrom, Locale localeTo) {
         DateFormat dateFormatFrom = DateFormat.ENGLISH;
         DateFormat dateFormatTo = DateFormat.ENGLISH;
-        if (LocaleFrom.equals(Locale.FRENCH)) {
+        if (localeFrom.equals(Locale.FRENCH)) {
             dateFormatFrom = DateFormat.FRENCH;
         }
-        if (LocaleTo.equals(Locale.FRENCH)) {
+        if (localeTo.equals(Locale.FRENCH)) {
             dateFormatTo = DateFormat.FRENCH;
         }
         listConverter(page.getComputers(), dateFormatFrom, dateFormatTo);

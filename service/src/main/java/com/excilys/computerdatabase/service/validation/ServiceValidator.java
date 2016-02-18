@@ -8,10 +8,10 @@ import com.excilys.computerdatabase.model.UserDetail;
  * @author Vincent Galloy
  *         The Class ServiceValidator.
  */
-public class ServiceValidator {
-    public static final String INVALID_USER = "invalid user";
-    public static final String INVALID_USERNAME = "invalid username";
-    public static final String INVALID_RULE = "invalid rule";
+public interface ServiceValidator {
+    String INVALID_USER = "invalid user";
+    String INVALID_USERNAME = "invalid username";
+    String INVALID_RULE = "invalid rule";
 
     /**
      * Checks if is user name correct.
@@ -19,7 +19,7 @@ public class ServiceValidator {
      * @param userName the user name
      * @return true, if is user name correct
      */
-    public static boolean isUserNameCorrect(String userName) {
+    static boolean isUserNameCorrect(String userName) {
         return userName != null && !userName.trim().isEmpty();
     }
 
@@ -29,7 +29,7 @@ public class ServiceValidator {
      * @param userDetail the user detail
      * @return true, if is user correct
      */
-    public static boolean isUserCorrect(UserDetail userDetail) {
+    static boolean isUserCorrect(UserDetail userDetail) {
         if (userDetail == null) {
             return false;
         } else if (userDetail.getUserName() == null) {
@@ -47,7 +47,7 @@ public class ServiceValidator {
      * @param rule the rule
      * @return true, if is rule correct
      */
-    public static boolean isRuleCorrect(Rule rule) {
+    static boolean isRuleCorrect(Rule rule) {
         if (rule == null) {
             return false;
         } else if (!isUserNameCorrect(rule.getUserName())) {

@@ -5,17 +5,20 @@ package com.excilys.computerdatabase.sort;
  *         The Enum SortColumn.
  */
 public enum SortColumn {
-    COMPUTER_ID("computer.id"),
-    COMPUTER_NAME("computer.name"),
-    INTRODUCED_DATE("computer.introduced"),
-    DISCONTINUED_DATE("computer.discontinued"),
-    COMPANY_NAME("company.name");
+    COMPUTER_ID("computer.id", "COMPUTER_ID"),
+    COMPUTER_NAME("computer.name", "COMPUTER_NAME"),
+    INTRODUCED_DATE("computer.introduced", "INTRODUCED_DATE"),
+    DISCONTINUED_DATE("computer.discontinued", "DISCONTINUED_DATE"),
+    COMPANY_NAME("company.name", "COMPANY_NAME");
     private final String value;
+    private final String valueForPrint;
 
-    SortColumn(String value) {
+    SortColumn(String value, String valueForPrint) {
         this.value = value;
+        this.valueForPrint = valueForPrint;
     }
 
+    @Override
     public String toString() {
         return this.value;
     }
@@ -24,20 +27,7 @@ public enum SortColumn {
      * @return the string
      */
     public String toPrint() {
-        switch (this) {
-            case COMPUTER_ID:
-                return "COMPUTER_ID";
-            case COMPUTER_NAME:
-                return "COMPUTER_NAME";
-            case INTRODUCED_DATE:
-                return "INTRODUCED_DATE";
-            case DISCONTINUED_DATE:
-                return "DISCONTINUED_DATE";
-            case COMPANY_NAME:
-                return "COMPANY_NAME";
-            default:
-                return null;
-        }
+        return this.valueForPrint;
     }
 
     /**

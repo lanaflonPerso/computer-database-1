@@ -16,6 +16,18 @@ public class SortCriteria {
         this.sortDirection = SortDirection.ASC;
     }
 
+    /**
+     * Instantiates a new sort criteria.
+     *
+     * @param sortColumn    the sort column
+     * @param sortDirection the sort direction
+     */
+    public SortCriteria(SortColumn sortColumn, SortDirection sortDirection) {
+        super();
+        this.sortColumn = sortColumn;
+        this.sortDirection = sortDirection;
+    }
+
     public SortColumn getSortColumn() {
         return sortColumn;
     }
@@ -32,18 +44,7 @@ public class SortCriteria {
         this.sortDirection = sortDirection;
     }
 
-    /**
-     * Instantiates a new sort criteria.
-     *
-     * @param sortColumn    the sort column
-     * @param sortDirection the sort direction
-     */
-    public SortCriteria(SortColumn sortColumn, SortDirection sortDirection) {
-        super();
-        this.sortColumn = sortColumn;
-        this.sortDirection = sortDirection;
-    }
-
+    @Override
     public String toString() {
         return sortColumn.toString() + " " + sortDirection.toString();
     }

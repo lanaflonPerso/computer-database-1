@@ -3,7 +3,6 @@ package com.excilys.computerdatabase.dto.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 /**
  * @author Vincent Galloy
  *         The Interface DtoMapper.

@@ -26,27 +26,27 @@ import java.util.List;
 @RequestMapping("rest/json/computer")
 public class ComputerRestController implements ComputerResource {
     @Autowired
-    private ComputerService ComputerService;
+    private ComputerService computerService;
 
     @Override
     @GET
     @RequestMapping("getAll")
     public List<Computer> getAll() {
-        return ComputerService.list(new SortCriteria());
+        return computerService.list(new SortCriteria());
     }
 
     @Override
     @GET
     @RequestMapping("getById/{id}")
     public Computer getById(@PathParam("id") Long id) {
-        return ComputerService.getById(id);
+        return computerService.getById(id);
     }
 
     @Override
     @POST
     @RequestMapping("create")
     public Computer create(Computer t) {
-        ComputerService.create(t);
+        computerService.create(t);
         return t;
     }
 
@@ -54,7 +54,7 @@ public class ComputerRestController implements ComputerResource {
     @POST
     @RequestMapping("update")
     public Computer update(Computer t) {
-        ComputerService.update(t);
+        computerService.update(t);
         return t;
     }
 
@@ -63,7 +63,7 @@ public class ComputerRestController implements ComputerResource {
     @Produces(MediaType.TEXT_HTML)
     @RequestMapping("delete/{id}")
     public Response delete(@PathParam("id") Long id) {
-        ComputerService.delete(id);
+        computerService.delete(id);
         return Response.ok("ok").build();
     }
 }

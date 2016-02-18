@@ -13,28 +13,28 @@ import java.util.List;
 
 /**
  * @author Vincent Galloy
- * The Class CompanyDashboardPageCreator.
+ *         The Class CompanyDashboardPageCreator.
  */
 @Service
 public class CompanyDashboardPageCreator extends AbstractPageCreator {
-	@Autowired
-	private CompanyService companyService;
-	@Autowired
-	private CompanyDtoMapper companyDtoMapper;
+    @Autowired
+    private CompanyService companyService;
+    @Autowired
+    private CompanyDtoMapper companyDtoMapper;
 
-	public CompanyDashboardPage getPageFromGetRequest() {
-		return pageGet();
-	}
+    public CompanyDashboardPage getPageFromGetRequest() {
+        return pageGet();
+    }
 
-	/**
-	 * Page get.
-	 *
-	 * @return the company dashboard page
-	 */
-	private CompanyDashboardPage pageGet() {
-		CompanyDashboardPage newPage = new CompanyDashboardPage();
-		List<Company> list = companyService.list(new SortCriteria());
-		newPage.setCompanyList(companyDtoMapper.mapListFromModel(list));
-		return newPage;
-	}
+    /**
+     * Page get.
+     *
+     * @return the company dashboard page
+     */
+    private CompanyDashboardPage pageGet() {
+        CompanyDashboardPage newPage = new CompanyDashboardPage();
+        List<Company> list = companyService.list(new SortCriteria());
+        newPage.setCompanyList(companyDtoMapper.mapListFromModel(list));
+        return newPage;
+    }
 }

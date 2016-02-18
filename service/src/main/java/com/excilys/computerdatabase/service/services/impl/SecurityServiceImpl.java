@@ -3,6 +3,7 @@ package com.excilys.computerdatabase.service.services.impl;
 import com.excilys.computerdatabase.model.Rule;
 import com.excilys.computerdatabase.model.UserDetail;
 import com.excilys.computerdatabase.persistence.dao.UserDetailDao;
+import com.excilys.computerdatabase.service.exception.ServiceException;
 import com.excilys.computerdatabase.service.mapper.UserDetailsMapper;
 import com.excilys.computerdatabase.service.services.SecurityService;
 import com.excilys.computerdatabase.service.util.CodingUtil;
@@ -36,7 +37,7 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
     public UserDetail getByName(String userName) {
         LOGGER.info("getByName : {} ", userName);
         if (!ServiceValidator.isUserNameCorrect(userName)) {
-            throw new RuntimeException(ServiceValidator.INVALID_USERNAME);
+            throw new ServiceException(ServiceValidator.INVALID_USERNAME);
         }
         return userDetailDao.getByUsername(userName);
     }
@@ -45,7 +46,7 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
     public void create(UserDetail userDetail) {
         LOGGER.info("create : {} ", userDetail);
         if (!ServiceValidator.isUserCorrect(userDetail)) {
-            throw new RuntimeException(ServiceValidator.INVALID_USER);
+            throw new ServiceException(ServiceValidator.INVALID_USER);
         }
         userDetail.setPassword(CodingUtil.encode(userDetail.getPassword()));
         userDetailDao.create(userDetail);
@@ -55,11 +56,11 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
     public void resetPassword(UserDetail userDetail) {
         LOGGER.info("resetPassword : {} ", userDetail);
         if (userDetail == null) {
-            throw new RuntimeException(ServiceValidator.INVALID_USER);
+            throw new ServiceException(ServiceValidator.INVALID_USER);
         }
         String userName = userDetail.getUserName();
         if (!ServiceValidator.isUserNameCorrect(userName)) {
-            throw new RuntimeException(ServiceValidator.INVALID_USERNAME);
+            throw new ServiceException(ServiceValidator.INVALID_USERNAME);
         }
         userDetail.setPassword(CodingUtil.encode(userDetail.getPassword()));
         UserDetail newUserDetail = userDetailDao.getByUsername(userName);
@@ -71,7 +72,7 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
     public void delete(String userName) {
         LOGGER.info("delete : {} ", userName);
         if (!ServiceValidator.isUserNameCorrect(userName)) {
-            throw new RuntimeException(ServiceValidator.INVALID_USERNAME);
+            throw new ServiceException(ServiceValidator.INVALID_USERNAME);
         }
         userDetailDao.delete(userName);
     }
@@ -87,7 +88,7 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
     public void updateRight(Rule rule) {
         LOGGER.info("updateRight : {} ", rule);
         if (!ServiceValidator.isRuleCorrect(rule)) {
-            throw new RuntimeException(ServiceValidator.INVALID_RULE);
+            throw new ServiceException(ServiceValidator.INVALID_RULE);
         }
         UserDetail userDetail = userDetailDao.getByUsername(rule.getUserName());
         if (rule.isAuthorized()) {
@@ -100,7 +101,7 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
 
     @Override
     @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         UserDetail userDetail = userDetailDao.getByUsername(username);
         return userDetailsMapper.mapFromModel(userDetail);
     }

@@ -42,7 +42,7 @@ public class CompanyController extends AbstractController {
         LOGGER.info("Servlet : [POST] company: add {}", companyDto);
 
         if (bindingResult.hasErrors() || companyDto.getName().trim().isEmpty()) {
-            LOGGER.warn("Wrong input");
+            LOGGER.warn(WRONG_INPUT);
         } else {
             Company company = companyDtoMapper.mapToModel(companyDto);
             companyService.create(company);
@@ -63,7 +63,7 @@ public class CompanyController extends AbstractController {
         LOGGER.info("Servlet : [POST] company: edit {}", companyDto);
 
         if (bindingResult.hasErrors() || companyDto.getName().trim().isEmpty()) {
-            LOGGER.warn("Wrong input");
+            LOGGER.warn(WRONG_INPUT);
         } else {
             Company company = companyDtoMapper.mapToModel(companyDto);
             companyService.update(company);
@@ -84,22 +84,5 @@ public class CompanyController extends AbstractController {
         getList(selection).stream().forEach(companyService::delete);
 
         return REDIRECT + COMPANY + VIEW + DASHBOARD;
-    }
-
-    /**
-     * Gets the list.
-     *
-     * @param selection the selection
-     * @return the list
-     */
-    private List<Long> getList(String selection) {
-        List<Long> list = new ArrayList<>();
-        if ("".equals(selection)) {
-            return list;
-        }
-        for (String s : selection.split(",")) {
-            list.add(Long.valueOf(s));
-        }
-        return list;
     }
 }

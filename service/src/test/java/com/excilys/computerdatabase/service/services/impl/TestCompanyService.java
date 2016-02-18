@@ -1,6 +1,3 @@
-/**
- * @author Vincent Galloy
- */
 package com.excilys.computerdatabase.service.services.impl;
 
 import com.excilys.computerdatabase.model.Company;
@@ -28,6 +25,9 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
+/**
+ * @author Vincent Galloy
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/test-service-application-context.xml"})
 public class TestCompanyService extends AbstractTransactionalJUnit4SpringContextTests {

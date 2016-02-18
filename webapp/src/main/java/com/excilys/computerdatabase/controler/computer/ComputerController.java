@@ -65,7 +65,7 @@ public class ComputerController extends AbstractController {
         addComputerSession.setBindingResult(bindingResult);
 
         if (bindingResult.hasErrors()) {
-            LOGGER.info("Wrong input");
+            LOGGER.info(WRONG_INPUT);
             return REDIRECT + COMPUTER + VIEW + ADD;
         } else {
             AbstractPageCreator.pageConverter(page, LocaleContextHolder.getLocaleContext().getLocale(), Locale.ENGLISH);
@@ -81,11 +81,10 @@ public class ComputerController extends AbstractController {
      *
      * @param computerDto   the computer dto
      * @param bindingResult the binding result
-     * @param model         the model
      * @return the string
      */
     @RequestMapping(value = COMPUTER + CRUD + EDIT, method = RequestMethod.POST)
-    public String editComputer(@Valid @ModelAttribute("editComputerDto") ComputerDto computerDto, BindingResult bindingResult, Model model) {
+    public String editComputer(@Valid @ModelAttribute("editComputerDto") ComputerDto computerDto, BindingResult bindingResult) {
         LOGGER.info("Servlet : [POST] computer-edit {}", computerDto);
 
         ComputerPage page = editPageCreator.getPageFromPostRequest(computerDto);
@@ -93,7 +92,7 @@ public class ComputerController extends AbstractController {
         editComputerSession.setBindingResult(bindingResult);
 
         if (bindingResult.hasErrors()) {
-            LOGGER.info("Wrong input");
+            LOGGER.info(WRONG_INPUT);
             return REDIRECT + COMPUTER + VIEW + EDIT;
         } else {
             AbstractPageCreator.pageConverter(page, LocaleContextHolder.getLocaleContext().getLocale(), Locale.ENGLISH);
@@ -117,22 +116,5 @@ public class ComputerController extends AbstractController {
         getList(selection).stream().forEach(computerService::delete);
 
         return REDIRECT + COMPUTER + VIEW + DASHBOARD;
-    }
-
-    /**
-     * Gets the list.
-     *
-     * @param selection the selection
-     * @return the list
-     */
-    private List<Long> getList(String selection) {
-        List<Long> list = new ArrayList<>();
-        if ("".equals(selection)) {
-            return list;
-        }
-        for (String s : selection.split(",")) {
-            list.add(Long.valueOf(s));
-        }
-        return list;
     }
 }

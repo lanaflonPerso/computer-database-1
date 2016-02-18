@@ -10,15 +10,15 @@ import org.apache.commons.validator.routines.DateValidator;
  * @author Vincent Galloy
  *         The Class Validator.
  */
-public class Validator {
-    public static final String WRONG_DATE_FORMAT = "unable to convert to date";
-    public static final String INVALID_COMPUTER = "computer is invalid";
-    public static final String INVALID_COMPUTER_ID = "computer's id is invalid";
-    public static final String INVALID_COMPANY = "company is invalid";
-    public static final String INVALID_COMPANY_ID = "company's id is invalid";
-    public static final String INVALID_BOUND = "invalid bound";
-    public static final String INVALID_STRING_FOR_SEARCH = "invalid string for search";
-    public static final String INVALID_SORT_CRITERIA = "invalid sort criteria";
+public interface Validator {
+    String WRONG_DATE_FORMAT = "unable to convert to date";
+    String INVALID_COMPUTER = "computer is invalid";
+    String INVALID_COMPUTER_ID = "computer's id is invalid";
+    String INVALID_COMPANY = "company is invalid";
+    String INVALID_COMPANY_ID = "company's id is invalid";
+    String INVALID_BOUND = "invalid bound";
+    String INVALID_STRING_FOR_SEARCH = "invalid string for search";
+    String INVALID_SORT_CRITERIA = "invalid sort criteria";
 
     /**
      * Checks if is date valid.
@@ -26,7 +26,7 @@ public class Validator {
      * @param date the date
      * @return true, if is date valid
      */
-    public static boolean isDateValid(String date) {
+    static boolean isDateValid(String date) {
         return isDateValid(date, DateFormat.ENGLISH);
     }
 
@@ -37,7 +37,7 @@ public class Validator {
      * @param dateFormat the date format
      * @return true, if is date valid
      */
-    public static boolean isDateValid(String date, DateFormat dateFormat) {
+    static boolean isDateValid(String date, DateFormat dateFormat) {
         return isDateValid(date, dateFormat.toString());
     }
 
@@ -48,7 +48,7 @@ public class Validator {
      * @param pattern the pattern
      * @return true, if is date valid
      */
-    public static boolean isDateValid(String date, String pattern) {
+    static boolean isDateValid(String date, String pattern) {
         return DateValidator.getInstance().isValid(date, pattern);
     }
 
@@ -58,7 +58,7 @@ public class Validator {
      * @param computer the computer
      * @return true, if is computer correct
      */
-    public static boolean isComputerCorrect(Computer computer) {
+    static boolean isComputerCorrect(Computer computer) {
         return computer != null && computer.getName() != null && !"".equals(computer.getName().trim()) && computer.getCompany() != null;
     }
 
@@ -68,7 +68,7 @@ public class Validator {
      * @param id the id
      * @return true, if is id correct
      */
-    public static boolean isIdCorrect(Long id) {
+    static boolean isIdCorrect(Long id) {
         return id != null && id > new Long(0);
     }
 
@@ -79,7 +79,7 @@ public class Validator {
      * @param to   the to
      * @return true, if is date from to correct
      */
-    public static boolean isDateFromToCorrect(Long from, Long to) {
+    static boolean isDateFromToCorrect(Long from, Long to) {
         return !(from == null || to == null) && from >= 0L && to >= 0L && from <= to && !from.equals(to);
     }
 
@@ -89,7 +89,7 @@ public class Validator {
      * @param string the string
      * @return true, if is string for search correct
      */
-    public static boolean isStringForSearchCorrect(String string) {
+    static boolean isStringForSearchCorrect(String string) {
         return string != null && !"".equals(string.trim());
     }
 
@@ -99,7 +99,7 @@ public class Validator {
      * @param company the company
      * @return true, if is company correct
      */
-    public static boolean isCompanyCorrect(Company company) {
+    static boolean isCompanyCorrect(Company company) {
         return company != null && company.getName() != null && !"".equals(company.getName().trim());
     }
 
@@ -109,7 +109,7 @@ public class Validator {
      * @param sortCriteria the sort criteria
      * @return true, if is sort criteria correct
      */
-    public static boolean isSortCriteriaCorrect(SortCriteria sortCriteria) {
+    static boolean isSortCriteriaCorrect(SortCriteria sortCriteria) {
         return sortCriteria != null && sortCriteria.getSortColumn() != null && sortCriteria.getSortDirection() != null;
     }
 }

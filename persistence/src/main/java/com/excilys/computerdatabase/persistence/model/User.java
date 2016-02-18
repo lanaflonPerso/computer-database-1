@@ -27,6 +27,7 @@ public class User implements Serializable {
      * Instantiates a new user.
      */
     public User() {
+        super();
     }
 
     /**
