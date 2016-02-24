@@ -51,6 +51,6 @@ public class TestEditComputerFirefox extends AbstractWebTest {
 
         driver.findElement(By.id("editButton")).click();
 
-        assertTrue(driver.getCurrentUrl().contains("http://localhost:8080/webapp/computer/view/edit"));
+        assertTrue(driver.getCurrentUrl().contains("http://localhost:18080/webapp/computer/view/edit"));
     }
 }

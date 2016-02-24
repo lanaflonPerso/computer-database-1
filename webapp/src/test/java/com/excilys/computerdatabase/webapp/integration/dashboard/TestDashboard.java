@@ -35,12 +35,12 @@ public class TestDashboard extends AbstractWebTest {
     @Test
     public void testGoToAddElementUrl() {
         driver.findElement(By.id("addComputer")).click();
-        assertEquals("http://localhost:8080/webapp/computer/view/add", driver.getCurrentUrl());
+        assertEquals("http://localhost:18080/webapp/computer/view/add", driver.getCurrentUrl());
     }
 
     @Test
     public void testGoToEditElementUrl() {
         driver.findElement(By.id("name_0")).click();
-        assertEquals(driver.getCurrentUrl().contains("http://localhost:8080/webapp/computer/view/edit?computerId="), true);
+        assertEquals(driver.getCurrentUrl().contains("http://localhost:18080/webapp/computer/view/edit?computerId="), true);
     }
 }

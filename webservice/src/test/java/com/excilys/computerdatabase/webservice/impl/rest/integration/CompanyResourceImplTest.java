@@ -66,11 +66,10 @@ public class CompanyResourceImplTest {
         testService.deleteComputer(computers.get(computers.size() - 1).getId());
         assertEquals(computerNumber, testService.getAllComputer().size() + 1);
     }
-
 }
 
 class TestService {
-    private static final String SERVER_ROOT_URI = "http://localhost:8080/webservice/rest/xml";
+    private static final String SERVER_ROOT_URI = "http://localhost:18080/webservice/rest/xml";
     private static final String SERVER_ROOT_COMPANY = SERVER_ROOT_URI + "/company";
     private static final String SERVER_ROOT_COMPUTER = SERVER_ROOT_URI + "/computer";
 

@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Service
 public class ConsoleServiceImpl implements ConsoleService {
-    private static final String SERVER_ROOT_URI = "http://localhost:8080/webservice/rest/xml";
+    private static final String SERVER_ROOT_URI = "http://localhost:18080/webservice/rest/xml";
     private static final String SERVER_ROOT_COMPANY = SERVER_ROOT_URI + "/company";
     private static final String SERVER_ROOT_COMPUTER = SERVER_ROOT_URI + "/computer";
 
