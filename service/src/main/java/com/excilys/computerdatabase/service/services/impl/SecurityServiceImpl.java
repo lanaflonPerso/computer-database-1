@@ -11,11 +11,13 @@ import com.excilys.computerdatabase.service.validation.ServiceValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -102,6 +104,9 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
         UserDetail userDetail = userDetailDao.getByUsername(username);
+        if (userDetail == null) {
+            userDetail = new UserDetail("Not a user", "fake password", new HashSet<>());
+        }
         return userDetailsMapper.mapFromModel(userDetail);
     }
 }
