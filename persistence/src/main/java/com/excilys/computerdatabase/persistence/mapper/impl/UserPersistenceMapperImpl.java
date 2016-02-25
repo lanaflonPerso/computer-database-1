@@ -3,8 +3,8 @@ package com.excilys.computerdatabase.persistence.mapper.impl;
 import com.excilys.computerdatabase.model.Role;
 import com.excilys.computerdatabase.model.UserDetail;
 import com.excilys.computerdatabase.persistence.mapper.UserPersistenceMapper;
-import com.excilys.computerdatabase.persistence.model.User;
-import com.excilys.computerdatabase.persistence.model.UserRole;
+import com.excilys.computerdatabase.model.User;
+import com.excilys.computerdatabase.model.UserRole;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;

@@ -3,7 +3,7 @@ package com.excilys.computerdatabase.persistence.dao.impl;
 import com.excilys.computerdatabase.model.UserDetail;
 import com.excilys.computerdatabase.persistence.dao.UserDetailDao;
 import com.excilys.computerdatabase.persistence.mapper.UserPersistenceMapper;
-import com.excilys.computerdatabase.persistence.model.User;
+import com.excilys.computerdatabase.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
