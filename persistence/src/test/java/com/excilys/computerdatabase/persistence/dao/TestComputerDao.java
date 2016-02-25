@@ -16,7 +16,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -97,7 +100,7 @@ public class TestComputerDao extends AbstractTestDao {
     @Test
     public void testListComputer() {
         List<Computer> computers = computerDao.getAll(new SortCriteria());
-        assertEquals(computers.get(0), new Computer(1L, "MacBook Pro 15.4 inch", null, null, new Company(1L, "Apple Inc.")));
+        assertEquals(computers.get(0), new Computer(1L, "MacBook Pro 15.4 inch", LocalDateTime.of(LocalDate.of(1991, Month.JANUARY, 1), LocalTime.MIN), null, new Company(1L, "Apple Inc.")));
         assertEquals(computers.size(), 5);
     }
 
@@ -109,7 +112,6 @@ public class TestComputerDao extends AbstractTestDao {
             assertTrue(previous.getName().compareTo(current.getName()) <= 0);
             previous = current;
         }
-
     }
 
     @Test
