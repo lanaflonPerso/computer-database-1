@@ -37,7 +37,7 @@
         <sonar-maven-plugin.version>2.7</sonar-maven-plugin.version>
 
         <cargo-servlet-port>18080</cargo-servlet-port>
-        <cargo-tomcat-ajp-port>8009</cargo-tomcat-ajp-port>
+        <cargo-tomcat-ajp-port>18009</cargo-tomcat-ajp-port>
         <cargo-maven2-version>1.4.16</cargo-maven2-version>
         <!-- SQL -->
         <mysql-connector-version>5.1.6</mysql-connector-version>

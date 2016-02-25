@@ -11,27 +11,7 @@
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top navbar-default computer-color" role="navigation">
 			<div class="container-fluid">
-			    <div class="col-md-5 navbar-header ">	
-			     	<a class="navbar-brand white-color" href="/webapp"> Application computer database</a>
-			    </div>
-			    <div class="col-md-4 navbar-header">
-				    <security:authorize access="isAuthenticated()">
-				      	<ul class="nav navbar-nav">
-					        <li class="dropdown">
-						          <a href="#" class="dropdown-toggle white-color computer-color" data-toggle="dropdown" role="button" aria-expanded="false">Selection <span class="caret"></span></a>
-						          <ul class="dropdown-menu dropdown-menu-right" role="menu">
-						          		<security:authorize access="hasRole('ROLE_SUPER_ADMIN')">
-							            	<li><a class="btn-warning btn-user" href="/webapp/user/view/dashboard"><spring:message code="user" /></a></li>
-							            </security:authorize>
-							            <li><a class="btn-warning btn-computer " href="/webapp/computer/view/dashboard"><spring:message code="computer" /></a></li>
-						          		<security:authorize access="hasRole('ROLE_ADMIN')">
-							            	<li><a class="btn-warning btn-company" href="/webapp/company/view/dashboard"><spring:message code="company" /></a></li>
-							            </security:authorize>
-						          </ul>
-					        </li>
-				      	</ul>
-			      	</security:authorize>
-				</div>	 
+			    <mylib:menuSelection colorMenu="computer-color"/>
 			    <div class="col-md-2 navbar-header">
 					<ul class="nav navbar-nav">
 						<li class="dropdown">
@@ -42,14 +22,14 @@
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="?language=en&computerId=${page.getComputerDto().getId()}"><img src="/webapp/fonts/flags/uk.png" alt="uk flag" style="width:25px;height:20px"> English</a></li>
-							<li><a href="?language=fr&computerId=${page.getComputerDto().getId()}"><img src="/webapp/fonts/flags/fr.png" alt="fr flag" style="width:25px;height:20px"> Français</a></li>
+							<li><a href="?language=en&computerId=${page.getComputerDto().getId()}"><img src="${pageContext.request.contextPath}/fonts/flags/uk.png" alt="uk flag" style="width:25px;height:20px"> English</a></li>
+							<li><a href="?language=fr&computerId=${page.getComputerDto().getId()}"><img src="${pageContext.request.contextPath}/fonts/flags/fr.png" alt="fr flag" style="width:25px;height:20px"> Français</a></li>
 						</ul></li>
 					</ul>
 			    </div>    
 			    <security:authorize access="isAuthenticated()">
 				    <div class="col-md-1 navbar-header">
-						<a class="white-color navbar-brand btn-logout" href="/webapp/global/view/logout"><i class="fa fa-power-off"></i> <spring:message code="log.out"/></a>
+						<a class="white-color navbar-brand btn-logout" href="${pageContext.request.contextPath}/global/view/logout"><i class="fa fa-power-off"></i> <spring:message code="log.out"/></a>
 				    </div> 
 			    </security:authorize>
 			</div>
@@ -102,7 +82,7 @@
 							<div class="actions pull-right">
 								<input id="editButton" type="submit" value="<spring:message	code="button.edit" />" class="btn btn-primary"> 
 								<spring:message code="or" />
-								<a href="/webapp/computer/view/dashboard" class="btn btn-default"><spring:message code="button.cancel" /></a>
+								<a href="${pageContext.request.contextPath}/computer/view/dashboard" class="btn btn-default"><spring:message code="button.cancel" /></a>
 							</div>
 						</form:form>
 					</div>
