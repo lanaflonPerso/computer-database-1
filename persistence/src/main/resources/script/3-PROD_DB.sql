@@ -1,37 +1,38 @@
-drop schema if exists `computer-database-db-test-2`;
-create schema if not exists `computer-database-db-test-2`;
-use `computer-database-db-test-2`;
+drop schema if exists `computer-database-db`;
+create schema if not exists `computer-database-db`;
+use `computer-database-db`;
 
 drop table if exists computer;
 drop table if exists company;
-drop table if exists users;
 drop table if exists authorities;
+drop table if exists users;
 
 create table company (
-id                        bigint not null auto_increment,
-name                      varchar(255),
-constraint pk_company primary key (id))
+  id                        bigint not null auto_increment,
+  name                      varchar(255),
+  constraint pk_company primary key (id))
 ;
 
 create table computer (
-id                        bigint not null auto_increment,
-name                      varchar(255),
-introduced                timestamp NULL,
-discontinued              timestamp NULL,
-company_id                bigint default NULL,
-constraint pk_computer primary key (id))
+  id                        bigint not null auto_increment,
+  name                      varchar(255),
+  introduced                timestamp NULL,
+  discontinued              timestamp NULL,
+  company_id                bigint default NULL,
+  constraint pk_computer primary key (id))
 ;
 
 create table users(
-username                  varchar(100) not null primary key,
-password                  varchar(100) not null,
-enabled                   boolean not null DEFAULT TRUE );
+  username                  varchar(100) not null primary key,
+  password                  varchar(100) not null)
+;
 
 create table authorities (
-user_role_id              bigint not null auto_increment,
-username                  varchar(100) not null ,
-role                      varchar(100) not null,
-constraint                pk_authorities primary key (user_role_id));
+  user_role_id              bigint not null auto_increment,
+  username                  varchar(100) not null ,
+  role                      varchar(100) not null,
+  constraint                pk_authorities primary key (user_role_id))
+;
 
 alter table computer add constraint fk_computer_company_1 foreign key (company_id) references company (id) on delete restrict on update restrict;
 create index ix_computer_company_1 on computer (company_id);
@@ -39,14 +40,15 @@ create index ix_computer_company_1 on computer (company_id);
 alter table authorities add constraint fk_authorities_users foreign key(username) references users(username) on delete CASCADE on update restrict;
 create index ix_role_username on authorities (username,role);
 
-#INSERT INTO users(username,password,enabled) VALUES ('admin','$2a$10$cwXZKDV44c3cFl0ac0QU0OyIMMkSuUC9gEifqDuwzmc8QSAVbhatS', TRUE);
-#INSERT INTO users(username,password,enabled) VALUES ('user','$2a$10$H0eNB7HcZI0V049EetfGxu4hK07vZLCkaZkcQOv6/aZCGLI7TFSQW', TRUE);
-INSERT INTO users(username,password,enabled) VALUES ('all','$2a$10$UA.m4MEeB5dFfwtZZO.0B.a.dLJuzuB05gclWOjS/a9UiZ8dZI/2S', TRUE);
 
 
-#INSERT INTO authorities (username, role) VALUES ('admin', 'ROLE_USER');
-#INSERT INTO authorities (username, role) VALUES ('admin', 'ROLE_ADMIN');
-#INSERT INTO authorities (username, role) VALUES ('user', 'ROLE_USER');
+INSERT INTO users(username,password) VALUES ('admin','$2a$10$cwXZKDV44c3cFl0ac0QU0OyIMMkSuUC9gEifqDuwzmc8QSAVbhatS');
+INSERT INTO users(username,password) VALUES ('user','$2a$10$H0eNB7HcZI0V049EetfGxu4hK07vZLCkaZkcQOv6/aZCGLI7TFSQW');
+INSERT INTO users(username,password) VALUES ('all','$2a$10$UA.m4MEeB5dFfwtZZO.0B.a.dLJuzuB05gclWOjS/a9UiZ8dZI/2S');
+
+INSERT INTO authorities (username, role) VALUES ('admin', 'ROLE_USER');
+INSERT INTO authorities (username, role) VALUES ('admin', 'ROLE_ADMIN');
+INSERT INTO authorities (username, role) VALUES ('user', 'ROLE_USER');
 INSERT INTO authorities (username, role) VALUES ('all', 'ROLE_USER');
 INSERT INTO authorities (username, role) VALUES ('all', 'ROLE_ADMIN');
 INSERT INTO authorities (username, role) VALUES ('all', 'ROLE_SUPER_ADMIN');
@@ -69,7 +71,7 @@ insert into company (id,name) values ( 15,'Canon');
 insert into company (id,name) values ( 16,'Nokia');
 insert into company (id,name) values ( 17,'Sony');
 insert into company (id,name) values ( 18,'OQO');
-insert into company (id,name) values ( 19,'NeXT');    
+insert into company (id,name) values ( 19,'NeXT');
 insert into company (id,name) values ( 20,'Atari');
 insert into company (id,name) values ( 22,'Acorn computer');
 insert into company (id,name) values ( 23,'Timex Sinclair');
@@ -81,7 +83,7 @@ insert into company (id,name) values ( 28,'Zemmix');
 insert into company (id,name) values ( 29,'ACVS');
 insert into company (id,name) values ( 30,'Sanyo');
 insert into company (id,name) values ( 31,'Cray');
-insert into company (id,name) values ( 32,'Evans & Sutherland');    
+insert into company (id,name) values ( 32,'Evans & Sutherland');
 insert into company (id,name) values ( 33,'E.S.R. Inc.');
 insert into company (id,name) values ( 34,'OMRON');
 insert into company (id,name) values ( 35,'BBN Technologies');
@@ -93,7 +95,6 @@ insert into company (id,name) values ( 40,'Texas Instruments');
 insert into company (id,name) values ( 41,'HTC Corporation');
 insert into company (id,name) values ( 42,'Research In Motion');
 insert into company (id,name) values ( 43,'Samsung Electronics');
-
 
 insert into computer (id,name,introduced,discontinued,company_id) values (  1,'MacBook Pro 15.4 inch',null,null,1);
 insert into computer (id,name,introduced,discontinued,company_id) values (  2,'CM-2a',null,null,2);
@@ -526,3 +527,146 @@ insert into computer (id,name,introduced,discontinued,company_id) values (428,'T
 insert into computer (id,name,introduced,discontinued,company_id) values (429,'Komputer 2086',null,null,null);
 insert into computer (id,name,introduced,discontinued,company_id) values (430,'Galaksija',null,null,null);
 insert into computer (id,name,introduced,discontinued,company_id) values (431,'Vector-06C',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (432,'Elektronika BK',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (433,'Sun386i',null,null,39);
+insert into computer (id,name,introduced,discontinued,company_id) values (434,'Xerox Daybreak','1985-01-01','1989-01-01',null);
+insert into computer (id,name,introduced,discontinued,company_id) values (435,'Xerox NoteTaker',null,null,26);
+insert into computer (id,name,introduced,discontinued,company_id) values (436,'D4a','1965-01-01',null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (437,'LGP-30',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (438,'LGP-21',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (439,'ASUS Eee PC 900','2008-05-01',null,37);
+insert into computer (id,name,introduced,discontinued,company_id) values (440,'Atari TT030',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (441,'Bi Am ZX-Spectrum 48/64',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (442,'Bi Am ZX-Spectrum 128',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (443,'PlayStation Portable',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (444,'MSI Wind Netbook',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (445,'Sharp Mebius NJ70A','2009-04-21',null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (446,'HTC Snap',null,null,41);
+insert into computer (id,name,introduced,discontinued,company_id) values (447,'Commodore Educator 64',null,null,6);
+insert into computer (id,name,introduced,discontinued,company_id) values (448,'Amiga 1500',null,null,6);
+insert into computer (id,name,introduced,discontinued,company_id) values (449,'Commodore 65',null,null,6);
+insert into computer (id,name,introduced,discontinued,company_id) values (450,'Commodore 16',null,null,6);
+insert into computer (id,name,introduced,discontinued,company_id) values (451,'Commodore CBM-II',null,null,6);
+insert into computer (id,name,introduced,discontinued,company_id) values (452,'Commodore Plus/4',null,null,6);
+insert into computer (id,name,introduced,discontinued,company_id) values (453,'Commodore LCD',null,null,6);
+insert into computer (id,name,introduced,discontinued,company_id) values (454,'Commodore MAX Machine',null,null,6);
+insert into computer (id,name,introduced,discontinued,company_id) values (455,'Aster CT-80',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (456,'Test','2009-01-01','2009-01-01',null);
+insert into computer (id,name,introduced,discontinued,company_id) values (457,'MSI GX723',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (458,'Eee PC 1000HV','2009-05-22',null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (459,'VTech Laser 200','1983-01-01',null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (460,'CrunchPad',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (461,'Neo Geo','1990-01-01',null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (462,'Sega Mega Drive',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (463,'Sega Master System',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (464,'TurboGrafx-16',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (465,'Sun-3',null,null,39);
+insert into computer (id,name,introduced,discontinued,company_id) values (466,'Pleiades',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (467,'IBM Sequoia',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (468,'Inves Spectrum 48k plus',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (469,'iPhone 3G',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (470,'iPhone 3GS',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (471,'Beagle Board',null,null,40);
+insert into computer (id,name,introduced,discontinued,company_id) values (472,'HP nPar',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (473,'MacBook Family',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (474,'Reservisor',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (475,'BladeSystem',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (476,'lenovo thinkpad t60p',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (477,'lenovo thinkpad x200',null,null,36);
+insert into computer (id,name,introduced,discontinued,company_id) values (478,'lenovo thinkpad t60',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (479,'lenovo thinkpad w700',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (480,'lenovo thinkpad t41',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (481,'lenovo thinkpad z61p',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (482,'lenovo thinkpad x61s',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (483,'lenovo thinkpad t43',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (484,'lenovo thinkpad r400',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (485,'lenovo thinkpad x60s',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (486,'lenovo thinkpad x301',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (487,'lenovo thinkpad t42',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (488,'lenovo thinkpad r61',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (489,'lenovo thinkpad w500',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (490,'lenovo thinkpad sl400',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (491,'lenovo thinkpad x40',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (492,'lenovo thinkpad x200 tablet',null,null,36);
+insert into computer (id,name,introduced,discontinued,company_id) values (493,'lenovo thinkpad t400s',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (494,'Nokia N900','2009-10-01',null,16);
+insert into computer (id,name,introduced,discontinued,company_id) values (495,'Internet Tablet',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (496,'Meiko Computing Surface','1986-01-01','1993-01-01',null);
+insert into computer (id,name,introduced,discontinued,company_id) values (497,'CS-2',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (498,'IBM 701','1952-01-01',null,13);
+insert into computer (id,name,introduced,discontinued,company_id) values (499,'IBM 5100','1975-01-01',null,13);
+insert into computer (id,name,introduced,discontinued,company_id) values (500,'AN/FSQ-7','1958-01-01',null,13);
+insert into computer (id,name,introduced,discontinued,company_id) values (501,'AN/FSQ-32','1960-01-01',null,13);
+insert into computer (id,name,introduced,discontinued,company_id) values (502,'IBM CPC','1949-01-01',null,13);
+insert into computer (id,name,introduced,discontinued,company_id) values (503,'System/34','1978-01-01','1983-01-01',13);
+insert into computer (id,name,introduced,discontinued,company_id) values (504,'System/32','1975-01-01',null,13);
+insert into computer (id,name,introduced,discontinued,company_id) values (505,'System/3','1969-01-01','1985-01-01',13);
+insert into computer (id,name,introduced,discontinued,company_id) values (506,'IBM 305','1956-01-01',null,13);
+insert into computer (id,name,introduced,discontinued,company_id) values (507,'English Electric DEUCE',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (508,'CER-203',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (509,'CER-22',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (510,'Kentucky Linux Athlon Testbed',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (511,'QNAP TS-101',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (512,'iPad','2010-01-01','2011-03-02',1);
+insert into computer (id,name,introduced,discontinued,company_id) values (513,'iPhone 2G',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (514,'Inslaw',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (515,'WePad','2010-07-01',null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (516,'MacBook Parts',null,null,1);
+insert into computer (id,name,introduced,discontinued,company_id) values (517,'MacBook 13-inch Core 2 Duo 2.13GHz (MC240LL/A) DDR2 Model',null,null,1);
+insert into computer (id,name,introduced,discontinued,company_id) values (518,'MacBook 13-inch Core 2 Duo 2.13GHz (MC240T/A) DDR2 Model',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (519,'MacBook 13-inch Core 2 Duo 2.13GHz (MC240X/A) DDR2 Model',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (520,'MacBook 13-inch Core 2 Duo 2.26GHz (Unibody MC207LL/A) DDR3 Model',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (521,'MC240LL/A',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (522,'D.K.COMMUNICATION',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (523,'iPhone 4',null,null,1);
+insert into computer (id,name,introduced,discontinued,company_id) values (524,'Nintendo 3DS','2010-03-23',null,24);
+insert into computer (id,name,introduced,discontinued,company_id) values (525,'ASUS Eee PC 1005PE','2010-01-01',null,37);
+insert into computer (id,name,introduced,discontinued,company_id) values (526,'National Law Enforcement System',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (527,'BlackBerry PlayBook',null,null,42);
+insert into computer (id,name,introduced,discontinued,company_id) values (528,'Barnes & Noble nook','2009-10-20',null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (529,'SAM Coupé',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (530,'HTC Dream','2008-10-22',null,41);
+insert into computer (id,name,introduced,discontinued,company_id) values (531,'Samsung Galaxy Tab','2010-09-02',null,43);
+insert into computer (id,name,introduced,discontinued,company_id) values (532,'BlackBerry PlayBook','2010-09-27',null,42);
+insert into computer (id,name,introduced,discontinued,company_id) values (533,'Tianhe-I',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (534,'Kno',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (535,'ThinkPad 701 C',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (536,'ThinkPad 340 CSE',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (537,'ThinkPad 755 CX',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (538,'ThinkPad 755 CE',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (539,'ThinkPad 370 C',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (540,'Coleco Adam','1983-01-01',null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (541,'Nebulae',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (542,'Alex eReader',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (543,'Acer Iconia',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (544,'Archos 101',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (545,'Fujitsu Lifebook T900',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (546,'Motorola Xoom',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (547,'ViewSonic G Tablet',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (548,'DEC Professional','1982-01-01',null,10);
+insert into computer (id,name,introduced,discontinued,company_id) values (549,'DEC Multia','1994-11-07',null,10);
+insert into computer (id,name,introduced,discontinued,company_id) values (550,'DEC Firefly',null,null,10);
+insert into computer (id,name,introduced,discontinued,company_id) values (551,'DEC 3000 AXP',null,null,10);
+insert into computer (id,name,introduced,discontinued,company_id) values (552,'DEC 2000 AXP','1993-05-25',null,10);
+insert into computer (id,name,introduced,discontinued,company_id) values (553,'DEC 4000 AXP','1992-11-10',null,10);
+insert into computer (id,name,introduced,discontinued,company_id) values (554,'DEC 7000/10000 AXP','1992-11-10',null,10);
+insert into computer (id,name,introduced,discontinued,company_id) values (555,'DEC Professional 350',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (556,'DEC Rainbow 100',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (557,'DEC Professional 325',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (558,'DECmate II',null,null,10);
+insert into computer (id,name,introduced,discontinued,company_id) values (559,'DECmate',null,null,10);
+insert into computer (id,name,introduced,discontinued,company_id) values (560,'DECsystem',null,null,10);
+insert into computer (id,name,introduced,discontinued,company_id) values (561,'NetApp Filer',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (562,'DEC GT40',null,null,10);
+insert into computer (id,name,introduced,discontinued,company_id) values (563,'ecoATM',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (564,'MindWave BrainCubed Education Bundle',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (565,'PalmPilot',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (566,'Upcoming iPhone 5',null,null,1);
+insert into computer (id,name,introduced,discontinued,company_id) values (567,'Dell Inspiron 560 Desktop Computer ',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (568,'IPad 2',null,null,1);
+insert into computer (id,name,introduced,discontinued,company_id) values (569,'HP TouchPad','2011-02-09',null,27);
+insert into computer (id,name,introduced,discontinued,company_id) values (570,'HP Veer','2011-02-09',null,27);
+insert into computer (id,name,introduced,discontinued,company_id) values (571,'Lenovo Thinkpad Edge 11',null,null,36);
+insert into computer (id,name,introduced,discontinued,company_id) values (572,'Dell Vostro',null,null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (573,'Gateway LT3103U','2008-01-01',null,null);
+insert into computer (id,name,introduced,discontinued,company_id) values (574,'iPhone 4S','2011-10-14',null,1);

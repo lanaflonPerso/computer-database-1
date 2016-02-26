@@ -46,12 +46,8 @@ public class UserDaoImpl implements UserDetailDao {
     @Override
     public UserDetail getByUsername(String userName) {
         LOGGER.info("getByName : {}", userName);
-        List<User> list = sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq("username", userName)).list();
-        if (list.size() != 1) {
-            return null;
-        } else {
-            return userPersistenceMapper.mapToModel(list.get(0));
-        }
+        User user = (User) sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq("username", userName)).uniqueResult();
+        return userPersistenceMapper.mapToModel(user);
     }
 
     @Override
@@ -66,7 +62,7 @@ public class UserDaoImpl implements UserDetailDao {
         LOGGER.info("delete : {}", userName);
         Session session = sessionFactory.getCurrentSession();
         UserDetail userDetail = getByUsername(userName);
-        User user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", userName)).list().get(0);
+        User user = (User) session.createCriteria(User.class).add(Restrictions.eq("username", userName)).uniqueResult();
         if (userDetail != null) {
             session.delete(user);
         } else {

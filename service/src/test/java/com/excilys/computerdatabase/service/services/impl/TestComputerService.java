@@ -28,7 +28,6 @@ import static org.junit.Assert.fail;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/test-service-application-context.xml"})
 public class TestComputerService {
-
     private static final Long COMPUTER_ID = 45L;
     private static final Long NUMBER_OF_ELEMENT = 101L;
     private final Computer computer1 = new Computer(1L, "myName", LocalDateTime.now(), LocalDateTime.now(), new Company(3L, "myCompany"));

@@ -5,7 +5,7 @@ package com.excilys.computerdatabase.model;
  * The Class Rule.
  */
 public class Rule {
-    private String userName;
+    private String username;
     private Role role;
     private boolean authorized;
 
@@ -19,22 +19,22 @@ public class Rule {
     /**
      * Instantiates a new rule.
      *
-     * @param userName   the user name
+     * @param username   the user name
      * @param role       the role
      * @param authorized the authorized
      */
-    public Rule(String userName, Role role, boolean authorized) {
-        this.userName = userName;
+    public Rule(String username, Role role, boolean authorized) {
+        this.username = username;
         this.role = role;
         this.authorized = authorized;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Role getRole() {
@@ -59,7 +59,7 @@ public class Rule {
         int result = 1;
         result = prime * result + (authorized ? 1231 : 1237);
         result = prime * result + ((role == null) ? 0 : role.hashCode());
-        result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+        result = prime * result + ((username == null) ? 0 : username.hashCode());
         return result;
     }
 
@@ -76,16 +76,16 @@ public class Rule {
             return false;
         if (role != other.role)
             return false;
-        if (userName == null) {
-            if (other.userName != null)
+        if (username == null) {
+            if (other.username != null)
                 return false;
-        } else if (!userName.equals(other.userName))
+        } else if (!username.equals(other.username))
             return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "Rule [userName=" + userName + ", role=" + role + ", authorized=" + authorized + "]";
+        return "Rule [username=" + username + ", role=" + role + ", authorized=" + authorized + "]";
     }
 }

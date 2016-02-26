@@ -133,8 +133,7 @@ public class ComputerDaoImpl implements ComputerDao {
         Session session = sessionFactory.getCurrentSession();
         return (Long) session.createCriteria(Computer.class)
                 .setProjection(Projections.rowCount())
-                .list()
-                .get(0);
+                .uniqueResult();
     }
 
     @Override
@@ -150,7 +149,6 @@ public class ComputerDaoImpl implements ComputerDao {
         if (!Validator.isSortCriteriaCorrect(sortCriteria)) {
             throw new DaoException(Validator.INVALID_SORT_CRITERIA);
         }
-
 
         Order order;
         if (sortCriteria.getSortDirection() == SortDirection.ASC) {
@@ -202,7 +200,6 @@ public class ComputerDaoImpl implements ComputerDao {
                 .createCriteria("company", "company", JoinType.LEFT_OUTER_JOIN)
                 .add(orExp)
                 .setProjection(Projections.rowCount())
-                .list()
-                .get(0);
+                .uniqueResult();
     }
 }

@@ -23,8 +23,6 @@ public class User implements Serializable {
     private String username;
     @Column(name = "password", nullable = false, length = 100)
     private String password;
-    @Column(name = "enabled", nullable = false)
-    private boolean enabled;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<UserRole> userRole = new HashSet<>(0);
 
@@ -40,12 +38,10 @@ public class User implements Serializable {
      *
      * @param username the username
      * @param password the password
-     * @param enabled  the enabled
      */
-    public User(String username, String password, boolean enabled) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.enabled = enabled;
     }
 
     /**
@@ -59,7 +55,6 @@ public class User implements Serializable {
     public User(String username, String password, boolean enabled, Set<UserRole> userRole) {
         this.username = username;
         this.password = password;
-        this.enabled = enabled;
         this.userRole = userRole;
     }
 
@@ -100,24 +95,6 @@ public class User implements Serializable {
     }
 
     /**
-     * Checks if is enabled.
-     *
-     * @return true, if is enabled
-     */
-    public boolean isEnabled() {
-        return this.enabled;
-    }
-
-    /**
-     * Sets the enabled.
-     *
-     * @param enabled the new enabled
-     */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    /**
      * Gets the user role.
      *
      * @return the user role
@@ -137,6 +114,6 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", userRole=" + userRole + "]";
+        return "User [username=" + username + ", password=" + password + ", userRole=" + userRole + "]";
     }
 }

@@ -6,7 +6,7 @@
     <form:form modelAttribute="userDetailDto" id="addUserForm" action="/webapp/user/crud/add" method="POST">
 	    <div>
 	    	<spring:message code="username" var="_username"/>
-	        <form:input path="userName" class="form-control" type="text" id="username" value="" placeholder="${_username}"/>
+	        <form:input path="username" class="form-control" type="text" id="username" value="" placeholder="${_username}"/>
 	    </div>
 	    <div>
 	    	<spring:message code="password" var="_password"/>

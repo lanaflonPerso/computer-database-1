@@ -20,7 +20,6 @@ public class UserPersistenceMapperImpl implements UserPersistenceMapper {
     @Override
     public User mapFromModel(UserDetail model) {
         User user = new User();
-        user.setEnabled(true);
         user.setUsername(model.getUserName());
         user.setPassword(model.getPassword());
         Set<UserRole> set = model.getRoles().stream().map(role -> new UserRole(user, role.toString())).collect(Collectors.toSet());

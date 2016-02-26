@@ -6,7 +6,7 @@
 <div class="popup">
     <form:form modelAttribute="userDetailDto" id="addUserForm" action="/webapp/user/crud/resetPassword" method="POST">
 	    <div>
-	        <form:input id="usernameResetPassword" path="userName" class="hidden form-control" type="text" value=""/>
+	        <form:input id="usernameResetPassword" path="username" class="hidden form-control" type="text" value=""/>
 	    </div>
 	    <div>
 	    	<spring:message code="password" var="_password"/>

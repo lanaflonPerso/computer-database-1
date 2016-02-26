@@ -11,14 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.sql.DataSource;
-import java.io.FileInputStream;
 
 /**
  * @author Vincent Galloy
  *         Created by Vincent Galloy on 17/02/16.
  */
 public abstract class AbstractTestDao {
-
     public static final Logger LOGGER = LoggerFactory.getLogger(AbstractTestDao.class);
 
     public void setUpDatabase(DataSource dataSource) {
@@ -26,7 +24,7 @@ public abstract class AbstractTestDao {
             IDatabaseConnection dbc = new DatabaseConnection(dataSource.getConnection());
             DatabaseConfig config = dbc.getConfig();
             config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
-            IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(new FileInputStream("src/test/resources/database/fakeDatabase.xml"));
+            IDataSet dataSet = new FlatXmlDataSetBuilder().setColumnSensing(true).build(AbstractTestDao.class.getClassLoader().getResourceAsStream("fakeDatabase.xml"));
             DatabaseOperation.CLEAN_INSERT.execute(dbc, dataSet);
         } catch (Exception e) {
             LOGGER.error("{}", e.getMessage(), e);

@@ -1,3 +1,14 @@
+INSERT INTO users(username,password) VALUES ('admin','$2a$10$cwXZKDV44c3cFl0ac0QU0OyIMMkSuUC9gEifqDuwzmc8QSAVbhatS');
+INSERT INTO users(username,password) VALUES ('user','$2a$10$H0eNB7HcZI0V049EetfGxu4hK07vZLCkaZkcQOv6/aZCGLI7TFSQW');
+INSERT INTO users(username,password) VALUES ('all','$2a$10$UA.m4MEeB5dFfwtZZO.0B.a.dLJuzuB05gclWOjS/a9UiZ8dZI/2S');
+
+INSERT INTO authorities (username, role) VALUES ('admin', 'ROLE_USER');
+INSERT INTO authorities (username, role) VALUES ('admin', 'ROLE_ADMIN');
+INSERT INTO authorities (username, role) VALUES ('user', 'ROLE_USER');
+INSERT INTO authorities (username, role) VALUES ('all', 'ROLE_USER');
+INSERT INTO authorities (username, role) VALUES ('all', 'ROLE_ADMIN');
+INSERT INTO authorities (username, role) VALUES ('all', 'ROLE_SUPER_ADMIN');
+
 insert into company (id,name) values (  1,'Apple Inc.');
 insert into company (id,name) values (  2,'Thinking Machines');
 insert into company (id,name) values (  3,'RCA');

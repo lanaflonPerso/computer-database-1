@@ -27,7 +27,7 @@ public class RuleDtoMapperImpl implements RuleDtoMapper {
         Rule rule = new Rule();
         rule.setAuthorized(dto.isAuthorized());
         rule.setRole(Role.build(dto.getRole()));
-        rule.setUserName(dto.getUserName());
+        rule.setUsername(dto.getUserName());
         return rule;
     }
 }

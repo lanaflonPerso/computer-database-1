@@ -65,8 +65,7 @@ public class CompanyDaoImpl implements CompanyDao {
         Session session = sessionFactory.getCurrentSession();
         return (Long) session.createCriteria(Company.class)
                 .setProjection(Projections.rowCount())
-                .list()
-                .get(0);
+                .uniqueResult();
     }
 
     @Override

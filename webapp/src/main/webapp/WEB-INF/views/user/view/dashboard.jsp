@@ -54,7 +54,7 @@
 								<td>
 									<c:set var="name" value="${\"ruleForm\"}${page.getUserList().get(i).getUserName()}0" />
 									<form:form modelAttribute="ruleDto" id="${name}" action="/webapp/user/crud/edit" method="POST">
-										<form:input path="userName" class="hidden" value="${page.getUserList().get(i).getUserName()}"/>
+										<form:input path="username" class="hidden" value="${page.getUserList().get(i).getUserName()}"/>
 										<form:input path="role" class="hidden" value="ROLE_SUPER_ADMIN"/>
 										<c:if test="${page.getUserList().get(i).getRoles().contains(\"ROLE_SUPER_ADMIN\")==true}">
 											<form:checkbox path="authorized" checked="checked" onchange="${name}.submit()"/>
@@ -67,7 +67,7 @@
 								<td>
 									<c:set var="name" value="${\"ruleForm\"}${page.getUserList().get(i).getUserName()}1" />
 									<form:form modelAttribute="ruleDto" id="${name}" action="/webapp/user/crud/edit" method="POST">
-										<form:input path="userName" class="hidden" value="${page.getUserList().get(i).getUserName()}"/>
+										<form:input path="username" class="hidden" value="${page.getUserList().get(i).getUserName()}"/>
 										<form:input path="role" class="hidden" value="ROLE_ADMIN"/>
 										<c:if test="${page.getUserList().get(i).getRoles().contains(\"ROLE_ADMIN\")==true}">
 											<form:checkbox path="authorized" checked="checked" onchange="${name}.submit()"/>
@@ -80,7 +80,7 @@
 								<td>
 									<c:set var="name" value="${\"ruleForm\"}${page.getUserList().get(i).getUserName()}2" />
 									<form:form modelAttribute="ruleDto" id="${name}" action="/webapp/user/crud/edit" method="POST">
-										<form:input path="userName" class="hidden" value="${page.getUserList().get(i).getUserName()}"/>
+										<form:input path="username" class="hidden" value="${page.getUserList().get(i).getUserName()}"/>
 										<form:input path="role" class="hidden" value="ROLE_USER"/>
 										<c:if test="${page.getUserList().get(i).getRoles().contains(\"ROLE_USER\")==true}">
 											<form:checkbox path="authorized" checked="checked" onchange="${name}.submit()"/>

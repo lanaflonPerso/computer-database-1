@@ -22,8 +22,15 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Table(name = "authorities", uniqueConstraints = @UniqueConstraint(columnNames = {"role", "username"}))
 public class UserRole implements Serializable {
     private static final long serialVersionUID = -2736938120189054963L;
+
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "user_role_id", unique = true, nullable = false)
     private Integer userRoleId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "username", nullable = false)
     private User user;
+    @Column(name = "role", nullable = false, length = 100)
     private String role;
 
     /**
@@ -43,10 +50,6 @@ public class UserRole implements Serializable {
         this.user = user;
         this.role = role;
     }
-
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "user_role_id", unique = true, nullable = false)
     public Integer getUserRoleId() {
         return this.userRoleId;
     }
@@ -54,9 +57,6 @@ public class UserRole implements Serializable {
     public void setUserRoleId(Integer userRoleId) {
         this.userRoleId = userRoleId;
     }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "username", nullable = false)
     public User getUser() {
         return this.user;
     }
@@ -65,7 +65,6 @@ public class UserRole implements Serializable {
         this.user = user;
     }
 
-    @Column(name = "role", nullable = false, length = 100)
     public String getRole() {
         return this.role;
     }

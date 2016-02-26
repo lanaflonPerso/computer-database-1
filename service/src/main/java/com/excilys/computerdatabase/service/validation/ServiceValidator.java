@@ -50,7 +50,7 @@ public interface ServiceValidator {
     static boolean isRuleCorrect(Rule rule) {
         if (rule == null) {
             return false;
-        } else if (!isUserNameCorrect(rule.getUserName())) {
+        } else if (!isUserNameCorrect(rule.getUsername())) {
             return false;
         } else if (rule.getRole() == null || Role.NONE.equals(rule.getRole())) {
             return false;

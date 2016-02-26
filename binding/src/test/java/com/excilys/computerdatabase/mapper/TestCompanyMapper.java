@@ -25,14 +25,14 @@ public class TestCompanyMapper {
 
     @Test
     public void testMapperModelToDtoOk() {
-        Company company = new Company(new Long(4), "Company test");
+        Company company = new Company(4L, "Company test");
         CompanyDto computerDto = companyDtoMapper.mapFromModel(company);
         assertEquals(computerDto.getId(), "4");
         assertEquals(computerDto.getName(), "Company test");
     }
 
     @Test
-    public void testMapperModelToDtoNullAttributs() {
+    public void testMapperModelToDtoNullAttributes() {
         Company company = new Company(null, null);
         CompanyDto computerDto = companyDtoMapper.mapFromModel(company);
         assertEquals(null, computerDto.getId());
@@ -46,8 +46,8 @@ public class TestCompanyMapper {
 
     @Test
     public void testMapperListModelToDtoOk() {
-        Company company = new Company(new Long(4), "Company test");
-        List<Company> companies = new ArrayList<Company>();
+        Company company = new Company(4L, "Company test");
+        List<Company> companies = new ArrayList<>();
         companies.add(company);
         companies.add(new Company());
 
@@ -67,7 +67,7 @@ public class TestCompanyMapper {
 
     @Test
     public void testMapperDtoToModelOk() {
-        Company company2 = new Company(new Long(4), "Company test");
+        Company company2 = new Company(4L, "Company test");
         Company company = companyDtoMapper.mapToModel(new CompanyDto("4", "Company test"));
         assertEquals(company.hashCode(), company2.hashCode());
         assertEquals(company, company2);

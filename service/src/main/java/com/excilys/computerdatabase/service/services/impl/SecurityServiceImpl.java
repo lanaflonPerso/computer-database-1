@@ -90,7 +90,7 @@ public class SecurityServiceImpl implements SecurityService, UserDetailsService 
         if (!ServiceValidator.isRuleCorrect(rule)) {
             throw new ServiceException(ServiceValidator.INVALID_RULE);
         }
-        UserDetail userDetail = userDetailDao.getByUsername(rule.getUserName());
+        UserDetail userDetail = userDetailDao.getByUsername(rule.getUsername());
         if (rule.isAuthorized()) {
             userDetail.getRoles().add(rule.getRole());
         } else {
