@@ -11,6 +11,7 @@
         <version>1.0-RELEASE</version>
     </parent>
     <dependencies>
+
         <!-- Module -->
         <dependency>
             <groupId>${project.groupId}</groupId>

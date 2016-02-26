@@ -86,7 +86,7 @@ public class TestComputerDao extends AbstractTestDao {
     }
 
     @Test(expected = DaoException.class)
-    public void testInsertComputerWithNullAttributs() {
+    public void testInsertComputerWithNullAttributes() {
         Computer computer = new Computer();
         computerDao.create(computer);
     }
