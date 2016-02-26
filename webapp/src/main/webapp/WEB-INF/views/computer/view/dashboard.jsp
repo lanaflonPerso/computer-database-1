@@ -9,7 +9,7 @@
 
 <!DOCTYPE HTML>
 <html>
-	<jsp:include page="/WEB-INF/views/import/head.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/import/head.jsp"/>
 	<body>
 		<mylib:commonHead colorMenu="computer-color"/>
 		<section id="main">
@@ -63,7 +63,7 @@
 							<mylib:dashboardTitle page="${page}" name="${computer_name}" sortColumn="COMPUTER_NAME" />
 							<spring:message code="introduced.date" var="introduced_date"/>
 							<mylib:dashboardTitle page="${page}" name="${introduced_date}" sortColumn="INTRODUCED_DATE" />
-							<spring:message code="discontined.date" var="discontinued_date"/>
+							<spring:message code="discontinued.date" var="discontinued_date"/>
 							<mylib:dashboardTitle page="${page}" name="${discontinued_date}" sortColumn="DISCONTINUED_DATE" />
 							<spring:message code="company.name" var="company_name"/>
 							<mylib:dashboardTitle page="${page}" name="${company_name}" sortColumn="COMPANY_NAME" />
@@ -98,7 +98,7 @@
 		<footer class="navbar-fixed-bottom">
 			<mylib:pagination page="${page}" />			
 		</footer>
-		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"/>
 		<script type="text/javascript">
 			var button_view = "<spring:message code='button.cancel'/>";
 			var button_edit = "<spring:message code='button.delete'/>";

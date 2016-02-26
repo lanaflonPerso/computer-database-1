@@ -3,7 +3,7 @@
 
 <!DOCTYPE html>
 <html>
-	<jsp:include page="/WEB-INF/views/import/head.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/import/head.jsp"/>
 	<body>
 		<mylib:commonHead />
 		<section id="main">
@@ -15,6 +15,6 @@
 				</div>
 			</div>
 		</section>
-		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"/>
 	</body>
 </html>

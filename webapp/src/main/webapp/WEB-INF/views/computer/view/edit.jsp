@@ -7,7 +7,7 @@
 
 <!DOCTYPE HTML>
 <html>
-	<jsp:include page="/WEB-INF/views/import/head.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/import/head.jsp"/>
 	<body>
 		<nav class="navbar navbar-inverse navbar-fixed-top navbar-default computer-color" role="navigation">
 			<div class="container-fluid">
@@ -46,24 +46,24 @@
 								<div class="form-group">
 									<spring:message code="computer.name" var="computer_name"/>
 									<form:label path="name" for="computerName"><spring:message code="computer.name" /></form:label>
-									<form:input onkeyup="checkName(document)" path="name" name="name" type="text" class="form-control" id="computerName" value="${page.getComputerDto().getName()}" placeholder="${date_format}"></form:input>
-									<form:errors path="name" id="serviceNameException" style="color:red"></form:errors>
+									<form:input onkeyup="checkName(document)" path="name" name="name" type="text" class="form-control" id="computerName" value="${page.getComputerDto().getName()}" placeholder="${date_format}"/>
+									<form:errors path="name" id="serviceNameException" style="color:red"/>
 								</div>
 								<div id="nameError" class="alert alert-danger" role="alert"><spring:message code="error.invalid.computer.name"/></div>
 								<div class="form-group">
 									<spring:message code="date.format" var="date_format"/>
 									<form:label path="introduced" for="introduced"><spring:message code="introduced.date" /></form:label>
-									<form:input onkeyup="checkIntroduced(document)" path="introduced" name="introduced" type="text" class="form-control" id="introduced" value="${page.getComputerDto().getIntroduced()}" placeholder="${date_format}"></form:input>
-									<form:errors path="introduced" id="serviceIntroducedException" style="color:red"></form:errors>
+									<form:input onkeyup="checkIntroduced(document)" path="introduced" name="introduced" type="text" class="form-control" id="introduced" value="${page.getComputerDto().getIntroduced()}" placeholder="${date_format}"/>
+									<form:errors path="introduced" id="serviceIntroducedException" style="color:red"/>
 								</div>
 								<div id="introducedError" class="alert alert-danger" role="alert"><spring:message code="error.invalid.introduced.date"/> <spring:message code="date.format"/></div>
 								<div class="form-group">
 									<spring:message code="date.format" var="date_format"/>
-									<form:label path="discontinued" for="discontinued"><spring:message code="discontined.date" /></form:label>
-									<form:input	onkeyup="checkDiscontinued(document)" path="discontinued" name="discontinued" type="text" class="form-control" id="discontinued" value="${page.getComputerDto().getDiscontinued()}" placeholder="${date_format}"></form:input>
-									<form:errors path="discontinued" id="serviceDiscontinuedException" style="color:red"></form:errors>
+									<form:label path="discontinued" for="discontinued"><spring:message code="discontinued.date" /></form:label>
+									<form:input	onkeyup="checkDiscontinued(document)" path="discontinued" name="discontinued" type="text" class="form-control" id="discontinued" value="${page.getComputerDto().getDiscontinued()}" placeholder="${date_format}"/>
+									<form:errors path="discontinued" id="serviceDiscontinuedException" style="color:red"/>
 								</div>
-								<div id="discontinuedError" class="alert alert-danger" role="alert"><spring:message code="error.invalid.discontined.date"/> <spring:message code="date.format"/></div>
+								<div id="discontinuedError" class="alert alert-danger" role="alert"><spring:message code="error.invalid.discontinued.date"/> <spring:message code="date.format"/></div>
 								<div class="form-group">
 									<form:label path="companyId" for="companyId"><spring:message code="company" /></form:label>
 									<form:select path="companyId" class="form-control" id="companyId" name="companyId">
@@ -89,7 +89,7 @@
 				</div>
 			</div>
 		</section>
-		<jsp:include page="/WEB-INF/views/import/validator_js.jsp"></jsp:include>
-		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"></jsp:include>
+		<jsp:include page="/WEB-INF/views/import/validator_js.jsp"/>
+		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"/>
 	</body>
 </html>

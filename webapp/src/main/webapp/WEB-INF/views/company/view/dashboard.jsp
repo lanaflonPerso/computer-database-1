@@ -9,7 +9,7 @@
 
 <!DOCTYPE html>
 <html>
-	<jsp:include page="/WEB-INF/views/import/head.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/import/head.jsp"/>
 	<body>
 		<mylib:commonHead colorMenu="company-color"/>
 	    <section id="main">
@@ -58,16 +58,16 @@
 	        </div>       
 	    </section>    
 	    <!-- Popup -->
-	   	<jsp:include page="/WEB-INF/views/company/popup/addCompany.jsp"></jsp:include>
-	   	<jsp:include page="/WEB-INF/views/company/popup/editCompany.jsp"></jsp:include>
+	   	<jsp:include page="/WEB-INF/views/company/popup/addCompany.jsp"/>
+	   	<jsp:include page="/WEB-INF/views/company/popup/editCompany.jsp"/>
 	   	<!-- Javascript -->
-		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"></jsp:include>
-		<script src="/webapp/js/company.js"></script>	
+		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"/>
+		<script src="${pageContext.request.contextPath}/js/company.js"></script>
 		<script type="text/javascript">
 			var button_view = "<spring:message code='button.cancel'/>";
 			var button_edit = "<spring:message code='button.delete'/>";
 			var alert_message = "<spring:message code='delete.company.message'/>";
 		</script>
-		<script src="/webapp/js/dashboard.js"></script>
+		<script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 	</body>
 </html>

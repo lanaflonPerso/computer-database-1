@@ -6,10 +6,9 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="mylib"%>
 
-
 <!DOCTYPE html>
 <html>
-	<jsp:include page="/WEB-INF/views/import/head.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/import/head.jsp"/>
 	<body>
 		<mylib:commonHead colorMenu="user-color"/>
 	    <section id="main">
@@ -55,39 +54,39 @@
 								<td>
 									<c:set var="name" value="${\"ruleForm\"}${page.getUserList().get(i).getUserName()}0" />
 									<form:form modelAttribute="ruleDto" id="${name}" action="/webapp/user/crud/edit" method="POST">
-										<form:input path="userName" class="hidden" value="${page.getUserList().get(i).getUserName()}"></form:input>
-										<form:input path="role" class="hidden" value="ROLE_SUPER_ADMIN"></form:input>
+										<form:input path="userName" class="hidden" value="${page.getUserList().get(i).getUserName()}"/>
+										<form:input path="role" class="hidden" value="ROLE_SUPER_ADMIN"/>
 										<c:if test="${page.getUserList().get(i).getRoles().contains(\"ROLE_SUPER_ADMIN\")==true}">
-											<form:checkbox path="authorized" checked="checked" onchange="${name}.submit()"></form:checkbox>
+											<form:checkbox path="authorized" checked="checked" onchange="${name}.submit()"/>
 										</c:if>
 										<c:if test="${page.getUserList().get(i).getRoles().contains(\"ROLE_SUPER_ADMIN\")==false}">
-											<form:checkbox path="authorized" onchange="${name}.submit()"></form:checkbox>
+											<form:checkbox path="authorized" onchange="${name}.submit()"/>
 										</c:if>											
 									</form:form>
 								</td>
 								<td>
 									<c:set var="name" value="${\"ruleForm\"}${page.getUserList().get(i).getUserName()}1" />
 									<form:form modelAttribute="ruleDto" id="${name}" action="/webapp/user/crud/edit" method="POST">
-										<form:input path="userName" class="hidden" value="${page.getUserList().get(i).getUserName()}"></form:input>
-										<form:input path="role" class="hidden" value="ROLE_ADMIN"></form:input>
+										<form:input path="userName" class="hidden" value="${page.getUserList().get(i).getUserName()}"/>
+										<form:input path="role" class="hidden" value="ROLE_ADMIN"/>
 										<c:if test="${page.getUserList().get(i).getRoles().contains(\"ROLE_ADMIN\")==true}">
-											<form:checkbox path="authorized" checked="checked" onchange="${name}.submit()"></form:checkbox>
+											<form:checkbox path="authorized" checked="checked" onchange="${name}.submit()"/>
 										</c:if>
 										<c:if test="${page.getUserList().get(i).getRoles().contains(\"ROLE_ADMIN\")==false}">
-											<form:checkbox path="authorized" onchange="${name}.submit()"></form:checkbox>
+											<form:checkbox path="authorized" onchange="${name}.submit()"/>
 										</c:if>											
 									</form:form>
 								</td>
 								<td>
 									<c:set var="name" value="${\"ruleForm\"}${page.getUserList().get(i).getUserName()}2" />
 									<form:form modelAttribute="ruleDto" id="${name}" action="/webapp/user/crud/edit" method="POST">
-										<form:input path="userName" class="hidden" value="${page.getUserList().get(i).getUserName()}"></form:input>
-										<form:input path="role" class="hidden" value="ROLE_USER"></form:input>
+										<form:input path="userName" class="hidden" value="${page.getUserList().get(i).getUserName()}"/>
+										<form:input path="role" class="hidden" value="ROLE_USER"/>
 										<c:if test="${page.getUserList().get(i).getRoles().contains(\"ROLE_USER\")==true}">
-											<form:checkbox path="authorized" checked="checked" onchange="${name}.submit()"></form:checkbox>
+											<form:checkbox path="authorized" checked="checked" onchange="${name}.submit()"/>
 										</c:if>
 										<c:if test="${page.getUserList().get(i).getRoles().contains(\"ROLE_USER\")==false}">
-											<form:checkbox path="authorized" onchange="${name}.submit()"></form:checkbox>
+											<form:checkbox path="authorized" onchange="${name}.submit()"/>
 										</c:if>											
 									</form:form>
 								</td>
@@ -103,16 +102,16 @@
 	        </div> 
 	    </section>
 	    <!-- Popup -->
-	   	<jsp:include page="/WEB-INF/views/user/popup/addUser.jsp"></jsp:include>
-	   	<jsp:include page="/WEB-INF/views/user/popup/resetPassword.jsp"></jsp:include>
+	   	<jsp:include page="/WEB-INF/views/user/popup/addUser.jsp"/>
+	   	<jsp:include page="/WEB-INF/views/user/popup/resetPassword.jsp"/>
 	   	<!-- Javascript -->
-		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"></jsp:include>
-		<script src="/webapp/js/user.js"></script>	
+		<jsp:include page="/WEB-INF/views/import/common_js_import.jsp"/>
+		<script src="${pageContext.request.contextPath}/js/user.js"></script>
 		<script type="text/javascript">
 			var button_view = "<spring:message code='button.cancel'/>";
 			var button_edit = "<spring:message code='button.delete'/>";
 			var alert_message = "<spring:message code='delete.user.message'/>";
 		</script>
-		<script src="/webapp/js/dashboard.js"></script>
+		<script src="${pageContext.request.contextPath}/js/dashboard.js"></script>
 	</body>
 </html>

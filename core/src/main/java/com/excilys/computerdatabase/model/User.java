@@ -18,9 +18,14 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements Serializable {
     private static final long serialVersionUID = -1574644808526138085L;
+    @Id
+    @Column(name = "username", unique = true, nullable = false, length = 100)
     private String username;
+    @Column(name = "password", nullable = false, length = 100)
     private String password;
+    @Column(name = "enabled", nullable = false)
     private boolean enabled;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     private Set<UserRole> userRole = new HashSet<>(0);
 
     /**
@@ -63,8 +68,6 @@ public class User implements Serializable {
      *
      * @return the username
      */
-    @Id
-    @Column(name = "username", unique = true, nullable = false, length = 100)
     public String getUsername() {
         return this.username;
     }
@@ -83,7 +86,6 @@ public class User implements Serializable {
      *
      * @return the password
      */
-    @Column(name = "password", nullable = false, length = 100)
     public String getPassword() {
         return this.password;
     }
@@ -102,7 +104,6 @@ public class User implements Serializable {
      *
      * @return true, if is enabled
      */
-    @Column(name = "enabled", nullable = false)
     public boolean isEnabled() {
         return this.enabled;
     }
@@ -121,7 +122,6 @@ public class User implements Serializable {
      *
      * @return the user role
      */
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
     public Set<UserRole> getUserRole() {
         return this.userRole;
     }

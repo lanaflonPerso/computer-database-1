@@ -6,12 +6,12 @@
 
 <!Doctype HTML>
 <html>
-	<jsp:include page="/WEB-INF/views/import/head.jsp"></jsp:include>
-	<link href="/webapp/css/signin.css" rel="stylesheet" media="screen">
+	<jsp:include page="/WEB-INF/views/import/head.jsp"/>
+	<link href="${pageContext.request.contextPath}/css/signin.css" rel="stylesheet" media="screen">
 	<body>
 		<mylib:commonHead />
 		<div id="login-box">
-			<form class="login-form" name="f" action="/webapp/j_spring_security_check" method="POST">
+			<form class="login-form" name="f" action="${pageContext.request.contextPath}/j_spring_security_check" method="POST">
 				<spring:message code="password" var="password"/>
 				<spring:message code="username" var="username"/>
 				<h2 class="form-signin-heading"><spring:message code="please.log.in" /></h2>
@@ -36,7 +36,7 @@
 				<button id="login" class="btn btn-lg btn-primary btn-block" type="submit"><spring:message code="log.in" /></button>
 			</form>
 		</div>
-		<script src="/webapp/js/jquery.min.js"></script>
-		<script src="/webapp/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/jquery.min.js"/>
+		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"/>
 	</body>
 </html>

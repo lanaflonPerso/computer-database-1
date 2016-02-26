@@ -6,7 +6,7 @@
 
 <!Doctype HTML>
 <html>
-	<jsp:include page="/WEB-INF/views/import/head.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/import/head.jsp"/>
 	<body>
 		<mylib:commonHead /> 
 		<div class="row">
@@ -19,17 +19,17 @@
 			</security:authorize>
 			<security:authorize access="hasRole('ROLE_SUPER_ADMIN')">
 				<div class="col-md-3" id="user-icone">
-					<a href="/webapp/user/view/dashboard"><i class="fa fa-users home-icone user-home-icone"></i></a>
+					<a href="${pageContext.request.contextPath}/user/view/dashboard"><i class="fa fa-users home-icone user-home-icone"></i></a>
 				</div>
 			</security:authorize>
 			<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
 				<div class="col-md-3" id="computer-icone">
-					<a href="/webapp/computer/view/dashboard"><i class="fa fa-laptop home-icone computer-home-icone"></i></a>
+					<a href="${pageContext.request.contextPath}/computer/view/dashboard"><i class="fa fa-laptop home-icone computer-home-icone"></i></a>
 				</div>
 			</security:authorize>
 			<security:authorize access="hasRole('ROLE_ADMIN')">
 				<div class="col-md-2" id="company-icone">
-					<a href="/webapp/company/view/dashboard"><i class="fa fa-building home-icone company-home-icone"></i></a>
+					<a href="${pageContext.request.contextPath}/company/view/dashboard"><i class="fa fa-building home-icone company-home-icone"></i></a>
 				</div>
 			</security:authorize>	
 		</div>
@@ -59,7 +59,7 @@
 		
 		
 		</div>
-		<script src="/webapp/js/jquery.min.js"></script>
-		<script src="/webapp/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
 	</body>
 </html>
