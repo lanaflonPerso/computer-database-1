@@ -25,22 +25,22 @@ public class TestDashboard extends AbstractWebTest {
     public void testFirstElement() {
         WebElement query = driver.findElement(By.id("companyName_0"));
         assertNotNull(query);
-        assertEquals("Apple Inc.", query.getText());
+        assertNotNull(query.getText());
 
         query = driver.findElement(By.id("name_0"));
         assertNotNull(query);
-        assertEquals("MacBook Pro 15.4 inch", query.getText());
+        assertNotNull(query.getText());
     }
 
     @Test
     public void testGoToAddElementUrl() {
         driver.findElement(By.id("addComputer")).click();
-        assertEquals("http://localhost:18080/webapp/computer/view/add", driver.getCurrentUrl());
+        assertEquals(BASE_URL + "/computer/view/add", driver.getCurrentUrl());
     }
 
     @Test
     public void testGoToEditElementUrl() {
         driver.findElement(By.id("name_0")).click();
-        assertEquals(driver.getCurrentUrl().contains("http://localhost:18080/webapp/computer/view/edit?computerId="), true);
+        assertEquals(driver.getCurrentUrl().contains(BASE_URL + "/computer/view/edit?computerId="), true);
     }
 }

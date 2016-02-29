@@ -17,6 +17,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>service</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>binding</artifactId>
+        </dependency>
         <!-- Dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>

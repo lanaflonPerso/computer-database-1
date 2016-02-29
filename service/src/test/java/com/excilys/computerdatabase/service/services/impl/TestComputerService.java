@@ -110,7 +110,7 @@ public class TestComputerService {
 
     @Test
     public void testUpdateWrongComputer() {
-        Computer computer = new Computer(0L, "myName", LocalDateTime.now(), LocalDateTime.now(), null);
+        Computer computer = new Computer(0L, "myName", LocalDateTime.now(), LocalDateTime.now(), new Company(null, null));
         try {
             computerServiceImpl.create(computer);
             fail("no exception occurred");

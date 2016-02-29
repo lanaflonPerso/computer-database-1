@@ -30,7 +30,7 @@ public class CompanyDaoImpl implements CompanyDao {
     public void create(Company t) {
         LOGGER.info("Company create : {}", t);
         Session session = sessionFactory.getCurrentSession();
-        if (!Validator.isCompanyCorrect(t)) {
+        if (!Validator.isCompanyCorrectForCreate(t)) {
             LOGGER.warn(Validator.INVALID_COMPANY);
             throw new DaoException(Validator.INVALID_COMPANY);
         }
@@ -76,7 +76,7 @@ public class CompanyDaoImpl implements CompanyDao {
             LOGGER.warn(Validator.INVALID_COMPANY_ID);
             throw new DaoException(Validator.INVALID_COMPANY_ID);
         }
-        Company company = (Company) session.get(Company.class, id);
+        Company company = session.get(Company.class, id);
         if (company == null) {
             return;
         }
@@ -91,14 +91,14 @@ public class CompanyDaoImpl implements CompanyDao {
             LOGGER.warn(Validator.INVALID_COMPANY_ID);
             throw new DaoException(Validator.INVALID_COMPANY_ID);
         }
-        return (Company) session.get(Company.class, id);
+        return session.get(Company.class, id);
     }
 
     @Override
     public void update(Company t) {
         LOGGER.info("Company update : {}", t);
         Session session = sessionFactory.getCurrentSession();
-        if (!Validator.isCompanyCorrect(t)) {
+        if (!Validator.isCompanyCorrectForUpdate(t)) {
             LOGGER.warn(Validator.INVALID_COMPANY);
             throw new DaoException(Validator.INVALID_COMPANY);
         }

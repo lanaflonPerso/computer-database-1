@@ -48,13 +48,13 @@ public class TestValidator {
 	@Test
 	public void testComputerNullCompanyId() {
 		Computer computer = new Computer(null, "name", null, null, new Company(null, "company_name"));
-		assertEquals(Validator.isComputerCorrect(computer), true);
+		assertEquals(Validator.isComputerCorrect(computer), false);
 	}
 
 	@Test
 	public void testComputerNullCompanyName() {
 		Computer computer = new Computer(null, "name", null, null, new Company(null, null));
-		assertEquals(Validator.isComputerCorrect(computer), true);
+		assertEquals(Validator.isComputerCorrect(computer), false);
 	}
 
 	@Test
@@ -72,7 +72,7 @@ public class TestValidator {
 	@Test
 	public void testComputerNullCompany() {
 		Computer computer = new Computer(null, "name", null, null, null);
-		assertEquals(Validator.isComputerCorrect(computer), false);
+		assertEquals(Validator.isComputerCorrect(computer), true);
 	}
 
 	@Test

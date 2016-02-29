@@ -3,12 +3,14 @@ package com.excilys.computerdatabase.dto.model;
 import com.excilys.computerdatabase.dto.validator.Date;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
  * @author Vincent Galloy
  *         The Class ComputerDto.
  */
+@XmlRootElement
 public class ComputerDto implements Serializable {
     private static final long serialVersionUID = 7688863162139310127L;
     private String id;

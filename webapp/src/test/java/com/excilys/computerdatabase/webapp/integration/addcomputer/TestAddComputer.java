@@ -31,7 +31,7 @@ public class TestAddComputer extends AbstractWebTest {
         driver.findElement(By.id("addComputer")).click();
         enterComputer(driver, "name", "wrongDate", "WrongDate", "Apple Inc.");
         driver.findElement(By.id("addButton")).click();
-        assertEquals(driver.getCurrentUrl(), "http://localhost:18080/webapp/computer/view/add");
+        assertEquals(driver.getCurrentUrl(), BASE_URL + "/computer/view/add");
     }
 
     @Test

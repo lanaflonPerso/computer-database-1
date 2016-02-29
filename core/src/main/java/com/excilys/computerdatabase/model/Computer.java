@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * @author Vincent Galloy
  *         The Class Computer.
  */
-@XmlRootElement
+//@XmlRootElement
 @Entity(name = "computer")
 public class Computer implements Serializable {
     private static final long serialVersionUID = 8483783012500208376L;
@@ -25,8 +25,10 @@ public class Computer implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+//    @XmlJavaTypeAdapter(LocalDateTimeBindMapper.class)
     @Type(type = "com.excilys.computerdatabase.mapper.impl.LocalDateTimeHibernateMapper")
     private LocalDateTime introduced;
+//    @XmlJavaTypeAdapter(LocalDateTimeBindMapper.class)
     @Type(type = "com.excilys.computerdatabase.mapper.impl.LocalDateTimeHibernateMapper")
     private LocalDateTime discontinued;
     @OneToOne

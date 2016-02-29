@@ -26,6 +26,9 @@ public class CompanyDtoMapperImpl implements CompanyDtoMapper {
 
     @Override
     public Company mapToModel(CompanyDto dto) {
+        if(dto.getId() == null && dto.getName() == null) {
+            return null;
+        }
         Company company = new Company();
 
         company.setName(dto.getName());

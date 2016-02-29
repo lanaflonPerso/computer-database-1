@@ -1,14 +1,12 @@
-package com.excilys.computerdatabase.console.service.impl;
+package com.excilys.computerdatabase.webservice.impl.rest.integration.mock.impl;
 
-import com.excilys.computerdatabase.console.exception.ConsoleException;
-import com.excilys.computerdatabase.console.service.ConsoleService;
 import com.excilys.computerdatabase.dto.mapper.CompanyDtoMapper;
 import com.excilys.computerdatabase.dto.mapper.ComputerDtoMapper;
 import com.excilys.computerdatabase.dto.model.CompanyDto;
 import com.excilys.computerdatabase.dto.model.ComputerDto;
 import com.excilys.computerdatabase.model.Company;
 import com.excilys.computerdatabase.model.Computer;
-import com.excilys.computerdatabase.validation.Validator;
+import com.excilys.computerdatabase.webservice.impl.rest.integration.mock.TestService;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
@@ -20,10 +18,10 @@ import java.util.List;
 
 /**
  * @author Vincent Galloy
+ *         Created by Vincent Galloy on 29/02/16.
  */
 @Service
-public class ConsoleServiceImpl implements ConsoleService {
-    private static final String BASE_URL = "http://localhost:18080/webservice/rest";
+public class MockResourceService implements TestService {
     private static final String SERVER_ROOT_URI = BASE_URL + "/xml";
     private static final String SERVER_ROOT_COMPANY = SERVER_ROOT_URI + "/company";
     private static final String SERVER_ROOT_COMPUTER = SERVER_ROOT_URI + "/computer";
@@ -52,9 +50,6 @@ public class ConsoleServiceImpl implements ConsoleService {
 
     @Override
     public void createComputer(Computer c) {
-        if (!Validator.isComputerCorrect(c)) {
-            throw new ConsoleException(Validator.INVALID_COMPUTER);
-        }
         Long id = computerDtoMapper.mapToModel(Client
                 .create()
                 .resource(SERVER_ROOT_COMPUTER + "/create")
@@ -62,33 +57,12 @@ public class ConsoleServiceImpl implements ConsoleService {
                 .type(MediaType.APPLICATION_XML)
                 .entity(computerDtoMapper.mapFromModel(c))
                 .post(ClientResponse.class)
-                .getEntity(new GenericType<ComputerDto>() {
-                })).getId();
+                .getEntity(new GenericType<ComputerDto>() {})).getId();
         c.setId(id);
     }
 
     @Override
     public void deleteComputer(Long id) {
         Client.create().resource(SERVER_ROOT_COMPUTER + "/delete/" + id).header("Content-Type", "application/xml").delete(ClientResponse.class);
-    }
-
-    @Override
-    public void deleteCompany(Long id) {
-        Client.create().resource(SERVER_ROOT_COMPANY + "/delete/" + id).header("Content-Type", "application/xml").delete(ClientResponse.class);
-    }
-
-    @Override
-    public void updateComputer(Computer c) {
-        if (!Validator.isComputerCorrect(c)) {
-            throw new ConsoleException(Validator.INVALID_COMPUTER);
-        }
-        Client.create()
-                .resource(SERVER_ROOT_COMPUTER + "/create")
-                .accept(MediaType.APPLICATION_XML)
-                .type(MediaType.APPLICATION_XML)
-                .entity(computerDtoMapper.mapFromModel(c))
-                .post(ClientResponse.class)
-                .getEntity(new GenericType<ComputerDto>() {
-                });
     }
 }

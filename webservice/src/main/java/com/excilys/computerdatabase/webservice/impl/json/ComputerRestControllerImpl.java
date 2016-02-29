@@ -1,4 +1,4 @@
-package com.excilys.computerdatabase.webservice.impl.xml;
+package com.excilys.computerdatabase.webservice.impl.json;
 
 import com.excilys.computerdatabase.dto.mapper.ComputerDtoMapper;
 import com.excilys.computerdatabase.dto.model.ComputerDto;
@@ -7,68 +7,59 @@ import com.excilys.computerdatabase.service.services.ComputerService;
 import com.excilys.computerdatabase.sort.SortCriteria;
 import com.excilys.computerdatabase.webservice.ComputerResource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
  * @author Vincent Galloy
- *         The Class ComputerResourceImpl.
+ *         The Class ComputerRestController.
  */
-@Path("/computer")
-@Produces(MediaType.APPLICATION_XML)
-@Consumes(MediaType.APPLICATION_XML)
-public class ComputerResourceImpl implements ComputerResource {
+@RestController
+@RequestMapping("rest/json/computer")
+public class ComputerRestControllerImpl implements ComputerResource {
     @Autowired
     private ComputerService computerService;
     @Autowired
     private ComputerDtoMapper computerDtoMapper;
 
     @Override
-    @GET
-    @Path("getAll")
+    @RequestMapping(value = "getAll", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public List<ComputerDto> getAll() {
         return computerDtoMapper.mapListFromModel(computerService.list(new SortCriteria()));
     }
 
     @Override
-    @GET
-    @Path("getById/{id}")
-    public ComputerDto getById(@PathParam("id") Long id) {
+    @RequestMapping(value = "getById/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
+    public ComputerDto getById(@PathVariable("id") Long id) {
         return computerDtoMapper.mapFromModel(computerService.getById(id));
     }
 
     @Override
-    @POST
-    @Path("create")
-    public ComputerDto create(ComputerDto t) {
+    @RequestMapping(value = "create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
+    public ComputerDto create(@RequestBody ComputerDto t) {
         Computer computer = computerDtoMapper.mapToModel(t);
         computerService.create(computer);
         return computerDtoMapper.mapFromModel(computer);
     }
 
     @Override
-    @POST
-    @Path("update")
-    public ComputerDto update(ComputerDto t) {
+    @RequestMapping(value = "update", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON)
+    public ComputerDto update(@RequestBody ComputerDto t) {
         Computer computer = computerDtoMapper.mapToModel(t);
         computerService.update(computer);
         return computerDtoMapper.mapFromModel(computer);
     }
 
     @Override
-    @DELETE
-    @Produces(MediaType.TEXT_HTML)
-    @Path("delete/{id}")
-    public Response delete(@PathParam("id") Long id) {
+    @RequestMapping(value = "delete/{id}", method = RequestMethod.DELETE)
+    public Response delete(@PathVariable("id") Long id) {
         computerService.delete(id);
         return Response.ok("ok").build();
     }

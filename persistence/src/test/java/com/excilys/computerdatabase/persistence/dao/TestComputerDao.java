@@ -24,6 +24,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -45,9 +46,20 @@ public class TestComputerDao extends AbstractTestDao {
 
     @Test
     public void testInsertOk() {
-        Computer computer = new Computer(1L, "test_name", LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), new Company(new Long(2), "RCA"));
+        Computer computer = new Computer(1L, "test_name", LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), new Company(2L, "RCA"));
         computerDao.create(computer);
         assertEquals(computer.getId() == 1, false);
+
+        Computer computer2 = computerDao.getById(computer.getId());
+        assertEquals(computer, computer2);
+    }
+
+
+    @Test
+    public void testInsertWithNullCompany() {
+        Computer computer = new Computer(null, "test_name", null, null, null);
+        computerDao.create(computer);
+        assertNotNull(computer.getId());
 
         Computer computer2 = computerDao.getById(computer.getId());
         assertEquals(computer, computer2);
@@ -63,14 +75,10 @@ public class TestComputerDao extends AbstractTestDao {
         assertEquals(computer, computer2);
     }
 
-    @Test
+    @Test(expected = DaoException.class)
     public void testInsertNullCompanyId() {
         Computer computer = new Computer(1L, "test_name", LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS), new Company(null, "Canon"));
         computerDao.create(computer);
-        computer.setCompany(null);
-
-        Computer computer2 = computerDao.getById(computer.getId());
-        assertEquals(computer2, computer);
     }
 
     @Test(expected = DaoException.class)
@@ -133,7 +141,6 @@ public class TestComputerDao extends AbstractTestDao {
             assertTrue(previous.getCompany().getName().compareTo(current.getCompany().getName()) <= 0);
             previous = current;
         }
-
     }
 
     @Test
@@ -144,7 +151,6 @@ public class TestComputerDao extends AbstractTestDao {
             assertTrue(previous.getCompany().getName().compareTo(current.getCompany().getName()) >= 0);
             previous = current;
         }
-
     }
 
     @Test

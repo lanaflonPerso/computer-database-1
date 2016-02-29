@@ -69,7 +69,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional(readOnly = false)
     public void create(Company t) {
         LOGGER.info("Company create : {}", t);
-        if (!Validator.isCompanyCorrect(t)) {
+        if (!Validator.isCompanyCorrectForCreate(t)) {
             throw new ServiceException(Validator.INVALID_COMPANY);
         }
         companyDao.create(t);
@@ -88,7 +88,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Transactional(readOnly = false)
     public void update(Company t) {
         LOGGER.info("Company update : {}", t);
-        if (!Validator.isCompanyCorrect(t)) {
+        if (!Validator.isCompanyCorrectForUpdate(t)) {
             throw new ServiceException(Validator.INVALID_COMPANY);
         }
         companyDao.update(t);

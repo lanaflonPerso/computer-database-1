@@ -109,7 +109,7 @@ public class TestCompanyService extends AbstractTransactionalJUnit4SpringContext
     public void testDeleteOk() {
         Company company = new Company(null, "company_test");
         companyServiceImpl.create(company);
-        Computer computer = new Computer(null, "nameDeleteCompanyTest", null, null, new Company(company.getId(), null));
+        Computer computer = new Computer(null, "nameDeleteCompanyTest", null, null, new Company(company.getId(), "fake name"));
         computerService.create(computer);
 
         companyServiceImpl.delete(company.getId());

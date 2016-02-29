@@ -54,8 +54,10 @@ public class ComputerServiceImpl implements ComputerService {
     @Transactional(readOnly = false)
     public void update(Computer c) {
         LOGGER.info("Update computer : {}", c);
-        if (!Validator.isComputerCorrect(c) && Validator.isIdCorrect(c.getId())) {
+        if (!Validator.isComputerCorrect(c)) {
             throw new ServiceException(Validator.INVALID_COMPUTER);
+        } else if (!Validator.isIdCorrect(c.getId())) {
+            throw new ServiceException(Validator.INVALID_COMPUTER_ID);
         }
         computerDao.update(c);
 
@@ -82,8 +84,7 @@ public class ComputerServiceImpl implements ComputerService {
         LOGGER.info("List computers with criteria : {} from {} to {} ", sortCriteria, from, to);
         if (!Validator.isDateFromToCorrect(from, to)) {
             throw new ServiceException(Validator.INVALID_BOUND);
-        }
-        if (!Validator.isSortCriteriaCorrect(sortCriteria)) {
+        } else if (!Validator.isSortCriteriaCorrect(sortCriteria)) {
             throw new ServiceException(Validator.INVALID_SORT_CRITERIA);
         }
         return computerDao.getAll(from, to, sortCriteria);
@@ -94,11 +95,9 @@ public class ComputerServiceImpl implements ComputerService {
         LOGGER.info("List computers with criteria : {} and contains {} from {} to {} ", sortCriteria, search, from, to);
         if (!Validator.isStringForSearchCorrect(search)) {
             throw new ServiceException(Validator.INVALID_STRING_FOR_SEARCH);
-        }
-        if (!Validator.isStringForSearchCorrect(search)) {
+        } else if (!Validator.isStringForSearchCorrect(search)) {
             throw new ServiceException(Validator.INVALID_BOUND);
-        }
-        if (!Validator.isSortCriteriaCorrect(sortCriteria)) {
+        } else if (!Validator.isSortCriteriaCorrect(sortCriteria)) {
             throw new ServiceException(Validator.INVALID_SORT_CRITERIA);
         }
         return computerDao.getByName(search, from, to, sortCriteria);

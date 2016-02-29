@@ -1,11 +1,13 @@
 package com.excilys.computerdatabase.dto.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
  * @author Vincent Galloy
  *         The Class CompanyDto.
  */
+@XmlRootElement
 public class CompanyDto implements Serializable {
     private static final long serialVersionUID = -3498505972646793146L;
     private String id;

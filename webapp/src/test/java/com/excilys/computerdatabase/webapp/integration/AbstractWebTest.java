@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.fail;
 
 public abstract class AbstractWebTest {
+    public static final String BASE_URL = "http://localhost:18080/webapp";
     private static final String ADMIN_USERNAME = "all";
     private static final String ADMIN_PASSWORD = "all";
 
@@ -27,7 +28,7 @@ public abstract class AbstractWebTest {
     protected void login(WebDriver driver) {
         driver.manage().timeouts().pageLoadTimeout(5000L, TimeUnit.MILLISECONDS);
         driver.manage().timeouts().implicitlyWait(5000L, TimeUnit.MILLISECONDS);
-        driver.get("http://localhost:18080/webapp/computer/view/dashboard?language=en");
+        driver.get(BASE_URL + "/computer/view/dashboard?language=en");
 
         driver.findElement(By.id("username")).sendKeys(ADMIN_USERNAME);
         driver.findElement(By.id("password")).sendKeys(ADMIN_PASSWORD);

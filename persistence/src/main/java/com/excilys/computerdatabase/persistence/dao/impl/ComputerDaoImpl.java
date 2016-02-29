@@ -38,9 +38,6 @@ public class ComputerDaoImpl implements ComputerDao {
         if (!Validator.isComputerCorrect(t)) {
             throw new DaoException(Validator.INVALID_COMPUTER);
         }
-        if (t.getCompany() != null && t.getCompany().getId() == null) {
-            t.setCompany(null);
-        }
         Long id = (Long) session.save(t);
         t.setId(id);
     }
@@ -52,7 +49,7 @@ public class ComputerDaoImpl implements ComputerDao {
         if (!Validator.isIdCorrect(id)) {
             throw new DaoException(Validator.INVALID_COMPUTER_ID);
         }
-        Computer computer = (Computer) session.get(Computer.class, id);
+        Computer computer = session.get(Computer.class, id);
         if (computer == null) {
             return;
         }
@@ -66,9 +63,6 @@ public class ComputerDaoImpl implements ComputerDao {
         if (!Validator.isComputerCorrect(t)) {
             throw new DaoException(Validator.INVALID_COMPUTER);
         }
-        if (t.getCompany() != null && t.getCompany().getId() == null) {
-            t.setCompany(null);
-        }
         session.merge(t);
     }
 
@@ -79,7 +73,7 @@ public class ComputerDaoImpl implements ComputerDao {
         if (!Validator.isIdCorrect(id)) {
             throw new DaoException(Validator.INVALID_COMPANY_ID);
         }
-        return (Computer) session.get(Computer.class, id);
+        return session.get(Computer.class, id);
     }
 
     @Override

@@ -30,6 +30,10 @@ public class ComputerDtoMapperImpl implements ComputerDtoMapper {
         }
         if (model.getCompany() != null) {
             computerDto.setCompanyName(model.getCompany().getName());
+            Long id = model.getCompany().getId();
+            if(id != null) {
+                computerDto.setCompanyId(id.toString());
+            }
         } else {
             computerDto.setCompanyName(null);
         }

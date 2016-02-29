@@ -11,13 +11,13 @@ import java.time.format.DateTimeFormatter;
 /**
  * @author Vincent Galloy
  */
-public class DateMapper {
+public interface DateMapper {
 
-    public static LocalDateTime extractFromString(String date, DateFormat dateFormat) {
+    static LocalDateTime extractFromString(String date, DateFormat dateFormat) {
         return extractFromString(date, dateFormat.toString());
     }
 
-    public static LocalDateTime extractFromString(String date, String pattern) {
+    static LocalDateTime extractFromString(String date, String pattern) {
         if (date == null) {
             return null;
         } else if ("".equals(date.trim())) {
@@ -32,7 +32,7 @@ public class DateMapper {
 
     }
 
-    public static String convertIntoString(LocalDateTime localDateTime, DateFormat dateFormat) {
+    static String convertIntoString(LocalDateTime localDateTime, DateFormat dateFormat) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat.toString());
         if (localDateTime == null) {
             return null;
@@ -40,15 +40,15 @@ public class DateMapper {
         return localDateTime.format(dateTimeFormatter);
     }
 
-    public static String convertIntoString(LocalDateTime localDateTime) {
+    static String convertIntoString(LocalDateTime localDateTime) {
         return convertIntoString(localDateTime, DateFormat.ENGLISH);
     }
 
-    public static LocalDateTime extractFromString(String date) {
+    static LocalDateTime extractFromString(String date) {
         return extractFromString(date, DateFormat.ENGLISH);
     }
 
-    public static String convertString(String currentDate, DateFormat dateFormatFrom, DateFormat dateFormatTo) {
+    static String convertString(String currentDate, DateFormat dateFormatFrom, DateFormat dateFormatTo) {
         LocalDateTime localDateTime = DateMapper.extractFromString(currentDate, dateFormatFrom);
         return DateMapper.convertIntoString(localDateTime, dateFormatTo);
     }

@@ -59,7 +59,7 @@ public interface Validator {
      * @return true, if is computer correct
      */
     static boolean isComputerCorrect(Computer computer) {
-        return computer != null && computer.getName() != null && !"".equals(computer.getName().trim()) && computer.getCompany() != null;
+        return computer != null && computer.getName() != null && !"".equals(computer.getName().trim()) && (computer.getCompany() == null || computer.getCompany().getId() != null);
     }
 
     /**
@@ -94,12 +94,22 @@ public interface Validator {
     }
 
     /**
-     * Checks if is company correct.
+     * Checks if is company correct for update.
      *
      * @param company the company
      * @return true, if is company correct
      */
-    static boolean isCompanyCorrect(Company company) {
+    static boolean isCompanyCorrectForUpdate(Company company) {
+        return isCompanyCorrectForCreate(company) && company.getId() != null;
+    }
+
+    /**
+     * Checks if is company correct for create.
+     *
+     * @param company the company
+     * @return true, if is company correct
+     */
+    static boolean isCompanyCorrectForCreate(Company company) {
         return company != null && company.getName() != null && !"".equals(company.getName().trim());
     }
 
