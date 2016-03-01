@@ -28,15 +28,6 @@ public interface CommonService<T> {
     /**
      * List.
      *
-     * @return the list
-     */
-    default List<T> list() {
-        return list(new SortCriteria());
-    }
-
-    /**
-     * List.
-     *
      * @param from         the from
      * @param to           the to
      * @param sortCriteria the sort criteria
