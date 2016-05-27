@@ -23,54 +23,74 @@
         </repository>
     </repositories>
     <properties>
-        <!-- JAVA -->
-        <java-source-version>1.8</java-source-version>
-        <java-target-version>1.8</java-target-version>
-        <!-- maven -->
-        <sonar.jacoco.itReportPath>${basedir}/target/coverage-reports/jacoco-unit.exec</sonar.jacoco.itReportPath>
+        <!-- Project -->
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <!-- Maven -->
         <maven-compiler-plugin-version>3.1</maven-compiler-plugin-version>
         <maven-war-plugin-version>2.4</maven-war-plugin-version>
-        <cobertura.version>2.7</cobertura.version>
         <maven-surefire-version>2.18</maven-surefire-version>
         <maven-failsafe-version>2.19.1</maven-failsafe-version>
+
+        <!-- Mojo version checker -->
+        <versions-maven-plugin.version>2.2</versions-maven-plugin.version>
+
+        <!-- Sonar -->
+        <sonar.jacoco.itReportPath>${basedir}/target/coverage-reports/jacoco-unit.exec</sonar.jacoco.itReportPath>
         <sonar-maven-plugin.version>2.7</sonar-maven-plugin.version>
 
+        <!-- Cobertura -->
+        <cobertura.version>2.7</cobertura.version>
+
+        <!-- Cargo -->
         <cargo-servlet-port>18080</cargo-servlet-port>
         <cargo-tomcat-ajp-port>18009</cargo-tomcat-ajp-port>
         <cargo-maven2-version>1.4.16</cargo-maven2-version>
+
         <!-- SQL -->
-        <mysql-connector-version>5.1.6</mysql-connector-version>
+        <mysql-connector-version>5.1.39</mysql-connector-version>
+
         <!-- Test -->
-        <dbunit-version>2.5.1</dbunit-version>
-        <mockito-all-version>1.9.0</mockito-all-version>
+        <dbunit-version>2.5.2</dbunit-version>
+        <mockito-all-version>2.0.2-beta</mockito-all-version>
+
         <!-- Servlet -->
         <javax.servlet-api-version>3.1.0</javax.servlet-api-version>
+
         <!-- Selenium -->
-        <selenium-java-version>2.52.0</selenium-java-version>
+        <selenium-java-version>2.53.0</selenium-java-version>
+        <selenium-htmlunit-driver-version>2.52.0</selenium-htmlunit-driver-version>
         <guava-version>19.0</guava-version>
+
         <!-- Date -->
-        <commons-validator-version>1.4.0</commons-validator-version>
+        <commons-validator-version>1.5.1</commons-validator-version>
+
         <!-- JSP + JSTL -->
         <standard-version>1.1.2</standard-version>
         <jstl-version>1.1.2</jstl-version>
+
         <!-- Log -->
-        <slf4j-api-version>1.7.12</slf4j-api-version>
-        <logback-classic-version>1.1.3</logback-classic-version>
+        <slf4j-api-version>1.7.21</slf4j-api-version>
+        <logback-classic-version>1.1.7</logback-classic-version>
         <commons-logging-version>99-empty</commons-logging-version>
+
         <!-- Spring -->
-        <spring-version>4.2.4.RELEASE</spring-version>
-        <jcl-over-slf4j-version>1.7.10</jcl-over-slf4j-version>
-        <spring-data-jpa-version>1.7.2.RELEASE</spring-data-jpa-version>
-        <spring-security-version>4.0.0.RELEASE</spring-security-version>
+        <spring-version>4.2.6.RELEASE</spring-version>
+        <jcl-over-slf4j-version>1.7.21</jcl-over-slf4j-version>
+        <spring-data-jpa-version>1.10.1.RELEASE</spring-data-jpa-version>
+        <spring-security-version>4.1.0.RELEASE</spring-security-version>
+
         <!-- Hibernate -->
         <hibernate-version>5.1.0.Final</hibernate-version>
-        <hibernate-validator-version>5.1.3.Final</hibernate-validator-version>
+        <hibernate-validator-version>5.2.4.Final</hibernate-validator-version>
+
         <!-- Jersey -->
-        <jersey-version>2.17</jersey-version>
-        <jersey-bundle-version>1.10-b01</jersey-bundle-version>
-        <jackson-version>2.7.1</jackson-version>
-        <java-rs-version>2.0</java-rs-version>
+        <jersey-version>2.23</jersey-version>
+        <jersey-bundle-version>1.19.1</jersey-bundle-version>
+        <jackson-version>2.7.4</jackson-version>
+        <java-rs-version>2.0.1</java-rs-version>
+
         <!-- xml API -->
         <xml-apis.version>1.4.01</xml-apis.version>
     </properties>
@@ -87,11 +107,13 @@
             <artifactId>spring-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <!-- Hibernate --> <!-- Don't move it : Hibernate Log bug -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
+
         <!-- Log -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -152,6 +174,7 @@
                 <artifactId>webservice</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
             <!-- MySQL -->
             <dependency>
                 <groupId>mysql</groupId>
@@ -159,6 +182,7 @@
                 <version>${mysql-connector-version}</version>
                 <scope>runtime</scope>
             </dependency>
+
             <!-- Test -->
             <dependency>
                 <groupId>org.mockito</groupId>
@@ -166,13 +190,15 @@
                 <version>${mockito-all-version}</version>
                 <scope>test</scope>
             </dependency>
-            <!-- servlet -->
+
+            <!-- Servlet -->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${javax.servlet-api-version}</version>
                 <scope>provided</scope>
             </dependency>
+
             <!-- Selenium -->
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
@@ -181,17 +207,25 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-htmlunit-driver</artifactId>
+                <version>${selenium-htmlunit-driver-version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava-version}</version>
                 <scope>test</scope>
             </dependency>
+
             <!-- Date -->
             <dependency>
                 <groupId>commons-validator</groupId>
                 <artifactId>commons-validator</artifactId>
                 <version>${commons-validator-version}</version>
             </dependency>
+
             <!-- JSTL + JSP + tag -->
             <dependency>
                 <groupId>taglibs</groupId>
@@ -205,6 +239,7 @@
                 <version>${jstl-version}</version>
                 <scope>runtime</scope>
             </dependency>
+
             <!-- Spring -->
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -276,6 +311,7 @@
                 <artifactId>spring-security-taglibs</artifactId>
                 <version>${spring-security-version}</version>
             </dependency>
+
             <!-- Hibernate -->
             <dependency>
                 <groupId>org.hibernate</groupId>
@@ -292,6 +328,7 @@
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator-version}</version>
             </dependency>
+
             <!-- Jersey -->
             <dependency>
                 <groupId>com.sun.jersey</groupId>
@@ -328,6 +365,7 @@
                 <artifactId>jersey-media-moxy</artifactId>
                 <version>${jersey-version}</version>
             </dependency>
+
             <!-- Conversion JSON/XML -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -428,8 +466,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin-version}</version>
                 <configuration>
-                    <source>${java-source-version}</source>
-                    <target>${java-target-version}</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
             <!-- Cobertura -->
@@ -446,6 +484,7 @@
                         <ignoreTrivial>true</ignoreTrivial>
                     </instrumentation>
                     <aggregate>true</aggregate>
+                    <check/>
                 </configuration>
             </plugin>
             <!-- Sonar -->
@@ -453,6 +492,16 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>${sonar-maven-plugin.version}</version>
+            </plugin>
+            <!-- Codehaus version checker -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions-maven-plugin.version}</version>
+                <inherited>false</inherited>
+                <configuration>
+                    <outputFile>target/outdated-dependencies.txt</outputFile>
+                </configuration>
             </plugin>
         </plugins>
     </build>
